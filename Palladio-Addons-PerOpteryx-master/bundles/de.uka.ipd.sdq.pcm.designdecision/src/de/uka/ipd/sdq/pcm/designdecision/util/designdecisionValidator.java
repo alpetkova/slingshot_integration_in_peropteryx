@@ -2,7 +2,6 @@
  */
 package de.uka.ipd.sdq.pcm.designdecision.util;
 
-import de.uka.ipd.sdq.pcm.designdecision.*;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -10,6 +9,8 @@ import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 
+import de.uka.ipd.sdq.identifier.util.IdentifierValidator;
+import de.uka.ipd.sdq.pcm.designdecision.BoolChoice;
 import de.uka.ipd.sdq.pcm.designdecision.Candidate;
 import de.uka.ipd.sdq.pcm.designdecision.Candidates;
 import de.uka.ipd.sdq.pcm.designdecision.Choice;
@@ -18,6 +19,7 @@ import de.uka.ipd.sdq.pcm.designdecision.ContinousRangeChoice;
 import de.uka.ipd.sdq.pcm.designdecision.DecisionSpace;
 import de.uka.ipd.sdq.pcm.designdecision.DegreeOfFreedomInstance;
 import de.uka.ipd.sdq.pcm.designdecision.DiscreteRangeChoice;
+import de.uka.ipd.sdq.pcm.designdecision.FeatureChoice;
 import de.uka.ipd.sdq.pcm.designdecision.designdecisionPackage;
 
 /**
@@ -65,12 +67,21 @@ public class designdecisionValidator extends EObjectValidator {
 	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
 
 	/**
+	 * The cached base package validator.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IdentifierValidator identifierValidator;
+
+	/**
 	 * Creates an instance of the switch.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public designdecisionValidator() {
 		super();
+		identifierValidator = IdentifierValidator.INSTANCE;
 	}
 
 	/**
@@ -90,7 +101,8 @@ public class designdecisionValidator extends EObjectValidator {
 	 * @generated
 	 */
 	@Override
-	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
 		switch (classifierID) {
 		case designdecisionPackage.DISCRETE_RANGE_CHOICE:
 			return validateDiscreteRangeChoice((DiscreteRangeChoice) value, diagnostics, context);
@@ -121,7 +133,8 @@ public class designdecisionValidator extends EObjectValidator {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateDiscreteRangeChoice(DiscreteRangeChoice discreteRangeChoice, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateDiscreteRangeChoice(DiscreteRangeChoice discreteRangeChoice, DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(discreteRangeChoice, diagnostics, context);
 	}
 
@@ -129,7 +142,8 @@ public class designdecisionValidator extends EObjectValidator {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateDegreeOfFreedomInstance(DegreeOfFreedomInstance degreeOfFreedomInstance, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateDegreeOfFreedomInstance(DegreeOfFreedomInstance degreeOfFreedomInstance,
+			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(degreeOfFreedomInstance, diagnostics, context);
 	}
 
@@ -145,7 +159,8 @@ public class designdecisionValidator extends EObjectValidator {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateClassChoice(ClassChoice classChoice, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateClassChoice(ClassChoice classChoice, DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(classChoice, diagnostics, context);
 	}
 
@@ -153,7 +168,8 @@ public class designdecisionValidator extends EObjectValidator {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateContinousRangeChoice(ContinousRangeChoice continousRangeChoice, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateContinousRangeChoice(ContinousRangeChoice continousRangeChoice, DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(continousRangeChoice, diagnostics, context);
 	}
 
@@ -161,8 +177,28 @@ public class designdecisionValidator extends EObjectValidator {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateDecisionSpace(DecisionSpace decisionSpace, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(decisionSpace, diagnostics, context);
+	public boolean validateDecisionSpace(DecisionSpace decisionSpace, DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(decisionSpace, diagnostics, context))
+			return false;
+		boolean result = validate_EveryMultiplicityConforms(decisionSpace, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryDataValueConforms(decisionSpace, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryReferenceIsContained(decisionSpace, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryBidirectionalReferenceIsPaired(decisionSpace, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryProxyResolves(decisionSpace, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_UniqueID(decisionSpace, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryKeyUnique(decisionSpace, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryMapEntryUnique(decisionSpace, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= identifierValidator.validateIdentifier_identifierIsUnique(decisionSpace, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -205,7 +241,8 @@ public class designdecisionValidator extends EObjectValidator {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateCandidates_numberOfChoicesMustEqualNumberOfDecisions(Candidates candidates, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateCandidates_numberOfChoicesMustEqualNumberOfDecisions(Candidates candidates,
+			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return candidates.numberOfChoicesMustEqualNumberOfDecisions(diagnostics, context);
 	}
 
@@ -223,7 +260,8 @@ public class designdecisionValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateFeatureChoice(FeatureChoice featureChoice, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateFeatureChoice(FeatureChoice featureChoice, DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(featureChoice, diagnostics, context);
 	}
 

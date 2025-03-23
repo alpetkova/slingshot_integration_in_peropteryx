@@ -10,17 +10,20 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.palladiosimulator.pcm.PCMBaseClass;
+import org.palladiosimulator.pcm.PCMClass;
 import org.palladiosimulator.pcm.core.entity.NamedElement;
 
 import de.uka.ipd.sdq.pcm.designdecision.DegreeOfFreedomInstance;
-import de.uka.ipd.sdq.pcm.designdecision.specific.*;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ATNumberOfReplicaDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.AdvicePlacementDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.AllocationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.AssembledComponentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.CapacityDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ClassAsReferenceDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ClassDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ClassWithCopyDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ComplementumVisnetisDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousRangeDegree;
@@ -31,10 +34,14 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteRangeDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.EnumDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExchangeComponentRule;
+import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureCompletionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureConfigDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureGroupDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureSubset;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IndicatorDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.MonitoringDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.MultipleInclusionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.NumberOfCoresAsListDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.NumberOfCoresAsRangeDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.NumberOfCoresDegree;
@@ -50,6 +57,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceSelectionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.SchedulingPolicyDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringSetDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.UnorderedDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.UnorderedPrimitiveDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.specificPackage;
@@ -104,7 +112,7 @@ public class specificAdapterFactory extends AdapterFactoryImpl {
 	 * end-user-doc -->
 	 * @generated
 	 */
-	protected specificSwitch<Adapter> modelSwitch = new specificSwitch<Adapter>() {
+	protected specificSwitch<Adapter> modelSwitch = new specificSwitch<>() {
 		@Override
 		public Adapter caseExchangeComponentRule(ExchangeComponentRule object) {
 			return createExchangeComponentRuleAdapter();
@@ -251,7 +259,8 @@ public class specificAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseResourceContainerReplicationDegreeWithComponentChange(ResourceContainerReplicationDegreeWithComponentChange object) {
+		public Adapter caseResourceContainerReplicationDegreeWithComponentChange(
+				ResourceContainerReplicationDegreeWithComponentChange object) {
 			return createResourceContainerReplicationDegreeWithComponentChangeAdapter();
 		}
 
@@ -323,6 +332,21 @@ public class specificAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseComplementumVisnetisDegree(ComplementumVisnetisDegree object) {
 			return createComplementumVisnetisDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseTargetGroupSizeMaxConstraintDegree(TargetGroupSizeMaxConstraintDegree object) {
+			return createTargetGroupSizeMaxConstraintDegreeAdapter();
+		}
+
+		@Override
+		public Adapter casePCMClass(PCMClass object) {
+			return createPCMClassAdapter();
+		}
+
+		@Override
+		public Adapter casePCMBaseClass(PCMBaseClass object) {
+			return createPCMBaseClassAdapter();
 		}
 
 		@Override
@@ -947,6 +971,48 @@ public class specificAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createComplementumVisnetisDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree <em>Target Group Size Max Constraint Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree
+	 * @generated
+	 */
+	public Adapter createTargetGroupSizeMaxConstraintDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.pcm.PCMClass <em>PCM Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.palladiosimulator.pcm.PCMClass
+	 * @generated
+	 */
+	public Adapter createPCMClassAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.pcm.PCMBaseClass <em>PCM Base Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.palladiosimulator.pcm.PCMBaseClass
+	 * @generated
+	 */
+	public Adapter createPCMBaseClassAdapter() {
 		return null;
 	}
 

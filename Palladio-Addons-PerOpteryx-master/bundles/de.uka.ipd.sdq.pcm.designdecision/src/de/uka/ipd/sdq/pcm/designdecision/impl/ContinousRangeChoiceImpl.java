@@ -77,7 +77,8 @@ public class ContinousRangeChoiceImpl extends ChoiceImpl implements ContinousRan
 		double oldChosenValue = chosenValue;
 		chosenValue = newChosenValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, designdecisionPackage.CONTINOUS_RANGE_CHOICE__CHOSEN_VALUE, oldChosenValue, chosenValue));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					designdecisionPackage.CONTINOUS_RANGE_CHOICE__CHOSEN_VALUE, oldChosenValue, chosenValue));
 	}
 
 	/**
@@ -143,7 +144,7 @@ public class ContinousRangeChoiceImpl extends ChoiceImpl implements ContinousRan
 		if (eIsProxy())
 			return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (chosenValue: ");
 		result.append(chosenValue);
 		result.append(')');
@@ -160,7 +161,8 @@ public class ContinousRangeChoiceImpl extends ChoiceImpl implements ContinousRan
 		if (newValue instanceof Number) {
 			this.setChosenValue(((Number) newValue).doubleValue());
 		} else {
-			throw new IllegalArgumentException("Cannot cast " + newValue.getClass().getName() + " to Number to get the double value.");
+			throw new IllegalArgumentException(
+					"Cannot cast " + newValue.getClass().getName() + " to Number to get the double value.");
 		}
 
 	}

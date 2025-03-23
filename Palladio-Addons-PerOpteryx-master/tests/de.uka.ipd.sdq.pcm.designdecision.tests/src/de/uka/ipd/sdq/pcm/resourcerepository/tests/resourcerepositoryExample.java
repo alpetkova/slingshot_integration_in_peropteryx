@@ -2,26 +2,21 @@
  */
 package de.uka.ipd.sdq.pcm.resourcerepository.tests;
 
-import de.uka.ipd.sdq.pcm.resourcerepository.ResourceDescriptionRepository;
-import de.uka.ipd.sdq.pcm.resourcerepository.resourcerepositoryFactory;
-import de.uka.ipd.sdq.pcm.resourcerepository.resourcerepositoryPackage;
-
-import de.uka.ipd.sdq.pcm.resourcerepository.util.resourcerepositoryResourceFactoryImpl;
-
 import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
 import org.eclipse.emf.ecore.util.Diagnostician;
+
+import de.uka.ipd.sdq.pcm.resourcerepository.ResourceDescriptionRepository;
+import de.uka.ipd.sdq.pcm.resourcerepository.resourcerepositoryFactory;
+import de.uka.ipd.sdq.pcm.resourcerepository.resourcerepositoryPackage;
+import de.uka.ipd.sdq.pcm.resourcerepository.util.resourcerepositoryResourceFactoryImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,7 +39,8 @@ public class resourcerepositoryExample {
 
 		// Register the appropriate resource factory to handle all file extensions.
 		//
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new resourcerepositoryResourceFactoryImpl());
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+				.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new resourcerepositoryResourceFactoryImpl());
 
 		// Register the package to ensure it is available during loading.
 		//
@@ -56,7 +52,8 @@ public class resourcerepositoryExample {
 			System.out.println("Enter a list of file paths or URIs that have content like this:");
 			try {
 				Resource resource = resourceSet.createResource(URI.createURI("http:///My.resourcerepository"));
-				ResourceDescriptionRepository root = resourcerepositoryFactory.eINSTANCE.createResourceDescriptionRepository();
+				ResourceDescriptionRepository root = resourcerepositoryFactory.eINSTANCE
+						.createResourceDescriptionRepository();
 				resource.getContents().add(root);
 				resource.save(System.out, null);
 			} catch (IOException exception) {
@@ -65,13 +62,13 @@ public class resourcerepositoryExample {
 		} else {
 			// Iterate over all the arguments.
 			//
-			for (int i = 0; i < args.length; ++i) {
+			for (String arg : args) {
 				// Construct the URI for the instance file.
 				// The argument is treated as a file path only if it denotes an existing file.
 				// Otherwise, it's directly treated as a URL.
 				//
-				File file = new File(args[i]);
-				URI uri = file.isFile() ? URI.createFileURI(file.getAbsolutePath()) : URI.createURI(args[i]);
+				File file = new File(arg);
+				URI uri = file.isFile() ? URI.createFileURI(file.getAbsolutePath()) : URI.createURI(arg);
 
 				try {
 					// Demand load resource for this file.

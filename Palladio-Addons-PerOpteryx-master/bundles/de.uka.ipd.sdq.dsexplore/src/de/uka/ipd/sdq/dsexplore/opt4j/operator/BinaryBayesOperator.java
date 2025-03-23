@@ -29,6 +29,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.AssembledComponentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.CapacityDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceSelectionDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
 
 /**  
  * Operator to operate on a collection of 
@@ -143,7 +144,14 @@ public class BinaryBayesOperator implements BayesianCrossover<DesignDecisionGeno
 				
 					ddgpure.add(purechoice);
 				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof TargetGroupSizeMaxConstraintDegree){
+					DiscreteRangeChoice purechoice = designdecisionFactory.eINSTANCE.createDiscreteRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
 				
+					ddgpure.add(purechoice);
+				}
 			}
 			DDGenotypeOffspringList.add(ddgpure);
 		}

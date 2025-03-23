@@ -63,7 +63,8 @@ public class gdofActionBarContributor extends EditingDomainActionBarContributor 
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected IAction showPropertiesViewAction = new Action(DesignDecisionEditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) {
+	protected IAction showPropertiesViewAction = new Action(
+			DesignDecisionEditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) {
 		@Override
 		public void run() {
 			try {
@@ -81,7 +82,8 @@ public class gdofActionBarContributor extends EditingDomainActionBarContributor 
 	 * end-user-doc -->
 	 * @generated
 	 */
-	protected IAction refreshViewerAction = new Action(DesignDecisionEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
+	protected IAction refreshViewerAction = new Action(
+			DesignDecisionEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
 		@Override
 		public boolean isEnabled() {
 			return activeEditorPart instanceof IViewerProvider;
@@ -149,6 +151,7 @@ public class gdofActionBarContributor extends EditingDomainActionBarContributor 
 	 */
 	@Override
 	public void contributeToToolBar(IToolBarManager toolBarManager) {
+		super.contributeToToolBar(toolBarManager);
 		toolBarManager.add(new Separator("gdof-settings"));
 		toolBarManager.add(new Separator("gdof-additions"));
 	}
@@ -163,7 +166,9 @@ public class gdofActionBarContributor extends EditingDomainActionBarContributor 
 	public void contributeToMenu(IMenuManager menuManager) {
 		super.contributeToMenu(menuManager);
 
-		IMenuManager submenuManager = new MenuManager(DesignDecisionEditorPlugin.INSTANCE.getString("_UI_gdofEditor_menu"), "de.uka.ipd.sdq.pcm.designdecision.gdofMenuID");
+		IMenuManager submenuManager = new MenuManager(
+				DesignDecisionEditorPlugin.INSTANCE.getString("_UI_gdofEditor_menu"),
+				"de.uka.ipd.sdq.pcm.designdecision.gdofMenuID");
 		menuManager.insertAfter("additions", submenuManager);
 		submenuManager.add(new Separator("settings"));
 		submenuManager.add(new Separator("actions"));
@@ -172,12 +177,14 @@ public class gdofActionBarContributor extends EditingDomainActionBarContributor 
 
 		// Prepare for CreateChild item addition or removal.
 		//
-		createChildMenuManager = new MenuManager(DesignDecisionEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item"));
+		createChildMenuManager = new MenuManager(
+				DesignDecisionEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item"));
 		submenuManager.insertBefore("additions", createChildMenuManager);
 
 		// Prepare for CreateSibling item addition or removal.
 		//
-		createSiblingMenuManager = new MenuManager(DesignDecisionEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
+		createSiblingMenuManager = new MenuManager(
+				DesignDecisionEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
 		submenuManager.insertBefore("additions", createSiblingMenuManager);
 
 		// Force an update because Eclipse hides empty menus now.
@@ -278,7 +285,7 @@ public class gdofActionBarContributor extends EditingDomainActionBarContributor 
 	 * @generated
 	 */
 	protected Collection<IAction> generateCreateChildActions(Collection<?> descriptors, ISelection selection) {
-		Collection<IAction> actions = new ArrayList<IAction>();
+		Collection<IAction> actions = new ArrayList<>();
 		if (descriptors != null) {
 			for (Object descriptor : descriptors) {
 				actions.add(new CreateChildAction(activeEditorPart, selection, descriptor));
@@ -295,7 +302,7 @@ public class gdofActionBarContributor extends EditingDomainActionBarContributor 
 	 * @generated
 	 */
 	protected Collection<IAction> generateCreateSiblingActions(Collection<?> descriptors, ISelection selection) {
-		Collection<IAction> actions = new ArrayList<IAction>();
+		Collection<IAction> actions = new ArrayList<>();
 		if (descriptors != null) {
 			for (Object descriptor : descriptors) {
 				actions.add(new CreateSiblingAction(activeEditorPart, selection, descriptor));
@@ -313,7 +320,8 @@ public class gdofActionBarContributor extends EditingDomainActionBarContributor 
 	 * --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void populateManager(IContributionManager manager, Collection<? extends IAction> actions, String contributionID) {
+	protected void populateManager(IContributionManager manager, Collection<? extends IAction> actions,
+			String contributionID) {
 		if (actions != null) {
 			for (IAction action : actions) {
 				if (contributionID != null) {
@@ -334,10 +342,10 @@ public class gdofActionBarContributor extends EditingDomainActionBarContributor 
 	protected void depopulateManager(IContributionManager manager, Collection<? extends IAction> actions) {
 		if (actions != null) {
 			IContributionItem[] items = manager.getItems();
-			for (int i = 0; i < items.length; i++) {
+			for (IContributionItem item : items) {
 				// Look into SubContributionItems
 				//
-				IContributionItem contributionItem = items[i];
+				IContributionItem contributionItem = item;
 				while (contributionItem instanceof SubContributionItem) {
 					contributionItem = ((SubContributionItem) contributionItem).getInnerItem();
 				}

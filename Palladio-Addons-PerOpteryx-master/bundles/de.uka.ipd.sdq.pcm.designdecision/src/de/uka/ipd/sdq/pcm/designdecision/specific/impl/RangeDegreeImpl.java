@@ -117,7 +117,8 @@ public abstract class RangeDegreeImpl extends OrderedDataTypeDegreeImpl implemen
 		boolean oldUpperBoundIncluded = upperBoundIncluded;
 		upperBoundIncluded = newUpperBoundIncluded;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, specificPackage.RANGE_DEGREE__UPPER_BOUND_INCLUDED, oldUpperBoundIncluded, upperBoundIncluded));
+			eNotify(new ENotificationImpl(this, Notification.SET, specificPackage.RANGE_DEGREE__UPPER_BOUND_INCLUDED,
+					oldUpperBoundIncluded, upperBoundIncluded));
 	}
 
 	/**
@@ -138,7 +139,8 @@ public abstract class RangeDegreeImpl extends OrderedDataTypeDegreeImpl implemen
 		boolean oldLowerBoundIncluded = lowerBoundIncluded;
 		lowerBoundIncluded = newLowerBoundIncluded;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, specificPackage.RANGE_DEGREE__LOWER_BOUND_INCLUDED, oldLowerBoundIncluded, lowerBoundIncluded));
+			eNotify(new ENotificationImpl(this, Notification.SET, specificPackage.RANGE_DEGREE__LOWER_BOUND_INCLUDED,
+					oldLowerBoundIncluded, lowerBoundIncluded));
 	}
 
 	/**
@@ -159,7 +161,8 @@ public abstract class RangeDegreeImpl extends OrderedDataTypeDegreeImpl implemen
 		int oldNumberOfSteps = numberOfSteps;
 		numberOfSteps = newNumberOfSteps;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, specificPackage.RANGE_DEGREE__NUMBER_OF_STEPS, oldNumberOfSteps, numberOfSteps));
+			eNotify(new ENotificationImpl(this, Notification.SET, specificPackage.RANGE_DEGREE__NUMBER_OF_STEPS,
+					oldNumberOfSteps, numberOfSteps));
 	}
 
 	/**
@@ -245,7 +248,7 @@ public abstract class RangeDegreeImpl extends OrderedDataTypeDegreeImpl implemen
 		if (eIsProxy())
 			return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (upperBoundIncluded: ");
 		result.append(upperBoundIncluded);
 		result.append(", lowerBoundIncluded: ");

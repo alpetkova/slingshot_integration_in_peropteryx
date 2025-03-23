@@ -284,6 +284,15 @@ public interface specificFactory extends EFactory {
 	ComplementumVisnetisDegree createComplementumVisnetisDegree();
 
 	/**
+	 * Returns a new object of class '<em>Target Group Size Max Constraint Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Target Group Size Max Constraint Degree</em>'.
+	 * @generated
+	 */
+	TargetGroupSizeMaxConstraintDegree createTargetGroupSizeMaxConstraintDegree();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the package supported by this factory.

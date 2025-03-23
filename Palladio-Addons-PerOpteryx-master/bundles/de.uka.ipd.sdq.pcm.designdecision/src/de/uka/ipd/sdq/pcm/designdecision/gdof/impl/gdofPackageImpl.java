@@ -10,8 +10,10 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.uml2.types.TypesPackage;
 import org.palladiosimulator.analyzer.resultdecorator.ResultdecoratorPackage;
+import org.palladiosimulator.pcm.PcmPackage;
 
 import de.uka.ipd.sdq.featuremodel.featuremodelPackage;
+import de.uka.ipd.sdq.identifier.IdentifierPackage;
 import de.uka.ipd.sdq.pcm.cost.costPackage;
 import de.uka.ipd.sdq.pcm.designdecision.designdecisionPackage;
 import de.uka.ipd.sdq.pcm.designdecision.gdof.ChangeableElementDescription;
@@ -34,6 +36,9 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.specificPackage;
 import de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl;
 import de.uka.ipd.sdq.pcm.resourcerepository.resourcerepositoryPackage;
 import de.uka.ipd.sdq.pcm.resourcerepository.impl.resourcerepositoryPackageImpl;
+import de.uka.ipd.sdq.probfunction.ProbfunctionPackage;
+import de.uka.ipd.sdq.stoex.StoexPackage;
+import de.uka.ipd.sdq.units.UnitsPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!-- end-user-doc -->
@@ -132,7 +137,7 @@ public class gdofPackageImpl extends EPackageImpl implements gdofPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link gdofPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -146,27 +151,42 @@ public class gdofPackageImpl extends EPackageImpl implements gdofPackage {
 			return (gdofPackage) EPackage.Registry.INSTANCE.getEPackage(gdofPackage.eNS_URI);
 
 		// Obtain or create and register package
-		gdofPackageImpl thegdofPackage = (gdofPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof gdofPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new gdofPackageImpl());
+		Object registeredgdofPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		gdofPackageImpl thegdofPackage = registeredgdofPackage instanceof gdofPackageImpl
+				? (gdofPackageImpl) registeredgdofPackage
+				: new gdofPackageImpl();
 
 		isInited = true;
 
 		// Initialize simple dependencies
 		costPackage.eINSTANCE.eClass();
+		EcorePackage.eINSTANCE.eClass();
 		featuremodelPackage.eINSTANCE.eClass();
+		IdentifierPackage.eINSTANCE.eClass();
+		PcmPackage.eINSTANCE.eClass();
 		ResultdecoratorPackage.eINSTANCE.eClass();
+		StoexPackage.eINSTANCE.eClass();
 		TypesPackage.eINSTANCE.eClass();
+		UnitsPackage.eINSTANCE.eClass();
+		ProbfunctionPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
-		designdecisionPackageImpl thedesigndecisionPackage = (designdecisionPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(designdecisionPackage.eNS_URI) instanceof designdecisionPackageImpl
-				? EPackage.Registry.INSTANCE.getEPackage(designdecisionPackage.eNS_URI) : designdecisionPackage.eINSTANCE);
-		qualitypropertiesPackageImpl thequalitypropertiesPackage = (qualitypropertiesPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(qualitypropertiesPackage.eNS_URI) instanceof qualitypropertiesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(qualitypropertiesPackage.eNS_URI)
-						: qualitypropertiesPackage.eINSTANCE);
-		resourcerepositoryPackageImpl theresourcerepositoryPackage = (resourcerepositoryPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(resourcerepositoryPackage.eNS_URI) instanceof resourcerepositoryPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(resourcerepositoryPackage.eNS_URI)
-						: resourcerepositoryPackage.eINSTANCE);
-		specificPackageImpl thespecificPackage = (specificPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(specificPackage.eNS_URI) instanceof specificPackageImpl
-				? EPackage.Registry.INSTANCE.getEPackage(specificPackage.eNS_URI) : specificPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(designdecisionPackage.eNS_URI);
+		designdecisionPackageImpl thedesigndecisionPackage = (designdecisionPackageImpl) (registeredPackage instanceof designdecisionPackageImpl
+				? registeredPackage
+				: designdecisionPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(qualitypropertiesPackage.eNS_URI);
+		qualitypropertiesPackageImpl thequalitypropertiesPackage = (qualitypropertiesPackageImpl) (registeredPackage instanceof qualitypropertiesPackageImpl
+				? registeredPackage
+				: qualitypropertiesPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(resourcerepositoryPackage.eNS_URI);
+		resourcerepositoryPackageImpl theresourcerepositoryPackage = (resourcerepositoryPackageImpl) (registeredPackage instanceof resourcerepositoryPackageImpl
+				? registeredPackage
+				: resourcerepositoryPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(specificPackage.eNS_URI);
+		specificPackageImpl thespecificPackage = (specificPackageImpl) (registeredPackage instanceof specificPackageImpl
+				? registeredPackage
+				: specificPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		thegdofPackage.createPackageContents();
@@ -492,7 +512,8 @@ public class gdofPackageImpl extends EPackageImpl implements gdofPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		featuremodelPackage thefeaturemodelPackage = (featuremodelPackage) EPackage.Registry.INSTANCE.getEPackage(featuremodelPackage.eNS_URI);
+		featuremodelPackage thefeaturemodelPackage = (featuremodelPackage) EPackage.Registry.INSTANCE
+				.getEPackage(featuremodelPackage.eNS_URI);
 		EcorePackage theEcorePackage = (EcorePackage) EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 		TypesPackage theTypesPackage = (TypesPackage) EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
 
@@ -512,53 +533,76 @@ public class gdofPackageImpl extends EPackageImpl implements gdofPackage {
 		degreeOfFreedomEClass.getESuperTypes().add(thefeaturemodelPackage.getNamedElement());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(changeableElementDescriptionEClass, ChangeableElementDescription.class, "ChangeableElementDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getChangeableElementDescription_Changeable(), theEcorePackage.getEStructuralFeature(), null, "changeable", null, 1, 1, ChangeableElementDescription.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getChangeableElementDescription_ValueRule(), this.getValueRule(), null, "valueRule", null, 1, 1, ChangeableElementDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+		initEClass(changeableElementDescriptionEClass, ChangeableElementDescription.class,
+				"ChangeableElementDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getChangeableElementDescription_Changeable(), theEcorePackage.getEStructuralFeature(), null,
+				"changeable", null, 1, 1, ChangeableElementDescription.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getChangeableElementDescription_ValueRule(), this.getValueRule(), null, "valueRule", null, 1, 1,
+				ChangeableElementDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getChangeableElementDescription_SelectionRule(), this.getSelectionRule(), null, "selectionRule",
+				null, 0, 1, ChangeableElementDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getChangeableElementDescription_SelectionRule(), this.getSelectionRule(), null, "selectionRule", null, 0, 1, ChangeableElementDescription.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
-		initEClass(valueRuleEClass, ValueRule.class, "ValueRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(valueRuleEClass, ValueRule.class, "ValueRule", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(oclRuleEClass, OCLRule.class, "OCLRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOCLRule_MainOclQuery(), theTypesPackage.getString(), "mainOclQuery", null, 1, 1, OCLRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+		initEAttribute(getOCLRule_MainOclQuery(), theTypesPackage.getString(), "mainOclQuery", null, 1, 1,
+				OCLRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, !IS_ORDERED);
-		initEReference(getOCLRule_HelperDefinition(), this.getHelperOCLDefinition(), null, "helperDefinition", null, 0, -1, OCLRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getOCLRule_HelperDefinition(), this.getHelperOCLDefinition(), null, "helperDefinition", null, 0,
+				-1, OCLRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
-		initEClass(helperOCLDefinitionEClass, HelperOCLDefinition.class, "HelperOCLDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(helperOCLDefinitionEClass, HelperOCLDefinition.class, "HelperOCLDefinition", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(staticContextRuleEClass, StaticContextRule.class, "StaticContextRule", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStaticContextRule_ContextClass(), theEcorePackage.getEClass(), null, "contextClass", null, 0, 1, StaticContextRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+		initEClass(staticContextRuleEClass, StaticContextRule.class, "StaticContextRule", IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStaticContextRule_ContextClass(), theEcorePackage.getEClass(), null, "contextClass", null, 0,
+				1, StaticContextRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(selectionRuleEClass, SelectionRule.class, "SelectionRule", IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(doFRepositoryEClass, DoFRepository.class, "DoFRepository", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDoFRepository_Dofs(), this.getDegreeOfFreedom(), null, "dofs", null, 0, -1,
+				DoFRepository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(instanceSelectionRuleEClass, InstanceSelectionRule.class, "InstanceSelectionRule", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInstanceSelectionRule_ContextInstance(), this.getChangeableElementDescription(), null,
+				"contextInstance", null, 0, 1, InstanceSelectionRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
-		initEClass(selectionRuleEClass, SelectionRule.class, "SelectionRule", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(staticSelectionRuleEClass, StaticSelectionRule.class, "StaticSelectionRule", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(doFRepositoryEClass, DoFRepository.class, "DoFRepository", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDoFRepository_Dofs(), this.getDegreeOfFreedom(), null, "dofs", null, 0, -1, DoFRepository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(instanceSelectionRuleEClass, InstanceSelectionRule.class, "InstanceSelectionRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstanceSelectionRule_ContextInstance(), this.getChangeableElementDescription(), null, "contextInstance", null, 0, 1, InstanceSelectionRule.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(staticSelectionRuleEClass, StaticSelectionRule.class, "StaticSelectionRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(degreeOfFreedomEClass, DegreeOfFreedom.class, "DegreeOfFreedom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDegreeOfFreedom_AddedElements(), theEcorePackage.getEClass(), null, "addedElements", null, 0, -1, DegreeOfFreedom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+		initEClass(degreeOfFreedomEClass, DegreeOfFreedom.class, "DegreeOfFreedom", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDegreeOfFreedom_AddedElements(), theEcorePackage.getEClass(), null, "addedElements", null, 0,
+				-1, DegreeOfFreedom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getDegreeOfFreedom_ChangeableElementDescriptions(), this.getChangeableElementDescription(), null,
+				"changeableElementDescriptions", null, 1, -1, DegreeOfFreedom.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDegreeOfFreedom_InteractionConstraints(), theEcorePackage.getEOperation(), null,
+				"interactionConstraints", null, 0, -1, DegreeOfFreedom.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getDegreeOfFreedom_PrimaryChangeable(), this.getChangeableElementDescription(), null,
+				"primaryChangeable", null, 1, 1, DegreeOfFreedom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getDegreeOfFreedom_ChangeableElementDescriptions(), this.getChangeableElementDescription(), null, "changeableElementDescriptions", null, 1, -1, DegreeOfFreedom.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDegreeOfFreedom_InteractionConstraints(), theEcorePackage.getEOperation(), null, "interactionConstraints", null, 0, -1, DegreeOfFreedom.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getDegreeOfFreedom_PrimaryChangeable(), this.getChangeableElementDescription(), null, "primaryChangeable", null, 1, 1, DegreeOfFreedom.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getDegreeOfFreedom_RequiredDecoratorModel(), this.getDecoratorModelDescription(), null, "requiredDecoratorModel", null, 0, -1, DegreeOfFreedom.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDegreeOfFreedom_RequiredDecoratorModel(), this.getDecoratorModelDescription(), null,
+				"requiredDecoratorModel", null, 0, -1, DegreeOfFreedom.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(decoratorModelDescriptionEClass, DecoratorModelDescription.class, "DecoratorModelDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(decoratorModelDescriptionEClass, DecoratorModelDescription.class, "DecoratorModelDescription",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create annotations
 		// null
@@ -572,7 +616,8 @@ public class gdofPackageImpl extends EPackageImpl implements gdofPackage {
 	 */
 	protected void createNullAnnotations() {
 		String source = null;
-		addAnnotation(degreeOfFreedomEClass, source, new String[] { "documentation", "TODO Daniel requiredDecoratorModel erl\u00e4utern" });
+		addAnnotation(degreeOfFreedomEClass, source,
+				new String[] { "documentation", "TODO Daniel requiredDecoratorModel erl\u00e4utern" });
 	}
 
 } // gdofPackageImpl

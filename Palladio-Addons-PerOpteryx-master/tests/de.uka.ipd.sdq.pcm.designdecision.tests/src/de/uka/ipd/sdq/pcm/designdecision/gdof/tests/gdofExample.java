@@ -2,26 +2,21 @@
  */
 package de.uka.ipd.sdq.pcm.designdecision.gdof.tests;
 
-import de.uka.ipd.sdq.pcm.designdecision.gdof.ChangeableElementDescription;
-import de.uka.ipd.sdq.pcm.designdecision.gdof.gdofFactory;
-import de.uka.ipd.sdq.pcm.designdecision.gdof.gdofPackage;
-
-import de.uka.ipd.sdq.pcm.designdecision.gdof.util.gdofResourceFactoryImpl;
-
 import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
 import org.eclipse.emf.ecore.util.Diagnostician;
+
+import de.uka.ipd.sdq.pcm.designdecision.gdof.ChangeableElementDescription;
+import de.uka.ipd.sdq.pcm.designdecision.gdof.gdofFactory;
+import de.uka.ipd.sdq.pcm.designdecision.gdof.gdofPackage;
+import de.uka.ipd.sdq.pcm.designdecision.gdof.util.gdofResourceFactoryImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,7 +39,8 @@ public class gdofExample {
 
 		// Register the appropriate resource factory to handle all file extensions.
 		//
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION, new gdofResourceFactoryImpl());
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+				.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new gdofResourceFactoryImpl());
 
 		// Register the package to ensure it is available during loading.
 		//
@@ -65,13 +61,13 @@ public class gdofExample {
 		} else {
 			// Iterate over all the arguments.
 			//
-			for (int i = 0; i < args.length; ++i) {
+			for (String arg : args) {
 				// Construct the URI for the instance file.
 				// The argument is treated as a file path only if it denotes an existing file.
 				// Otherwise, it's directly treated as a URL.
 				//
-				File file = new File(args[i]);
-				URI uri = file.isFile() ? URI.createFileURI(file.getAbsolutePath()) : URI.createURI(args[i]);
+				File file = new File(arg);
+				URI uri = file.isFile() ? URI.createFileURI(file.getAbsolutePath()) : URI.createURI(arg);
 
 				try {
 					// Demand load resource for this file.

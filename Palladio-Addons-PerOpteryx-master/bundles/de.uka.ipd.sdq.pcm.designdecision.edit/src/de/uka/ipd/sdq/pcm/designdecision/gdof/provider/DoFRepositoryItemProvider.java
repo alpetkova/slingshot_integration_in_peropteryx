@@ -29,8 +29,8 @@ import de.uka.ipd.sdq.pcm.designdecision.provider.DesignDecisionEditPlugin;
  * end-user-doc -->
  * @generated
  */
-public class DoFRepositoryItemProvider extends ItemProviderAdapter
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class DoFRepositoryItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc --> <!--
@@ -135,7 +135,8 @@ public class DoFRepositoryItemProvider extends ItemProviderAdapter
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(gdofPackage.Literals.DO_FREPOSITORY__DOFS, gdofFactory.eINSTANCE.createDegreeOfFreedom()));
+		newChildDescriptors.add(createChildParameter(gdofPackage.Literals.DO_FREPOSITORY__DOFS,
+				gdofFactory.eINSTANCE.createDegreeOfFreedom()));
 	}
 
 	/**

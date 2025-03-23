@@ -2,19 +2,18 @@
  */
 package de.uka.ipd.sdq.pcm.designdecision.provider;
 
-import de.uka.ipd.sdq.pcm.designdecision.BoolChoice;
-import de.uka.ipd.sdq.pcm.designdecision.designdecisionPackage;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import de.uka.ipd.sdq.pcm.designdecision.BoolChoice;
+import de.uka.ipd.sdq.pcm.designdecision.designdecisionPackage;
 
 /**
  * This is the item provider adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.BoolChoice} object.
@@ -56,9 +55,13 @@ public class BoolChoiceItemProvider extends ChoiceItemProvider {
 	 * @generated
 	 */
 	protected void addChosenValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_BoolChoice_chosenValue_feature"), getString("_UI_PropertyDescriptor_description", "_UI_BoolChoice_chosenValue_feature", "_UI_BoolChoice_type"),
-				designdecisionPackage.Literals.BOOL_CHOICE__CHOSEN_VALUE, true, false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_BoolChoice_chosenValue_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_BoolChoice_chosenValue_feature",
+								"_UI_BoolChoice_type"),
+						designdecisionPackage.Literals.BOOL_CHOICE__CHOSEN_VALUE, true, false, false,
+						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
 	/**

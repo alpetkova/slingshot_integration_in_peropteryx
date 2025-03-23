@@ -21,7 +21,7 @@ public interface BinaryGenotypeRepresentation<E> extends List<E> {
 		 OrderedIntegerDegree, ProcessingRateDegree, ProcessingResourceDegree,
 		 RangeDegree, ResourceContainerReplicationDegree, ResourceContainerReplicationDegreeWithComponentChange,
 		 ResourceSelectionDegree, SchedulingPolicyDegree, StringComponentParamDegree,
-		 StringSetDegree, UnorderedDegree, UnorderedPrimitiveDegree
+		 StringSetDegree, UnorderedDegree, UnorderedPrimitiveDegree, TargetGroupSizeMaxConstraintDegree
 	}
 	
 	// Abstract methods

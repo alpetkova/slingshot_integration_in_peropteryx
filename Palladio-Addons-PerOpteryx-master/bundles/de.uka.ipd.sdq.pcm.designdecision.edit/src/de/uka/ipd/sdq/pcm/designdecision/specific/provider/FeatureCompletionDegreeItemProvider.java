@@ -2,15 +2,14 @@
  */
 package de.uka.ipd.sdq.pcm.designdecision.specific.provider;
 
-import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureCompletionDegree;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+
+import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureCompletionDegree;
 
 /**
  * This is the item provider adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.FeatureCompletionDegree} object.
@@ -64,7 +63,8 @@ public class FeatureCompletionDegreeItemProvider extends ClassAsReferenceDegreeI
 	@Override
 	public String getText(Object object) {
 		String label = ((FeatureCompletionDegree) object).getEntityName();
-		return label == null || label.length() == 0 ? getString("_UI_FeatureCompletionDegree_type") : getString("_UI_FeatureCompletionDegree_type") + " " + label;
+		return label == null || label.length() == 0 ? getString("_UI_FeatureCompletionDegree_type")
+				: getString("_UI_FeatureCompletionDegree_type") + " " + label;
 	}
 
 	/**

@@ -43,6 +43,9 @@
           propertySortChoices="true" ecoreFeature="ecore:EReference designdecision.ecore#//DegreeOfFreedomInstance/dof"/>
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
           propertySortChoices="true" ecoreFeature="ecore:EReference designdecision.ecore#//DegreeOfFreedomInstance/changeableElements"/>
+      <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
+          propertySortChoices="true" ecoreFeature="ecore:EReference designdecision.ecore#//DegreeOfFreedomInstance/decoratorModel"/>
+      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="designdecision.ecore#//DegreeOfFreedomInstance/decoratorModelTypeMustMatchRequiredDecorator"/>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//ClassChoice">
       <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
@@ -70,6 +73,13 @@
         <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="designdecision.ecore#//Candidates/numberOfChoicesMustEqualNumberOfDecisions/diagnostics"/>
         <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="designdecision.ecore#//Candidates/numberOfChoicesMustEqualNumberOfDecisions/context"/>
       </genOperations>
+    </genClasses>
+    <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//BoolChoice">
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute designdecision.ecore#//BoolChoice/chosenValue"/>
+    </genClasses>
+    <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//FeatureChoice">
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute designdecision.ecore#//FeatureChoice/selected"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute designdecision.ecore#//FeatureChoice/present"/>
     </genClasses>
     <nestedGenPackages xsi:type="genmodel:GenPackage" prefix="gdof" basePackage="de.uka.ipd.sdq.pcm.designdecision"
         resource="XMI" disposableProviderFactory="true" ecorePackage="designdecision.ecore#//gdof">
@@ -111,7 +121,10 @@
             propertySortChoices="true" ecoreFeature="ecore:EReference designdecision.ecore#//gdof/DegreeOfFreedom/interactionConstraints"/>
         <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
             propertySortChoices="true" ecoreFeature="ecore:EReference designdecision.ecore#//gdof/DegreeOfFreedom/primaryChangeable"/>
+        <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
+            propertySortChoices="true" ecoreFeature="ecore:EReference designdecision.ecore#//gdof/DegreeOfFreedom/requiredDecoratorModel"/>
       </genClasses>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//gdof/DecoratorModelDescription"/>
     </nestedGenPackages>
     <nestedGenPackages xsi:type="genmodel:GenPackage" prefix="qualityproperties" basePackage="de.uka.ipd.sdq.pcm.designdecision"
         resource="XML" disposableProviderFactory="true" ecorePackage="designdecision.ecore#//qualityproperties">
@@ -244,6 +257,13 @@
       <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/CapacityDegree"/>
       <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/MonitoringDegree"/>
       <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/ATNumberOfReplicaDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/FeatureCompletionDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/FeatureDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" image="false" ecoreClass="designdecision.ecore#//specific/IndicatorDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/MultipleInclusionDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/AdvicePlacementDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/ComplementumVisnetisDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/TargetGroupSizeMaxConstraintDegree"/>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

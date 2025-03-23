@@ -66,7 +66,7 @@ public class qualitypropertiesAdapterFactory extends AdapterFactoryImpl {
 	 * end-user-doc -->
 	 * @generated
 	 */
-	protected qualitypropertiesSwitch<Adapter> modelSwitch = new qualitypropertiesSwitch<Adapter>() {
+	protected qualitypropertiesSwitch<Adapter> modelSwitch = new qualitypropertiesSwitch<>() {
 		@Override
 		public Adapter caseNumericQualityProperty(NumericQualityProperty object) {
 			return createNumericQualityPropertyAdapter();

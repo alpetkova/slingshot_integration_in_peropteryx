@@ -20,7 +20,8 @@ public interface resourcerepositoryFactory extends EFactory {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	resourcerepositoryFactory eINSTANCE = de.uka.ipd.sdq.pcm.resourcerepository.impl.resourcerepositoryFactoryImpl.init();
+	resourcerepositoryFactory eINSTANCE = de.uka.ipd.sdq.pcm.resourcerepository.impl.resourcerepositoryFactoryImpl
+			.init();
 
 	/**
 	 * Returns a new object of class '<em>Resource Description Repository</em>'.

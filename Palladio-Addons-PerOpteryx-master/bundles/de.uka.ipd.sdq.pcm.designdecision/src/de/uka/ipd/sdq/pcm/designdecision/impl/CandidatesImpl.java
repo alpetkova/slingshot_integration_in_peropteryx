@@ -83,7 +83,8 @@ public class CandidatesImpl extends EObjectImpl implements Candidates {
 	@Override
 	public EList<Candidate> getCandidate() {
 		if (candidate == null) {
-			candidate = new EObjectContainmentEList<Candidate>(Candidate.class, this, designdecisionPackage.CANDIDATES__CANDIDATE);
+			candidate = new EObjectContainmentEList<>(Candidate.class, this,
+					designdecisionPackage.CANDIDATES__CANDIDATE);
 		}
 		return candidate;
 	}
@@ -99,7 +100,8 @@ public class CandidatesImpl extends EObjectImpl implements Candidates {
 			problem = (DecisionSpace) eResolveProxy(oldProblem);
 			if (problem != oldProblem) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, designdecisionPackage.CANDIDATES__PROBLEM, oldProblem, problem));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, designdecisionPackage.CANDIDATES__PROBLEM,
+							oldProblem, problem));
 			}
 		}
 		return problem;
@@ -122,7 +124,8 @@ public class CandidatesImpl extends EObjectImpl implements Candidates {
 		DecisionSpace oldProblem = problem;
 		problem = newProblem;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, designdecisionPackage.CANDIDATES__PROBLEM, oldProblem, problem));
+			eNotify(new ENotificationImpl(this, Notification.SET, designdecisionPackage.CANDIDATES__PROBLEM, oldProblem,
+					problem));
 	}
 
 	/**
@@ -137,9 +140,13 @@ public class CandidatesImpl extends EObjectImpl implements Candidates {
 		// Ensure that you remove @generated or mark it @generated NOT
 		if (false) {
 			if (diagnostics != null) {
-				diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR, designdecisionValidator.DIAGNOSTIC_SOURCE, designdecisionValidator.CANDIDATES__NUMBER_OF_CHOICES_MUST_EQUAL_NUMBER_OF_DECISIONS,
-						EcorePlugin.INSTANCE.getString("_UI_GenericInvariant_diagnostic", new Object[] { "numberOfChoicesMustEqualNumberOfDecisions", EObjectValidator.getObjectLabel(this, context) }),
-						new Object[] { this }));
+				diagnostics
+						.add(new BasicDiagnostic(Diagnostic.ERROR, designdecisionValidator.DIAGNOSTIC_SOURCE,
+								designdecisionValidator.CANDIDATES__NUMBER_OF_CHOICES_MUST_EQUAL_NUMBER_OF_DECISIONS,
+								EcorePlugin.INSTANCE.getString("_UI_GenericInvariant_diagnostic",
+										new Object[] { "numberOfChoicesMustEqualNumberOfDecisions",
+												EObjectValidator.getObjectLabel(this, context) }),
+								new Object[] { this }));
 			}
 			return false;
 		}

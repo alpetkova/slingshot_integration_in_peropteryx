@@ -64,7 +64,8 @@ public class ContinuousComponentParamDegreeItemProvider extends ContinuousRangeD
 	@Override
 	public String getText(Object object) {
 		String label = ((ContinuousComponentParamDegree) object).getEntityName();
-		return label == null || label.length() == 0 ? getString("_UI_ContinuousComponentParamDegree_type") : getString("_UI_ContinuousComponentParamDegree_type") + " " + label;
+		return label == null || label.length() == 0 ? getString("_UI_ContinuousComponentParamDegree_type")
+				: getString("_UI_ContinuousComponentParamDegree_type") + " " + label;
 	}
 
 	/**

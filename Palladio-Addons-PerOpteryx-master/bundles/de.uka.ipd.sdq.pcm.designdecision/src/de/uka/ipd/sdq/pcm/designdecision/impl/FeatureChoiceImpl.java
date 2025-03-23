@@ -94,7 +94,8 @@ public class FeatureChoiceImpl extends ChoiceImpl implements FeatureChoice {
 		boolean oldSelected = selected;
 		selected = newSelected;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, designdecisionPackage.FEATURE_CHOICE__SELECTED, oldSelected, selected));
+			eNotify(new ENotificationImpl(this, Notification.SET, designdecisionPackage.FEATURE_CHOICE__SELECTED,
+					oldSelected, selected));
 	}
 
 	/**
@@ -115,7 +116,8 @@ public class FeatureChoiceImpl extends ChoiceImpl implements FeatureChoice {
 		boolean oldPresent = present;
 		present = newPresent;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, designdecisionPackage.FEATURE_CHOICE__PRESENT, oldPresent, present));
+			eNotify(new ENotificationImpl(this, Notification.SET, designdecisionPackage.FEATURE_CHOICE__PRESENT,
+					oldPresent, present));
 	}
 
 	/**
@@ -191,7 +193,7 @@ public class FeatureChoiceImpl extends ChoiceImpl implements FeatureChoice {
 		if (eIsProxy())
 			return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (selected: ");
 		result.append(selected);
 		result.append(", present: ");
@@ -210,7 +212,8 @@ public class FeatureChoiceImpl extends ChoiceImpl implements FeatureChoice {
 		if (newValue instanceof Boolean) {
 			this.setSelected(((Boolean) newValue).booleanValue());
 		} else {
-			throw new IllegalArgumentException("Cannot cast " + newValue.getClass().getName() + " to Boolean to get the bool value.");
+			throw new IllegalArgumentException(
+					"Cannot cast " + newValue.getClass().getName() + " to Boolean to get the bool value.");
 		}
 
 	}

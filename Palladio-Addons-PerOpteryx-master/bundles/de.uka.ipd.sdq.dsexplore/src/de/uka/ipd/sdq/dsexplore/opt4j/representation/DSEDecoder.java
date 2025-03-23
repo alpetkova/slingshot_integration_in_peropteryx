@@ -23,6 +23,8 @@ import org.palladiosimulator.pcm.resourcetype.ProcessingResourceType;
 import org.palladiosimulator.pcm.resourcetype.SchedulingPolicy;
 import org.palladiosimulator.solver.models.PCMInstance;
 
+import org.palladiosimulator.spd.constraints.target.TargetGroupSizeConstraint;
+
 import com.google.inject.Inject;
 
 import de.uka.ipd.sdq.dsexplore.analysis.PCMPhenotype;
@@ -68,6 +70,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.RangeDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegreeWithComponentChange;
 import de.uka.ipd.sdq.pcm.designdecision.specific.SchedulingPolicyDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
 import placementDescription.SelectedCV;
 
 /**
@@ -201,6 +204,8 @@ public class DSEDecoder implements Decoder<DesignDecisionGenotype, PCMPhenotype>
 			this.applyChangeResourceContainerReplicationDegree((ResourceContainerReplicationDegree) designDecision, choice);
 		} else if (designDecision instanceof ATNumberOfReplicaDegree) {
 			this.applyChangeATNumberOfReplicaDegree((ATNumberOfReplicaDegree) designDecision, choice);
+		} else if (designDecision instanceof TargetGroupSizeMaxConstraintDegree) {
+			this.applyChangeTargetGroupSizeMaxConstraintDecision((TargetGroupSizeMaxConstraintDegree) designDecision, choice);
 		} else {
 			try {
 				trans.transformChoice(pcm, choice);
@@ -209,6 +214,17 @@ public class DSEDecoder implements Decoder<DesignDecisionGenotype, PCMPhenotype>
 				e.printStackTrace();
 			}
 		}
+	}
+	private void applyChangeTargetGroupSizeMaxConstraintDecision(final TargetGroupSizeMaxConstraintDegree designDecision, final Choice choice) {
+		if (!(choice instanceof DiscreteRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final DiscreteRangeChoice discreteChoice = (DiscreteRangeChoice) choice;
+
+		final TargetGroupSizeConstraint tgsc = (TargetGroupSizeConstraint) designDecision.getPrimaryChanged();
+		tgsc.setMaxSize(discreteChoice.getChosenValue());
+
 	}
 
 	private void applyChangeATNumberOfReplicaDegree(ATNumberOfReplicaDegree designDecision, Choice choice) {

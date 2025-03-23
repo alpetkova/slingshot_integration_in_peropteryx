@@ -54,9 +54,12 @@ public class OptionalFeatureDegreeItemProvider extends FeatureConfigDegreeItemPr
 	 * @generated
 	 */
 	protected void addSimplePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_OptionalFeatureDegree_simple_feature"), getString("_UI_PropertyDescriptor_description", "_UI_OptionalFeatureDegree_simple_feature", "_UI_OptionalFeatureDegree_type"),
-				specificPackage.Literals.OPTIONAL_FEATURE_DEGREE__SIMPLE, true, false, true, null, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_OptionalFeatureDegree_simple_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_OptionalFeatureDegree_simple_feature",
+								"_UI_OptionalFeatureDegree_type"),
+						specificPackage.Literals.OPTIONAL_FEATURE_DEGREE__SIMPLE, true, false, true, null, null, null));
 	}
 
 	/**
@@ -78,7 +81,8 @@ public class OptionalFeatureDegreeItemProvider extends FeatureConfigDegreeItemPr
 	@Override
 	public String getText(Object object) {
 		String label = ((OptionalFeatureDegree) object).getEntityName();
-		return label == null || label.length() == 0 ? getString("_UI_OptionalFeatureDegree_type") : getString("_UI_OptionalFeatureDegree_type") + " " + label;
+		return label == null || label.length() == 0 ? getString("_UI_OptionalFeatureDegree_type")
+				: getString("_UI_OptionalFeatureDegree_type") + " " + label;
 	}
 
 	/**

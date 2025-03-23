@@ -1435,7 +1435,8 @@ public interface specificPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESSING_RESOURCE_DEGREE__PROCESSINGRESOURCETYPE = designdecisionPackage.DEGREE_OF_FREEDOM_INSTANCE_FEATURE_COUNT + 0;
+	int PROCESSING_RESOURCE_DEGREE__PROCESSINGRESOURCETYPE = designdecisionPackage.DEGREE_OF_FREEDOM_INSTANCE_FEATURE_COUNT
+			+ 0;
 
 	/**
 	 * The number of structural features of the '<em>Processing Resource Degree</em>' class. <!--
@@ -2479,7 +2480,8 @@ public interface specificPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_CONTAINER_REPLICATION_DEGREE_WITH_COMPONENT_CHANGE__EXCHANGE_COMPONENT_RULE = RESOURCE_CONTAINER_REPLICATION_DEGREE_FEATURE_COUNT + 0;
+	int RESOURCE_CONTAINER_REPLICATION_DEGREE_WITH_COMPONENT_CHANGE__EXCHANGE_COMPONENT_RULE = RESOURCE_CONTAINER_REPLICATION_DEGREE_FEATURE_COUNT
+			+ 0;
 
 	/**
 	 * The number of structural features of the '
@@ -2489,7 +2491,8 @@ public interface specificPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_CONTAINER_REPLICATION_DEGREE_WITH_COMPONENT_CHANGE_FEATURE_COUNT = RESOURCE_CONTAINER_REPLICATION_DEGREE_FEATURE_COUNT + 1;
+	int RESOURCE_CONTAINER_REPLICATION_DEGREE_WITH_COMPONENT_CHANGE_FEATURE_COUNT = RESOURCE_CONTAINER_REPLICATION_DEGREE_FEATURE_COUNT
+			+ 1;
 
 	/**
 	 * The meta object id for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ResourceSelectionDegreeImpl <em>Resource Selection Degree</em>}' class.
@@ -3605,6 +3608,115 @@ public interface specificPackage extends EPackage {
 	int COMPLEMENTUM_VISNETIS_DEGREE_FEATURE_COUNT = CLASS_AS_REFERENCE_DEGREE_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.TargetGroupSizeMaxConstraintDegreeImpl <em>Target Group Size Max Constraint Degree</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.TargetGroupSizeMaxConstraintDegreeImpl
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getTargetGroupSizeMaxConstraintDegree()
+	 * @generated
+	 */
+	int TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE = 44;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE__ENTITY_NAME = DISCRETE_RANGE_DEGREE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Primary Changed</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE__PRIMARY_CHANGED = DISCRETE_RANGE_DEGREE__PRIMARY_CHANGED;
+
+	/**
+	 * The feature id for the '<em><b>Dof</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE__DOF = DISCRETE_RANGE_DEGREE__DOF;
+
+	/**
+	 * The feature id for the '<em><b>Changeable Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE__CHANGEABLE_ELEMENTS = DISCRETE_RANGE_DEGREE__CHANGEABLE_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Decorator Model</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE__DECORATOR_MODEL = DISCRETE_RANGE_DEGREE__DECORATOR_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE__UPPER_BOUND_INCLUDED = DISCRETE_RANGE_DEGREE__UPPER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE__LOWER_BOUND_INCLUDED = DISCRETE_RANGE_DEGREE__LOWER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Steps</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE__NUMBER_OF_STEPS = DISCRETE_RANGE_DEGREE__NUMBER_OF_STEPS;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE__TO = DISCRETE_RANGE_DEGREE__TO;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE__FROM = DISCRETE_RANGE_DEGREE__FROM;
+
+	/**
+	 * The number of structural features of the '<em>Target Group Size Max Constraint Degree</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE_FEATURE_COUNT = DISCRETE_RANGE_DEGREE_FEATURE_COUNT + 0;
+
+	/**
 	 * Returns the meta object for class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExchangeComponentRule <em>Exchange Component Rule</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Exchange Component Rule</em>'.
@@ -4211,6 +4323,16 @@ public interface specificPackage extends EPackage {
 	EClass getComplementumVisnetisDegree();
 
 	/**
+	 * Returns the meta object for class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree <em>Target Group Size Max Constraint Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Target Group Size Max Constraint Degree</em>'.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree
+	 * @generated
+	 */
+	EClass getTargetGroupSizeMaxConstraintDegree();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -4245,7 +4367,8 @@ public interface specificPackage extends EPackage {
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXCHANGE_COMPONENT_RULE__REPOSITORY_COMPONENT = eINSTANCE.getExchangeComponentRule_RepositoryComponent();
+		EReference EXCHANGE_COMPONENT_RULE__REPOSITORY_COMPONENT = eINSTANCE
+				.getExchangeComponentRule_RepositoryComponent();
 
 		/**
 		 * The meta object literal for the '<em><b>Allocation Context</b></em>' reference feature.
@@ -4512,7 +4635,8 @@ public interface specificPackage extends EPackage {
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROCESSING_RESOURCE_DEGREE__PROCESSINGRESOURCETYPE = eINSTANCE.getProcessingResourceDegree_Processingresourcetype();
+		EReference PROCESSING_RESOURCE_DEGREE__PROCESSINGRESOURCETYPE = eINSTANCE
+				.getProcessingResourceDegree_Processingresourcetype();
 
 		/**
 		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.DiscreteComponentParamDegreeImpl <em>Discrete Component Param Degree</em>}' class.
@@ -4565,7 +4689,8 @@ public interface specificPackage extends EPackage {
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FEATURE_GROUP_DEGREE__DOMAIN_OF_FEATURE_CONFIG_COMBINATIONS = eINSTANCE.getFeatureGroupDegree_DomainOfFeatureConfigCombinations();
+		EReference FEATURE_GROUP_DEGREE__DOMAIN_OF_FEATURE_CONFIG_COMBINATIONS = eINSTANCE
+				.getFeatureGroupDegree_DomainOfFeatureConfigCombinations();
 
 		/**
 		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.FeatureSubsetImpl <em>Feature Subset</em>}' class.
@@ -4650,14 +4775,16 @@ public interface specificPackage extends EPackage {
 		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getResourceContainerReplicationDegreeWithComponentChange()
 		 * @generated
 		 */
-		EClass RESOURCE_CONTAINER_REPLICATION_DEGREE_WITH_COMPONENT_CHANGE = eINSTANCE.getResourceContainerReplicationDegreeWithComponentChange();
+		EClass RESOURCE_CONTAINER_REPLICATION_DEGREE_WITH_COMPONENT_CHANGE = eINSTANCE
+				.getResourceContainerReplicationDegreeWithComponentChange();
 
 		/**
 		 * The meta object literal for the '<em><b>Exchange Component Rule</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RESOURCE_CONTAINER_REPLICATION_DEGREE_WITH_COMPONENT_CHANGE__EXCHANGE_COMPONENT_RULE = eINSTANCE.getResourceContainerReplicationDegreeWithComponentChange_ExchangeComponentRule();
+		EReference RESOURCE_CONTAINER_REPLICATION_DEGREE_WITH_COMPONENT_CHANGE__EXCHANGE_COMPONENT_RULE = eINSTANCE
+				.getResourceContainerReplicationDegreeWithComponentChange_ExchangeComponentRule();
 
 		/**
 		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ResourceSelectionDegreeImpl <em>Resource Selection Degree</em>}' class.
@@ -4799,6 +4926,16 @@ public interface specificPackage extends EPackage {
 		 * @generated
 		 */
 		EClass COMPLEMENTUM_VISNETIS_DEGREE = eINSTANCE.getComplementumVisnetisDegree();
+
+		/**
+		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.TargetGroupSizeMaxConstraintDegreeImpl <em>Target Group Size Max Constraint Degree</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.TargetGroupSizeMaxConstraintDegreeImpl
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getTargetGroupSizeMaxConstraintDegree()
+		 * @generated
+		 */
+		EClass TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE = eINSTANCE.getTargetGroupSizeMaxConstraintDegree();
 
 	}
 

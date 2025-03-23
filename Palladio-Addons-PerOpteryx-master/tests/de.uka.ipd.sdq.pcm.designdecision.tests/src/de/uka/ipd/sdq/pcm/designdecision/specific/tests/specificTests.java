@@ -4,7 +4,6 @@ package de.uka.ipd.sdq.pcm.designdecision.specific.tests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-
 import junit.textui.TestRunner;
 
 /**
@@ -58,6 +57,7 @@ public class specificTests extends TestSuite {
 		suite.addTestSuite(MultipleInclusionDegreeTest.class);
 		suite.addTestSuite(AdvicePlacementDegreeTest.class);
 		suite.addTestSuite(ComplementumVisnetisDegreeTest.class);
+		suite.addTestSuite(TargetGroupSizeMaxConstraintDegreeTest.class);
 		return suite;
 	}
 

@@ -13,9 +13,9 @@ import de.uka.ipd.sdq.pcm.designdecision.gdof.DegreeOfFreedom;
  * <em><b>Degree Of Freedom Instance</b></em>'. <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Each degree of freedom of the system architecture can be represented by a DegreeOfFreedom element. Each DegreeOfFreedomInstance has two parts: It links a model element that is the changeable entity in this DegreeOfFreedom, and it specifies a domain of possible values that the model element can take. 
- * 
- * The domain is defined in subclasses, because it may be either a set of PCM Entities (in the EnumerationDegree) or integer or double ranges (in the RangeDegree and its subclasses). 
+ * Each degree of freedom of the system architecture can be represented by a DegreeOfFreedom element. Each DegreeOfFreedomInstance has two parts: It links a model element that is the changeable entity in this DegreeOfFreedom, and it specifies a domain of possible values that the model element can take.
+ *
+ * The domain is defined in subclasses, because it may be either a set of PCM Entities (in the EnumerationDegree) or integer or double ranges (in the RangeDegree and its subclasses).
  * <!-- end-model-doc -->
  *
  * <p>
@@ -32,7 +32,7 @@ import de.uka.ipd.sdq.pcm.designdecision.gdof.DegreeOfFreedom;
  * @model
  * @generated
  */
-public interface DegreeOfFreedomInstance extends EObject, NamedElement {
+public interface DegreeOfFreedomInstance extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Primary Changed</b></em>' reference.
 	 * <!-- begin-user-doc -->

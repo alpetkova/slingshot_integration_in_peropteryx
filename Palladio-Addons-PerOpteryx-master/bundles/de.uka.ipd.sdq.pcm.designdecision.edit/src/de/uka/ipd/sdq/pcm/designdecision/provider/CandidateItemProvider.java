@@ -99,7 +99,8 @@ public class CandidateItemProvider extends NamedElementItemProvider {
 	@Override
 	public String getText(Object object) {
 		String label = ((Candidate) object).getEntityName();
-		return label == null || label.length() == 0 ? getString("_UI_Candidate_type") : getString("_UI_Candidate_type") + " " + label;
+		return label == null || label.length() == 0 ? getString("_UI_Candidate_type")
+				: getString("_UI_Candidate_type") + " " + label;
 	}
 
 	/**
@@ -131,21 +132,29 @@ public class CandidateItemProvider extends NamedElementItemProvider {
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__CHOICES, designdecisionFactory.eINSTANCE.createDiscreteRangeChoice()));
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__CHOICES,
+				designdecisionFactory.eINSTANCE.createDiscreteRangeChoice()));
 
-		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__CHOICES, designdecisionFactory.eINSTANCE.createClassChoice()));
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__CHOICES,
+				designdecisionFactory.eINSTANCE.createClassChoice()));
 
-		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__CHOICES, designdecisionFactory.eINSTANCE.createContinousRangeChoice()));
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__CHOICES,
+				designdecisionFactory.eINSTANCE.createContinousRangeChoice()));
 
-		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__CHOICES, designdecisionFactory.eINSTANCE.createBoolChoice()));
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__CHOICES,
+				designdecisionFactory.eINSTANCE.createBoolChoice()));
 
-		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__CHOICES, designdecisionFactory.eINSTANCE.createFeatureChoice()));
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__CHOICES,
+				designdecisionFactory.eINSTANCE.createFeatureChoice()));
 
-		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__QUALITY_PROPERTY, qualitypropertiesFactory.eINSTANCE.createElementQualityProperty()));
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__QUALITY_PROPERTY,
+				qualitypropertiesFactory.eINSTANCE.createElementQualityProperty()));
 
-		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__QUALITY_PROPERTY, qualitypropertiesFactory.eINSTANCE.createIntegerQualityProperty()));
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__QUALITY_PROPERTY,
+				qualitypropertiesFactory.eINSTANCE.createIntegerQualityProperty()));
 
-		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__QUALITY_PROPERTY, qualitypropertiesFactory.eINSTANCE.createDoubleQualityProperty()));
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.CANDIDATE__QUALITY_PROPERTY,
+				qualitypropertiesFactory.eINSTANCE.createDoubleQualityProperty()));
 	}
 
 	/**

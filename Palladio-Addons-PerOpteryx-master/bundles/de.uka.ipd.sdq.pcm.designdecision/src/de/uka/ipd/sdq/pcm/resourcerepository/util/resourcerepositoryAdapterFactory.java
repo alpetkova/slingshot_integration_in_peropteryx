@@ -65,7 +65,7 @@ public class resourcerepositoryAdapterFactory extends AdapterFactoryImpl {
 	 * end-user-doc -->
 	 * @generated
 	 */
-	protected resourcerepositorySwitch<Adapter> modelSwitch = new resourcerepositorySwitch<Adapter>() {
+	protected resourcerepositorySwitch<Adapter> modelSwitch = new resourcerepositorySwitch<>() {
 		@Override
 		public Adapter caseResourceDescriptionRepository(ResourceDescriptionRepository object) {
 			return createResourceDescriptionRepositoryAdapter();

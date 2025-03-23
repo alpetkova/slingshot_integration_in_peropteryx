@@ -2,15 +2,14 @@
  */
 package de.uka.ipd.sdq.pcm.designdecision.specific.provider;
 
-import de.uka.ipd.sdq.pcm.designdecision.specific.MultipleInclusionDegree;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+
+import de.uka.ipd.sdq.pcm.designdecision.specific.MultipleInclusionDegree;
 
 /**
  * This is the item provider adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.MultipleInclusionDegree} object.
@@ -64,7 +63,8 @@ public class MultipleInclusionDegreeItemProvider extends IndicatorDegreeItemProv
 	@Override
 	public String getText(Object object) {
 		String label = ((MultipleInclusionDegree) object).getEntityName();
-		return label == null || label.length() == 0 ? getString("_UI_MultipleInclusionDegree_type") : getString("_UI_MultipleInclusionDegree_type") + " " + label;
+		return label == null || label.length() == 0 ? getString("_UI_MultipleInclusionDegree_type")
+				: getString("_UI_MultipleInclusionDegree_type") + " " + label;
 	}
 
 	/**

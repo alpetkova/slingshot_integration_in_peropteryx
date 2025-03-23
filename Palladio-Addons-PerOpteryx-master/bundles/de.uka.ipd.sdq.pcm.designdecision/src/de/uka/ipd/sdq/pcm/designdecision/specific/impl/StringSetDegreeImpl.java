@@ -61,7 +61,8 @@ public abstract class StringSetDegreeImpl extends UnorderedDegreeImpl implements
 	@Override
 	public EList<String> getStringValues() {
 		if (stringValues == null) {
-			stringValues = new EDataTypeUniqueEList<String>(String.class, this, specificPackage.STRING_SET_DEGREE__STRING_VALUES);
+			stringValues = new EDataTypeUniqueEList<>(String.class, this,
+					specificPackage.STRING_SET_DEGREE__STRING_VALUES);
 		}
 		return stringValues;
 	}
@@ -131,7 +132,7 @@ public abstract class StringSetDegreeImpl extends UnorderedDegreeImpl implements
 		if (eIsProxy())
 			return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (stringValues: ");
 		result.append(stringValues);
 		result.append(')');

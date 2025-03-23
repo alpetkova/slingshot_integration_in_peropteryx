@@ -2,20 +2,17 @@
  */
 package de.uka.ipd.sdq.pcm.designdecision.specific.provider;
 
-import de.uka.ipd.sdq.pcm.designdecision.provider.DegreeOfFreedomInstanceItemProvider;
-import de.uka.ipd.sdq.pcm.designdecision.provider.DesignDecisionEditPlugin;
-
-import de.uka.ipd.sdq.pcm.designdecision.specific.IndicatorDegree;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+
+import de.uka.ipd.sdq.pcm.designdecision.provider.DegreeOfFreedomInstanceItemProvider;
+import de.uka.ipd.sdq.pcm.designdecision.provider.DesignDecisionEditPlugin;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IndicatorDegree;
 
 /**
  * This is the item provider adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.IndicatorDegree} object.
@@ -58,7 +55,8 @@ public class IndicatorDegreeItemProvider extends DegreeOfFreedomInstanceItemProv
 	@Override
 	public String getText(Object object) {
 		String label = ((IndicatorDegree) object).getEntityName();
-		return label == null || label.length() == 0 ? getString("_UI_IndicatorDegree_type") : getString("_UI_IndicatorDegree_type") + " " + label;
+		return label == null || label.length() == 0 ? getString("_UI_IndicatorDegree_type")
+				: getString("_UI_IndicatorDegree_type") + " " + label;
 	}
 
 	/**

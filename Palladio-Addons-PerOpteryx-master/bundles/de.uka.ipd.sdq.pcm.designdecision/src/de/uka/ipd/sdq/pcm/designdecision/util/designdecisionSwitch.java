@@ -5,10 +5,12 @@ package de.uka.ipd.sdq.pcm.designdecision.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.palladiosimulator.pcm.PCMBaseClass;
+import org.palladiosimulator.pcm.PCMClass;
 import org.palladiosimulator.pcm.core.entity.NamedElement;
 
 import de.uka.ipd.sdq.identifier.Identifier;
-import de.uka.ipd.sdq.pcm.designdecision.*;
+import de.uka.ipd.sdq.pcm.designdecision.BoolChoice;
 import de.uka.ipd.sdq.pcm.designdecision.Candidate;
 import de.uka.ipd.sdq.pcm.designdecision.Candidates;
 import de.uka.ipd.sdq.pcm.designdecision.Choice;
@@ -17,6 +19,7 @@ import de.uka.ipd.sdq.pcm.designdecision.ContinousRangeChoice;
 import de.uka.ipd.sdq.pcm.designdecision.DecisionSpace;
 import de.uka.ipd.sdq.pcm.designdecision.DegreeOfFreedomInstance;
 import de.uka.ipd.sdq.pcm.designdecision.DiscreteRangeChoice;
+import de.uka.ipd.sdq.pcm.designdecision.FeatureChoice;
 import de.uka.ipd.sdq.pcm.designdecision.designdecisionPackage;
 
 /**
@@ -91,6 +94,10 @@ public class designdecisionSwitch<T> extends Switch<T> {
 			if (result == null)
 				result = caseNamedElement(degreeOfFreedomInstance);
 			if (result == null)
+				result = casePCMBaseClass(degreeOfFreedomInstance);
+			if (result == null)
+				result = casePCMClass(degreeOfFreedomInstance);
+			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
@@ -128,6 +135,10 @@ public class designdecisionSwitch<T> extends Switch<T> {
 			T result = caseCandidate(candidate);
 			if (result == null)
 				result = caseNamedElement(candidate);
+			if (result == null)
+				result = casePCMBaseClass(candidate);
+			if (result == null)
+				result = casePCMClass(candidate);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -301,6 +312,36 @@ public class designdecisionSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseFeatureChoice(FeatureChoice object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>PCM Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>PCM Class</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePCMClass(PCMClass object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>PCM Base Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>PCM Base Class</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePCMBaseClass(PCMBaseClass object) {
 		return null;
 	}
 

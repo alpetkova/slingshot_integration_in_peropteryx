@@ -31,7 +31,8 @@ import de.uka.ipd.sdq.pcm.designdecision.qualityproperties.util.qualitypropertie
  * end-user-doc -->
  * @generated
  */
-public class qualitypropertiesItemProviderAdapterFactory extends qualitypropertiesAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class qualitypropertiesItemProviderAdapterFactory extends qualitypropertiesAdapterFactory
+		implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -53,7 +54,7 @@ public class qualitypropertiesItemProviderAdapterFactory extends qualityproperti
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection<Object> supportedTypes = new ArrayList<Object>();
+	protected Collection<Object> supportedTypes = new ArrayList<>();
 
 	/**
 	 * This constructs an instance.
@@ -254,7 +255,7 @@ public class qualitypropertiesItemProviderAdapterFactory extends qualityproperti
 	}
 
 	/**
-	 * This disposes all of the item providers created by this factory. 
+	 * This disposes all of the item providers created by this factory.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @generated

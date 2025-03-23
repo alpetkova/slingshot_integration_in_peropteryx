@@ -92,6 +92,7 @@ import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
@@ -159,7 +160,8 @@ import de.uka.ipd.sdq.units.provider.UnitsItemProviderAdapterFactory;
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
-public class specificEditor extends MultiPageEditorPart implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
+public class specificEditor extends MultiPageEditorPart
+		implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	/**
 	 * This keeps track of the editing domain that is used to track all changes to the model. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -202,7 +204,7 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected List<PropertySheetPage> propertySheetPages = new ArrayList<PropertySheetPage>();
+	protected List<PropertySheetPage> propertySheetPages = new ArrayList<>();
 
 	/**
 	 * This is the viewer that shadows the selection in the content outline.
@@ -277,7 +279,7 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection<ISelectionChangedListener> selectionChangedListeners = new ArrayList<ISelectionChangedListener>();
+	protected Collection<ISelectionChangedListener> selectionChangedListeners = new ArrayList<>();
 
 	/**
 	 * This keeps track of the selection of the editor as a whole.
@@ -347,7 +349,7 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 	 * end-user-doc -->
 	 * @generated
 	 */
-	protected Collection<Resource> removedResources = new ArrayList<Resource>();
+	protected Collection<Resource> removedResources = new ArrayList<>();
 
 	/**
 	 * Resources that have been changed since last activation.
@@ -355,14 +357,14 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 	 * end-user-doc -->
 	 * @generated
 	 */
-	protected Collection<Resource> changedResources = new ArrayList<Resource>();
+	protected Collection<Resource> changedResources = new ArrayList<>();
 
 	/**
 	 * Resources that have been saved.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection<Resource> savedResources = new ArrayList<Resource>();
+	protected Collection<Resource> savedResources = new ArrayList<>();
 
 	/**
 	 * Map to store the diagnostic associated with a resource.
@@ -370,7 +372,7 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 	 * end-user-doc -->
 	 * @generated
 	 */
-	protected Map<Resource, Diagnostic> resourceToDiagnosticMap = new LinkedHashMap<Resource, Diagnostic>();
+	protected Map<Resource, Diagnostic> resourceToDiagnosticMap = new LinkedHashMap<>();
 
 	/**
 	 * Controls whether the problem indication should be updated.
@@ -387,6 +389,8 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 	 * @generated
 	 */
 	protected EContentAdapter problemIndicationAdapter = new EContentAdapter() {
+		protected boolean dispatching;
+
 		@Override
 		public void notifyChanged(Notification notification) {
 			if (notification.getNotifier() instanceof Resource) {
@@ -401,20 +405,25 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 					} else {
 						resourceToDiagnosticMap.remove(resource);
 					}
-
-					if (updateProblemIndication) {
-						getSite().getShell().getDisplay().asyncExec(new Runnable() {
-							@Override
-							public void run() {
-								updateProblemIndication();
-							}
-						});
-					}
+					dispatchUpdateProblemIndication();
 					break;
 				}
 				}
 			} else {
 				super.notifyChanged(notification);
+			}
+		}
+
+		protected void dispatchUpdateProblemIndication() {
+			if (updateProblemIndication && !dispatching) {
+				dispatching = true;
+				getSite().getShell().getDisplay().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						dispatching = false;
+						updateProblemIndication();
+					}
+				});
 			}
 		}
 
@@ -427,14 +436,7 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 		protected void unsetTarget(Resource target) {
 			basicUnsetTarget(target);
 			resourceToDiagnosticMap.remove(target);
-			if (updateProblemIndication) {
-				getSite().getShell().getDisplay().asyncExec(new Runnable() {
-					@Override
-					public void run() {
-						updateProblemIndication();
-					}
-				});
-			}
+			dispatchUpdateProblemIndication();
 		}
 	};
 
@@ -450,14 +452,16 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 			try {
 				class ResourceDeltaVisitor implements IResourceDeltaVisitor {
 					protected ResourceSet resourceSet = editingDomain.getResourceSet();
-					protected Collection<Resource> changedResources = new ArrayList<Resource>();
-					protected Collection<Resource> removedResources = new ArrayList<Resource>();
+					protected Collection<Resource> changedResources = new ArrayList<>();
+					protected Collection<Resource> removedResources = new ArrayList<>();
 
 					@Override
 					public boolean visit(IResourceDelta delta) {
 						if (delta.getResource().getType() == IResource.FILE) {
-							if (delta.getKind() == IResourceDelta.REMOVED || delta.getKind() == IResourceDelta.CHANGED && delta.getFlags() != IResourceDelta.MARKERS) {
-								Resource resource = resourceSet.getResource(URI.createPlatformResourceURI(delta.getFullPath().toString(), true), false);
+							if (delta.getKind() == IResourceDelta.REMOVED || delta.getKind() == IResourceDelta.CHANGED
+									&& delta.getFlags() != IResourceDelta.MARKERS) {
+								Resource resource = resourceSet.getResource(
+										URI.createPlatformResourceURI(delta.getFullPath().toString(), true), false);
 								if (resource != null) {
 									if (delta.getKind() == IResourceDelta.REMOVED) {
 										removedResources.add(resource);
@@ -554,8 +558,9 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 	 */
 	protected void handleChangedResources() {
 		if (!changedResources.isEmpty() && (!isDirty() || handleDirtyConflict())) {
+			ResourceSet resourceSet = editingDomain.getResourceSet();
 			if (isDirty()) {
-				changedResources.addAll(editingDomain.getResourceSet().getResources());
+				changedResources.addAll(resourceSet.getResources());
 			}
 			editingDomain.getCommandStack().flush();
 
@@ -564,7 +569,7 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 				if (resource.isLoaded()) {
 					resource.unload();
 					try {
-						resource.load(Collections.EMPTY_MAP);
+						resource.load(resourceSet.getLoadOptions());
 					} catch (IOException exception) {
 						if (!resourceToDiagnosticMap.containsKey(resource)) {
 							resourceToDiagnosticMap.put(resource, analyzeResourceProblems(resource, exception));
@@ -589,7 +594,8 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 	 */
 	protected void updateProblemIndication() {
 		if (updateProblemIndication) {
-			BasicDiagnostic diagnostic = new BasicDiagnostic(Diagnostic.OK, "de.uka.ipd.sdq.pcm.designdecision.editor", 0, null, new Object[] { editingDomain.getResourceSet() });
+			BasicDiagnostic diagnostic = new BasicDiagnostic(Diagnostic.OK, "de.uka.ipd.sdq.pcm.designdecision.editor",
+					0, null, new Object[] { editingDomain.getResourceSet() });
 			for (Diagnostic childDiagnostic : resourceToDiagnosticMap.values()) {
 				if (childDiagnostic.getSeverity() != Diagnostic.OK) {
 					diagnostic.add(childDiagnostic);
@@ -617,13 +623,10 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 			}
 
 			if (markerHelper.hasMarkers(editingDomain.getResourceSet())) {
-				markerHelper.deleteMarkers(editingDomain.getResourceSet());
-				if (diagnostic.getSeverity() != Diagnostic.OK) {
-					try {
-						markerHelper.createMarkers(diagnostic);
-					} catch (CoreException exception) {
-						DesignDecisionEditorPlugin.INSTANCE.log(exception);
-					}
+				try {
+					markerHelper.updateMarkers(diagnostic);
+				} catch (CoreException exception) {
+					DesignDecisionEditorPlugin.INSTANCE.log(exception);
 				}
 			}
 		}
@@ -636,7 +639,8 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 	 * @generated
 	 */
 	protected boolean handleDirtyConflict() {
-		return MessageDialog.openQuestion(getSite().getShell(), getString("_UI_FileConflict_label"), getString("_WARN_FileConflict"));
+		return MessageDialog.openQuestion(getSite().getShell(), getString("_UI_FileConflict_label"),
+				getString("_WARN_FileConflict"));
 	}
 
 	/**
@@ -720,7 +724,7 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 						}
 						for (Iterator<PropertySheetPage> i = propertySheetPages.iterator(); i.hasNext();) {
 							PropertySheetPage propertySheetPage = i.next();
-							if (propertySheetPage.getControl().isDisposed()) {
+							if (propertySheetPage.getControl() == null || propertySheetPage.getControl().isDisposed()) {
 								i.remove();
 							} else {
 								propertySheetPage.refresh();
@@ -923,7 +927,8 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 		getSite().registerContextMenu(contextMenu, new UnwrappingSelectionProvider(viewer));
 
 		int dndOperations = DND.DROP_COPY | DND.DROP_MOVE | DND.DROP_LINK;
-		Transfer[] transfers = new Transfer[] { LocalTransfer.getInstance(), LocalSelectionTransfer.getTransfer(), FileTransfer.getInstance() };
+		Transfer[] transfers = new Transfer[] { LocalTransfer.getInstance(), LocalSelectionTransfer.getTransfer(),
+				FileTransfer.getInstance() };
 		viewer.addDragSupport(dndOperations, transfers, new ViewerDragAdapter(viewer));
 		viewer.addDropSupport(dndOperations, transfers, new EditingDomainViewerDropAdapter(editingDomain, viewer));
 	}
@@ -962,12 +967,15 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 	public Diagnostic analyzeResourceProblems(Resource resource, Exception exception) {
 		boolean hasErrors = !resource.getErrors().isEmpty();
 		if (hasErrors || !resource.getWarnings().isEmpty()) {
-			BasicDiagnostic basicDiagnostic = new BasicDiagnostic(hasErrors ? Diagnostic.ERROR : Diagnostic.WARNING, "de.uka.ipd.sdq.pcm.designdecision.editor", 0,
-					getString("_UI_CreateModelError_message", resource.getURI()), new Object[] { exception == null ? (Object) resource : exception });
+			BasicDiagnostic basicDiagnostic = new BasicDiagnostic(hasErrors ? Diagnostic.ERROR : Diagnostic.WARNING,
+					"de.uka.ipd.sdq.pcm.designdecision.editor", 0,
+					getString("_UI_CreateModelError_message", resource.getURI()),
+					new Object[] { exception == null ? (Object) resource : exception });
 			basicDiagnostic.merge(EcoreUtil.computeDiagnostic(resource, true));
 			return basicDiagnostic;
 		} else if (exception != null) {
-			return new BasicDiagnostic(Diagnostic.ERROR, "de.uka.ipd.sdq.pcm.designdecision.editor", 0, getString("_UI_CreateModelError_message", resource.getURI()), new Object[] { exception });
+			return new BasicDiagnostic(Diagnostic.ERROR, "de.uka.ipd.sdq.pcm.designdecision.editor", 0,
+					getString("_UI_CreateModelError_message", resource.getURI()), new Object[] { exception });
 		} else {
 			return Diagnostic.OK_INSTANCE;
 		}
@@ -1009,10 +1017,12 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 
 				selectionViewer = (TreeViewer) viewerPane.getViewer();
 				selectionViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+				selectionViewer.setUseHashlookup(true);
 
 				selectionViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
 				selectionViewer.setInput(editingDomain.getResourceSet());
-				selectionViewer.setSelection(new StructuredSelection(editingDomain.getResourceSet().getResources().get(0)), true);
+				selectionViewer.setSelection(
+						new StructuredSelection(editingDomain.getResourceSet().getResources().get(0)), true);
 				viewerPane.setTitle(editingDomain.getResourceSet());
 
 				new AdapterFactoryTreeEditor(selectionViewer.getTree(), adapterFactory);
@@ -1192,7 +1202,9 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 			getSite().getShell().getDisplay().asyncExec(new Runnable() {
 				@Override
 				public void run() {
-					setActivePage(0);
+					if (!getContainer().isDisposed()) {
+						setActivePage(0);
+					}
 				}
 			});
 		}
@@ -1231,9 +1243,9 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 		if (getPageCount() <= 1) {
 			setPageText(0, "");
 			if (getContainer() instanceof CTabFolder) {
-				((CTabFolder) getContainer()).setTabHeight(1);
 				Point point = getContainer().getSize();
-				getContainer().setSize(point.x, point.y + 6);
+				Rectangle clientArea = getContainer().getClientArea();
+				getContainer().setSize(point.x, 2 * point.y - clientArea.height - clientArea.y);
 			}
 		}
 	}
@@ -1248,9 +1260,9 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 		if (getPageCount() > 1) {
 			setPageText(0, getString("_UI_SelectionPage_label"));
 			if (getContainer() instanceof CTabFolder) {
-				((CTabFolder) getContainer()).setTabHeight(SWT.DEFAULT);
 				Point point = getContainer().getSize();
-				getContainer().setSize(point.x, point.y - 6);
+				Rectangle clientArea = getContainer().getClientArea();
+				getContainer().setSize(point.x, clientArea.height + clientArea.y);
 			}
 		}
 	}
@@ -1277,13 +1289,13 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 	 */
 	@SuppressWarnings("rawtypes")
 	@Override
-	public Object getAdapter(Class key) {
+	public <T> T getAdapter(Class<T> key) {
 		if (key.equals(IContentOutlinePage.class)) {
-			return showOutlineView() ? getContentOutlinePage() : null;
+			return showOutlineView() ? key.cast(getContentOutlinePage()) : null;
 		} else if (key.equals(IPropertySheetPage.class)) {
-			return getPropertySheetPage();
+			return key.cast(getPropertySheetPage());
 		} else if (key.equals(IGotoMarker.class)) {
-			return this;
+			return key.cast(this);
 		} else {
 			return super.getAdapter(key);
 		}
@@ -1308,6 +1320,7 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 
 					// Set up the tree viewer.
 					//
+					contentOutlineViewer.setUseHashlookup(true);
 					contentOutlineViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
 					contentOutlineViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
 					contentOutlineViewer.setInput(editingDomain.getResourceSet());
@@ -1319,12 +1332,14 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 					if (!editingDomain.getResourceSet().getResources().isEmpty()) {
 						// Select the root object in the view.
 						//
-						contentOutlineViewer.setSelection(new StructuredSelection(editingDomain.getResourceSet().getResources().get(0)), true);
+						contentOutlineViewer.setSelection(
+								new StructuredSelection(editingDomain.getResourceSet().getResources().get(0)), true);
 					}
 				}
 
 				@Override
-				public void makeContributions(IMenuManager menuManager, IToolBarManager toolBarManager, IStatusLineManager statusLineManager) {
+				public void makeContributions(IMenuManager menuManager, IToolBarManager toolBarManager,
+						IStatusLineManager statusLineManager) {
 					super.makeContributions(menuManager, toolBarManager, statusLineManager);
 					contentOutlineStatusLineManager = statusLineManager;
 				}
@@ -1360,7 +1375,8 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 	 * @generated
 	 */
 	public IPropertySheetPage getPropertySheetPage() {
-		PropertySheetPage propertySheetPage = new ExtendedPropertySheetPage(editingDomain) {
+		PropertySheetPage propertySheetPage = new ExtendedPropertySheetPage(editingDomain,
+				ExtendedPropertySheetPage.Decoration.NONE, null, 0, false) {
 			@Override
 			public void setSelectionToViewer(List<?> selection) {
 				specificEditor.this.setSelectionToViewer(selection);
@@ -1396,7 +1412,7 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 				// If it's the selection viewer, then we want it to select the same selection as this selection.
 				//
 				if (currentViewerPane.getViewer() == selectionViewer) {
-					ArrayList<Object> selectionList = new ArrayList<Object>();
+					ArrayList<Object> selectionList = new ArrayList<>();
 					selectionList.add(selectedElement);
 					while (selectedElements.hasNext()) {
 						selectionList.add(selectedElements.next());
@@ -1438,7 +1454,7 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 	public void doSave(IProgressMonitor progressMonitor) {
 		// Save only resources that have actually changed.
 		//
-		final Map<Object, Object> saveOptions = new HashMap<Object, Object>();
+		final Map<Object, Object> saveOptions = new HashMap<>();
 		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 		saveOptions.put(Resource.OPTION_LINE_DELIMITER, Resource.OPTION_LINE_DELIMITER_UNSPECIFIED);
 
@@ -1452,8 +1468,10 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 				// Save the resources to the file system.
 				//
 				boolean first = true;
-				for (Resource resource : editingDomain.getResourceSet().getResources()) {
-					if ((first || !resource.getContents().isEmpty() || isPersisted(resource)) && !editingDomain.isReadOnly(resource)) {
+				List<Resource> resources = editingDomain.getResourceSet().getResources();
+				for (Resource resource : resources) {
+					if ((first || !resource.getContents().isEmpty() || isPersisted(resource))
+							&& !editingDomain.isReadOnly(resource)) {
 						try {
 							long timeStamp = resource.getTimeStamp();
 							resource.save(saveOptions);
@@ -1545,7 +1563,9 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 		(editingDomain.getResourceSet().getResources().get(0)).setURI(uri);
 		setInputWithNotify(editorInput);
 		setPartName(editorInput.getName());
-		IProgressMonitor progressMonitor = getActionBars().getStatusLineManager() != null ? getActionBars().getStatusLineManager().getProgressMonitor() : new NullProgressMonitor();
+		IProgressMonitor progressMonitor = getActionBars().getStatusLineManager() != null
+				? getActionBars().getStatusLineManager().getProgressMonitor()
+				: new NullProgressMonitor();
 		doSave(progressMonitor);
 	}
 
@@ -1573,7 +1593,8 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 		setPartName(editorInput.getName());
 		site.setSelectionProvider(this);
 		site.getPage().addPartListener(partListener);
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener, IResourceChangeEvent.POST_CHANGE);
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener,
+				IResourceChangeEvent.POST_CHANGE);
 	}
 
 	/**
@@ -1643,7 +1664,9 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 	 * @generated
 	 */
 	public void setStatusLineManager(ISelection selection) {
-		IStatusLineManager statusLineManager = currentViewer != null && currentViewer == contentOutlineViewer ? contentOutlineStatusLineManager : getActionBars().getStatusLineManager();
+		IStatusLineManager statusLineManager = currentViewer != null && currentViewer == contentOutlineViewer
+				? contentOutlineStatusLineManager
+				: getActionBars().getStatusLineManager();
 
 		if (statusLineManager != null) {
 			if (selection instanceof IStructuredSelection) {
@@ -1659,7 +1682,8 @@ public class specificEditor extends MultiPageEditorPart implements IEditingDomai
 					break;
 				}
 				default: {
-					statusLineManager.setMessage(getString("_UI_MultiObjectSelected", Integer.toString(collection.size())));
+					statusLineManager
+							.setMessage(getString("_UI_MultiObjectSelected", Integer.toString(collection.size())));
 					break;
 				}
 				}

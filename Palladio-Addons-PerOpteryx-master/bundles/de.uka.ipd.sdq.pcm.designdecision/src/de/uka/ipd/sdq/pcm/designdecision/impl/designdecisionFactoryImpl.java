@@ -2,13 +2,13 @@
  */
 package de.uka.ipd.sdq.pcm.designdecision.impl;
 
-import de.uka.ipd.sdq.pcm.designdecision.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+import de.uka.ipd.sdq.pcm.designdecision.BoolChoice;
 import de.uka.ipd.sdq.pcm.designdecision.Candidate;
 import de.uka.ipd.sdq.pcm.designdecision.Candidates;
 import de.uka.ipd.sdq.pcm.designdecision.ClassChoice;
@@ -16,6 +16,7 @@ import de.uka.ipd.sdq.pcm.designdecision.ContinousRangeChoice;
 import de.uka.ipd.sdq.pcm.designdecision.DecisionSpace;
 import de.uka.ipd.sdq.pcm.designdecision.DegreeOfFreedomInstance;
 import de.uka.ipd.sdq.pcm.designdecision.DiscreteRangeChoice;
+import de.uka.ipd.sdq.pcm.designdecision.FeatureChoice;
 import de.uka.ipd.sdq.pcm.designdecision.designdecisionFactory;
 import de.uka.ipd.sdq.pcm.designdecision.designdecisionPackage;
 
@@ -31,7 +32,8 @@ public class designdecisionFactoryImpl extends EFactoryImpl implements designdec
 	 */
 	public static designdecisionFactory init() {
 		try {
-			designdecisionFactory thedesigndecisionFactory = (designdecisionFactory) EPackage.Registry.INSTANCE.getEFactory(designdecisionPackage.eNS_URI);
+			designdecisionFactory thedesigndecisionFactory = (designdecisionFactory) EPackage.Registry.INSTANCE
+					.getEFactory(designdecisionPackage.eNS_URI);
 			if (thedesigndecisionFactory != null) {
 				return thedesigndecisionFactory;
 			}

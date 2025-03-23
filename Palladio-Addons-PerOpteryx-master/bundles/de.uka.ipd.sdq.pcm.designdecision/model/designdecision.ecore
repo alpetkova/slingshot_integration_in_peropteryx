@@ -469,5 +469,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="MultipleInclusionDegree" eSuperTypes="#//specific/IndicatorDegree"/>
     <eClassifiers xsi:type="ecore:EClass" name="AdvicePlacementDegree" eSuperTypes="#//specific/IndicatorDegree"/>
     <eClassifiers xsi:type="ecore:EClass" name="ComplementumVisnetisDegree" eSuperTypes="#//specific/ClassAsReferenceDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TargetGroupSizeMaxConstraintDegree"
+        eSuperTypes="#//specific/DiscreteRangeDegree"/>
   </eSubpackages>
 </ecore:EPackage>

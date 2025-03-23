@@ -25,6 +25,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.AssembledComponentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.CapacityDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceSelectionDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.specificFactory;
 /**
  * The {@link Adapter} contains methods to translate between {@link DesignDecisionGenotype} 
@@ -68,6 +69,7 @@ public class Adapter {
 	List<EObject> COMPONENTS;
 	double[] SERVER_INTERVALS = {0,0,0,0}; // Initialization
 	double[] CAPACITYDEGREE_INTERVALS = {0,0,0,0}; // Initialization
+	double[] TARGETGROUPSIZEMAXCONSTRAINTDEGREE = {0,0,0,0}; // Initialization
 	
 	/**The ContinuousProcessingRateArchiveStorage stores the 
 	 * various values of server speeds of the candidates 
@@ -147,6 +149,13 @@ public class Adapter {
 					}
 				}
 				//logger.info(CAPACITYDEGREE_INTERVALS);
+			}else if(dofi instanceof TargetGroupSizeMaxConstraintDegree) {
+				double targetgroupsizemaxconstraintdegree_interval_lowerbound = ((TargetGroupSizeMaxConstraintDegree) dofi).getFrom();
+				double targetgroupsizemaxconstraintdegree_interval_upperbound = ((TargetGroupSizeMaxConstraintDegree) dofi).getTo();
+				double diff = (targetgroupsizemaxconstraintdegree_interval_upperbound - targetgroupsizemaxconstraintdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					TARGETGROUPSIZEMAXCONSTRAINTDEGREE[i] = targetgroupsizemaxconstraintdegree_interval_lowerbound + i*diff;
+				}
 			}
 			count++;
 		}
@@ -267,6 +276,20 @@ public class Adapter {
 				
 				BinaryGenotype capacityDegreeValueBinaryGenotypeObj = new BinaryGenotype(capacityDegreeValueBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.CapacityDegree);
 				TranslatedGenotype.add(capacityDegreeValueBinaryGenotypeObj);
+			}else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof TargetGroupSizeMaxConstraintDegree){
+				/* If the Choice object is representing TargetGroupSizeMaxConstraintDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double targetGroupSizeMaxConstraintDegreeValue=(Integer) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which targetGroupSizeMaxConstraintDegreeValue value lies
+				 */
+				
+				List<Integer> targetGroupSizeMaxConstraintBinaryRep = getTargetGroupSizeMaxConstraintBinaryRep(targetGroupSizeMaxConstraintDegreeValue);
+				
+				BinaryGenotype targetGroupSizeMaxConstraintDegreeValueBinaryGenotypeObj = new BinaryGenotype(targetGroupSizeMaxConstraintBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.TargetGroupSizeMaxConstraintDegree);
+				TranslatedGenotype.add(targetGroupSizeMaxConstraintDegreeValueBinaryGenotypeObj);
 			}else throwOutOfScopeDegreeException(ChoiceIterator.getDegreeOfFreedomInstance());
 		}
 	 
@@ -503,6 +526,23 @@ public class Adapter {
 		// TODO Auto-generated method stub
 		for(int i=0;i<CAPACITYDEGREE_INTERVALS.length;i++){
 			if(capacityDegreeValue< SERVER_INTERVALS[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getTargetGroupSizeMaxConstraintBinaryRep(double targetGroupSizeMaxConstraintDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<TARGETGROUPSIZEMAXCONSTRAINTDEGREE.length;i++){
+			if(targetGroupSizeMaxConstraintDegreeValue< TARGETGROUPSIZEMAXCONSTRAINTDEGREE[i] & !FOUNDINTERVAL){
 				Result.add(1);
 				FOUNDINTERVAL = true;
 			}else{

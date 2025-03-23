@@ -81,7 +81,8 @@ public class IntegerQualityPropertyImpl extends NumericQualityPropertyImpl imple
 		Integer oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qualitypropertiesPackage.INTEGER_QUALITY_PROPERTY__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					qualitypropertiesPackage.INTEGER_QUALITY_PROPERTY__VALUE, oldValue, value));
 	}
 
 	/**
@@ -147,7 +148,7 @@ public class IntegerQualityPropertyImpl extends NumericQualityPropertyImpl imple
 		if (eIsProxy())
 			return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (value: ");
 		result.append(value);
 		result.append(')');

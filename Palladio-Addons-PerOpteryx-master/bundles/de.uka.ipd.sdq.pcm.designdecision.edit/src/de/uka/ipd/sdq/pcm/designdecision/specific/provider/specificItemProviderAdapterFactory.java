@@ -31,7 +31,8 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.util.specificAdapterFactory;
  * end-user-doc -->
  * @generated
  */
-public class specificItemProviderAdapterFactory extends specificAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class specificItemProviderAdapterFactory extends specificAdapterFactory
+		implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -53,7 +54,7 @@ public class specificItemProviderAdapterFactory extends specificAdapterFactory i
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection<Object> supportedTypes = new ArrayList<Object>();
+	protected Collection<Object> supportedTypes = new ArrayList<>();
 
 	/**
 	 * This constructs an instance.
@@ -441,7 +442,8 @@ public class specificItemProviderAdapterFactory extends specificAdapterFactory i
 	@Override
 	public Adapter createResourceContainerReplicationDegreeWithComponentChangeAdapter() {
 		if (resourceContainerReplicationDegreeWithComponentChangeItemProvider == null) {
-			resourceContainerReplicationDegreeWithComponentChangeItemProvider = new ResourceContainerReplicationDegreeWithComponentChangeItemProvider(this);
+			resourceContainerReplicationDegreeWithComponentChangeItemProvider = new ResourceContainerReplicationDegreeWithComponentChangeItemProvider(
+					this);
 		}
 
 		return resourceContainerReplicationDegreeWithComponentChangeItemProvider;
@@ -760,6 +762,29 @@ public class specificItemProviderAdapterFactory extends specificAdapterFactory i
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TargetGroupSizeMaxConstraintDegreeItemProvider targetGroupSizeMaxConstraintDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTargetGroupSizeMaxConstraintDegreeAdapter() {
+		if (targetGroupSizeMaxConstraintDegreeItemProvider == null) {
+			targetGroupSizeMaxConstraintDegreeItemProvider = new TargetGroupSizeMaxConstraintDegreeItemProvider(this);
+		}
+
+		return targetGroupSizeMaxConstraintDegreeItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -853,7 +878,7 @@ public class specificItemProviderAdapterFactory extends specificAdapterFactory i
 	}
 
 	/**
-	 * This disposes all of the item providers created by this factory. 
+	 * This disposes all of the item providers created by this factory.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @generated
@@ -918,6 +943,8 @@ public class specificItemProviderAdapterFactory extends specificAdapterFactory i
 			advicePlacementDegreeItemProvider.dispose();
 		if (complementumVisnetisDegreeItemProvider != null)
 			complementumVisnetisDegreeItemProvider.dispose();
+		if (targetGroupSizeMaxConstraintDegreeItemProvider != null)
+			targetGroupSizeMaxConstraintDegreeItemProvider.dispose();
 	}
 
 }

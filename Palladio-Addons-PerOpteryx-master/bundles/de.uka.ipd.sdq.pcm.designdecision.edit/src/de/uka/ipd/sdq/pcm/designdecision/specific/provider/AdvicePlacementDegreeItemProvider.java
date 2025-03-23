@@ -2,15 +2,14 @@
  */
 package de.uka.ipd.sdq.pcm.designdecision.specific.provider;
 
-import de.uka.ipd.sdq.pcm.designdecision.specific.AdvicePlacementDegree;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+
+import de.uka.ipd.sdq.pcm.designdecision.specific.AdvicePlacementDegree;
 
 /**
  * This is the item provider adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.AdvicePlacementDegree} object.
@@ -64,7 +63,8 @@ public class AdvicePlacementDegreeItemProvider extends IndicatorDegreeItemProvid
 	@Override
 	public String getText(Object object) {
 		String label = ((AdvicePlacementDegree) object).getEntityName();
-		return label == null || label.length() == 0 ? getString("_UI_AdvicePlacementDegree_type") : getString("_UI_AdvicePlacementDegree_type") + " " + label;
+		return label == null || label.length() == 0 ? getString("_UI_AdvicePlacementDegree_type")
+				: getString("_UI_AdvicePlacementDegree_type") + " " + label;
 	}
 
 	/**

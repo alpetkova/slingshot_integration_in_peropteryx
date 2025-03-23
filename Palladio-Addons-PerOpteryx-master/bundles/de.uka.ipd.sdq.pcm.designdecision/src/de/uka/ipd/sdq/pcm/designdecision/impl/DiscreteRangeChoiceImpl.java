@@ -77,7 +77,8 @@ public class DiscreteRangeChoiceImpl extends ChoiceImpl implements DiscreteRange
 		int oldChosenValue = chosenValue;
 		chosenValue = newChosenValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, designdecisionPackage.DISCRETE_RANGE_CHOICE__CHOSEN_VALUE, oldChosenValue, chosenValue));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					designdecisionPackage.DISCRETE_RANGE_CHOICE__CHOSEN_VALUE, oldChosenValue, chosenValue));
 	}
 
 	/**
@@ -143,7 +144,7 @@ public class DiscreteRangeChoiceImpl extends ChoiceImpl implements DiscreteRange
 		if (eIsProxy())
 			return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (chosenValue: ");
 		result.append(chosenValue);
 		result.append(')');
@@ -160,7 +161,8 @@ public class DiscreteRangeChoiceImpl extends ChoiceImpl implements DiscreteRange
 		if (newValue instanceof Number) {
 			this.setChosenValue(((Number) newValue).intValue());
 		} else {
-			throw new IllegalArgumentException("Cannot cast " + newValue.getClass().getName() + " to Number to get the integer value.");
+			throw new IllegalArgumentException(
+					"Cannot cast " + newValue.getClass().getName() + " to Number to get the integer value.");
 		}
 
 	}

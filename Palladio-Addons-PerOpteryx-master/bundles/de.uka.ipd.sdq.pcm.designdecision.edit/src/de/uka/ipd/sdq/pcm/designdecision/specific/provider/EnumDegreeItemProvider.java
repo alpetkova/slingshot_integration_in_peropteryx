@@ -53,9 +53,12 @@ public class EnumDegreeItemProvider extends UnorderedDegreeItemProvider {
 	 * @generated
 	 */
 	protected void addEnumerationPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_EnumDegree_enumeration_feature"), getString("_UI_PropertyDescriptor_description", "_UI_EnumDegree_enumeration_feature", "_UI_EnumDegree_type"),
-				specificPackage.Literals.ENUM_DEGREE__ENUMERATION, true, false, true, null, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_EnumDegree_enumeration_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_EnumDegree_enumeration_feature",
+								"_UI_EnumDegree_type"),
+						specificPackage.Literals.ENUM_DEGREE__ENUMERATION, true, false, true, null, null, null));
 	}
 
 	/**
@@ -67,7 +70,8 @@ public class EnumDegreeItemProvider extends UnorderedDegreeItemProvider {
 	@Override
 	public String getText(Object object) {
 		String label = ((EnumDegree) object).getEntityName();
-		return label == null || label.length() == 0 ? getString("_UI_EnumDegree_type") : getString("_UI_EnumDegree_type") + " " + label;
+		return label == null || label.length() == 0 ? getString("_UI_EnumDegree_type")
+				: getString("_UI_EnumDegree_type") + " " + label;
 	}
 
 	/**

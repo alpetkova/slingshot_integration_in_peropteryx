@@ -57,9 +57,13 @@ public class RangeDegreeItemProvider extends OrderedDataTypeDegreeItemProvider {
 	 * @generated
 	 */
 	protected void addUpperBoundIncludedPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_RangeDegree_upperBoundIncluded_feature"), getString("_UI_PropertyDescriptor_description", "_UI_RangeDegree_upperBoundIncluded_feature", "_UI_RangeDegree_type"),
-				specificPackage.Literals.RANGE_DEGREE__UPPER_BOUND_INCLUDED, true, false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_RangeDegree_upperBoundIncluded_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_RangeDegree_upperBoundIncluded_feature",
+								"_UI_RangeDegree_type"),
+						specificPackage.Literals.RANGE_DEGREE__UPPER_BOUND_INCLUDED, true, false, false,
+						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -69,9 +73,13 @@ public class RangeDegreeItemProvider extends OrderedDataTypeDegreeItemProvider {
 	 * @generated
 	 */
 	protected void addLowerBoundIncludedPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_RangeDegree_lowerBoundIncluded_feature"), getString("_UI_PropertyDescriptor_description", "_UI_RangeDegree_lowerBoundIncluded_feature", "_UI_RangeDegree_type"),
-				specificPackage.Literals.RANGE_DEGREE__LOWER_BOUND_INCLUDED, true, false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_RangeDegree_lowerBoundIncluded_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_RangeDegree_lowerBoundIncluded_feature",
+								"_UI_RangeDegree_type"),
+						specificPackage.Literals.RANGE_DEGREE__LOWER_BOUND_INCLUDED, true, false, false,
+						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -81,9 +89,13 @@ public class RangeDegreeItemProvider extends OrderedDataTypeDegreeItemProvider {
 	 * @generated
 	 */
 	protected void addNumberOfStepsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_RangeDegree_numberOfSteps_feature"), getString("_UI_PropertyDescriptor_description", "_UI_RangeDegree_numberOfSteps_feature", "_UI_RangeDegree_type"),
-				specificPackage.Literals.RANGE_DEGREE__NUMBER_OF_STEPS, true, false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_RangeDegree_numberOfSteps_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_RangeDegree_numberOfSteps_feature",
+								"_UI_RangeDegree_type"),
+						specificPackage.Literals.RANGE_DEGREE__NUMBER_OF_STEPS, true, false, false,
+						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -95,7 +107,8 @@ public class RangeDegreeItemProvider extends OrderedDataTypeDegreeItemProvider {
 	@Override
 	public String getText(Object object) {
 		String label = ((RangeDegree) object).getEntityName();
-		return label == null || label.length() == 0 ? getString("_UI_RangeDegree_type") : getString("_UI_RangeDegree_type") + " " + label;
+		return label == null || label.length() == 0 ? getString("_UI_RangeDegree_type")
+				: getString("_UI_RangeDegree_type") + " " + label;
 	}
 
 	/**

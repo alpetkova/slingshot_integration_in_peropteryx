@@ -11,7 +11,6 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -78,7 +77,8 @@ public class ExchangeComponentRuleImpl extends EObjectImpl implements ExchangeCo
 	@Override
 	public EList<RepositoryComponent> getRepositoryComponent() {
 		if (repositoryComponent == null) {
-			repositoryComponent = new EObjectResolvingEList<RepositoryComponent>(RepositoryComponent.class, this, specificPackage.EXCHANGE_COMPONENT_RULE__REPOSITORY_COMPONENT);
+			repositoryComponent = new EObjectResolvingEList<>(RepositoryComponent.class, this,
+					specificPackage.EXCHANGE_COMPONENT_RULE__REPOSITORY_COMPONENT);
 		}
 		return repositoryComponent;
 	}
@@ -89,12 +89,14 @@ public class ExchangeComponentRuleImpl extends EObjectImpl implements ExchangeCo
 	 */
 	@Override
 	public AllocationContext getAllocationContext() {
-		if (allocationContext != null && ((EObject) allocationContext).eIsProxy()) {
+		if (allocationContext != null && allocationContext.eIsProxy()) {
 			InternalEObject oldAllocationContext = (InternalEObject) allocationContext;
 			allocationContext = (AllocationContext) eResolveProxy(oldAllocationContext);
 			if (allocationContext != oldAllocationContext) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, specificPackage.EXCHANGE_COMPONENT_RULE__ALLOCATION_CONTEXT, oldAllocationContext, allocationContext));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							specificPackage.EXCHANGE_COMPONENT_RULE__ALLOCATION_CONTEXT, oldAllocationContext,
+							allocationContext));
 			}
 		}
 		return allocationContext;
@@ -117,7 +119,9 @@ public class ExchangeComponentRuleImpl extends EObjectImpl implements ExchangeCo
 		AllocationContext oldAllocationContext = allocationContext;
 		allocationContext = newAllocationContext;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, specificPackage.EXCHANGE_COMPONENT_RULE__ALLOCATION_CONTEXT, oldAllocationContext, allocationContext));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					specificPackage.EXCHANGE_COMPONENT_RULE__ALLOCATION_CONTEXT, oldAllocationContext,
+					allocationContext));
 	}
 
 	/**

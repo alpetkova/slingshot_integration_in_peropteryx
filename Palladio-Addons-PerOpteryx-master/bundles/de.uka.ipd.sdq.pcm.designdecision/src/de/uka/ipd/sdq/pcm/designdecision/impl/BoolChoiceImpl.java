@@ -75,7 +75,8 @@ public class BoolChoiceImpl extends ChoiceImpl implements BoolChoice {
 		boolean oldChosenValue = chosenValue;
 		chosenValue = newChosenValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, designdecisionPackage.BOOL_CHOICE__CHOSEN_VALUE, oldChosenValue, chosenValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, designdecisionPackage.BOOL_CHOICE__CHOSEN_VALUE,
+					oldChosenValue, chosenValue));
 	}
 
 	/**
@@ -141,7 +142,7 @@ public class BoolChoiceImpl extends ChoiceImpl implements BoolChoice {
 		if (eIsProxy())
 			return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (chosenValue: ");
 		result.append(chosenValue);
 		result.append(')');
@@ -158,7 +159,8 @@ public class BoolChoiceImpl extends ChoiceImpl implements BoolChoice {
 		if (newValue instanceof Boolean) {
 			this.setChosenValue(((Boolean) newValue).booleanValue());
 		} else {
-			throw new IllegalArgumentException("Cannot cast " + newValue.getClass().getName() + " to Boolean to get the bool value.");
+			throw new IllegalArgumentException(
+					"Cannot cast " + newValue.getClass().getName() + " to Boolean to get the bool value.");
 		}
 	}
 } // BoolChoiceImpl

@@ -2,7 +2,6 @@
  */
 package de.uka.ipd.sdq.pcm.designdecision.specific.impl;
 
-import de.uka.ipd.sdq.pcm.designdecision.specific.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -10,10 +9,12 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import de.uka.ipd.sdq.pcm.designdecision.specific.ATNumberOfReplicaDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.AdvicePlacementDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.AllocationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.AssembledComponentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.CapacityDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ClassAsReferenceDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ComplementumVisnetisDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousRangeDegree;
@@ -21,9 +22,12 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteRangeDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExchangeComponentRule;
+import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureCompletionDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureGroupDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureSubset;
 import de.uka.ipd.sdq.pcm.designdecision.specific.MonitoringDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.MultipleInclusionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.NumberOfCoresAsListDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.NumberOfCoresAsRangeDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.OptionalFeatureDegree;
@@ -33,6 +37,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDe
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceSelectionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.SchedulingPolicyDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringComponentParamDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.specificFactory;
 import de.uka.ipd.sdq.pcm.designdecision.specific.specificPackage;
 
@@ -48,7 +53,8 @@ public class specificFactoryImpl extends EFactoryImpl implements specificFactory
 	 */
 	public static specificFactory init() {
 		try {
-			specificFactory thespecificFactory = (specificFactory) EPackage.Registry.INSTANCE.getEFactory(specificPackage.eNS_URI);
+			specificFactory thespecificFactory = (specificFactory) EPackage.Registry.INSTANCE
+					.getEFactory(specificPackage.eNS_URI);
 			if (thespecificFactory != null) {
 				return thespecificFactory;
 			}
@@ -132,6 +138,8 @@ public class specificFactoryImpl extends EFactoryImpl implements specificFactory
 			return createAdvicePlacementDegree();
 		case specificPackage.COMPLEMENTUM_VISNETIS_DEGREE:
 			return createComplementumVisnetisDegree();
+		case specificPackage.TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE:
+			return createTargetGroupSizeMaxConstraintDegree();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -430,6 +438,17 @@ public class specificFactoryImpl extends EFactoryImpl implements specificFactory
 	public ComplementumVisnetisDegree createComplementumVisnetisDegree() {
 		ComplementumVisnetisDegreeImpl complementumVisnetisDegree = new ComplementumVisnetisDegreeImpl();
 		return complementumVisnetisDegree;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TargetGroupSizeMaxConstraintDegree createTargetGroupSizeMaxConstraintDegree() {
+		TargetGroupSizeMaxConstraintDegreeImpl targetGroupSizeMaxConstraintDegree = new TargetGroupSizeMaxConstraintDegreeImpl();
+		return targetGroupSizeMaxConstraintDegree;
 	}
 
 	/**

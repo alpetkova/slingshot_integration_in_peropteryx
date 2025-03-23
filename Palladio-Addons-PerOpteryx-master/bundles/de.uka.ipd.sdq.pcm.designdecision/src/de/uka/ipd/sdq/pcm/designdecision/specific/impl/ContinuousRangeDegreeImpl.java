@@ -102,7 +102,8 @@ public class ContinuousRangeDegreeImpl extends RangeDegreeImpl implements Contin
 		double oldTo = to;
 		to = newTo;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, specificPackage.CONTINUOUS_RANGE_DEGREE__TO, oldTo, to));
+			eNotify(new ENotificationImpl(this, Notification.SET, specificPackage.CONTINUOUS_RANGE_DEGREE__TO, oldTo,
+					to));
 	}
 
 	/**
@@ -123,7 +124,8 @@ public class ContinuousRangeDegreeImpl extends RangeDegreeImpl implements Contin
 		double oldFrom = from;
 		from = newFrom;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, specificPackage.CONTINUOUS_RANGE_DEGREE__FROM, oldFrom, from));
+			eNotify(new ENotificationImpl(this, Notification.SET, specificPackage.CONTINUOUS_RANGE_DEGREE__FROM,
+					oldFrom, from));
 	}
 
 	/**
@@ -199,7 +201,7 @@ public class ContinuousRangeDegreeImpl extends RangeDegreeImpl implements Contin
 		if (eIsProxy())
 			return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (to: ");
 		result.append(to);
 		result.append(", from: ");

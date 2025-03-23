@@ -81,7 +81,8 @@ public class DoubleQualityPropertyImpl extends NumericQualityPropertyImpl implem
 		double oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qualitypropertiesPackage.DOUBLE_QUALITY_PROPERTY__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					qualitypropertiesPackage.DOUBLE_QUALITY_PROPERTY__VALUE, oldValue, value));
 	}
 
 	/**
@@ -147,7 +148,7 @@ public class DoubleQualityPropertyImpl extends NumericQualityPropertyImpl implem
 		if (eIsProxy())
 			return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (value: ");
 		result.append(value);
 		result.append(')');

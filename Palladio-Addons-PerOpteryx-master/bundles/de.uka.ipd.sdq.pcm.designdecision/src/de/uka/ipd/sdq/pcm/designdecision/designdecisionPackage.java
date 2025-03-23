@@ -947,7 +947,8 @@ public interface designdecisionPackage extends EPackage {
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DEGREE_OF_FREEDOM_INSTANCE__CHANGEABLE_ELEMENTS = eINSTANCE.getDegreeOfFreedomInstance_ChangeableElements();
+		EReference DEGREE_OF_FREEDOM_INSTANCE__CHANGEABLE_ELEMENTS = eINSTANCE
+				.getDegreeOfFreedomInstance_ChangeableElements();
 
 		/**
 		 * The meta object literal for the '<em><b>Decorator Model</b></em>' reference list feature.

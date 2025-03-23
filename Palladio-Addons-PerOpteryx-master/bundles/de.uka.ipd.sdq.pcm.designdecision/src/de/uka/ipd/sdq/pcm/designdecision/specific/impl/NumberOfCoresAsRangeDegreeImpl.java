@@ -8,7 +8,6 @@ package de.uka.ipd.sdq.pcm.designdecision.specific.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.palladiosimulator.pcm.resourcetype.ProcessingResourceType;
@@ -63,13 +62,14 @@ public class NumberOfCoresAsRangeDegreeImpl extends DiscreteRangeDegreeImpl impl
 	 */
 	@Override
 	public ProcessingResourceType getProcessingresourcetype() {
-		if (processingresourcetype != null && ((EObject) processingresourcetype).eIsProxy()) {
+		if (processingresourcetype != null && processingresourcetype.eIsProxy()) {
 			InternalEObject oldProcessingresourcetype = (InternalEObject) processingresourcetype;
 			processingresourcetype = (ProcessingResourceType) eResolveProxy(oldProcessingresourcetype);
 			if (processingresourcetype != oldProcessingresourcetype) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, specificPackage.NUMBER_OF_CORES_AS_RANGE_DEGREE__PROCESSINGRESOURCETYPE, oldProcessingresourcetype,
-							processingresourcetype));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							specificPackage.NUMBER_OF_CORES_AS_RANGE_DEGREE__PROCESSINGRESOURCETYPE,
+							oldProcessingresourcetype, processingresourcetype));
 			}
 		}
 		return processingresourcetype;
@@ -92,7 +92,9 @@ public class NumberOfCoresAsRangeDegreeImpl extends DiscreteRangeDegreeImpl impl
 		ProcessingResourceType oldProcessingresourcetype = processingresourcetype;
 		processingresourcetype = newProcessingresourcetype;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, specificPackage.NUMBER_OF_CORES_AS_RANGE_DEGREE__PROCESSINGRESOURCETYPE, oldProcessingresourcetype, processingresourcetype));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					specificPackage.NUMBER_OF_CORES_AS_RANGE_DEGREE__PROCESSINGRESOURCETYPE, oldProcessingresourcetype,
+					processingresourcetype));
 	}
 
 	/**

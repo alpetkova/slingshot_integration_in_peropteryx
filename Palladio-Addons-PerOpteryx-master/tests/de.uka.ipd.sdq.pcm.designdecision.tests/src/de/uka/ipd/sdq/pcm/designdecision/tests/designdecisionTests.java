@@ -4,7 +4,6 @@ package de.uka.ipd.sdq.pcm.designdecision.tests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-
 import junit.textui.TestRunner;
 
 /**
@@ -35,6 +34,7 @@ public class designdecisionTests extends TestSuite {
 		suite.addTestSuite(DegreeOfFreedomInstanceTest.class);
 		suite.addTestSuite(ClassChoiceTest.class);
 		suite.addTestSuite(ContinousRangeChoiceTest.class);
+		suite.addTestSuite(CandidateTest.class);
 		suite.addTestSuite(CandidatesTest.class);
 		suite.addTestSuite(BoolChoiceTest.class);
 		suite.addTestSuite(FeatureChoiceTest.class);

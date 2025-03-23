@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Design Decision Model Plug-in
+Bundle-Name: %pluginName
 Bundle-SymbolicName: de.uka.ipd.sdq.pcm.designdecision;singleton:=true
 Bundle-Version: 5.2.1.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: sdq.ipd.uka.de
+Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: de.uka.ipd.sdq.pcm.designdecision;

@@ -31,7 +31,8 @@ import de.uka.ipd.sdq.pcm.designdecision.util.designdecisionAdapterFactory;
  * end-user-doc -->
  * @generated
  */
-public class designdecisionItemProviderAdapterFactory extends designdecisionAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class designdecisionItemProviderAdapterFactory extends designdecisionAdapterFactory
+		implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -53,7 +54,7 @@ public class designdecisionItemProviderAdapterFactory extends designdecisionAdap
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection<Object> supportedTypes = new ArrayList<Object>();
+	protected Collection<Object> supportedTypes = new ArrayList<>();
 
 	/**
 	 * This constructs an instance.
@@ -368,7 +369,7 @@ public class designdecisionItemProviderAdapterFactory extends designdecisionAdap
 	}
 
 	/**
-	 * This disposes all of the item providers created by this factory. 
+	 * This disposes all of the item providers created by this factory.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @generated

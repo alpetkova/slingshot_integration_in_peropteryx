@@ -17,7 +17,8 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.specificPackage;
  *
  * @generated
  */
-public class ResourceContainerReplicationDegreeImpl extends DiscreteRangeDegreeImpl implements ResourceContainerReplicationDegree {
+public class ResourceContainerReplicationDegreeImpl extends DiscreteRangeDegreeImpl
+		implements ResourceContainerReplicationDegree {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated

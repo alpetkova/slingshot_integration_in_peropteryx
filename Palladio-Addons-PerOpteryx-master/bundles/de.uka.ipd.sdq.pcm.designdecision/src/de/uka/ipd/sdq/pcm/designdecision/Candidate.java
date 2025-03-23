@@ -3,7 +3,6 @@
 package de.uka.ipd.sdq.pcm.designdecision;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.palladiosimulator.pcm.core.entity.NamedElement;
 
 import de.uka.ipd.sdq.pcm.designdecision.qualityproperties.QualityProperty;
@@ -13,7 +12,7 @@ import de.uka.ipd.sdq.pcm.designdecision.qualityproperties.QualityProperty;
  * end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Candidate represents one solution candidate to the optimisation problem. It contains as many choices as there are DegreeOfFreedoms. 
+ * Candidate represents one solution candidate to the optimisation problem. It contains as many choices as there are DegreeOfFreedoms.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -28,7 +27,7 @@ import de.uka.ipd.sdq.pcm.designdecision.qualityproperties.QualityProperty;
  * @model
  * @generated
  */
-public interface Candidate extends EObject, NamedElement {
+public interface Candidate extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Choices</b></em>' containment reference list.
 	 * The list contents are of type {@link de.uka.ipd.sdq.pcm.designdecision.Choice}.

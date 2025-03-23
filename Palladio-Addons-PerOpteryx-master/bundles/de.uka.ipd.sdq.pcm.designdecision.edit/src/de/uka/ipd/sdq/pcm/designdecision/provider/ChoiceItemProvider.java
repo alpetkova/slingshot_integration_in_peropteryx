@@ -31,7 +31,8 @@ import de.uka.ipd.sdq.pcm.designdecision.designdecisionPackage;
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
-public class ChoiceItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+public class ChoiceItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc --> <!--
@@ -67,9 +68,13 @@ public class ChoiceItemProvider extends ItemProviderAdapter implements IEditingD
 	 * @generated
 	 */
 	protected void addIsActivePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(), getString("_UI_Choice_isActive_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_Choice_isActive_feature", "_UI_Choice_type"), designdecisionPackage.Literals.CHOICE__IS_ACTIVE, true, false, false,
-				ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Choice_isActive_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Choice_isActive_feature",
+								"_UI_Choice_type"),
+						designdecisionPackage.Literals.CHOICE__IS_ACTIVE, true, false, false,
+						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -79,9 +84,12 @@ public class ChoiceItemProvider extends ItemProviderAdapter implements IEditingD
 	 * @generated
 	 */
 	protected void addValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(), getString("_UI_Choice_value_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_Choice_value_feature", "_UI_Choice_type"), designdecisionPackage.Literals.CHOICE__VALUE, false, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Choice_value_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Choice_value_feature", "_UI_Choice_type"),
+						designdecisionPackage.Literals.CHOICE__VALUE, false, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -91,9 +99,13 @@ public class ChoiceItemProvider extends ItemProviderAdapter implements IEditingD
 	 * @generated
 	 */
 	protected void addDegreeOfFreedomInstancePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_Choice_degreeOfFreedomInstance_feature"), getString("_UI_PropertyDescriptor_description", "_UI_Choice_degreeOfFreedomInstance_feature", "_UI_Choice_type"),
-				designdecisionPackage.Literals.CHOICE__DEGREE_OF_FREEDOM_INSTANCE, true, false, true, null, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Choice_degreeOfFreedomInstance_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Choice_degreeOfFreedomInstance_feature",
+								"_UI_Choice_type"),
+						designdecisionPackage.Literals.CHOICE__DEGREE_OF_FREEDOM_INSTANCE, true, false, true, null,
+						null, null));
 	}
 
 	/**

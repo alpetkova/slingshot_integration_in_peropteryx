@@ -66,7 +66,8 @@ public class HelperOCLDefinitionImpl extends OCLRuleImpl implements HelperOCLDef
 			contextClass = (EClass) eResolveProxy(oldContextClass);
 			if (contextClass != oldContextClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, gdofPackage.HELPER_OCL_DEFINITION__CONTEXT_CLASS, oldContextClass, contextClass));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							gdofPackage.HELPER_OCL_DEFINITION__CONTEXT_CLASS, oldContextClass, contextClass));
 			}
 		}
 		return contextClass;
@@ -89,7 +90,8 @@ public class HelperOCLDefinitionImpl extends OCLRuleImpl implements HelperOCLDef
 		EClass oldContextClass = contextClass;
 		contextClass = newContextClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, gdofPackage.HELPER_OCL_DEFINITION__CONTEXT_CLASS, oldContextClass, contextClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, gdofPackage.HELPER_OCL_DEFINITION__CONTEXT_CLASS,
+					oldContextClass, contextClass));
 	}
 
 	/**

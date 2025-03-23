@@ -72,7 +72,7 @@ public class gdofAdapterFactory extends AdapterFactoryImpl {
 	 * end-user-doc -->
 	 * @generated
 	 */
-	protected gdofSwitch<Adapter> modelSwitch = new gdofSwitch<Adapter>() {
+	protected gdofSwitch<Adapter> modelSwitch = new gdofSwitch<>() {
 		@Override
 		public Adapter caseChangeableElementDescription(ChangeableElementDescription object) {
 			return createChangeableElementDescriptionAdapter();

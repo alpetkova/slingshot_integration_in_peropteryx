@@ -66,7 +66,8 @@ public class ResourceDescriptionRepositoryImpl extends EObjectImpl implements Re
 	@Override
 	public EList<ResourceDescription> getAvailableProcessingResources_ResourceRepository() {
 		if (availableProcessingResources_ResourceRepository == null) {
-			availableProcessingResources_ResourceRepository = new EObjectContainmentEList<ResourceDescription>(ResourceDescription.class, this,
+			availableProcessingResources_ResourceRepository = new EObjectContainmentEList<>(
+					ResourceDescription.class, this,
 					resourcerepositoryPackage.RESOURCE_DESCRIPTION_REPOSITORY__AVAILABLE_PROCESSING_RESOURCES_RESOURCE_REPOSITORY);
 		}
 		return availableProcessingResources_ResourceRepository;
@@ -80,7 +81,8 @@ public class ResourceDescriptionRepositoryImpl extends EObjectImpl implements Re
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case resourcerepositoryPackage.RESOURCE_DESCRIPTION_REPOSITORY__AVAILABLE_PROCESSING_RESOURCES_RESOURCE_REPOSITORY:
-			return ((InternalEList<?>) getAvailableProcessingResources_ResourceRepository()).basicRemove(otherEnd, msgs);
+			return ((InternalEList<?>) getAvailableProcessingResources_ResourceRepository()).basicRemove(otherEnd,
+					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -108,7 +110,8 @@ public class ResourceDescriptionRepositoryImpl extends EObjectImpl implements Re
 		switch (featureID) {
 		case resourcerepositoryPackage.RESOURCE_DESCRIPTION_REPOSITORY__AVAILABLE_PROCESSING_RESOURCES_RESOURCE_REPOSITORY:
 			getAvailableProcessingResources_ResourceRepository().clear();
-			getAvailableProcessingResources_ResourceRepository().addAll((Collection<? extends ResourceDescription>) newValue);
+			getAvailableProcessingResources_ResourceRepository()
+					.addAll((Collection<? extends ResourceDescription>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,7 +139,8 @@ public class ResourceDescriptionRepositoryImpl extends EObjectImpl implements Re
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case resourcerepositoryPackage.RESOURCE_DESCRIPTION_REPOSITORY__AVAILABLE_PROCESSING_RESOURCES_RESOURCE_REPOSITORY:
-			return availableProcessingResources_ResourceRepository != null && !availableProcessingResources_ResourceRepository.isEmpty();
+			return availableProcessingResources_ResourceRepository != null
+					&& !availableProcessingResources_ResourceRepository.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -28,6 +28,8 @@ import org.palladiosimulator.pcm.resourcetype.ProcessingResourceType;
 import org.palladiosimulator.pcm.resourcetype.SchedulingPolicy;
 import org.palladiosimulator.solver.models.PCMInstance;
 
+import org.palladiosimulator.spd.constraints.target.TargetGroupSizeConstraint;
+
 import de.uka.ipd.sdq.dsexplore.Modules;
 import de.uka.ipd.sdq.dsexplore.designdecisions.alternativecomponents.AlternativeComponent;
 import de.uka.ipd.sdq.dsexplore.exception.ChoiceOutOfBoundsException;
@@ -69,9 +71,12 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.NumberOfCoresDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ProcessingResourceDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.SchedulingPolicyDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.specificFactory;
 import de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificFactoryImpl;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
+
+
 
 /**
  * The {@link DSEProblem} defines the problem. Therefore, it reads in the
@@ -342,6 +347,10 @@ public class DSEProblem {
 						// TODO: Add specific code to set numberOfReplicas of
 						// AssemblyContext
 					}
+				} else if (degree instanceof TargetGroupSizeMaxConstraintDegree) {
+					final TargetGroupSizeConstraint tgsc = (TargetGroupSizeConstraint) entity;
+					choice.setChosenValue(tgsc.getMaxSize());
+					
 				} else {
 					this.throwUnknownDegreeException(dd);
 				}
