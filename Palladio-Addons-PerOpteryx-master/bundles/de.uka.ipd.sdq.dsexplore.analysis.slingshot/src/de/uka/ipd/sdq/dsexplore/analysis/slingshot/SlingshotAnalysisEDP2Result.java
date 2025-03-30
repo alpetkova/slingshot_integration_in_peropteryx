@@ -404,14 +404,24 @@ public class SlingshotAnalysisEDP2Result extends SlingshotAnalysisResult {
 	 * 
 	 * @return measurement or <code>null</code> if no matching measurement found
 	 */
+//	private Measurement getPcmEntityMeasurements() {
+//		for (final Measurement m : run.getMeasurement()) {
+//			final MeasuringPoint measuringPoint = m.getMeasuringType().getMeasuringPoint();
+//			if (measuringPoint instanceof StringMeasuringPoint) {
+//				if (isRequestedMeasurement(pcmEntityIdentifier,
+//						((StringMeasuringPoint) measuringPoint).getMeasuringPoint())) {
+//					return m;
+//				}
+//			}
+//		}
+//		return null;
+//	}
 	private Measurement getPcmEntityMeasurements() {
 		for (final Measurement m : run.getMeasurement()) {
 			final MeasuringPoint measuringPoint = m.getMeasuringType().getMeasuringPoint();
-			if (measuringPoint instanceof StringMeasuringPoint) {
-				if (isRequestedMeasurement(pcmEntityIdentifier,
-						((StringMeasuringPoint) measuringPoint).getMeasuringPoint())) {
-					return m;
-				}
+			final String MeasuringPointString = measuringPoint.getStringRepresentation();
+			if (isRequestedMeasurement(pcmEntityIdentifier, MeasuringPointString)) {
+				return m;
 			}
 		}
 		return null;
