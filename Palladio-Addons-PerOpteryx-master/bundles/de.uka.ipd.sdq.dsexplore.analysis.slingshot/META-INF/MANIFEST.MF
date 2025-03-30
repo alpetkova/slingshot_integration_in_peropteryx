@@ -40,7 +40,9 @@ Require-Bundle: org.eclipse.ui,
  org.palladiosimulator.analyzer.slingshot.workflow;bundle-version="1.0.0",
  org.palladiosimulator.analyzer.slingshot.ui;bundle-version="1.0.0",
  de.uka.ipd.sdq.simucomframework;bundle-version="5.1.0",
- org.palladiosimulator.analyzer.slingshot.workflow.events;bundle-version="1.0.0"
+ org.palladiosimulator.analyzer.slingshot.workflow.events;bundle-version="1.0.0",
+ de.uka.ipd.sdq.codegen.simudatavisualisation.datatypes;bundle-version="5.1.0",
+ de.uka.ipd.sdq.sensorframework;bundle-version="5.1.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: de.uka.ipd.sdq.dsexplore.analysis.slingshot
 Bundle-RequiredExecutionEnvironment: JavaSE-17

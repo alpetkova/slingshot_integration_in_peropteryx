@@ -14,7 +14,7 @@ import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
 /**
  * This job modifies the paths to PCM Models in the
  * {@link SimuLizarWorkflowConfiguration} to the temporary model created by
- * PerOpteryx and stored by {@link SimulizarJob}.
+ * PerOpteryx and stored by {@link SlingshotJob}.
  *
  * @author Dominik Fuchss
  *

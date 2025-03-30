@@ -22,13 +22,25 @@ import org.palladiosimulator.simulizar.runconfig.SimuLizarLaunchConfigurationBas
 import org.palladiosimulator.simulizar.runconfig.SimuLizarWorkflowConfiguration;
 import org.palladiosimulator.solver.models.PCMInstance;
 
+import de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuComWorkflowConfiguration;
+import de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuComWorkflowLauncher;
+import de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs.SimuComJob;
 import de.uka.ipd.sdq.dsexplore.analysis.AbstractAnalysis;
 import de.uka.ipd.sdq.dsexplore.analysis.AnalysisFailedException;
 import de.uka.ipd.sdq.dsexplore.analysis.IAnalysis;
+import de.uka.ipd.sdq.dsexplore.analysis.IAnalysisResult;
 import de.uka.ipd.sdq.dsexplore.analysis.IStatisticAnalysisResult;
 import de.uka.ipd.sdq.dsexplore.analysis.PCMPhenotype;
+//import de.uka.ipd.sdq.dsexplore.analysis.simucom.DSESimuComWorkflowLauncher;
+//import de.uka.ipd.sdq.dsexplore.analysis.simucom.SimuComAnalysisEDP2Result;
+//import de.uka.ipd.sdq.dsexplore.analysis.simucom.SimuComAnalysisResult;
+//import de.uka.ipd.sdq.dsexplore.analysis.simucom.SimuComAnalysisSensorFrameworkResult;
+//import de.uka.ipd.sdq.dsexplore.analysis.simucom.SimuComQualityAttributeDeclaration;
+//import de.uka.ipd.sdq.dsexplore.analysis.simulizar.SimulizarAnalysis;
 import de.uka.ipd.sdq.dsexplore.exception.ExceptionHelper;
+import de.uka.ipd.sdq.dsexplore.helper.ConfigurationHelper;
 import de.uka.ipd.sdq.dsexplore.launch.DSEWorkflowConfiguration;
+import de.uka.ipd.sdq.dsexplore.launch.DSEConstantsContainer.QualityAttribute;
 import de.uka.ipd.sdq.dsexplore.qml.pcm.datastructures.EntryLevelSystemCallCriterion;
 import de.uka.ipd.sdq.dsexplore.qml.pcm.datastructures.UsageScenarioBasedCriterion;
 import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
@@ -37,6 +49,7 @@ import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
 import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
 import de.uka.ipd.sdq.workflow.launchconfig.AbstractWorkflowConfigurationBuilder;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
+import de.uka.ipd.sdq.workflow.mdsd.blackboard.ResourceSetPartition;
 
 import org.palladiosimulator.analyzer.slingshot.core.Slingshot;
 import org.palladiosimulator.analyzer.slingshot.core.api.SystemDriver;
@@ -44,8 +57,14 @@ import org.palladiosimulator.analyzer.slingshot.workflow.SimulationLauncher;
 import org.palladiosimulator.analyzer.slingshot.workflow.SimulationWorkflowConfiguration;
 import org.palladiosimulator.analyzer.slingshot.workflow.events.WorkflowLaunchConfigurationBuilderInitialized;
 import org.palladiosimulator.analyzer.slingshot.workflow.jobs.SimulationJob;
-import org.palladiosimulator.analyzer.slingshot.workflow.jobs.SimulationRootJob;
+//import org.palladiosimulator.analyzer.slingshot.workflow.jobs.SimulationRootJob;
 import de.uka.ipd.sdq.simucomframework.SimuComConfig;
+import org.palladiosimulator.analyzer.workflow.jobs.LoadModelIntoBlackboardJob;
+import org.palladiosimulator.analyzer.workflow.jobs.PreparePCMBlackboardPartitionJob;
+
+import de.uka.ipd.sdq.workflow.jobs.ICompositeJob;
+import de.uka.ipd.sdq.workflow.jobs.SequentialBlackboardInteractingJob;
+import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
 
 /**
  * Starts a Slingshot Analysis for the design space exploration. Mainly adopted
@@ -53,186 +72,359 @@ import de.uka.ipd.sdq.simucomframework.SimuComConfig;
  */
 public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
 
-	private static int COUNTER = 0;
-
-	/** Logger for log4j. */
-	private static Logger logger = Logger.getLogger("de.uka.ipd.sdq.dsexplore");
-
-	private static final Logger LOGGER = Logger.getLogger(SimulationLauncher.class);
-	private final SystemDriver systemDriver = Slingshot.getInstance().getSystemDriver();
-	
-	/**
-	 * Store the launch parameters so that we do not have to pass them all the
-	 * time.
-	 */
-	private ILaunchConfiguration config;
-
-	private String initialExperimentName;
-	private final Map<Integer, String> previousExperimentNames = new HashMap<>();
-
-	private SimulationWorkflowConfiguration workflowConfig;
-
 	public SlingshotAnalysis() {
-		super(new SlingshotQualityAttributeDeclaration());
-	}
+        super(new SlingshotQualityAttributeDeclaration());
+    }
 
-	@Override
-	public void analyse(final PCMPhenotype pheno, final IProgressMonitor monitor) throws AnalysisFailedException, CoreException, UserCanceledException {
-		final String experimentName = this.getExperimentName(pheno);
-		final String experimentSettingName = this.getExperimentSettingName(pheno);
-		this.previousExperimentNames.put(pheno.getGenotypeID().hashCode(), experimentSettingName);
 
-		final ILaunchConfigurationWorkingCopy launchWorkingCopy = this.config.getWorkingCopy();
 
-		launchWorkingCopy.setAttribute(AbstractSimulationConfig.EXPERIMENT_RUN, experimentName);
-		launchWorkingCopy.setAttribute(AbstractSimulationConfig.VARIATION_ID, experimentSettingName);
+    /** Logger for log4j. */
+    private static Logger logger =
+            Logger.getLogger("de.uka.ipd.sdq.dsexplore");
 
-		this.workflowConfig = this.deriveConfiguration(launchWorkingCopy, ILaunchManager.RUN_MODE);
-		//this.workflowConfig.setOverwriteWithoutAsking(true);
+    /** Store the launch parameters so that we do not have to pass them all the time.*/
+    private ILaunchConfiguration config;
 
-		System.gc();
+    private String initialExperimentName;
+    private final Map<Integer, String> previousExperimentNames = new HashMap<Integer, String>();
 
-		if (this.isExperimentRunDoesNotExist(experimentName, experimentSettingName)) {
-			this.launchSlingshot(monitor);
-		}
-	}
+    private SimulationWorkflowConfiguration workflowConfig;
 
-	private void launchSlingshot(IProgressMonitor monitor) throws CoreException, AnalysisFailedException {
-		//this.workflowConfig.setInteractive(false);
+    private int datasourceReloadCount = 1;
 
-		final SimulationJob job = new SimulationJob(this.workflowConfig.getSimuComConfig());
-		job.setBlackboard(this.blackboard);
+    /**
+     * Calls SimuCom. Before doing so, it calls the {@link ConfigurationHelper}
+     * to update the {@link ILaunchConfiguration} and stores the
+     * {@link PCMInstance} to files, so that SimuCom can read it as usual. After
+     * the SimuCom run, the analysis results are extracted from the
+     * sensorFramework data sources and returned. The returned
+     * {@link IAnalysisResult} is a {@link SimuComAnalysisResult} which does not
+     * store the results directly, but provides access to the underlying
+     * sensorFramework data sources.
+     *
+     * {@inheritDoc}
+     * @throws UserCanceledException
+     *
+     * @see de.uka.ipd.sdq.dsexplore.analysis.IAnalysis#analyse(PCMPhenotype, de.uka.ipd.sdq.dsexplore.PCMInstance)
+     */
+    @Override
+    public void analyse(final PCMPhenotype pheno, final IProgressMonitor monitor) throws AnalysisFailedException, CoreException, UserCanceledException {
 
-		try {
-			job.execute(monitor);
-			SlingshotAnalysis.logger.debug("Finished Slingshot analysis");
-			job.cleanup(monitor);
-		} catch (JobFailedException | UserCanceledException | CleanupFailedException e) {
-			SlingshotAnalysis.logger.error("Error during simulation.");
-			e.printStackTrace();
-			throw new AnalysisFailedException(e);
-		}
-	}
+        final String experimentName = getExperimentName(pheno);
+        final String experimentSettingName = getExperimentSettingName(pheno);
+        this.previousExperimentNames.put(pheno.getGenotypeID().hashCode(), experimentSettingName);
 
-	@Override
-	public void initialise(DSEWorkflowConfiguration configuration) throws CoreException {
-		this.previousExperimentNames.clear();
-		this.config = configuration.getRawConfiguration();
+        final ILaunchConfigurationWorkingCopy launchWorkingCopy = this.config.getWorkingCopy();
+        
+        launchWorkingCopy.setAttribute(AbstractSimulationConfig.EXPERIMENT_RUN, experimentName);
+        launchWorkingCopy.setAttribute(AbstractSimulationConfig.VARIATION_ID, experimentSettingName);
 
-		if (!this.config.getAttribute("persistenceFramework", "").contains("EDP2")) {
-			throw ExceptionHelper.createNewCoreException("Only EDP2 is supported");
-		}
+        /* this method call already creates an empty run if EDP2 is used. */
+        this.workflowConfig = new DSESimulationLauncher().deriveConfiguration(launchWorkingCopy);
+        this.workflowConfig.setOverwriteWithoutAsking(true);
 
-		if (this.blackboard == null) {
-			throw ExceptionHelper.createNewCoreException("Error in initialisation: No Blackboard was set when initialising the SimuLizar Analysis. Contact the developers.");
-		}
+        //this.simuComWorkflowConfiguration.getSimulationConfiguration().setNameBase(experimentName);
+        //((AbstractRecorderConfigurationFactory)this.simuComWorkflowConfiguration.getSimulationConfiguration().getRecorderConfigurationFactory()).setExperimentNameAndRunName(experimentName);
 
-		this.initialExperimentName = this.config.getAttribute(AbstractSimulationConfig.EXPERIMENT_RUN, "");
-		this.initialiseCriteria(configuration);
-	}
+        System.gc();
 
-	@Override
-	public IStatisticAnalysisResult retrieveResultsFor(final PCMPhenotype pheno, final Criterion criterion) throws CoreException, AnalysisFailedException {
-		Entity entity = this.getPCMEntityForCriterion(criterion);
-		return this.retrieveSlingshotResults(pheno, entity);
-	}
+        if (isExperimentRunDoesNotExist(experimentName, experimentSettingName)){
+            launchSlingshot( monitor);
+        }
 
-	private IStatisticAnalysisResult retrieveSlingshotResults(PCMPhenotype pheno, Entity entity) throws AnalysisFailedException, CoreException {
 
-		final String experimentName = this.getExperimentName(pheno);
-		final String experimentSettingName = this.getExperimentSettingName(pheno);
-		final PCMResourceSetPartition pcmPartition = (PCMResourceSetPartition) this.blackboard.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID);
-		// TODO Iff no copy of Blackboard in launchSimulizar is done this fails
-		// .. (shall not be so)
-		final PCMInstance pcmInstance = new PCMInstance(pcmPartition);
+    }
 
-		Repository repo = SlingshotAnalysisResult.findSelectedEDP2Repository(this.config);
-		SlingshotQualityAttributeDeclaration sq = (SlingshotQualityAttributeDeclaration) this.qualityAttribute;
-		IStatisticAnalysisResult result = SlingshotAnalysisResult.findExperimentRunAndCreateResult(entity, experimentName, experimentSettingName, pcmInstance, repo, this.criterionToAspect, sq);
 
-		if (result == null) {
-			final String errormessage = ""//
-					+ "There was no experiment named \"" + experimentName + "\" with an experiment setting \"" + experimentSettingName + "\"" //
-					+ " in the selected data source after analysing the PCM instance \"" + experimentName + "\" of candidate " + pheno.getNumericID() + " " + pheno.getGenotypeID();
-			SlingshotAnalysis.logger.error(errormessage);
-			throw new AnalysisFailedException(errormessage);
-		}
 
-		return result;
-	}
+    /**
+     * Search in all open data sources whether there is already an experiment run with this name and check that it contains some results.
+     * @param experimentSettingName
+     * @return
+     */
+    private boolean isExperimentRunDoesNotExist(final String experimentName, final String experimentSettingName) throws CoreException {
+    	
+//        if (config.getAttribute("persistenceFramework", "").equals("SensorFramework"))
+//        {
+//        	return !SimuComAnalysisSensorFrameworkResult.isExperimentRunExisting(experimentName, this.simuComWorkflowConfiguration, this.datasourceReloadCount, config);
+//        }
+//        // In case the selected persistence framework is EDP2
+//        else 
+//        {
+//        	return !SlingshotAnalysisEDP2Result.isExperimentRunExisting(experimentName, experimentSettingName, SimuComAnalysisEDP2Result.findSelectedEDP2Repository(config));
+//        }
+        return !SlingshotAnalysisEDP2Result.isExperimentRunExisting(experimentName, experimentSettingName, SlingshotAnalysisEDP2Result.findSelectedEDP2Repository(config));
+        
+    }
 
-	private Entity getPCMEntityForCriterion(final Criterion criterion) throws CoreException {
-		if (criterion instanceof UsageScenarioBasedCriterion) {
-			return ((UsageScenarioBasedCriterion) criterion).getUsageScenario();
-		} else if (criterion instanceof EntryLevelSystemCallCriterion) {
-			return ((EntryLevelSystemCallCriterion) criterion).getEntryLevelSystemCall();
-		}
-		throw new CoreException(new Status(IStatus.ERROR, "de.uka.ipd.sdq.dsexplore.analysis.simulizar",
-				"Cannot handle Criterion of type " + criterion.getClass() + ". Required is UsageScenarioBasedCriterion or EntryLevelSystemCallCriterion."));
-	}
 
-	@Override
-	public boolean hasObjectivePerUsageScenario() throws CoreException {
-		return true;
-	}
 
-	@Override
-	public void setBlackboard(MDSDBlackboard blackboard) {
-		this.blackboard = blackboard;
-	}
+    private String getExperimentName(final PCMPhenotype pheno) throws CoreException {
+        if (config.getAttribute("persistenceFramework", "").equals("SensorFramework"))
+        {
+        	return this.initialExperimentName + " " + pheno.getGenotypeID();
+        }
+        // In case the selected persistence framework is EDP2
+        else 
+        {
+        	return this.initialExperimentName;
+        }
+        
+    }
+    
+    private String getExperimentSettingName(final PCMPhenotype pheno) throws CoreException {
 
-	// From SimuComAnalysis
+    	return pheno.getGenotypeID();
+        
+    }
 
-	/**
-	 * Search in all open data sources whether there is already an experiment
-	 * run with this name and check that it contains some results.
-	 *
-	 * @param experimentSettingName
-	 * @return the indicator
-	 */
-	private boolean isExperimentRunDoesNotExist(final String experimentName, final String experimentSettingName) throws CoreException {
-		return !SlingshotAnalysisResult.isExperimentRunExisting(experimentName, experimentSettingName, SlingshotAnalysisResult.findSelectedEDP2Repository(this.config));
-	}
 
-	// From PCMInterpreterLauncher
-	/*protected SimuComConfig deriveConfiguration(final ILaunchConfiguration configuration, final String mode) throws CoreException {
-		final SimuComConfig config = new SimuComConfig(configuration.getAttributes(), false);
+    /**
+     * FIXME: This method should not depend on the state of the blackboard anymore... but it does at this time.
+     *
+     * @param pheno
+     * @param entity
+     * @return
+     * @throws CoreException
+     * @throws AnalysisFailedException
+     */
+    private IStatisticAnalysisResult retrieveSlingshotResults(final PCMPhenotype pheno, final Entity entity)
+            throws CoreException, AnalysisFailedException {
 
-		AbstractWorkflowConfigurationBuilder builder;
-		builder = new PCMWorkflowConfigurationBuilder(configuration, mode);
-		builder.fillConfiguration(config);
+        final String experimentName = this.getExperimentName(pheno);
+        final String experimentSettingName = this.getExperimentSettingName(pheno);
+        final PCMResourceSetPartition pcmPartition = (PCMResourceSetPartition)this.blackboard.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID);
+        final PCMInstance pcmInstance = new PCMInstance(pcmPartition);
 
-		builder = new SimuLizarLaunchConfigurationBasedConfigBuilder(configuration, mode);
-		builder.fillConfiguration(config);
+        IStatisticAnalysisResult result = null;
+        
+        // Decide whether it's SensorFramework or EDP2
+        if ("SensorFramework".equals(config.getAttribute("persistenceFramework", "")))
+        {        	
+//                result = new SimuComAnalysisSensorFrameworkResult(entity,
+//                        experimentName, pcmInstance, this.criterionToAspect, (SimuComQualityAttributeDeclaration)this.qualityAttribute, this.config);
+            
+            if (result == null)
+            {
+                final String errormessage = "There was no experiment run or no experiment for experiment named \""
+                        +experimentName+"\" in the selected data source after analysing the PCM instance \""
+                        +experimentName+"\" of candidate "+pheno.getNumericID()+" "+pheno.getGenotypeID();
+                logger.error(errormessage);
+                throw new AnalysisFailedException(errormessage);
+            }
 
-		return config;
-	}
-*/
-	protected SimulationWorkflowConfiguration deriveConfiguration(ILaunchConfiguration configuration, String mode)
-			throws CoreException {
-		final SimuComConfig config = new SimuComConfig(configuration.getAttributes(), true);
-		final SimulationWorkflowConfiguration simulationWorkflowConfiguration = new SimulationWorkflowConfiguration(config);
+
+        }
+        // In case the selected persistence framework is EDP2
+        else 
+        {
+
+        	Repository selectedRepo = SlingshotAnalysisEDP2Result.findSelectedEDP2Repository(config);
+        	
+        	result = SlingshotAnalysisEDP2Result.findExperimentRunAndCreateResult(entity, experimentName,
+					experimentSettingName, pcmInstance, selectedRepo, this.criterionToAspect, (SlingshotQualityAttributeDeclaration)this.qualityAttribute);
+        	
+            if (result == null)
+            {
+                final String errormessage = "There was no experiment named \""
+                        +experimentName+"\" with an experiment setting \""+experimentSettingName+"\""
+                        +" in the selected data source after analysing the PCM instance \""
+                        +experimentName+"\" of candidate "+pheno.getNumericID()+" "+pheno.getGenotypeID();
+                logger.error(errormessage);
+                throw new AnalysisFailedException(errormessage);
+            }
+        	
+        }
+        
+
+
+        return result;
+    }
+
+
+
+    private void launchSlingshot(final IProgressMonitor monitor)
+            throws CoreException, AnalysisFailedException, UserCanceledException {
+
+        /*		LoadPCMModelsIntoBlackboardJob loadJob = new LoadPCMModelsIntoBlackboardJob(config);
+
+		PCMInstance pcm = new PCMInstance((PCMResourceSetPartition)this.blackboard.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
+		pcm.saveToXMIFile(pcm.getSystem(), this.config.getAttribute(ConstantsContainer.SYSTEM_FILE, ""));
+		pcm.saveToXMIFile(pcm.getAllocation(), this.config.getAttribute(ConstantsContainer.ALLOCATION_FILE, ""));
+
+		SimuComWorkflowLauncher simuCom = new SimuComWorkflowLauncher();
+
+		AbstractPCMWorkflowRunConfiguration PCMConfig;*/
+
+        // load feature config files into blackboard
+
+//        final String featureConfigFile = this.workflowConfig.getFeatureConfigFile();
+//        if (featureConfigFile != null && !"".equals(featureConfigFile)){
+//            final ResourceSetPartition pcmPartition = this.blackboard.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID);
+//            pcmPartition.loadModel(featureConfigFile);
+//        }
+
+//        workflowConfig.getPCMModelFiles().forEach(modelFile -> LoadModelIntoBlackboardJob.parseUriAndAddModelLoadJob(modelFile, this));
+//        workflowConfig.getPCMModelFiles().forEach(modelFile -> this.blackboard.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID).loadModel(modelFile));
+        this.workflowConfig.setInteractive(false);
+
+        final SimulationRootJob job = new SimulationRootJob(this.workflowConfig);
+//        final SimulationJob job = new SimulationJob(this.workflowConfig.getSimuComConfig());
+        job.setBlackboard(this.blackboard);
+
+        // retry simulation if the cause was that an extension could not be loaded, because that seems to be a transient problem (it only happens sometimes)
+        final int numberOfTries = 2;
+        for (int i = 0; i < numberOfTries; i++){
+            try {
+                // start SimuCom
+                job.execute(monitor);
+                logger.debug("Finished SimuCom analysis");
+                break;
+            } catch (final JobFailedException e) {
+                logger.error(e.getMessage());
+                if (e.getCause() != null){
+                	String causingErrorMessage = e.getCause().getMessage();
+                	if (numberOfTries > 0 && causingErrorMessage != null && causingErrorMessage.contains("Couldn't find extension")){
+                		logger.warn("Trying to start SimuCom again.");
+                		continue;
+                	}
+                }
+                // try to roll back and clean up (e.g. delete temporary folder). This is not tested yet and may cause problems. 
+                try {
+					job.cleanup(monitor);
+				} catch (CleanupFailedException e1) {
+					logger.error("Cleanup of failed simucoim run failed, probably you need to clean up manually (e.g. delete temorary plugin);");
+					e1.printStackTrace();
+				}
+                throw new AnalysisFailedException(e);
+            }
+        }
+
+    }
+
+
+    //	/** Put all the old appends back in the logger. FIXME: does not work as expected :( but whatever.
+    //	 * @throws CoreException */
+    //	private void restoreLogger(ILaunchConfiguration config) throws CoreException {
+    //		BasicConfigurator.resetConfiguration();
+    //		LoggerHelper.initializeLogger(config);
+    //	}
+
+
+    /**
+     * {@inheritDoc}
+     * @throws CoreException
+     * @see de.uka.ipd.sdq.dsexplore.analysis.IAnalysis#initialise(org.eclipse.debug.core.ILaunchConfiguration, java.lang.String, org.eclipse.debug.core.ILaunch, org.eclipse.core.runtime.IProgressMonitor)
+     */
+    @Override
+    public void initialise(final DSEWorkflowConfiguration configuration) throws CoreException {
+
+        this.previousExperimentNames.clear();
+
+        this.config = configuration.getRawConfiguration();
+        if (blackboard == null){
+            throw ExceptionHelper.createNewCoreException("Error in initialisation: No Blackboard was set when initialising the SimuCom Analysis. Contact the developers.");
+        }
+
+        this.initialExperimentName = this.config.getAttribute(SimuComConfig.EXPERIMENT_RUN, "");
+
+        //		this.objectives = new ArrayList<Objective>(scenarios.size());
+        //		for (UsageScenario usageScenario : scenarios) {
+        //			objectives.add(new UsageScenarioBasedObjective(this.getQualityAttribute(), Objective.Sign.MIN, usageScenario));
+        //		}
+
+        initialiseCriteria(configuration);
+    }
+
+
+
+
+
+    //MOVED to PCMDeclarationsReader
+    //	public UsageScenarioBasedObjective translateEvalAspectToObjective(EvaluationAspectWithContext aspect, UsageScenario usageScenario){
+    //		//Make sure, the aspect IS an objective
+    //		try {
+    //			if(aspect.getDimension().getType().getRelationSemantics().getRelSem() == EnumRelationSemantics.DECREASING) {
+    //				return new UsageScenarioBasedObjective(this.getQualityAttribute(), Objective.Sign.MIN, usageScenario);
+    //			} else {
+    //				//INCREASING
+    //				return new UsageScenarioBasedObjective(this.getQualityAttribute(), Objective.Sign.MAX, usageScenario);
+    //			}
+    //		} catch (CoreException e) {
+    //			e.printStackTrace();
+    //			throw new RuntimeException("Could not get response time quality attribute!");
+    //		}
+    //	}
+
+    @Override
+    public IStatisticAnalysisResult retrieveResultsFor(final PCMPhenotype pheno, final Criterion criterion) throws CoreException, AnalysisFailedException {
+
+        Entity entity = getPCMEntityForCriterion(criterion);
+        return this.retrieveSlingshotResults(pheno, entity);
+        
+    }
+    
+    private Entity getPCMEntityForCriterion(final Criterion criterion) throws CoreException{
+    	 if(criterion instanceof UsageScenarioBasedCriterion){
+             return ((UsageScenarioBasedCriterion)criterion).getUsageScenario();
+         } else if (criterion instanceof EntryLevelSystemCallCriterion){
+        	 return ((EntryLevelSystemCallCriterion)criterion).getEntryLevelSystemCall();
+         }
+    	 throw new CoreException(new Status(Status.ERROR, "de.uka.ipd.sdq.dsexplore.analysis.simucom", "Cannot handle Criterion of type "+criterion.getClass()+". Required is UsageScenarioBasedCriterion or EntryLevelSystemCallCriterion."));
+    }
+
+
+
+    @Override
+    public QualityAttribute getQualityAttribute() throws CoreException {
+        //return DSEConstantsContainer.MEAN_RESPONSE_TIME_QUALITY;
+        return qualityAttribute.getQualityAttribute();
+    }
+
+
+    //TODO remove Criterion parameter again, not needed. 
+    @Override
+    public boolean hasStatisticResultsFor() throws CoreException {
+    	// FIXME: need to properly map between criterion and the quality attribute dimension. Cannot fix this before PALLADIO-384 is fixed. 
+    	return true;
+    }
+
+
+    @Override
+    public boolean hasObjectivePerUsageScenario() throws CoreException {
+        return true;
+    }
+
+
+
+    @Override
+    public void setBlackboard(final MDSDBlackboard blackboard) {
+        this.blackboard = blackboard;
+
+    }
+
+
+
+}
+
+class DSESimulationLauncher extends SimulationLauncher{
+
+    public SimulationWorkflowConfiguration deriveConfiguration(final ILaunchConfiguration config) throws CoreException{
+        return super.deriveConfiguration(config, ILaunchManager.RUN_MODE);
+
+    }
+
+}
+
+class SimulationRootJob extends SequentialBlackboardInteractingJob<MDSDBlackboard> implements ICompositeJob {
+
+	public SimulationRootJob(final SimulationWorkflowConfiguration config) {
+		super(SimulationRootJob.class.getName(), false);
+
+		this.addJob(new PreparePCMBlackboardPartitionJob());
 		
-		final WorkflowLaunchConfigurationBuilderInitialized builderEvent = new WorkflowLaunchConfigurationBuilderInitialized(configuration, simulationWorkflowConfiguration);
-		systemDriver.postEvent(builderEvent);
-		
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("The workfloww launch configurations are:");
-			builderEvent.forEach().forEach((key, obj) -> {
-				LOGGER.debug("Key: " + key + ", Object: " + obj + "<" + obj.getClass().getName() + ">");
-			});
-		}
-		
-		// Currently, this is the only way I found to set the SimuComConfig. Maybe there is a better way?
-		return simulationWorkflowConfiguration;
-	}
-	
-	private String getExperimentName(final PCMPhenotype pheno) throws CoreException {
-		return this.initialExperimentName + " " + pheno.getGenotypeID();
-	}
-
-	private String getExperimentSettingName(final PCMPhenotype pheno) throws CoreException {
-		return pheno.getGenotypeID();
+		config.getPCMModelFiles().forEach(modelFile -> LoadModelIntoBlackboardJob.parseUriAndAddModelLoadJob(modelFile, this));
+		this.addJob(new SimulationJob(config.getSimuComConfig()));
 	}
 
 }
