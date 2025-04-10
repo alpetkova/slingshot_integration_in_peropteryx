@@ -1,6 +1,7 @@
 package de.uka.ipd.sdq.dsexplore.analysis.slingshot;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -65,6 +66,29 @@ import org.palladiosimulator.analyzer.workflow.jobs.PreparePCMBlackboardPartitio
 import de.uka.ipd.sdq.workflow.jobs.ICompositeJob;
 import de.uka.ipd.sdq.workflow.jobs.SequentialBlackboardInteractingJob;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
+import de.uka.ipd.sdq.workflow.mdsd.blackboard.ResourceSetPartition;
+
+import org.eclipse.emf.ecore.resource.Resource;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.palladiosimulator.spd.ScalingPolicy;
+import org.palladiosimulator.spd.SpdFactory;
+import org.palladiosimulator.spd.SpdPackage;
+import org.palladiosimulator.spd.constraints.target.TargetConstraint;
+import org.palladiosimulator.spd.impl.SPDImpl;
+import org.palladiosimulator.spd.targets.TargetGroup;
+import org.palladiosimulator.spd.targets.impl.TargetGroupImpl;
+import org.palladiosimulator.spd.constraints.target.impl.TargetGroupSizeConstraintImpl;
 
 /**
  * Starts a Slingshot Analysis for the design space exploration. Mainly adopted
@@ -91,6 +115,7 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
     private SimulationWorkflowConfiguration workflowConfig;
 
     private int datasourceReloadCount = 1;
+    private boolean alreadyLaunched = false;
 
     /**
      * Calls SimuCom. Before doing so, it calls the {@link ConfigurationHelper}
@@ -122,6 +147,48 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
         /* this method call already creates an empty run if EDP2 is used. */
         this.workflowConfig = new DSESimulationLauncher().deriveConfiguration(launchWorkingCopy);
         this.workflowConfig.setOverwriteWithoutAsking(true);
+        
+        List<String> modelFiles = this.workflowConfig.getPCMModelFiles();
+        for (int iModelFiles = 0; iModelFiles < modelFiles.size(); iModelFiles++) {
+        	String modelFile = modelFiles.get(iModelFiles);
+        	if (modelFile.endsWith(".spd") && alreadyLaunched) {
+        		int lastSlashIndex = modelFile.lastIndexOf("/");
+        		URI orgURI = URI.createURI(modelFile);
+        		
+				modelFile = modelFile.substring(0, lastSlashIndex) + "/slingshottmp" + modelFile.substring(lastSlashIndex + 1);
+				
+				URI modURI = URI.createURI(modelFile);
+				
+				final ResourceSetPartition pcmPartition = this.blackboard.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID);
+				
+//				System.out.println(pcmPartition);
+				for (int iResource = 0; iResource < pcmPartition.getResourceSet().getResources().size(); iResource++) {
+					Resource currResource = pcmPartition.getResourceSet().getResources().get(iResource);
+					if (currResource.getURI().toString().endsWith(".resourceenvironment")) {
+						currResource.setURI(URI.createURI(currResource.getURI().toString().replace(".resourceenvironmentcand", "")));
+					}
+					if (currResource.getURI().toString().endsWith(".spd")) {
+						currResource.setURI(modURI);
+//						for (EObject eObject : currResource.getContents()) {
+//							SPDImpl spdObject = (SPDImpl) eObject;
+//							for (TargetGroup tgGroup : spdObject.getTargetGroups()) {
+//								for (TargetConstraint tgGroupConstr :  tgGroup.getTargetConstraints()) {
+//									TargetGroupSizeConstraintImpl tgGCimpl = (TargetGroupSizeConstraintImpl) tgGroupConstr;
+////									System.out.println("tgGCimpl.ID = " + tgGCimpl.getId());
+//								}
+//							}
+//						}
+						
+						try {
+							currResource.save(null);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+        	}
+        }
 
         //this.simuComWorkflowConfiguration.getSimulationConfiguration().setNameBase(experimentName);
         //((AbstractRecorderConfigurationFactory)this.simuComWorkflowConfiguration.getSimulationConfiguration().getRecorderConfigurationFactory()).setExperimentNameAndRunName(experimentName);
@@ -266,9 +333,11 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
 
 //        workflowConfig.getPCMModelFiles().forEach(modelFile -> LoadModelIntoBlackboardJob.parseUriAndAddModelLoadJob(modelFile, this));
 //        workflowConfig.getPCMModelFiles().forEach(modelFile -> this.blackboard.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID).loadModel(modelFile));
-        this.workflowConfig.setInteractive(false);
-
-        final SimulationRootJob job = new SimulationRootJob(this.workflowConfig);
+//        this.alreadyLaunched = true;
+    	this.workflowConfig.setInteractive(false);
+        final SimulationRootJob job = new SimulationRootJob(this.workflowConfig, this.alreadyLaunched);
+//        job.addJob(new PreparePCMBlackboardPartitionJob());
+//        this.workflowConfig.getPCMModelFiles().forEach(modelFile -> LoadModelIntoBlackboardJob.parseUriAndAddModelLoadJob(modelFile, job));
 //        final SimulationJob job = new SimulationJob(this.workflowConfig.getSimuComConfig());
         job.setBlackboard(this.blackboard);
 
@@ -279,6 +348,7 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
                 // start SimuCom
                 job.execute(monitor);
                 logger.debug("Finished SimuCom analysis");
+                this.alreadyLaunched = true;
                 break;
             } catch (final JobFailedException e) {
                 logger.error(e.getMessage());
@@ -331,7 +401,7 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
         //		this.objectives = new ArrayList<Objective>(scenarios.size());
         //		for (UsageScenario usageScenario : scenarios) {
         //			objectives.add(new UsageScenarioBasedObjective(this.getQualityAttribute(), Objective.Sign.MIN, usageScenario));
-        //		}
+//        		}
 
         initialiseCriteria(configuration);
     }
@@ -418,12 +488,61 @@ class DSESimulationLauncher extends SimulationLauncher{
 
 class SimulationRootJob extends SequentialBlackboardInteractingJob<MDSDBlackboard> implements ICompositeJob {
 
-	public SimulationRootJob(final SimulationWorkflowConfiguration config) {
+	public SimulationRootJob(final SimulationWorkflowConfiguration config, boolean alreadyLaunched) {
 		super(SimulationRootJob.class.getName(), false);
 
 		this.addJob(new PreparePCMBlackboardPartitionJob());
 		
-		config.getPCMModelFiles().forEach(modelFile -> LoadModelIntoBlackboardJob.parseUriAndAddModelLoadJob(modelFile, this));
+		List<String> modelFiles = config.getPCMModelFiles();
+		
+		for (int iModelFiles = 0; iModelFiles < modelFiles.size(); iModelFiles++) {
+			String modelFile = modelFiles.get(iModelFiles);
+			if (modelFile.endsWith("spd") && alreadyLaunched) {
+				int lastSlashIndex = modelFile.lastIndexOf("/");
+				modelFile = modelFile.substring(0, lastSlashIndex) + "/slingshottmp" + modelFile.substring(lastSlashIndex + 1);
+				
+//				// Create a resource set to hold the resources.
+//				//
+//				ResourceSet resourceSet = new ResourceSetImpl();
+//
+//				// Register the appropriate resource factory to handle all file extensions.
+//				//
+//				resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+//						.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
+//
+//				// Register the package to ensure it is available during loading.
+//				//
+//				resourceSet.getPackageRegistry().put(SpdPackage.eNS_URI, SpdPackage.eINSTANCE);
+//				
+//				URI uri = URI.createURI(modelFile);
+//				Resource testresource = resourceSet.getResource(uri, true);
+//				
+//				if (modelFile.endsWith(".spd")) {
+//					for (EObject eObject : testresource.getContents()) {
+//						SPDImpl spdObject = (SPDImpl) eObject;
+//						for (TargetGroup tgGroup : spdObject.getTargetGroups()) {
+//							for (TargetConstraint tgGroupConstr :  tgGroup.getTargetConstraints()) {
+//								TargetGroupSizeConstraintImpl tgGCimpl = (TargetGroupSizeConstraintImpl) tgGroupConstr;
+//								tgGCimpl.setMaxSize(6);
+//								System.out.println("tgGCimpl.ID = " + tgGCimpl.getId());
+//								// do this over pheno
+//							}
+//						}
+//					}
+//					
+//					try {
+//						testresource.save(null);
+//					} catch (IOException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//				}
+			}
+			
+			LoadModelIntoBlackboardJob.parseUriAndAddModelLoadJob(modelFile, this);
+		}
+		
+//		config.getPCMModelFiles().forEach(modelFile -> LoadModelIntoBlackboardJob.parseUriAndAddModelLoadJob(modelFile, this));
 		this.addJob(new SimulationJob(config.getSimuComConfig()));
 	}
 

@@ -26,13 +26,13 @@ public class SlingshotQualityAttributeDeclaration extends AbstractPerformanceAtt
 		if (EcoreUtil.equals(dimension, this.responseTimeDimension) && aspect instanceof Mean) {
 			return true;
 		}
-		// if (EcoreUtil.equals(dimension, this.throughputDimension) && aspect
-		// instanceof Mean) {
-		// return true;
-		// }
-		// if (EcoreUtil.equals(dimension, this.maxUtilizationDimension)) {
-		// return true;
-		// }
+		 if (EcoreUtil.equals(dimension, this.throughputDimension) && aspect
+		 instanceof Mean) {
+		 return true;
+		 }
+		 if (EcoreUtil.equals(dimension, this.maxUtilizationDimension)) {
+		 return true;
+		 }
 		return false;
 	}
 

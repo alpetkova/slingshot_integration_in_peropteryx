@@ -1,66 +1,78 @@
 package de.uka.ipd.sdq.dsexplore.analysis.slingshot;
 
-import org.eclipse.core.runtime.CoreException;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.palladiosimulator.simulizar.SimuLizarPlatform;
-import org.palladiosimulator.simulizar.runconfig.SimuLizarWorkflowConfiguration;
-import org.palladiosimulator.analyzer.slingshot.workflow.SimulationWorkflowConfiguration;
-import de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuComWorkflowConfiguration;
+import org.palladiosimulator.analyzer.slingshot.core.Slingshot;
+import org.palladiosimulator.analyzer.slingshot.core.api.SimulationDriver;
+import org.palladiosimulator.analyzer.slingshot.core.extension.PCMResourceSetPartitionProvider;
+import org.palladiosimulator.analyzer.slingshot.workflow.WorkflowConfigurationModule;
+import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
+import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
 
-import de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs.AbstractSimulationJob;
+import de.uka.ipd.sdq.simucomframework.SimuComConfig;
 import de.uka.ipd.sdq.workflow.jobs.CleanupFailedException;
-import org.palladiosimulator.analyzer.slingshot.workflow.jobs.SimulationJob;
-//import org.palladiosimulator.analyzer.slingshot.workflow.jobs.SimulationRootJob;
+import de.uka.ipd.sdq.workflow.jobs.IBlackboardInteractingJob;
+import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
+import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
+import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
 
-/**
- * Defines the job which runs SimuLizar on the current PCM Model of PerOpteryx
- *
- * @author Dominik Fuchss
- *
- */
-public class SlingshotJob extends AbstractSimulationJob<SimuComWorkflowConfiguration> {
-	/**
-	 * Create the job.
-	 *
-	 * @param configuration
-	 *            the configuration
-	 * @param counter
-	 *            the current count of runs (for id of temp location)
-	 * @throws CoreException
-	 *             throw from super class
-	 */
-	public SlingshotJob(final SimulationWorkflowConfiguration configuration, int counter) throws CoreException {
-		super(SlingshotJob.updateConfig(configuration, counter), null, false);
+public class SlingshotJob implements IBlackboardInteractingJob<MDSDBlackboard> {
 
-	}
+	private static final Logger LOGGER = LogManager.getLogger(SlingshotJob.class);
 
-	/**
-	 * Change temporary storage location.
-	 *
-	 * @param configuration
-	 *            the configuration
-	 * @param counter
-	 *            the iteration
-	 * @return the same configuration for chaning
-	 */
-	private static SimulationWorkflowConfiguration updateConfig(SimulationWorkflowConfiguration configuration, int counter) {
-		configuration.setStoragePluginID(configuration.getStoragePluginID() + "_" + (counter));
-		return configuration;
+	private MDSDBlackboard blackboard;
+	private final SimulationDriver simulationDriver;
+	private final PCMResourceSetPartitionProvider pcmResourceSetPartition;
+	private final SimuComConfig simuComConfig;
+
+	public SlingshotJob(final SimuComConfig simuComConfig) {
+		this.simulationDriver = Slingshot.getInstance().getSimulationDriver();
+		this.pcmResourceSetPartition = Slingshot.getInstance().getInstance(PCMResourceSetPartitionProvider.class);
+		this.simuComConfig = simuComConfig;
 	}
 
 	@Override
-	protected void addSimulatorSpecificJobs(SimulationWorkflowConfiguration configuration) {
-		//this.add(new PathChangerJob(configuration));
-		//this.add(SimuLizarPlatform.getPlatformComponent()
-		//		.analysisFactory()
-		//		.create((SimulationWorkflowConfiguration) configuration)
-		//		.rootJob());
-		final SimulationJob job = new SimulationJob(configuration.getSimuComConfig());
-		this.add(job);
+	public void execute(final IProgressMonitor monitor) throws JobFailedException, UserCanceledException {
+		final PCMResourceSetPartition partition = (PCMResourceSetPartition)
+				this.blackboard.getPartition(ConstantsContainer.DEFAULT_PCM_INSTANCE_PARTITION_ID);
+
+		WorkflowConfigurationModule.simuComConfigProvider.set(simuComConfig);
+		WorkflowConfigurationModule.blackboardProvider.set(blackboard);
+		this.pcmResourceSetPartition.set(partition);
+		LOGGER.debug("Current partition: ");
+		partition.getResourceSet().getResources().forEach(resource -> LOGGER.debug("Resource: " + resource.getURI().path()));
+
+		LOGGER.debug("monitor: " + monitor.getClass().getName());
+		monitor.beginTask("Start Simulation", 3);
+
+		monitor.subTask("Initialize driver");
+		simulationDriver.init(simuComConfig, monitor);
+		monitor.worked(1);
+
+		monitor.subTask("Start simulation");
+		simulationDriver.start();
+		monitor.worked(1);
+
+		monitor.subTask("Restore");
+		monitor.worked(1);
+
+		monitor.done();
 	}
 
 	@Override
-	public void cleanup(IProgressMonitor monitor) throws CleanupFailedException {
-		// Disable cleanup for issues with missing partitions..
+	public void cleanup(final IProgressMonitor monitor) throws CleanupFailedException {
+
 	}
+
+	@Override
+	public String getName() {
+		return SlingshotJob.class.getCanonicalName();
+	}
+
+	@Override
+	public void setBlackboard(final MDSDBlackboard blackboard) {
+		this.blackboard = blackboard;
+	}
+
 }
