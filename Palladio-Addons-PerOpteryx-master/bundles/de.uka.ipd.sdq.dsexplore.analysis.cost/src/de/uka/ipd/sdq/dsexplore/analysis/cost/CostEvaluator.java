@@ -176,14 +176,24 @@ public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
 	private void updateCostModel(PCMInstance pcmInstance) {
 
 		List<Cost> allCosts = this.getCosts();
+//		int allCostsOrgSize = allCosts.size();
 
 		if (qesModel != null) {
             qesModel.updateModel(pcmInstance);
         }
 
-		this.createCostsForReplicas(allCosts, pcmInstance);
+		this.createCostsForReplicas(allCosts, pcmInstance, true, false);
+		
+		// hotfix
+		this.createCostsForReplicas(allCosts, pcmInstance, false, true);
+//		if (allCosts.size() < allCostsOrgSize) {
+//			this.createCostsForReplicas(allCosts, pcmInstance, false, true);
+//		}
+		
 
-		for (Cost cost : allCosts) {
+//		for (Cost cost : allCosts) {
+		for (int iCost = 0; iCost < allCosts.size(); iCost++) {
+			Cost cost = allCosts.get(iCost);
 			if (cost instanceof ComponentCost && qesModel != null) {
                 qesModel.evaluateQesModel((ComponentCost) cost);
             }
@@ -224,6 +234,8 @@ public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
 								}
 							}
 						}
+						// hotfix
+						allCosts.set(iCost, varCost);
 						break;
 					}
 
@@ -238,6 +250,10 @@ public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
 				}
 			}
 		}
+		
+		// hotfix, not sure if ok
+		this.costModels.get(0).getCost().clear();
+		this.costModels.get(0).getCost().addAll(allCosts);
 
 	}
 
@@ -248,7 +264,8 @@ public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
 	 * @param allCosts
 	 * @param pcmInstance
 	 */
-	private void createCostsForReplicas(List<Cost> allCosts, PCMInstance pcmInstance) {
+//	private void createCostsForReplicas(List<Cost> allCosts, PCMInstance pcmInstance) { original
+	private void createCostsForReplicas(List<Cost> allCosts, PCMInstance pcmInstance, boolean deleteOldReplicaCosts, boolean addNewReplicaCosts) { // hotfix
 
 		List<ResourceContainer> containers = pcmInstance.getResourceEnvironment().getResourceContainer_ResourceEnvironment();
 		List<Cost> replicaCosts = new ArrayList<>();
@@ -257,6 +274,9 @@ public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
 		List<Cost> oldReplicaCosts = new ArrayList<>();
 
 		for (Cost anyCost : allCosts) {
+//		for (int iCost = 0; iCost < allCosts.size(); iCost++) {
+			
+//			Cost anyCost = allCosts.get(iCost);
 
 			// iterate through costs, look at all VariableProcessingResourceCost
 			// or FixedProcessingResourceCost and in particular at their
@@ -275,13 +295,15 @@ public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
 
 			// check if this is a cost model element for a replica, if yes
 			// delete it if its server is no longer in the resource environment
-			if (originalContainer.getEntityName().contains("Replica") && !containers.contains(originalContainer)) {
+//			if (originalContainer.getEntityName().contains("Replica") && !containers.contains(originalContainer)) {
+			if ((originalContainer.getEntityName().contains("Replica") || originalContainer.getEntityName().contains("_")) && !containers.contains(originalContainer)) {
 				oldReplicaCosts.add(cost);
 			}
 
 			// find replicated servers and their original
 			for (ResourceContainer resourceContainer : containers) {
-				if (resourceContainer.getEntityName().contains("Replica") && resourceContainer.getId().contains(originalContainer.getId())) {
+//				if (resourceContainer.getEntityName().contains("Replica") && resourceContainer.getId().contains(originalContainer.getId())) {
+				if ((resourceContainer.getEntityName().contains("Replica") || resourceContainer.getEntityName().contains("_")) && resourceContainer.getId().contains(originalContainer.getId())) {
 					// resourceContainer is a replica of
 					// originalResourceContainer
 
@@ -289,6 +311,8 @@ public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
 					// replica. If not, create a new one.
 					boolean replicaAlreadyAnnotated = false;
 					for (Cost existingCost : allCosts) {
+//					for (int iExCost = 0; iExCost < allCosts.size(); iExCost++) {
+//						Cost existingCost = allCosts.get(iExCost);
 						if (existingCost instanceof ProcessingResourceCost) {
 							ProcessingResourceCost existingProcRateCost = (ProcessingResourceCost) existingCost;
 							if (existingProcRateCost.getProcessingresourcespecification().getResourceContainer_ProcessingResourceSpecification().getId().equals(resourceContainer.getId())) {
@@ -325,8 +349,17 @@ public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
 				}
 			}
 		}
-		allCosts.removeAll(oldReplicaCosts);
-		allCosts.addAll(replicaCosts);
+		
+		// hotfix
+		if (deleteOldReplicaCosts) {
+			allCosts.removeAll(oldReplicaCosts);
+		}
+		
+		// hotfix
+		if (addNewReplicaCosts) {
+			allCosts.addAll(replicaCosts);
+		}
+		
 	}
 
 	@Override
