@@ -90,6 +90,16 @@ import org.palladiosimulator.spd.targets.TargetGroup;
 import org.palladiosimulator.spd.targets.impl.TargetGroupImpl;
 import org.palladiosimulator.spd.constraints.target.impl.TargetGroupSizeConstraintImpl;
 
+import java.nio.file.*;
+
+import org.eclipse.core.filesystem.*;
+import org.eclipse.core.runtime.*;
+
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 /**
  * Starts a Slingshot Analysis for the design space exploration. Mainly adopted
  * from classes in de.uka.ipd.sdq.dsexplore.analysis.simucom
@@ -116,6 +126,7 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
 
     private int datasourceReloadCount = 1;
     private boolean alreadyLaunched = false;
+    
 
     /**
      * Calls SimuCom. Before doing so, it calls the {@link ConfigurationHelper}
@@ -149,15 +160,69 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
         this.workflowConfig.setOverwriteWithoutAsking(true);
         
         List<String> modelFiles = this.workflowConfig.getPCMModelFiles();
+        
+        String firstModelFile = modelFiles.get(0);
+        URI tempStorePath = URI.createURI(firstModelFile.substring(0, firstModelFile.lastIndexOf("/"))+"/initStorage");
+        
+        // to do also for file system
+        IWorkspace workspace = ResourcesPlugin.getWorkspace();
+        if (tempStorePath.isPlatform()) {
+        	
+        	IFolder tempStoreFolder = workspace.getRoot().getFolder(new Path(tempStorePath.toPlatformString(true)));
+        	
+        	if (!tempStoreFolder.exists()) {
+        		tempStoreFolder.create(true, true, null);
+        		System.out.println("Initial storage directory created.");
+        	}
+        }
+        
+//        java.net.URI javaURI = java.net.URI.create(firstModelFile.substring(0, firstModelFile.lastIndexOf("/"))+"/initStorage");
+//        this.workflowConfig.getModelPaths().get(0);
+//        IFileStore tempStore = EFS.getStore(javaURI);
+//        
+//        if (!tempStore.fetchInfo().exists()) {
+//        	tempStore.mkdir(EFS.NONE, null);
+//        	System.out.println("Initial storage directory created.");
+//        }
+        
+//        Path tempPath = Paths.get(subdirStore);
+//        
+//        
+//        
+//        if (!Files.exists(tempPath)) {
+//        	try {
+//				Files.createDirectories(tempPath);
+//				System.out.println("Directory created at: " + tempPath);
+//			} catch (IOException e) {
+//				System.err.println("Error creating directory: " + e.getMessage());
+//			}
+//        }
+        
+        // copy files to the tempPath and replace them with the modified versions (only if this is not the first experiment)
         for (int iModelFiles = 0; iModelFiles < modelFiles.size(); iModelFiles++) {
         	String modelFile = modelFiles.get(iModelFiles);
-        	if (modelFile.endsWith(".spd") && alreadyLaunched) {
+        	
+        	// only for the spd file for now
+        	if (modelFile.endsWith(".spd") && this.alreadyLaunched) {
+        		IFolder tempStoreFolder = workspace.getRoot().getFolder(new Path(tempStorePath.toPlatformString(true)));
         		int lastSlashIndex = modelFile.lastIndexOf("/");
         		URI orgURI = URI.createURI(modelFile);
+        		IFile orgFile = workspace.getRoot().getFile(new Path(orgURI.toPlatformString(true)));
         		
-				modelFile = modelFile.substring(0, lastSlashIndex) + "/slingshottmp" + modelFile.substring(lastSlashIndex + 1);
+        		if (workspace.getRoot().exists(tempStoreFolder.getFullPath().append(orgFile.getName()))) {
+        			workspace.getRoot().getFile(tempStoreFolder.getFullPath().append(orgFile.getName())).delete(false, null);
+//        			orgFile.copy(tempStoreFolder.getFullPath().append(orgFile.getName()), false, null);
+        		}
+        		orgFile.copy(tempStoreFolder.getFullPath().append(orgFile.getName()), false, null);
+        		
+//        		IFile orgFile = workspace.getRoot().getFile(new Path(orgURI.toPlatformString(true)));
+        		
+        		
+//        		URI tmpURI = URI.createURI(modelFile.substring(0, lastSlashIndex) + "/slingshottmp" + modelFile.substring(lastSlashIndex + 1));
+        		
+//				modelFile = modelFile.substring(0, lastSlashIndex) + "/slingshottmp" + modelFile.substring(lastSlashIndex + 1);
 				
-				URI modURI = URI.createURI(modelFile);
+//				URI modURI = URI.createURI(modelFile);
 				
 				final ResourceSetPartition pcmPartition = this.blackboard.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID);
 				
@@ -168,7 +233,7 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
 						currResource.setURI(URI.createURI(currResource.getURI().toString().replace(".resourceenvironmentcand", "")));
 					}
 					if (currResource.getURI().toString().endsWith(".spd")) {
-						currResource.setURI(modURI);
+						currResource.setURI(orgURI);
 //						for (EObject eObject : currResource.getContents()) {
 //							SPDImpl spdObject = (SPDImpl) eObject;
 //							for (TargetGroup tgGroup : spdObject.getTargetGroups()) {
@@ -199,6 +264,22 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
             launchSlingshot( monitor);
         }
 
+        // replace back with init files
+        for (int iModelFiles = 0; iModelFiles < modelFiles.size(); iModelFiles++) {
+        	String modelFile = modelFiles.get(iModelFiles);
+        	
+        	if (modelFile.endsWith(".spd") && this.alreadyLaunched) {
+        		IFolder tempStoreFolder = workspace.getRoot().getFolder(new Path(tempStorePath.toPlatformString(true)));
+        		URI orgURI = URI.createURI(modelFile);
+        		IFile orgFile = workspace.getRoot().getFile(new Path(orgURI.toPlatformString(true)));
+        		IFile initFile = workspace.getRoot().getFile(tempStoreFolder.getFullPath().append(orgFile.getName()));
+        		orgFile.delete(false, null);
+        		initFile.copy(new Path(orgURI.toPlatformString(true)), false, null);
+        	}
+        	
+        }
+        
+        this.alreadyLaunched = true;
 
     }
 
@@ -348,7 +429,7 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
                 // start SimuCom
                 job.execute(monitor);
                 logger.debug("Finished SimuCom analysis");
-                this.alreadyLaunched = true;
+//                this.alreadyLaunched = true;
                 break;
             } catch (final JobFailedException e) {
                 logger.error(e.getMessage());
@@ -493,56 +574,56 @@ class SimulationRootJob extends SequentialBlackboardInteractingJob<MDSDBlackboar
 
 		this.addJob(new PreparePCMBlackboardPartitionJob());
 		
-		List<String> modelFiles = config.getPCMModelFiles();
-		
-		for (int iModelFiles = 0; iModelFiles < modelFiles.size(); iModelFiles++) {
-			String modelFile = modelFiles.get(iModelFiles);
-			if (modelFile.endsWith("spd") && alreadyLaunched) {
-				int lastSlashIndex = modelFile.lastIndexOf("/");
-				modelFile = modelFile.substring(0, lastSlashIndex) + "/slingshottmp" + modelFile.substring(lastSlashIndex + 1);
-				
-//				// Create a resource set to hold the resources.
-//				//
-//				ResourceSet resourceSet = new ResourceSetImpl();
-//
-//				// Register the appropriate resource factory to handle all file extensions.
-//				//
-//				resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-//						.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-//
-//				// Register the package to ensure it is available during loading.
-//				//
-//				resourceSet.getPackageRegistry().put(SpdPackage.eNS_URI, SpdPackage.eINSTANCE);
+//		List<String> modelFiles = config.getPCMModelFiles();
+//		
+//		for (int iModelFiles = 0; iModelFiles < modelFiles.size(); iModelFiles++) {
+//			String modelFile = modelFiles.get(iModelFiles);
+//			if (modelFile.endsWith("spd") && alreadyLaunched) {
+//				int lastSlashIndex = modelFile.lastIndexOf("/");
+//				modelFile = modelFile.substring(0, lastSlashIndex) + "/slingshottmp" + modelFile.substring(lastSlashIndex + 1);
 //				
-//				URI uri = URI.createURI(modelFile);
-//				Resource testresource = resourceSet.getResource(uri, true);
-//				
-//				if (modelFile.endsWith(".spd")) {
-//					for (EObject eObject : testresource.getContents()) {
-//						SPDImpl spdObject = (SPDImpl) eObject;
-//						for (TargetGroup tgGroup : spdObject.getTargetGroups()) {
-//							for (TargetConstraint tgGroupConstr :  tgGroup.getTargetConstraints()) {
-//								TargetGroupSizeConstraintImpl tgGCimpl = (TargetGroupSizeConstraintImpl) tgGroupConstr;
-//								tgGCimpl.setMaxSize(6);
-//								System.out.println("tgGCimpl.ID = " + tgGCimpl.getId());
-//								// do this over pheno
-//							}
-//						}
-//					}
-//					
-//					try {
-//						testresource.save(null);
-//					} catch (IOException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//				}
-			}
-			
-			LoadModelIntoBlackboardJob.parseUriAndAddModelLoadJob(modelFile, this);
-		}
+////				// Create a resource set to hold the resources.
+////				//
+////				ResourceSet resourceSet = new ResourceSetImpl();
+////
+////				// Register the appropriate resource factory to handle all file extensions.
+////				//
+////				resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+////						.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
+////
+////				// Register the package to ensure it is available during loading.
+////				//
+////				resourceSet.getPackageRegistry().put(SpdPackage.eNS_URI, SpdPackage.eINSTANCE);
+////				
+////				URI uri = URI.createURI(modelFile);
+////				Resource testresource = resourceSet.getResource(uri, true);
+////				
+////				if (modelFile.endsWith(".spd")) {
+////					for (EObject eObject : testresource.getContents()) {
+////						SPDImpl spdObject = (SPDImpl) eObject;
+////						for (TargetGroup tgGroup : spdObject.getTargetGroups()) {
+////							for (TargetConstraint tgGroupConstr :  tgGroup.getTargetConstraints()) {
+////								TargetGroupSizeConstraintImpl tgGCimpl = (TargetGroupSizeConstraintImpl) tgGroupConstr;
+////								tgGCimpl.setMaxSize(6);
+////								System.out.println("tgGCimpl.ID = " + tgGCimpl.getId());
+////								// do this over pheno
+////							}
+////						}
+////					}
+////					
+////					try {
+////						testresource.save(null);
+////					} catch (IOException e) {
+////						// TODO Auto-generated catch block
+////						e.printStackTrace();
+////					}
+////				}
+//			}
+//			
+//			LoadModelIntoBlackboardJob.parseUriAndAddModelLoadJob(modelFile, this);
+//		}
 		
-//		config.getPCMModelFiles().forEach(modelFile -> LoadModelIntoBlackboardJob.parseUriAndAddModelLoadJob(modelFile, this));
+		config.getPCMModelFiles().forEach(modelFile -> LoadModelIntoBlackboardJob.parseUriAndAddModelLoadJob(modelFile, this));
 		this.addJob(new SimulationJob(config.getSimuComConfig()));
 	}
 
