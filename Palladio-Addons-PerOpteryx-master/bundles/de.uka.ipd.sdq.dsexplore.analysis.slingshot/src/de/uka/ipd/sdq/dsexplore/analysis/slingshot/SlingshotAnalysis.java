@@ -1,5 +1,6 @@
 package de.uka.ipd.sdq.dsexplore.analysis.slingshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -176,6 +177,8 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
         	}
         }
         
+        List<String> savedInits = new ArrayList<>();
+        
 //        java.net.URI javaURI = java.net.URI.create(firstModelFile.substring(0, firstModelFile.lastIndexOf("/"))+"/initStorage");
 //        this.workflowConfig.getModelPaths().get(0);
 //        IFileStore tempStore = EFS.getStore(javaURI);
@@ -197,23 +200,165 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
 //				System.err.println("Error creating directory: " + e.getMessage());
 //			}
 //        }
+//        // old 17:14
+//        // copy initial files to the initStorage path
+//        for (int iModelFiles = 0; iModelFiles < modelFiles.size(); iModelFiles++) {
+//        	String modelFile = modelFiles.get(iModelFiles);
+//        	
+//        	// only for the spd file for now
+////        	if (modelFile.endsWith(".spd") && this.alreadyLaunched) {
+//        	if (!this.alreadyLaunched && modelFile.length() > 0) {
+//        		IFolder tempStoreFolder = workspace.getRoot().getFolder(new Path(tempStorePath.toPlatformString(true)));
+//        		int lastSlashIndex = modelFile.lastIndexOf("/");
+//        		URI orgURI = URI.createURI(modelFile);
+//        		IFile orgFile = workspace.getRoot().getFile(new Path(orgURI.toPlatformString(true)));
+//        		
+//        		if (workspace.getRoot().exists(tempStoreFolder.getFullPath().append(orgFile.getName()))) {
+//        			workspace.getRoot().getFile(tempStoreFolder.getFullPath().append(orgFile.getName())).delete(false, null);
+////        			orgFile.copy(tempStoreFolder.getFullPath().append(orgFile.getName()), false, null);
+//        		}
+//        		orgFile.copy(tempStoreFolder.getFullPath().append(orgFile.getName()), false, null);
+//        	}
+//        }
         
-        // copy files to the tempPath and replace them with the modified versions (only if this is not the first experiment)
-        for (int iModelFiles = 0; iModelFiles < modelFiles.size(); iModelFiles++) {
-        	String modelFile = modelFiles.get(iModelFiles);
-        	
-        	// only for the spd file for now
-        	if (modelFile.endsWith(".spd") && this.alreadyLaunched) {
-        		IFolder tempStoreFolder = workspace.getRoot().getFolder(new Path(tempStorePath.toPlatformString(true)));
-        		int lastSlashIndex = modelFile.lastIndexOf("/");
-        		URI orgURI = URI.createURI(modelFile);
-        		IFile orgFile = workspace.getRoot().getFile(new Path(orgURI.toPlatformString(true)));
-        		
-        		if (workspace.getRoot().exists(tempStoreFolder.getFullPath().append(orgFile.getName()))) {
-        			workspace.getRoot().getFile(tempStoreFolder.getFullPath().append(orgFile.getName())).delete(false, null);
-//        			orgFile.copy(tempStoreFolder.getFullPath().append(orgFile.getName()), false, null);
-        		}
-        		orgFile.copy(tempStoreFolder.getFullPath().append(orgFile.getName()), false, null);
+        if (this.alreadyLaunched) {
+        	// remove cand from URIs so that slingshot works
+        	IFolder tempStoreFolder = workspace.getRoot().getFolder(new Path(tempStorePath.toPlatformString(true)));
+            List<String> remCandMemory = new ArrayList<>();
+            final ResourceSetPartition pcmPartition = this.blackboard.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID);
+            for (int iResource = 0; iResource < pcmPartition.getResourceSet().getResources().size(); iResource++) {
+            	Resource currResource = pcmPartition.getResourceSet().getResources().get(iResource);
+            	if (currResource.getURI().toString().contains("cand")) {
+            		remCandMemory.add(currResource.getURI().toString().split("cand")[0]);
+            		currResource.setURI(URI.createURI(currResource.getURI().toString().split("cand")[0]));
+            	}
+            }
+            
+            // save changed files so that they are visible for Slingshot
+            for (String changedFile : remCandMemory) {
+            	for (int iResource = 0; iResource < pcmPartition.getResourceSet().getResources().size(); iResource++) {
+            		Resource currResource = pcmPartition.getResourceSet().getResources().get(iResource);
+            		if (changedFile.equals(currResource.getURI().toString())) {
+            			// save initial version of the resource
+            			IFile initFile = workspace.getRoot().getFile(new Path(currResource.getURI().toPlatformString(true)));
+            			if (workspace.getRoot().exists(tempStoreFolder.getFullPath().append(initFile.getName()))) {
+            				workspace.getRoot().getFile(tempStoreFolder.getFullPath().append(initFile.getName())).delete(false, null);
+            			}
+            			initFile.copy(tempStoreFolder.getFullPath().append(initFile.getName()), false, null);
+            			if (!savedInits.contains(currResource.getURI().toString())) {
+            				savedInits.add(currResource.getURI().toString());
+            			}
+
+            			// save current setting from PerOpteryx to the resource file
+            			try {
+                			currResource.save(null);
+                		} catch (IOException e) {
+                			e.printStackTrace();
+                		}
+            			break;
+            		}
+            	}
+            }
+       
+            // comment start
+//         // save SPD files, which are needed by Slingshot, to original directory, overwriting initial ones
+//            for (int iModelFiles = 0; iModelFiles < modelFiles.size(); iModelFiles++) {
+//            	String modelFile = modelFiles.get(iModelFiles);
+//            	if (modelFile.contains("spd")) {
+//            		URI orgURI = URI.createURI(modelFile);
+//                    
+//                	for (int iResource = 0; iResource < pcmPartition.getResourceSet().getResources().size(); iResource++) {
+//                		Resource currResource = pcmPartition.getResourceSet().getResources().get(iResource);
+//                		if (currResource.getURI() == orgURI) {
+//                			// save initial version of the resource
+//                			IFile initFile = workspace.getRoot().getFile(new Path(currResource.getURI().toPlatformString(true)));
+//                			if (workspace.getRoot().exists(tempStoreFolder.getFullPath().append(initFile.getName()))) {
+//                				workspace.getRoot().getFile(tempStoreFolder.getFullPath().append(initFile.getName())).delete(false, null);
+//                			}
+//                			initFile.copy(tempStoreFolder.getFullPath().append(initFile.getName()), false, null);
+//                			if (!savedInits.contains(currResource.getURI().toString())) {
+//                				savedInits.add(currResource.getURI().toString());
+//                			}
+//                			
+//                			// save current setting from PerOpteryx to the resource file
+//                    		try {
+//                    			currResource.save(null);
+//                    		} catch (IOException e) {
+//                    			e.printStackTrace();
+//                    		}
+//                    		break;
+//                    		
+//                		}
+//                	}
+//            	}
+//            	
+////            	URI orgURI = URI.createURI(modelFile);
+////            
+////            	for (int iResource = 0; iResource < pcmPartition.getResourceSet().getResources().size(); iResource++) {
+////            		Resource currResource = pcmPartition.getResourceSet().getResources().get(iResource);
+////            		if (currResource.getURI() == orgURI) {
+//////            			currResource.setURI(orgURI);
+////                		
+////                		try {
+////                			currResource.save(null);
+////                		} catch (IOException e) {
+////                			e.printStackTrace();
+////                		}
+////                		break;
+////                		
+////            		}
+//////            		currResource.setURI(orgURI);
+//////            		
+//////            		try {
+//////            			currResource.save(null);
+//////            		} catch (IOException e) {
+//////            			e.printStackTrace();
+//////            		}
+////            	}
+//            } // comment end
+            
+            // return .cand to URIs so that we don't run the danger of somehow breaking PerOpteryx
+            for (int iResource = 0; iResource < pcmPartition.getResourceSet().getResources().size(); iResource++) {
+            	Resource currResource = pcmPartition.getResourceSet().getResources().get(iResource);
+            	if (remCandMemory.contains(currResource.getURI().toString())) {
+            		String currURIstr = currResource.getURI().toString();
+            		int lastDotIndex = currURIstr.lastIndexOf('.');
+            		String currURIext = (lastDotIndex != -1) ? currURIstr.substring(lastDotIndex + 1) : "";
+            		currResource.setURI(URI.createURI(currResource.getURI().toString() + "cand." + currURIext));
+            		System.out.println("hold"); // stopped for 12.04.2025 (here I want to check if the .cand is returned correctly)
+            	}
+            }
+        }
+//        // remove cand from URIs so that slingshot works
+//        List<String> remCandMemory = new ArrayList<>();
+//        final ResourceSetPartition pcmPartition = this.blackboard.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID);
+//        for (int iResource = 0; iResource < pcmPartition.getResourceSet().getResources().size(); iResource++) {
+//        	Resource currResource = pcmPartition.getResourceSet().getResources().get(iResource);
+//        	if (currResource.getURI().toString().contains("cand")) {
+//        		remCandMemory.add(currResource.getURI().toString().split("cand")[1]);
+//        		currResource.setURI(URI.createURI(currResource.getURI().toString().split("cand")[0]));
+//        	}
+//        }
+        
+//        // save files, which are needed by slingshot to original directory, overwriting initial ones
+//        for (int iModelFiles = 0; iModelFiles < modelFiles.size(); iModelFiles++) {
+//        	String modelFile = modelFiles.get(iModelFiles);
+//        	
+//        	URI orgURI = URI.createURI(modelFile);
+//        
+//        	for (int iResource = 0; iResource < pcmPartition.getResourceSet().getResources().size(); iResource++) {
+//        		Resource currResource = pcmPartition.getResourceSet().getResources().get(iResource);
+//        		currResource.setURI(orgURI);
+//        		
+//        		try {
+//        			currResource.save(null);
+//        		} catch (IOException e) {
+//        			e.printStackTrace();
+//        		}
+//        	}
+//        }
+        
+        
         		
 //        		IFile orgFile = workspace.getRoot().getFile(new Path(orgURI.toPlatformString(true)));
         		
@@ -223,37 +368,38 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
 //				modelFile = modelFile.substring(0, lastSlashIndex) + "/slingshottmp" + modelFile.substring(lastSlashIndex + 1);
 				
 //				URI modURI = URI.createURI(modelFile);
-				
-				final ResourceSetPartition pcmPartition = this.blackboard.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID);
+        
+//				old state (11.04.2025)
+//				final ResourceSetPartition pcmPartition = this.blackboard.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID);
 				
 //				System.out.println(pcmPartition);
-				for (int iResource = 0; iResource < pcmPartition.getResourceSet().getResources().size(); iResource++) {
-					Resource currResource = pcmPartition.getResourceSet().getResources().get(iResource);
-					if (currResource.getURI().toString().endsWith(".resourceenvironment")) {
-						currResource.setURI(URI.createURI(currResource.getURI().toString().replace(".resourceenvironmentcand", "")));
-					}
-					if (currResource.getURI().toString().endsWith(".spd")) {
-						currResource.setURI(orgURI);
-//						for (EObject eObject : currResource.getContents()) {
-//							SPDImpl spdObject = (SPDImpl) eObject;
-//							for (TargetGroup tgGroup : spdObject.getTargetGroups()) {
-//								for (TargetConstraint tgGroupConstr :  tgGroup.getTargetConstraints()) {
-//									TargetGroupSizeConstraintImpl tgGCimpl = (TargetGroupSizeConstraintImpl) tgGroupConstr;
-////									System.out.println("tgGCimpl.ID = " + tgGCimpl.getId());
-//								}
-//							}
+//				for (int iResource = 0; iResource < pcmPartition.getResourceSet().getResources().size(); iResource++) {
+//					Resource currResource = pcmPartition.getResourceSet().getResources().get(iResource);
+//					if (currResource.getURI().toString().endsWith(".resourceenvironment")) {
+//						currResource.setURI(URI.createURI(currResource.getURI().toString().replace(".resourceenvironmentcand", "")));
+//					}
+//					if (currResource.getURI().toString().endsWith(".spd")) {
+//						currResource.setURI(orgURI);
+////						for (EObject eObject : currResource.getContents()) {
+////							SPDImpl spdObject = (SPDImpl) eObject;
+////							for (TargetGroup tgGroup : spdObject.getTargetGroups()) {
+////								for (TargetConstraint tgGroupConstr :  tgGroup.getTargetConstraints()) {
+////									TargetGroupSizeConstraintImpl tgGCimpl = (TargetGroupSizeConstraintImpl) tgGroupConstr;
+//////									System.out.println("tgGCimpl.ID = " + tgGCimpl.getId());
+////								}
+////							}
+////						}
+//						
+//						try {
+//							currResource.save(null);
+//						} catch (IOException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
 //						}
-						
-						try {
-							currResource.save(null);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}
-        	}
-        }
+//					}
+//				}
+//        	}
+//        }
 
         //this.simuComWorkflowConfiguration.getSimulationConfiguration().setNameBase(experimentName);
         //((AbstractRecorderConfigurationFactory)this.simuComWorkflowConfiguration.getSimulationConfiguration().getRecorderConfigurationFactory()).setExperimentNameAndRunName(experimentName);
@@ -265,19 +411,35 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
         }
 
         // replace back with init files
-        for (int iModelFiles = 0; iModelFiles < modelFiles.size(); iModelFiles++) {
-        	String modelFile = modelFiles.get(iModelFiles);
-        	
-        	if (modelFile.endsWith(".spd") && this.alreadyLaunched) {
-        		IFolder tempStoreFolder = workspace.getRoot().getFolder(new Path(tempStorePath.toPlatformString(true)));
-        		URI orgURI = URI.createURI(modelFile);
-        		IFile orgFile = workspace.getRoot().getFile(new Path(orgURI.toPlatformString(true)));
-        		IFile initFile = workspace.getRoot().getFile(tempStoreFolder.getFullPath().append(orgFile.getName()));
-        		orgFile.delete(false, null);
-        		initFile.copy(new Path(orgURI.toPlatformString(true)), false, null);
+        if (this.alreadyLaunched) {
+        	for (int iSavedInits = 0; iSavedInits < savedInits.size(); iSavedInits++) {
+        		String savedInit = savedInits.get(iSavedInits);
+        		
+        		if (savedInit.length() > 0) {
+        			IFolder tempStoreFolder = workspace.getRoot().getFolder(new Path(tempStorePath.toPlatformString(true)));
+            		URI orgURI = URI.createURI(savedInit);
+            		IFile orgFile = workspace.getRoot().getFile(new Path(orgURI.toPlatformString(true)));
+            		IFile initFile = workspace.getRoot().getFile(tempStoreFolder.getFullPath().append(orgFile.getName()));
+            		orgFile.delete(false, null);
+            		initFile.copy(new Path(orgURI.toPlatformString(true)), false, null);
+        		}
         	}
-        	
         }
+        
+        
+//        for (int iModelFiles = 0; iModelFiles < modelFiles.size(); iModelFiles++) {
+//        	String modelFile = modelFiles.get(iModelFiles);
+//        	
+//        	if (this.alreadyLaunched) {
+//        		IFolder tempStoreFolder = workspace.getRoot().getFolder(new Path(tempStorePath.toPlatformString(true)));
+//        		URI orgURI = URI.createURI(modelFile);
+//        		IFile orgFile = workspace.getRoot().getFile(new Path(orgURI.toPlatformString(true)));
+//        		IFile initFile = workspace.getRoot().getFile(tempStoreFolder.getFullPath().append(orgFile.getName()));
+//        		orgFile.delete(false, null);
+//        		initFile.copy(new Path(orgURI.toPlatformString(true)), false, null);
+//        	}
+//        	
+//        }
         
         this.alreadyLaunched = true;
 
