@@ -21,6 +21,13 @@ Require-Bundle: de.uka.ipd.sdq.dsexplore;bundle-version="1.0.0",
  de.uka.ipd.sdq.dsexplore.qml.handling;bundle-version="5.2.1",
  de.uka.ipd.sdq.dsexplore.qml,
  org.palladiosimulator.qes,
- de.uka.ipd.sdq.dsexplore.facade
+ de.uka.ipd.sdq.dsexplore.facade,
+ de.uka.ipd.sdq.simucomframework;bundle-version="5.1.0",
+ org.palladiosimulator.edp2.dao;bundle-version="5.1.0",
+ org.palladiosimulator.metricspec;bundle-version="5.1.0"
 Bundle-Vendor: sdq.ipd.uka.de
 Automatic-Module-Name: de.uka.ipd.sdq.dsexplore.analysis.cost
+Import-Package: org.palladiosimulator.edp2.impl,
+ org.palladiosimulator.edp2.models.ExperimentData,
+ org.palladiosimulator.edp2.models.Repository,
+ org.palladiosimulator.edp2.models.measuringpoint

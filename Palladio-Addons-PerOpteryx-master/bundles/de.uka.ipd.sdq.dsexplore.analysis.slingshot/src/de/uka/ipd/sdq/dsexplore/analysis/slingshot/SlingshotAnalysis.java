@@ -228,7 +228,7 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
             final ResourceSetPartition pcmPartition = this.blackboard.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID);
             for (int iResource = 0; iResource < pcmPartition.getResourceSet().getResources().size(); iResource++) {
             	Resource currResource = pcmPartition.getResourceSet().getResources().get(iResource);
-            	if (currResource.getURI().toString().contains("cand")) {
+            	if (currResource.getURI().toString().contains("cand") && !currResource.getURI().toString().contains(".designdecision")) {
             		remCandMemory.add(currResource.getURI().toString().split("cand")[0]);
             		currResource.setURI(URI.createURI(currResource.getURI().toString().split("cand")[0]));
             	}
@@ -420,8 +420,27 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
             		URI orgURI = URI.createURI(savedInit);
             		IFile orgFile = workspace.getRoot().getFile(new Path(orgURI.toPlatformString(true)));
             		IFile initFile = workspace.getRoot().getFile(tempStoreFolder.getFullPath().append(orgFile.getName()));
-            		orgFile.delete(false, null);
-            		initFile.copy(new Path(orgURI.toPlatformString(true)), false, null);
+            		
+            		final int numberOfTries = 3;
+                    for (int iDel = 0; iDel < numberOfTries; iDel++){
+                    	try {
+                    		orgFile.delete(false, null);
+                    		break;
+                    	} catch (final CoreException e) {
+                    		logger.warn(orgURI.toString() + " could't be deleted.");
+                    	}
+                    }
+//            		orgFile.delete(false, null);
+                    workspace.getRoot().refreshLocal(org.eclipse.core.resources.IResource.DEPTH_INFINITE, null);
+            		for (int iCop = 0; iCop < numberOfTries; iCop++){
+            			try {
+            				initFile.copy(new Path(orgURI.toPlatformString(true)), false, null);
+            				break;
+            			} catch (final CoreException e) {
+            				logger.warn(orgURI.toString() + " could't be copied, because it exists. Attempt: " + iCop);
+            			}
+            		}
+//            		initFile.copy(new Path(orgURI.toPlatformString(true)), false, null);
         		}
         	}
         }
@@ -591,7 +610,7 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
                 // start SimuCom
                 job.execute(monitor);
                 logger.debug("Finished SimuCom analysis");
-//                this.alreadyLaunched = true;
+                this.alreadyLaunched = true;
                 break;
             } catch (final JobFailedException e) {
                 logger.error(e.getMessage());

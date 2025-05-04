@@ -30,6 +30,18 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.CapacityDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceSelectionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedHDDUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNetworkUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedSimulationTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedOperationResponseTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNumberOfElementsDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree;
 
 /**  
  * Operator to operate on a collection of 
@@ -146,6 +158,102 @@ public class BinaryBayesOperator implements BayesianCrossover<DesignDecisionGeno
 				}
 				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof TargetGroupSizeMaxConstraintDegree){
 					DiscreteRangeChoice purechoice = designdecisionFactory.eINSTANCE.createDiscreteRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof StepAdjustmentDegree){
+					DiscreteRangeChoice purechoice = designdecisionFactory.eINSTANCE.createDiscreteRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof ExpectedCPUUtilizationDegree){
+					ContinousRangeChoice purechoice = designdecisionFactory.eINSTANCE.createContinousRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof ExpectedMemoryUtilizationDegree){
+					ContinousRangeChoice purechoice = designdecisionFactory.eINSTANCE.createContinousRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof ExpectedHDDUtilizationDegree){
+					ContinousRangeChoice purechoice = designdecisionFactory.eINSTANCE.createContinousRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof ExpectedNetworkUtilizationDegree){
+					ContinousRangeChoice purechoice = designdecisionFactory.eINSTANCE.createContinousRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof ExpectedSimulationTimeDegree){
+					ContinousRangeChoice purechoice = designdecisionFactory.eINSTANCE.createContinousRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof ExpectedOperationResponseTimeDegree){
+					ContinousRangeChoice purechoice = designdecisionFactory.eINSTANCE.createContinousRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof ExpectedNumberOfElementsDegree){
+					DiscreteRangeChoice purechoice = designdecisionFactory.eINSTANCE.createDiscreteRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof ExpectedQueueLengthDegree){
+					DiscreteRangeChoice purechoice = designdecisionFactory.eINSTANCE.createDiscreteRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof ExpectedTaskCountDegree){
+					DiscreteRangeChoice purechoice = designdecisionFactory.eINSTANCE.createDiscreteRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof CooldownMaxScalingOperationsConstraintDegree){
+					DiscreteRangeChoice purechoice = designdecisionFactory.eINSTANCE.createDiscreteRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof CooldownTimeConstraintDegree){
+					ContinousRangeChoice purechoice = designdecisionFactory.eINSTANCE.createContinousRangeChoice();
 					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
 					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
 					purechoice.setValue(ddg.get(k).getValue());

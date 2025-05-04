@@ -264,6 +264,18 @@
       <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/AdvicePlacementDegree"/>
       <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/ComplementumVisnetisDegree"/>
       <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/TargetGroupSizeMaxConstraintDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/StepAdjustmentDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/ExpectedCPUUtilizationDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/ExpectedMemoryUtilizationDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/ExpectedHDDUtilizationDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/ExpectedNetworkUtilizationDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/ExpectedSimulationTimeDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/ExpectedOperationResponseTimeDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/ExpectedNumberOfElementsDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/ExpectedQueueLengthDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/ExpectedTaskCountDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/CooldownTimeConstraintDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/CooldownMaxScalingOperationsConstraintDegree"/>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

@@ -24,6 +24,11 @@ import org.palladiosimulator.pcm.resourcetype.SchedulingPolicy;
 import org.palladiosimulator.solver.models.PCMInstance;
 
 import org.palladiosimulator.spd.constraints.target.TargetGroupSizeConstraint;
+import org.palladiosimulator.spd.adjustments.StepAdjustment;
+import org.palladiosimulator.spd.triggers.expectations.ExpectedPercentage;
+import org.palladiosimulator.spd.triggers.expectations.ExpectedTime;
+import org.palladiosimulator.spd.triggers.expectations.ExpectedCount;
+import org.palladiosimulator.spd.constraints.policy.CooldownConstraint;
 
 import com.google.inject.Inject;
 
@@ -71,6 +76,19 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDe
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegreeWithComponentChange;
 import de.uka.ipd.sdq.pcm.designdecision.specific.SchedulingPolicyDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedHDDUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNetworkUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedSimulationTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedOperationResponseTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNumberOfElementsDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree;
+
 import placementDescription.SelectedCV;
 
 /**
@@ -206,7 +224,31 @@ public class DSEDecoder implements Decoder<DesignDecisionGenotype, PCMPhenotype>
 			this.applyChangeATNumberOfReplicaDegree((ATNumberOfReplicaDegree) designDecision, choice);
 		} else if (designDecision instanceof TargetGroupSizeMaxConstraintDegree) {
 			this.applyChangeTargetGroupSizeMaxConstraintDecision((TargetGroupSizeMaxConstraintDegree) designDecision, choice);
-		} else {
+		} else if (designDecision instanceof StepAdjustmentDegree) {
+			this.applyChangeStepAdjustmentDecision((StepAdjustmentDegree) designDecision, choice);
+		} else if (designDecision instanceof ExpectedCPUUtilizationDegree) {
+			this.applyChangeExpectedCPUUtilizationDecision((ExpectedCPUUtilizationDegree) designDecision, choice);
+		}else if (designDecision instanceof ExpectedMemoryUtilizationDegree) {
+			this.applyChangeExpectedMemoryUtilizationDecision((ExpectedMemoryUtilizationDegree) designDecision, choice);
+		}else if (designDecision instanceof ExpectedHDDUtilizationDegree) {
+			this.applyChangeExpectedHDDUtilizationDecision((ExpectedHDDUtilizationDegree) designDecision, choice);
+		}else if (designDecision instanceof ExpectedNetworkUtilizationDegree) {
+			this.applyChangeExpectedNetworkUtilizationDecision((ExpectedNetworkUtilizationDegree) designDecision, choice);
+		}else if (designDecision instanceof ExpectedSimulationTimeDegree) {
+			this.applyChangeExpectedSimulationTimeDecision((ExpectedSimulationTimeDegree) designDecision, choice);
+		}else if (designDecision instanceof ExpectedOperationResponseTimeDegree) {
+			this.applyChangeExpectedOperationResponseTimeDecision((ExpectedOperationResponseTimeDegree) designDecision, choice);
+		} else if (designDecision instanceof ExpectedNumberOfElementsDegree) {
+			this.applyChangeExpectedNumberOfElementsDecision((ExpectedNumberOfElementsDegree) designDecision, choice);
+		}else if (designDecision instanceof ExpectedQueueLengthDegree) {
+			this.applyChangeExpectedQueueLengthDecision((ExpectedQueueLengthDegree) designDecision, choice);
+		}else if (designDecision instanceof ExpectedTaskCountDegree) {
+			this.applyChangeExpectedTaskCountDecision((ExpectedTaskCountDegree) designDecision, choice);
+		} else if (designDecision instanceof CooldownMaxScalingOperationsConstraintDegree) {
+			this.applyChangeCooldownMaxScalingOperationsConstraintDecision((CooldownMaxScalingOperationsConstraintDegree) designDecision, choice);
+		}else if (designDecision instanceof CooldownTimeConstraintDegree) {
+			this.applyChangeCooldownTimeConstraintDecision((CooldownTimeConstraintDegree) designDecision, choice);
+		}else {
 			try {
 				trans.transformChoice(pcm, choice);
 			} catch (final Exception e) {
@@ -215,6 +257,7 @@ public class DSEDecoder implements Decoder<DesignDecisionGenotype, PCMPhenotype>
 			}
 		}
 	}
+	
 	private void applyChangeTargetGroupSizeMaxConstraintDecision(final TargetGroupSizeMaxConstraintDegree designDecision, final Choice choice) {
 		if (!(choice instanceof DiscreteRangeChoice)) {
 			this.throwNewInvalidChoiceException(designDecision, choice);
@@ -224,6 +267,150 @@ public class DSEDecoder implements Decoder<DesignDecisionGenotype, PCMPhenotype>
 
 		final TargetGroupSizeConstraint tgsc = (TargetGroupSizeConstraint) designDecision.getPrimaryChanged();
 		tgsc.setMaxSize(discreteChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeStepAdjustmentDecision(final StepAdjustmentDegree designDecision, final Choice choice) {
+		if (!(choice instanceof DiscreteRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final DiscreteRangeChoice discreteChoice = (DiscreteRangeChoice) choice;
+
+		final StepAdjustment stadj = (StepAdjustment) designDecision.getPrimaryChanged();
+		stadj.setStepValue(discreteChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeExpectedCPUUtilizationDecision(final ExpectedCPUUtilizationDegree designDecision, final Choice choice) {
+		if (!(choice instanceof ContinousRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final ContinousRangeChoice continousChoice = (ContinousRangeChoice) choice;
+
+		final ExpectedPercentage ep = (ExpectedPercentage) designDecision.getPrimaryChanged();
+		ep.setValue(continousChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeExpectedMemoryUtilizationDecision(final ExpectedMemoryUtilizationDegree designDecision, final Choice choice) {
+		if (!(choice instanceof ContinousRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final ContinousRangeChoice continousChoice = (ContinousRangeChoice) choice;
+
+		final ExpectedPercentage ep = (ExpectedPercentage) designDecision.getPrimaryChanged();
+		ep.setValue(continousChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeExpectedHDDUtilizationDecision(final ExpectedHDDUtilizationDegree designDecision, final Choice choice) {
+		if (!(choice instanceof ContinousRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final ContinousRangeChoice continousChoice = (ContinousRangeChoice) choice;
+
+		final ExpectedPercentage ep = (ExpectedPercentage) designDecision.getPrimaryChanged();
+		ep.setValue(continousChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeExpectedNetworkUtilizationDecision(final ExpectedNetworkUtilizationDegree designDecision, final Choice choice) {
+		if (!(choice instanceof ContinousRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final ContinousRangeChoice continousChoice = (ContinousRangeChoice) choice;
+
+		final ExpectedPercentage ep = (ExpectedPercentage) designDecision.getPrimaryChanged();
+		ep.setValue(continousChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeExpectedSimulationTimeDecision(final ExpectedSimulationTimeDegree designDecision, final Choice choice) {
+		if (!(choice instanceof ContinousRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final ContinousRangeChoice continousChoice = (ContinousRangeChoice) choice;
+
+		final ExpectedTime expTime = (ExpectedTime) designDecision.getPrimaryChanged();
+		expTime.setValue(continousChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeExpectedOperationResponseTimeDecision(final ExpectedOperationResponseTimeDegree designDecision, final Choice choice) {
+		if (!(choice instanceof ContinousRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final ContinousRangeChoice continousChoice = (ContinousRangeChoice) choice;
+
+		final ExpectedTime expTime = (ExpectedTime) designDecision.getPrimaryChanged();
+		expTime.setValue(continousChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeExpectedNumberOfElementsDecision(final ExpectedNumberOfElementsDegree designDecision, final Choice choice) {
+		if (!(choice instanceof DiscreteRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final DiscreteRangeChoice discreteChoice = (DiscreteRangeChoice) choice;
+
+		final ExpectedCount expCount = (ExpectedCount) designDecision.getPrimaryChanged();
+		expCount.setCount(discreteChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeExpectedQueueLengthDecision(final ExpectedQueueLengthDegree designDecision, final Choice choice) {
+		if (!(choice instanceof DiscreteRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final DiscreteRangeChoice discreteChoice = (DiscreteRangeChoice) choice;
+
+		final ExpectedCount expCount = (ExpectedCount) designDecision.getPrimaryChanged();
+		expCount.setCount(discreteChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeExpectedTaskCountDecision(final ExpectedTaskCountDegree designDecision, final Choice choice) {
+		if (!(choice instanceof DiscreteRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final DiscreteRangeChoice discreteChoice = (DiscreteRangeChoice) choice;
+
+		final ExpectedCount expCount = (ExpectedCount) designDecision.getPrimaryChanged();
+		expCount.setCount(discreteChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeCooldownMaxScalingOperationsConstraintDecision(final CooldownMaxScalingOperationsConstraintDegree designDecision, final Choice choice) {
+		if (!(choice instanceof DiscreteRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final DiscreteRangeChoice discreteChoice = (DiscreteRangeChoice) choice;
+
+		final CooldownConstraint coolmaxscop = (CooldownConstraint) designDecision.getPrimaryChanged();
+		coolmaxscop.setMaxScalingOperations(discreteChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeCooldownTimeConstraintDecision(final CooldownTimeConstraintDegree designDecision, final Choice choice) {
+		if (!(choice instanceof ContinousRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final ContinousRangeChoice continousChoice = (ContinousRangeChoice) choice;
+
+		final CooldownConstraint cooltime = (CooldownConstraint) designDecision.getPrimaryChanged();
+		cooltime.setCooldownTime(continousChoice.getChosenValue());
 
 	}
 

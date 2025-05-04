@@ -58,6 +58,18 @@ public class specificTests extends TestSuite {
 		suite.addTestSuite(AdvicePlacementDegreeTest.class);
 		suite.addTestSuite(ComplementumVisnetisDegreeTest.class);
 		suite.addTestSuite(TargetGroupSizeMaxConstraintDegreeTest.class);
+		suite.addTestSuite(StepAdjustmentDegreeTest.class);
+		suite.addTestSuite(ExpectedCPUUtilizationDegreeTest.class);
+		suite.addTestSuite(ExpectedMemoryUtilizationDegreeTest.class);
+		suite.addTestSuite(ExpectedHDDUtilizationDegreeTest.class);
+		suite.addTestSuite(ExpectedNetworkUtilizationDegreeTest.class);
+		suite.addTestSuite(ExpectedSimulationTimeDegreeTest.class);
+		suite.addTestSuite(ExpectedOperationResponseTimeDegreeTest.class);
+		suite.addTestSuite(ExpectedNumberOfElementsDegreeTest.class);
+		suite.addTestSuite(ExpectedQueueLengthDegreeTest.class);
+		suite.addTestSuite(ExpectedTaskCountDegreeTest.class);
+		suite.addTestSuite(CooldownTimeConstraintDegreeTest.class);
+		suite.addTestSuite(CooldownMaxScalingOperationsConstraintDegreeTest.class);
 		return suite;
 	}
 

@@ -785,6 +785,283 @@ public class specificItemProviderAdapterFactory extends specificAdapterFactory
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StepAdjustmentDegreeItemProvider stepAdjustmentDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStepAdjustmentDegreeAdapter() {
+		if (stepAdjustmentDegreeItemProvider == null) {
+			stepAdjustmentDegreeItemProvider = new StepAdjustmentDegreeItemProvider(this);
+		}
+
+		return stepAdjustmentDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExpectedCPUUtilizationDegreeItemProvider expectedCPUUtilizationDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExpectedCPUUtilizationDegreeAdapter() {
+		if (expectedCPUUtilizationDegreeItemProvider == null) {
+			expectedCPUUtilizationDegreeItemProvider = new ExpectedCPUUtilizationDegreeItemProvider(this);
+		}
+
+		return expectedCPUUtilizationDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExpectedMemoryUtilizationDegreeItemProvider expectedMemoryUtilizationDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExpectedMemoryUtilizationDegreeAdapter() {
+		if (expectedMemoryUtilizationDegreeItemProvider == null) {
+			expectedMemoryUtilizationDegreeItemProvider = new ExpectedMemoryUtilizationDegreeItemProvider(this);
+		}
+
+		return expectedMemoryUtilizationDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedHDDUtilizationDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExpectedHDDUtilizationDegreeItemProvider expectedHDDUtilizationDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedHDDUtilizationDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExpectedHDDUtilizationDegreeAdapter() {
+		if (expectedHDDUtilizationDegreeItemProvider == null) {
+			expectedHDDUtilizationDegreeItemProvider = new ExpectedHDDUtilizationDegreeItemProvider(this);
+		}
+
+		return expectedHDDUtilizationDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNetworkUtilizationDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExpectedNetworkUtilizationDegreeItemProvider expectedNetworkUtilizationDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNetworkUtilizationDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExpectedNetworkUtilizationDegreeAdapter() {
+		if (expectedNetworkUtilizationDegreeItemProvider == null) {
+			expectedNetworkUtilizationDegreeItemProvider = new ExpectedNetworkUtilizationDegreeItemProvider(this);
+		}
+
+		return expectedNetworkUtilizationDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedSimulationTimeDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExpectedSimulationTimeDegreeItemProvider expectedSimulationTimeDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedSimulationTimeDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExpectedSimulationTimeDegreeAdapter() {
+		if (expectedSimulationTimeDegreeItemProvider == null) {
+			expectedSimulationTimeDegreeItemProvider = new ExpectedSimulationTimeDegreeItemProvider(this);
+		}
+
+		return expectedSimulationTimeDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedOperationResponseTimeDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExpectedOperationResponseTimeDegreeItemProvider expectedOperationResponseTimeDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedOperationResponseTimeDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExpectedOperationResponseTimeDegreeAdapter() {
+		if (expectedOperationResponseTimeDegreeItemProvider == null) {
+			expectedOperationResponseTimeDegreeItemProvider = new ExpectedOperationResponseTimeDegreeItemProvider(this);
+		}
+
+		return expectedOperationResponseTimeDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNumberOfElementsDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExpectedNumberOfElementsDegreeItemProvider expectedNumberOfElementsDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNumberOfElementsDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExpectedNumberOfElementsDegreeAdapter() {
+		if (expectedNumberOfElementsDegreeItemProvider == null) {
+			expectedNumberOfElementsDegreeItemProvider = new ExpectedNumberOfElementsDegreeItemProvider(this);
+		}
+
+		return expectedNumberOfElementsDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExpectedQueueLengthDegreeItemProvider expectedQueueLengthDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExpectedQueueLengthDegreeAdapter() {
+		if (expectedQueueLengthDegreeItemProvider == null) {
+			expectedQueueLengthDegreeItemProvider = new ExpectedQueueLengthDegreeItemProvider(this);
+		}
+
+		return expectedQueueLengthDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExpectedTaskCountDegreeItemProvider expectedTaskCountDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExpectedTaskCountDegreeAdapter() {
+		if (expectedTaskCountDegreeItemProvider == null) {
+			expectedTaskCountDegreeItemProvider = new ExpectedTaskCountDegreeItemProvider(this);
+		}
+
+		return expectedTaskCountDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CooldownTimeConstraintDegreeItemProvider cooldownTimeConstraintDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCooldownTimeConstraintDegreeAdapter() {
+		if (cooldownTimeConstraintDegreeItemProvider == null) {
+			cooldownTimeConstraintDegreeItemProvider = new CooldownTimeConstraintDegreeItemProvider(this);
+		}
+
+		return cooldownTimeConstraintDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CooldownMaxScalingOperationsConstraintDegreeItemProvider cooldownMaxScalingOperationsConstraintDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCooldownMaxScalingOperationsConstraintDegreeAdapter() {
+		if (cooldownMaxScalingOperationsConstraintDegreeItemProvider == null) {
+			cooldownMaxScalingOperationsConstraintDegreeItemProvider = new CooldownMaxScalingOperationsConstraintDegreeItemProvider(
+					this);
+		}
+
+		return cooldownMaxScalingOperationsConstraintDegreeItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -945,6 +1222,30 @@ public class specificItemProviderAdapterFactory extends specificAdapterFactory
 			complementumVisnetisDegreeItemProvider.dispose();
 		if (targetGroupSizeMaxConstraintDegreeItemProvider != null)
 			targetGroupSizeMaxConstraintDegreeItemProvider.dispose();
+		if (stepAdjustmentDegreeItemProvider != null)
+			stepAdjustmentDegreeItemProvider.dispose();
+		if (expectedCPUUtilizationDegreeItemProvider != null)
+			expectedCPUUtilizationDegreeItemProvider.dispose();
+		if (expectedMemoryUtilizationDegreeItemProvider != null)
+			expectedMemoryUtilizationDegreeItemProvider.dispose();
+		if (expectedHDDUtilizationDegreeItemProvider != null)
+			expectedHDDUtilizationDegreeItemProvider.dispose();
+		if (expectedNetworkUtilizationDegreeItemProvider != null)
+			expectedNetworkUtilizationDegreeItemProvider.dispose();
+		if (expectedSimulationTimeDegreeItemProvider != null)
+			expectedSimulationTimeDegreeItemProvider.dispose();
+		if (expectedOperationResponseTimeDegreeItemProvider != null)
+			expectedOperationResponseTimeDegreeItemProvider.dispose();
+		if (expectedNumberOfElementsDegreeItemProvider != null)
+			expectedNumberOfElementsDegreeItemProvider.dispose();
+		if (expectedQueueLengthDegreeItemProvider != null)
+			expectedQueueLengthDegreeItemProvider.dispose();
+		if (expectedTaskCountDegreeItemProvider != null)
+			expectedTaskCountDegreeItemProvider.dispose();
+		if (cooldownTimeConstraintDegreeItemProvider != null)
+			cooldownTimeConstraintDegreeItemProvider.dispose();
+		if (cooldownMaxScalingOperationsConstraintDegreeItemProvider != null)
+			cooldownMaxScalingOperationsConstraintDegreeItemProvider.dispose();
 	}
 
 }

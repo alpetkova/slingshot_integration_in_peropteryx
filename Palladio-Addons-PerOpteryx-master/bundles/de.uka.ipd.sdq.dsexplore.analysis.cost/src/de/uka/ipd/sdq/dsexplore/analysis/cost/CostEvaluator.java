@@ -7,15 +7,26 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Comparator;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.opt4j.core.Criterion;
+import org.palladiosimulator.edp2.impl.RepositoryManager;
+import org.palladiosimulator.edp2.models.ExperimentData.ExperimentGroup;
+import org.palladiosimulator.edp2.models.ExperimentData.ExperimentRun;
+import org.palladiosimulator.edp2.models.ExperimentData.ExperimentSetting;
+import org.palladiosimulator.edp2.models.ExperimentData.Measurement;
+import org.palladiosimulator.edp2.models.measuringpoint.MeasuringPoint;
+import org.palladiosimulator.edp2.models.measuringpoint.StringMeasuringPoint;
+import org.palladiosimulator.edp2.models.Repository.Repository;
 import org.palladiosimulator.pcm.allocation.AllocationContext;
 import org.palladiosimulator.pcm.core.composition.AssemblyContext;
 import org.palladiosimulator.pcm.core.composition.ComposedStructure;
@@ -48,6 +59,10 @@ import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
 import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
 
+import org.palladiosimulator.metricspec.MetricDescription;
+
+import de.uka.ipd.sdq.simucomframework.SimuComConfig;
+
 public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
 
 	public CostEvaluator() {
@@ -77,13 +92,17 @@ public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
 	 *            the PCM instance
 	 * @return
 	 */
-	private double getInitialCost(PCMInstance pcmInstance) {
+	private double getInitialCost(PCMInstance pcmInstance, final PCMPhenotype pheno) {
 		List<Cost> costs = this.getCosts();
 		double sum = 0;
 		for (Iterator<Cost> iterator = costs.iterator(); iterator.hasNext();) {
 			Cost cost = iterator.next();
 			if (this.doesCostApply(cost, pcmInstance)) {
-				sum += cost.getInitialCost();
+				int initialCostMultiplicator = 1;
+				if (cost instanceof FixedProcessingResourceCost) {
+					initialCostMultiplicator += determineNumberOfElasticityReplicas(cost, pheno);
+				}
+				sum += initialCostMultiplicator*cost.getInitialCost();
 			}
 		}
 
@@ -127,6 +146,76 @@ public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
 		} else {
 			return true;
 		}
+	}
+	
+	/**
+	 * Returns the multiple of servers so that the initial cost can be evaluated
+	 *
+	 * @param cost
+	 * @param pheno
+	 * @return number of replicas
+	 */
+	private int determineNumberOfElasticityReplicas(Cost cost, final PCMPhenotype pheno) {
+		
+		int numberOfReplicas = 0;
+		
+		FixedProcessingResourceCost fc = (FixedProcessingResourceCost) cost;
+		ResourceContainer rc = (ResourceContainer) fc.getProcessingresourcespecification().eContainer();
+		String rcName = rc.getEntityName();
+		
+		ILaunchConfiguration ILConfig = configuration.getRawConfiguration();
+		
+//		String experimentName = ILConfig.getAttribute(SimuComConfig.EXPERIMENT_RUN, "");
+		
+		ExperimentSetting mySetting = null;
+		try {
+			mySetting = findExperimentRun(ILConfig.getAttribute(SimuComConfig.EXPERIMENT_RUN, ""), pheno.getGenotypeID(), findSelectedEDP2Repository(ILConfig));
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (mySetting != null) {
+			final EList<ExperimentRun> expRuns = mySetting.getExperimentRuns();
+
+			// Find latest run
+			final Comparator<ExperimentRun> comp = new ExperimentRunComparator();
+
+			/* sort so that the newest it at the beginning */
+			ECollections.sort(expRuns, comp);
+
+			ExperimentRun reqRun = null;
+			for (ExperimentRun experimentRun : expRuns) {
+				if (experimentRun.getMeasurement().size() > 0) {
+					reqRun = experimentRun;
+					break;
+				}
+			}
+			System.out.println(reqRun.getId());
+			
+//			List<String> registeredReplicas = new ArrayList<>();
+			List<String> registeredMetricTypes = new ArrayList<>();
+			for (final Measurement m: reqRun.getMeasurement()) {
+				final MeasuringPoint measuringPoint = m.getMeasuringType().getMeasuringPoint();
+				final String MeasuringPointString = measuringPoint.getStringRepresentation();
+//				if (MeasuringPointString.contains(rcName + "_") && !registeredReplicas.contains(MeasuringPointString)) {
+				if (MeasuringPointString.contains(rcName + "_")) {
+					numberOfReplicas++;
+					if (!registeredMetricTypes.contains(m.getMeasuringType().getMetric().getId())) {
+						registeredMetricTypes.add(m.getMeasuringType().getMetric().getId());
+					}
+//					registeredMetricTypes.add(m.getMeasuringType().getMetric().getId());
+//					registeredReplicas.add(MeasuringPointString);
+				}
+				System.out.println(MeasuringPointString);
+			}
+			System.out.println(registeredMetricTypes);
+			if (registeredMetricTypes.size() > 0 ) {
+			numberOfReplicas /= registeredMetricTypes.size();
+			}
+		}
+		
+		return numberOfReplicas;
 	}
 
 	/**
@@ -173,7 +262,7 @@ public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
 		return sum;
 	}
 
-	private void updateCostModel(PCMInstance pcmInstance) {
+	private void updateCostModel(PCMInstance pcmInstance, final PCMPhenotype pheno) {
 
 		List<Cost> allCosts = this.getCosts();
 //		int allCostsOrgSize = allCosts.size();
@@ -182,10 +271,10 @@ public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
             qesModel.updateModel(pcmInstance);
         }
 
-		this.createCostsForReplicas(allCosts, pcmInstance, true, false);
+		this.createCostsForReplicas(allCosts, pcmInstance, pheno, true, false);
 		
 		// hotfix
-		this.createCostsForReplicas(allCosts, pcmInstance, false, true);
+		this.createCostsForReplicas(allCosts, pcmInstance, pheno, false, true);
 //		if (allCosts.size() < allCostsOrgSize) {
 //			this.createCostsForReplicas(allCosts, pcmInstance, false, true);
 //		}
@@ -265,10 +354,47 @@ public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
 	 * @param pcmInstance
 	 */
 //	private void createCostsForReplicas(List<Cost> allCosts, PCMInstance pcmInstance) { original
-	private void createCostsForReplicas(List<Cost> allCosts, PCMInstance pcmInstance, boolean deleteOldReplicaCosts, boolean addNewReplicaCosts) { // hotfix
+	private void createCostsForReplicas(List<Cost> allCosts, PCMInstance pcmInstance, final PCMPhenotype pheno, boolean deleteOldReplicaCosts, boolean addNewReplicaCosts) { // hotfix
 
 		List<ResourceContainer> containers = pcmInstance.getResourceEnvironment().getResourceContainer_ResourceEnvironment();
 		List<Cost> replicaCosts = new ArrayList<>();
+		
+//		ILaunchConfiguration ILConfig = configuration.getRawConfiguration();
+//		
+////		String experimentName = ILConfig.getAttribute(SimuComConfig.EXPERIMENT_RUN, "");
+//		
+//		ExperimentSetting mySetting = null;
+//		try {
+//			mySetting = findExperimentRun(ILConfig.getAttribute(SimuComConfig.EXPERIMENT_RUN, ""), pheno.getGenotypeID(), findSelectedEDP2Repository(ILConfig));
+//		} catch (CoreException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		if (mySetting != null) {
+//			final EList<ExperimentRun> expRuns = mySetting.getExperimentRuns();
+//
+//			// Find latest run
+//			final Comparator<ExperimentRun> comp = new ExperimentRunComparator();
+//
+//			/* sort so that the newest it at the beginning */
+//			ECollections.sort(expRuns, comp);
+//
+//			ExperimentRun reqRun = null;
+//			for (ExperimentRun experimentRun : expRuns) {
+//				if (experimentRun.getMeasurement().size() > 0) {
+//					reqRun = experimentRun;
+//					break;
+//				}
+//			}
+//			System.out.println(reqRun.getId());
+//			
+//			for (final Measurement m: reqRun.getMeasurement()) {
+//				final MeasuringPoint measuringPoint = m.getMeasuringType().getMeasuringPoint();
+//				final String MeasuringPointString = measuringPoint.getStringRepresentation();
+//				System.out.println(MeasuringPointString);
+//			}
+//		}
 
 		// also remove old replica costs from previous candidates
 		List<Cost> oldReplicaCosts = new ArrayList<>();
@@ -369,9 +495,9 @@ public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
 		// this.reloadCostModelIfNecessary();
 
 		// Important: "Read in" the right PCM instance first.
-		this.updateCostModel(pcm);
+		this.updateCostModel(pcm, pheno);
 
-		double initialCost = this.getInitialCost(pcm);
+		double initialCost = this.getInitialCost(pcm, pheno);
 		double operatingCost = this.getOperatingCost(pcm);
 		this.previousCostResults.put(pheno.getNumericID(),
 				new CostAnalysisResult(CostUtil.getTotalCost(initialCost, operatingCost, this.costModels.get(0).getInterest(), this.costModels.get(0).getTimePeriodYears()), initialCost, operatingCost,
@@ -474,5 +600,85 @@ public class CostEvaluator extends AbstractAnalysis implements IAnalysis {
 		}
 		return res;
 	}
+	
+	/**
+	 * Tries to find a matching experiment setting in all data sources available in
+	 * the repository manager. If a matching experiment setting that contains at
+	 * least one run is found, it is returned. If not, <code>null</code> is
+	 * returned.
+	 * 
+	 * @param experimentSettingName The experiment name to match
+	 * @param repo
+	 * @return The experiment setting if it has been found, <code>null</code>
+	 *         otherwise
+	 */
+	static private ExperimentSetting findExperimentRun(final String experimentName, final String experimentSettingName,
+			Repository repo) {
 
+		// Iterate through all experiment groups and find the one with the requested
+		// name
+		final EList<ExperimentGroup> currentExperimentGroups = repo.getExperimentGroups();
+
+		for (final ExperimentGroup curr : currentExperimentGroups) {
+			if (experimentName.equals(curr.getPurpose())) {
+
+				final EList<ExperimentSetting> settings = curr.getExperimentSettings();
+
+				for (ExperimentSetting experimentSetting : settings) {
+
+					if (experimentSettingName.equals(experimentSetting.getDescription())) {
+						// Assuming that each experiment group only has ONE setting
+						// NOTE: Change to loop if data structure is altered to find the matching
+						// setting
+						final EList<ExperimentRun> expRuns = experimentSetting.getExperimentRuns();
+
+						// Return true if there are runs
+						if (expRuns.size() > 0) {
+							for (ExperimentRun experimentRun : expRuns) {
+								if (experimentRun.getMeasurement().size() > 0) {
+									return experimentSetting;
+								}
+							}
+
+						}
+					}
+				}
+			}
+		}
+
+		return null;
+	}
+	
+	protected static Repository findSelectedEDP2Repository(final ILaunchConfiguration config) throws CoreException {
+		final String selectedDataSourceID = config.getAttribute("EDP2RepositoryID", "");
+
+		// Get the repository with the given name frRepositoryository manager.
+		EList<Repository> repos = RepositoryManager.getCentralRepository().getAvailableRepositories();
+
+		for (int i = 0; i < repos.size(); ++i) {
+			String s = repos.get(i).getId();
+			if (s.equals(selectedDataSourceID)) {
+				return repos.get(i);
+
+			}
+		}
+		return null;
+	}
+
+}
+
+/**
+ * Comparator for ExperimentRuns to sort them ordered by start date in
+ * descending order (newest first).
+ * 
+ * @author Shengjia Feng
+ */
+class ExperimentRunComparator implements Comparator<ExperimentRun> {
+	/**
+	 * Sorts experiment runs by their start date in ascending order.
+	 */
+	@Override
+	public int compare(final ExperimentRun first, final ExperimentRun second) {
+		return second.getStartTime().compareTo(first.getStartTime());
+	}
 }

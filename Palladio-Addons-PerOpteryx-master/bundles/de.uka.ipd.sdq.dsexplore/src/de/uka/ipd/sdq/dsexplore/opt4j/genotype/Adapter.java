@@ -26,6 +26,18 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.CapacityDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceSelectionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedHDDUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNetworkUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedSimulationTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedOperationResponseTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNumberOfElementsDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.specificFactory;
 /**
  * The {@link Adapter} contains methods to translate between {@link DesignDecisionGenotype} 
@@ -70,6 +82,21 @@ public class Adapter {
 	double[] SERVER_INTERVALS = {0,0,0,0}; // Initialization
 	double[] CAPACITYDEGREE_INTERVALS = {0,0,0,0}; // Initialization
 	double[] TARGETGROUPSIZEMAXCONSTRAINTDEGREE = {0,0,0,0}; // Initialization
+	double[] STEPADJUSTMENTDEGREE = {0,0,0,0}; // Initialization
+	double[] EXPECTEDCPUUTILIZATIONDEGREE = {0,0,0,0}; // Initialization
+	double[] EXPECTEDMEMORYUTILIZATIONDEGREE = {0,0,0,0}; // Initialization
+	double[] EXPECTEDHDDUTILIZATIONDEGREE = {0,0,0,0}; // Initialization
+	double[] EXPECTEDNETWORKUTILIZATIONDEGREE = {0,0,0,0}; // Initialization
+	double[] EXPECTEDSIMULATIONTIMEDEGREE = {0,0,0,0}; // Initialization
+	double[] EXPECTEDOPERATIONRESPONSETIMEDEGREE = {0,0,0,0}; // Initialization
+	double[] EXPECTEDNUMBEROFELEMENTSDEGREE = {0,0,0,0}; // Initialization
+	double[] EXPECTEDQUEUELENGTHDEGREE = {0,0,0,0}; // Initialization
+	double[] EXPECTEDTASKCOUNTDEGREE = {0,0,0,0}; // Initialization
+	double[] COOLDOWNMAXSCALINGOPERATIONSCONSTRAINTDEGREE = {0,0,0,0}; // Initialization
+	double[] COOLDOWNTIMECONSTRAINTDEGREE = {0,0,0,0}; // Initialization
+
+	
+	
 	
 	/**The ContinuousProcessingRateArchiveStorage stores the 
 	 * various values of server speeds of the candidates 
@@ -156,6 +183,110 @@ public class Adapter {
 				for(int i = 0 ; i < 4 ; i++) {
 					TARGETGROUPSIZEMAXCONSTRAINTDEGREE[i] = targetgroupsizemaxconstraintdegree_interval_lowerbound + i*diff;
 				}
+			
+			}else if(dofi instanceof StepAdjustmentDegree) {
+				double stepadjustmentdegree_interval_lowerbound = ((StepAdjustmentDegree) dofi).getFrom();
+				double stepadjustmentdegree_interval_upperbound = ((StepAdjustmentDegree) dofi).getTo();
+				double diff = (stepadjustmentdegree_interval_upperbound - stepadjustmentdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					STEPADJUSTMENTDEGREE[i] = stepadjustmentdegree_interval_lowerbound + i*diff;
+				}
+			
+			}else if(dofi instanceof ExpectedCPUUtilizationDegree) {
+				double expectedcpuutilizationdegree_interval_lowerbound = ((ExpectedCPUUtilizationDegree) dofi).getFrom();
+				double expectedcpuutilizationdegree_interval_upperbound = ((ExpectedCPUUtilizationDegree) dofi).getTo();
+				double diff = (expectedcpuutilizationdegree_interval_upperbound - expectedcpuutilizationdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					EXPECTEDCPUUTILIZATIONDEGREE[i] = expectedcpuutilizationdegree_interval_lowerbound + i*diff;
+				}
+			
+			}else if(dofi instanceof ExpectedMemoryUtilizationDegree) {
+				double expectedmemoryutilizationdegree_interval_lowerbound = ((ExpectedMemoryUtilizationDegree) dofi).getFrom();
+				double expectedmemoryutilizationdegree_interval_upperbound = ((ExpectedMemoryUtilizationDegree) dofi).getTo();
+				double diff = (expectedmemoryutilizationdegree_interval_upperbound - expectedmemoryutilizationdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					EXPECTEDMEMORYUTILIZATIONDEGREE[i] = expectedmemoryutilizationdegree_interval_lowerbound + i*diff;
+				}
+			
+			}else if(dofi instanceof ExpectedHDDUtilizationDegree) {
+				double expectedhddutilizationdegree_interval_lowerbound = ((ExpectedHDDUtilizationDegree) dofi).getFrom();
+				double expectedhddutilizationdegree_interval_upperbound = ((ExpectedHDDUtilizationDegree) dofi).getTo();
+				double diff = (expectedhddutilizationdegree_interval_upperbound - expectedhddutilizationdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					EXPECTEDHDDUTILIZATIONDEGREE[i] = expectedhddutilizationdegree_interval_lowerbound + i*diff;
+				}
+			
+			}else if(dofi instanceof ExpectedNetworkUtilizationDegree) {
+				double expectednetworkutilizationdegree_interval_lowerbound = ((ExpectedNetworkUtilizationDegree) dofi).getFrom();
+				double expectednetworkutilizationdegree_interval_upperbound = ((ExpectedNetworkUtilizationDegree) dofi).getTo();
+				double diff = (expectednetworkutilizationdegree_interval_upperbound - expectednetworkutilizationdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					EXPECTEDNETWORKUTILIZATIONDEGREE[i] = expectednetworkutilizationdegree_interval_lowerbound + i*diff;
+				}
+			
+			}
+			else if(dofi instanceof ExpectedSimulationTimeDegree) {
+				double expectedsimulationtimedegree_interval_lowerbound = ((ExpectedSimulationTimeDegree) dofi).getFrom();
+				double expectedsimulationtimedegree_interval_upperbound = ((ExpectedSimulationTimeDegree) dofi).getTo();
+				double diff = (expectedsimulationtimedegree_interval_upperbound - expectedsimulationtimedegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					EXPECTEDSIMULATIONTIMEDEGREE[i] = expectedsimulationtimedegree_interval_lowerbound + i*diff;
+				}
+			
+			}
+			else if(dofi instanceof ExpectedOperationResponseTimeDegree) {
+				double expectedoperationresponsetimedegree_interval_lowerbound = ((ExpectedOperationResponseTimeDegree) dofi).getFrom();
+				double expectedoperationresponsetimedegree_interval_upperbound = ((ExpectedOperationResponseTimeDegree) dofi).getTo();
+				double diff = (expectedoperationresponsetimedegree_interval_upperbound - expectedoperationresponsetimedegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					EXPECTEDOPERATIONRESPONSETIMEDEGREE[i] = expectedoperationresponsetimedegree_interval_lowerbound + i*diff;
+				}
+			
+			}
+			else if(dofi instanceof ExpectedNumberOfElementsDegree) {
+				double expectednumberofelementsdegree_interval_lowerbound = ((ExpectedNumberOfElementsDegree) dofi).getFrom();
+				double expectednumberofelementsdegree_interval_upperbound = ((ExpectedNumberOfElementsDegree) dofi).getTo();
+				double diff = (expectednumberofelementsdegree_interval_upperbound - expectednumberofelementsdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					EXPECTEDNUMBEROFELEMENTSDEGREE[i] = expectednumberofelementsdegree_interval_lowerbound + i*diff;
+				}
+			
+			}
+			else if(dofi instanceof ExpectedQueueLengthDegree) {
+				double expectedqueuelengthdegree_interval_lowerbound = ((ExpectedQueueLengthDegree) dofi).getFrom();
+				double expectedqueuelengthdegree_interval_upperbound = ((ExpectedQueueLengthDegree) dofi).getTo();
+				double diff = (expectedqueuelengthdegree_interval_upperbound - expectedqueuelengthdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					EXPECTEDQUEUELENGTHDEGREE[i] = expectedqueuelengthdegree_interval_lowerbound + i*diff;
+				}
+			
+			}
+			else if(dofi instanceof ExpectedTaskCountDegree) {
+				double expectedtaskcountdegree_interval_lowerbound = ((ExpectedTaskCountDegree) dofi).getFrom();
+				double expectedtaskcountdegree_interval_upperbound = ((ExpectedTaskCountDegree) dofi).getTo();
+				double diff = (expectedtaskcountdegree_interval_upperbound - expectedtaskcountdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					EXPECTEDTASKCOUNTDEGREE[i] = expectedtaskcountdegree_interval_lowerbound + i*diff;
+				}
+			
+			}
+			else if(dofi instanceof CooldownMaxScalingOperationsConstraintDegree) {
+				double cooldownmaxscopconstdegree_interval_lowerbound = ((CooldownMaxScalingOperationsConstraintDegree) dofi).getFrom();
+				double cooldownmaxscopconstdegree_interval_upperbound = ((CooldownMaxScalingOperationsConstraintDegree) dofi).getTo();
+				double diff = (cooldownmaxscopconstdegree_interval_upperbound - cooldownmaxscopconstdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					COOLDOWNMAXSCALINGOPERATIONSCONSTRAINTDEGREE[i] = cooldownmaxscopconstdegree_interval_lowerbound + i*diff;
+				}
+			
+			}
+			else if(dofi instanceof CooldownTimeConstraintDegree) {
+				double cooldowntimeconstraintdegree_interval_lowerbound = ((CooldownTimeConstraintDegree) dofi).getFrom();
+				double cooldowntimeconstraintdegree_interval_upperbound = ((CooldownTimeConstraintDegree) dofi).getTo();
+				double diff = (cooldowntimeconstraintdegree_interval_upperbound - cooldowntimeconstraintdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					COOLDOWNTIMECONSTRAINTDEGREE[i] = cooldowntimeconstraintdegree_interval_lowerbound + i*diff;
+				}
+			
 			}
 			count++;
 		}
@@ -290,7 +421,190 @@ public class Adapter {
 				
 				BinaryGenotype targetGroupSizeMaxConstraintDegreeValueBinaryGenotypeObj = new BinaryGenotype(targetGroupSizeMaxConstraintBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.TargetGroupSizeMaxConstraintDegree);
 				TranslatedGenotype.add(targetGroupSizeMaxConstraintDegreeValueBinaryGenotypeObj);
-			}else throwOutOfScopeDegreeException(ChoiceIterator.getDegreeOfFreedomInstance());
+			}else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof StepAdjustmentDegree){
+				/* If the Choice object is representing StepAdjustmentDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double stepAdjustmentDegreeValue=(Integer) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which stepAdjustmentDegreeValue value lies
+				 */
+				
+				List<Integer> stepAdjustmentBinaryRep = getStepAdjustmentBinaryRep(stepAdjustmentDegreeValue);
+				
+				BinaryGenotype stepAdjustmentDegreeValueBinaryGenotypeObj = new BinaryGenotype(stepAdjustmentBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.StepAdjustmentDegree);
+				TranslatedGenotype.add(stepAdjustmentDegreeValueBinaryGenotypeObj);
+				
+			}else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof ExpectedCPUUtilizationDegree){
+				/* If the Choice object is representing ExpectedCPUUtilizationDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double expectedCPUUtilizationDegreeValue=(Double) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which expectedCPUUtilizationDegreeValue value lies
+				 */
+				
+				List<Integer> expectedCPUUtilizationBinaryRep = getExpectedCPUUtilizationBinaryRep(expectedCPUUtilizationDegreeValue);
+				
+				BinaryGenotype expectedCPUUtilizationDegreeValueBinaryGenotypeObj = new BinaryGenotype(expectedCPUUtilizationBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.ExpectedCPUUtilizationDegree);
+				TranslatedGenotype.add(expectedCPUUtilizationDegreeValueBinaryGenotypeObj);
+				
+			}else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof ExpectedMemoryUtilizationDegree){
+				/* If the Choice object is representing ExpectedMemoryUtilizationDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double expectedMemoryUtilizationDegreeValue=(Double) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which expectedMemoryUtilizationDegreeValue value lies
+				 */
+				
+				List<Integer> expectedMemoryUtilizationBinaryRep = getExpectedMemoryUtilizationBinaryRep(expectedMemoryUtilizationDegreeValue);
+				
+				BinaryGenotype expectedMemoryUtilizationDegreeValueBinaryGenotypeObj = new BinaryGenotype(expectedMemoryUtilizationBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.ExpectedMemoryUtilizationDegree);
+				TranslatedGenotype.add(expectedMemoryUtilizationDegreeValueBinaryGenotypeObj);
+				
+			}else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof ExpectedHDDUtilizationDegree){
+				/* If the Choice object is representing ExpectedHDDUtilizationDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double expectedHDDUtilizationDegreeValue=(Double) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which expectedHDDUtilizationDegreeValue value lies
+				 */
+				
+				List<Integer> expectedHDDUtilizationBinaryRep = getExpectedHDDUtilizationBinaryRep(expectedHDDUtilizationDegreeValue);
+				
+				BinaryGenotype expectedHDDUtilizationDegreeValueBinaryGenotypeObj = new BinaryGenotype(expectedHDDUtilizationBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.ExpectedHDDUtilizationDegree);
+				TranslatedGenotype.add(expectedHDDUtilizationDegreeValueBinaryGenotypeObj);
+				
+			}else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof ExpectedNetworkUtilizationDegree){
+				/* If the Choice object is representing ExpectedNetworkUtilizationDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double expectedNetworkUtilizationDegreeValue=(Double) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which expectedNetworkUtilizationDegreeValue value lies
+				 */
+				
+				List<Integer> expectedNetworkUtilizationBinaryRep = getExpectedNetworkUtilizationBinaryRep(expectedNetworkUtilizationDegreeValue);
+				
+				BinaryGenotype expectedNetworkUtilizationDegreeValueBinaryGenotypeObj = new BinaryGenotype(expectedNetworkUtilizationBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.ExpectedNetworkUtilizationDegree);
+				TranslatedGenotype.add(expectedNetworkUtilizationDegreeValueBinaryGenotypeObj);
+				
+			}else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof ExpectedSimulationTimeDegree){
+				/* If the Choice object is representing ExpectedSimulationTimeDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double expectedSimulationTimeDegreeValue=(Double) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which expectedSimulationTimeDegreeValue value lies
+				 */
+				
+				List<Integer> expectedSimulationTimeBinaryRep = getExpectedSimulationTimeBinaryRep(expectedSimulationTimeDegreeValue);
+				
+				BinaryGenotype expectedSimulationTimeDegreeValueBinaryGenotypeObj = new BinaryGenotype(expectedSimulationTimeBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.ExpectedSimulationTimeDegree);
+				TranslatedGenotype.add(expectedSimulationTimeDegreeValueBinaryGenotypeObj);
+				
+			}else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof ExpectedOperationResponseTimeDegree){
+				/* If the Choice object is representing ExpectedOperationResponseTimeDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double expectedOperationResponseTimeDegreeValue=(Double) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which expectedOperationResponseTimeDegree value lies
+				 */
+				
+				List<Integer> expectedOperationResponseTimeBinaryRep = getExpectedOperationResponseTimeBinaryRep(expectedOperationResponseTimeDegreeValue);
+				
+				BinaryGenotype expectedOperationResponseTimeDegreeValueBinaryGenotypeObj = new BinaryGenotype(expectedOperationResponseTimeBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.ExpectedOperationResponseTimeDegree);
+				TranslatedGenotype.add(expectedOperationResponseTimeDegreeValueBinaryGenotypeObj);
+				
+			}else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof ExpectedNumberOfElementsDegree){
+				/* If the Choice object is representing ExpectedNumberOfElementsDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double expectedNumberOfElementsDegreeValue=(Integer) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which expectedNumberOfElementsDegreeValue value lies
+				 */
+				
+				List<Integer> expectedNumberOfElementsBinaryRep = getExpectedNumberOfElementsBinaryRep(expectedNumberOfElementsDegreeValue);
+				
+				BinaryGenotype expectedNumberOfElementsDegreeValueBinaryGenotypeObj = new BinaryGenotype(expectedNumberOfElementsBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.ExpectedNumberOfElementsDegree);
+				TranslatedGenotype.add(expectedNumberOfElementsDegreeValueBinaryGenotypeObj);
+				
+			}else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof ExpectedQueueLengthDegree){
+				/* If the Choice object is representing ExpectedQueueLengthDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double expectedQueueLengthDegreeValue=(Integer) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which expectedQueueLengthDegreeValue value lies
+				 */
+				
+				List<Integer> expectedQueueLengthBinaryRep = getExpectedQueueLengthBinaryRep(expectedQueueLengthDegreeValue);
+				
+				BinaryGenotype expectedQueueLengthDegreeValueBinaryGenotypeObj = new BinaryGenotype(expectedQueueLengthBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.ExpectedQueueLengthDegree);
+				TranslatedGenotype.add(expectedQueueLengthDegreeValueBinaryGenotypeObj);
+				
+			}else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof ExpectedTaskCountDegree){
+				/* If the Choice object is representing ExpectedTaskCountDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double expectedTaskCountDegreeValue=(Integer) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which expectedTaskCountDegreeValue value lies
+				 */
+				
+				List<Integer> expectedTaskCountBinaryRep = getExpectedTaskCountBinaryRep(expectedTaskCountDegreeValue);
+				
+				BinaryGenotype expectedTaskCountDegreeValueBinaryGenotypeObj = new BinaryGenotype(expectedTaskCountBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.ExpectedTaskCountDegree);
+				TranslatedGenotype.add(expectedTaskCountDegreeValueBinaryGenotypeObj);
+				
+			}
+			else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof CooldownMaxScalingOperationsConstraintDegree){
+				/* If the Choice object is representing CooldownMaxScalingOperationsConstraintDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double cooldownMaxScalingOperationsConstraintDegreeValue=(Integer) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which cooldownMaxScalingOperationsConstraintDegreeValue value lies
+				 */
+				
+				List<Integer> coolmaxscopconstrBinaryRep = getCooldownMaxScalingOperationsBinaryRep(cooldownMaxScalingOperationsConstraintDegreeValue);
+				
+				BinaryGenotype cooldmaxscopconstrDegreeValueBinaryGenotypeObj = new BinaryGenotype(coolmaxscopconstrBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.CooldownMaxScalingOperationsConstraintDegree);
+				TranslatedGenotype.add(cooldmaxscopconstrDegreeValueBinaryGenotypeObj);
+				
+			}
+			else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof CooldownTimeConstraintDegree){
+				/* If the Choice object is representing CooldownTimeConstraintDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double cooldownTimeConstraintDegreeValue=(Double) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which cooldownTimeConstraintDegreeValue value lies
+				 */
+				
+				List<Integer> cooldownTimeConstraintBinaryRep = getCooldownTimeConstraintBinaryRep(cooldownTimeConstraintDegreeValue);
+				
+				BinaryGenotype cooldownTimeConstraintDegreeValueBinaryGenotypeObj = new BinaryGenotype(cooldownTimeConstraintBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.CooldownTimeConstraintDegree);
+				TranslatedGenotype.add(cooldownTimeConstraintDegreeValueBinaryGenotypeObj);
+				
+			}
+			else throwOutOfScopeDegreeException(ChoiceIterator.getDegreeOfFreedomInstance());
 		}
 	 
 		return TranslatedGenotype;
@@ -552,6 +866,211 @@ public class Adapter {
 		
 		return Result;
 	}
+	
+	private List<Integer> getStepAdjustmentBinaryRep(double stepAdjustmentDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<STEPADJUSTMENTDEGREE.length;i++){
+			if(stepAdjustmentDegreeValue< STEPADJUSTMENTDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getExpectedCPUUtilizationBinaryRep(double expectedCPUUtilizationDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<EXPECTEDCPUUTILIZATIONDEGREE.length;i++){
+			if(expectedCPUUtilizationDegreeValue< EXPECTEDCPUUTILIZATIONDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getExpectedMemoryUtilizationBinaryRep(double expectedMemoryUtilizationDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<EXPECTEDMEMORYUTILIZATIONDEGREE.length;i++){
+			if(expectedMemoryUtilizationDegreeValue< EXPECTEDMEMORYUTILIZATIONDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getExpectedHDDUtilizationBinaryRep(double expectedHDDUtilizationDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<EXPECTEDHDDUTILIZATIONDEGREE.length;i++){
+			if(expectedHDDUtilizationDegreeValue< EXPECTEDHDDUTILIZATIONDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getExpectedNetworkUtilizationBinaryRep(double expectedNetworkUtilizationDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<EXPECTEDNETWORKUTILIZATIONDEGREE.length;i++){
+			if(expectedNetworkUtilizationDegreeValue< EXPECTEDNETWORKUTILIZATIONDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getExpectedSimulationTimeBinaryRep(double expectedSimulationTimeDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<EXPECTEDSIMULATIONTIMEDEGREE.length;i++){
+			if(expectedSimulationTimeDegreeValue< EXPECTEDSIMULATIONTIMEDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getExpectedOperationResponseTimeBinaryRep(double expectedOperationResponseTimeDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<EXPECTEDOPERATIONRESPONSETIMEDEGREE.length;i++){
+			if(expectedOperationResponseTimeDegreeValue< EXPECTEDOPERATIONRESPONSETIMEDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getExpectedNumberOfElementsBinaryRep(double expectedNumberOfElementsDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<EXPECTEDNUMBEROFELEMENTSDEGREE.length;i++){
+			if(expectedNumberOfElementsDegreeValue< EXPECTEDNUMBEROFELEMENTSDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getExpectedQueueLengthBinaryRep(double expectedQueueLengthDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<EXPECTEDQUEUELENGTHDEGREE.length;i++){
+			if(expectedQueueLengthDegreeValue< EXPECTEDQUEUELENGTHDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getExpectedTaskCountBinaryRep(double expectedTaskCountDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<EXPECTEDTASKCOUNTDEGREE.length;i++){
+			if(expectedTaskCountDegreeValue< EXPECTEDTASKCOUNTDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getCooldownMaxScalingOperationsBinaryRep(double cooldownMaxScalingOperationsConstraintDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<COOLDOWNMAXSCALINGOPERATIONSCONSTRAINTDEGREE.length;i++){
+			if(cooldownMaxScalingOperationsConstraintDegreeValue< COOLDOWNMAXSCALINGOPERATIONSCONSTRAINTDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getCooldownTimeConstraintBinaryRep(double cooldownTimeConstraintDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<COOLDOWNTIMECONSTRAINTDEGREE.length;i++){
+			if(cooldownTimeConstraintDegreeValue< COOLDOWNTIMECONSTRAINTDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+
 	
 	private void throwOutOfScopeDegreeException(DegreeOfFreedomInstance dd) {
 		throw new RuntimeException("The degree of freedom "+dd.toString()+" is out of scope for the current version of Adapter.");		

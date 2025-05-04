@@ -220,6 +220,42 @@ public class DecisionSpaceItemProvider extends NamedElementItemProvider {
 
 		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
 				specificFactory.eINSTANCE.createTargetGroupSizeMaxConstraintDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createStepAdjustmentDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createExpectedCPUUtilizationDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createExpectedMemoryUtilizationDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createExpectedHDDUtilizationDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createExpectedNetworkUtilizationDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createExpectedSimulationTimeDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createExpectedOperationResponseTimeDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createExpectedNumberOfElementsDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createExpectedQueueLengthDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createExpectedTaskCountDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createCooldownTimeConstraintDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createCooldownMaxScalingOperationsConstraintDegree()));
 	}
 
 	/**

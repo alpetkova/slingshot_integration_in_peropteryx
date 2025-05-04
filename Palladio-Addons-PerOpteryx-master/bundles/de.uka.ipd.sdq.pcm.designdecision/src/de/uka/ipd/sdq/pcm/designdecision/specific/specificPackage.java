@@ -3717,6 +3717,1314 @@ public interface specificPackage extends EPackage {
 	int TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE_FEATURE_COUNT = DISCRETE_RANGE_DEGREE_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.StepAdjustmentDegreeImpl <em>Step Adjustment Degree</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.StepAdjustmentDegreeImpl
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getStepAdjustmentDegree()
+	 * @generated
+	 */
+	int STEP_ADJUSTMENT_DEGREE = 45;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_ADJUSTMENT_DEGREE__ENTITY_NAME = DISCRETE_RANGE_DEGREE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Primary Changed</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_ADJUSTMENT_DEGREE__PRIMARY_CHANGED = DISCRETE_RANGE_DEGREE__PRIMARY_CHANGED;
+
+	/**
+	 * The feature id for the '<em><b>Dof</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_ADJUSTMENT_DEGREE__DOF = DISCRETE_RANGE_DEGREE__DOF;
+
+	/**
+	 * The feature id for the '<em><b>Changeable Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_ADJUSTMENT_DEGREE__CHANGEABLE_ELEMENTS = DISCRETE_RANGE_DEGREE__CHANGEABLE_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Decorator Model</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_ADJUSTMENT_DEGREE__DECORATOR_MODEL = DISCRETE_RANGE_DEGREE__DECORATOR_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_ADJUSTMENT_DEGREE__UPPER_BOUND_INCLUDED = DISCRETE_RANGE_DEGREE__UPPER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_ADJUSTMENT_DEGREE__LOWER_BOUND_INCLUDED = DISCRETE_RANGE_DEGREE__LOWER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Steps</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_ADJUSTMENT_DEGREE__NUMBER_OF_STEPS = DISCRETE_RANGE_DEGREE__NUMBER_OF_STEPS;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_ADJUSTMENT_DEGREE__TO = DISCRETE_RANGE_DEGREE__TO;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_ADJUSTMENT_DEGREE__FROM = DISCRETE_RANGE_DEGREE__FROM;
+
+	/**
+	 * The number of structural features of the '<em>Step Adjustment Degree</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_ADJUSTMENT_DEGREE_FEATURE_COUNT = DISCRETE_RANGE_DEGREE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedCPUUtilizationDegreeImpl <em>Expected CPU Utilization Degree</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedCPUUtilizationDegreeImpl
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedCPUUtilizationDegree()
+	 * @generated
+	 */
+	int EXPECTED_CPU_UTILIZATION_DEGREE = 46;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_CPU_UTILIZATION_DEGREE__ENTITY_NAME = CONTINUOUS_RANGE_DEGREE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Primary Changed</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_CPU_UTILIZATION_DEGREE__PRIMARY_CHANGED = CONTINUOUS_RANGE_DEGREE__PRIMARY_CHANGED;
+
+	/**
+	 * The feature id for the '<em><b>Dof</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_CPU_UTILIZATION_DEGREE__DOF = CONTINUOUS_RANGE_DEGREE__DOF;
+
+	/**
+	 * The feature id for the '<em><b>Changeable Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_CPU_UTILIZATION_DEGREE__CHANGEABLE_ELEMENTS = CONTINUOUS_RANGE_DEGREE__CHANGEABLE_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Decorator Model</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_CPU_UTILIZATION_DEGREE__DECORATOR_MODEL = CONTINUOUS_RANGE_DEGREE__DECORATOR_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_CPU_UTILIZATION_DEGREE__UPPER_BOUND_INCLUDED = CONTINUOUS_RANGE_DEGREE__UPPER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_CPU_UTILIZATION_DEGREE__LOWER_BOUND_INCLUDED = CONTINUOUS_RANGE_DEGREE__LOWER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Steps</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_CPU_UTILIZATION_DEGREE__NUMBER_OF_STEPS = CONTINUOUS_RANGE_DEGREE__NUMBER_OF_STEPS;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_CPU_UTILIZATION_DEGREE__TO = CONTINUOUS_RANGE_DEGREE__TO;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_CPU_UTILIZATION_DEGREE__FROM = CONTINUOUS_RANGE_DEGREE__FROM;
+
+	/**
+	 * The number of structural features of the '<em>Expected CPU Utilization Degree</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_CPU_UTILIZATION_DEGREE_FEATURE_COUNT = CONTINUOUS_RANGE_DEGREE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedMemoryUtilizationDegreeImpl <em>Expected Memory Utilization Degree</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedMemoryUtilizationDegreeImpl
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedMemoryUtilizationDegree()
+	 * @generated
+	 */
+	int EXPECTED_MEMORY_UTILIZATION_DEGREE = 47;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_MEMORY_UTILIZATION_DEGREE__ENTITY_NAME = CONTINUOUS_RANGE_DEGREE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Primary Changed</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_MEMORY_UTILIZATION_DEGREE__PRIMARY_CHANGED = CONTINUOUS_RANGE_DEGREE__PRIMARY_CHANGED;
+
+	/**
+	 * The feature id for the '<em><b>Dof</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_MEMORY_UTILIZATION_DEGREE__DOF = CONTINUOUS_RANGE_DEGREE__DOF;
+
+	/**
+	 * The feature id for the '<em><b>Changeable Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_MEMORY_UTILIZATION_DEGREE__CHANGEABLE_ELEMENTS = CONTINUOUS_RANGE_DEGREE__CHANGEABLE_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Decorator Model</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_MEMORY_UTILIZATION_DEGREE__DECORATOR_MODEL = CONTINUOUS_RANGE_DEGREE__DECORATOR_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_MEMORY_UTILIZATION_DEGREE__UPPER_BOUND_INCLUDED = CONTINUOUS_RANGE_DEGREE__UPPER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_MEMORY_UTILIZATION_DEGREE__LOWER_BOUND_INCLUDED = CONTINUOUS_RANGE_DEGREE__LOWER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Steps</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_MEMORY_UTILIZATION_DEGREE__NUMBER_OF_STEPS = CONTINUOUS_RANGE_DEGREE__NUMBER_OF_STEPS;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_MEMORY_UTILIZATION_DEGREE__TO = CONTINUOUS_RANGE_DEGREE__TO;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_MEMORY_UTILIZATION_DEGREE__FROM = CONTINUOUS_RANGE_DEGREE__FROM;
+
+	/**
+	 * The number of structural features of the '<em>Expected Memory Utilization Degree</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_MEMORY_UTILIZATION_DEGREE_FEATURE_COUNT = CONTINUOUS_RANGE_DEGREE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedHDDUtilizationDegreeImpl <em>Expected HDD Utilization Degree</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedHDDUtilizationDegreeImpl
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedHDDUtilizationDegree()
+	 * @generated
+	 */
+	int EXPECTED_HDD_UTILIZATION_DEGREE = 48;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_HDD_UTILIZATION_DEGREE__ENTITY_NAME = CONTINUOUS_RANGE_DEGREE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Primary Changed</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_HDD_UTILIZATION_DEGREE__PRIMARY_CHANGED = CONTINUOUS_RANGE_DEGREE__PRIMARY_CHANGED;
+
+	/**
+	 * The feature id for the '<em><b>Dof</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_HDD_UTILIZATION_DEGREE__DOF = CONTINUOUS_RANGE_DEGREE__DOF;
+
+	/**
+	 * The feature id for the '<em><b>Changeable Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_HDD_UTILIZATION_DEGREE__CHANGEABLE_ELEMENTS = CONTINUOUS_RANGE_DEGREE__CHANGEABLE_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Decorator Model</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_HDD_UTILIZATION_DEGREE__DECORATOR_MODEL = CONTINUOUS_RANGE_DEGREE__DECORATOR_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_HDD_UTILIZATION_DEGREE__UPPER_BOUND_INCLUDED = CONTINUOUS_RANGE_DEGREE__UPPER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_HDD_UTILIZATION_DEGREE__LOWER_BOUND_INCLUDED = CONTINUOUS_RANGE_DEGREE__LOWER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Steps</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_HDD_UTILIZATION_DEGREE__NUMBER_OF_STEPS = CONTINUOUS_RANGE_DEGREE__NUMBER_OF_STEPS;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_HDD_UTILIZATION_DEGREE__TO = CONTINUOUS_RANGE_DEGREE__TO;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_HDD_UTILIZATION_DEGREE__FROM = CONTINUOUS_RANGE_DEGREE__FROM;
+
+	/**
+	 * The number of structural features of the '<em>Expected HDD Utilization Degree</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_HDD_UTILIZATION_DEGREE_FEATURE_COUNT = CONTINUOUS_RANGE_DEGREE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedNetworkUtilizationDegreeImpl <em>Expected Network Utilization Degree</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedNetworkUtilizationDegreeImpl
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedNetworkUtilizationDegree()
+	 * @generated
+	 */
+	int EXPECTED_NETWORK_UTILIZATION_DEGREE = 49;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NETWORK_UTILIZATION_DEGREE__ENTITY_NAME = CONTINUOUS_RANGE_DEGREE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Primary Changed</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NETWORK_UTILIZATION_DEGREE__PRIMARY_CHANGED = CONTINUOUS_RANGE_DEGREE__PRIMARY_CHANGED;
+
+	/**
+	 * The feature id for the '<em><b>Dof</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NETWORK_UTILIZATION_DEGREE__DOF = CONTINUOUS_RANGE_DEGREE__DOF;
+
+	/**
+	 * The feature id for the '<em><b>Changeable Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NETWORK_UTILIZATION_DEGREE__CHANGEABLE_ELEMENTS = CONTINUOUS_RANGE_DEGREE__CHANGEABLE_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Decorator Model</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NETWORK_UTILIZATION_DEGREE__DECORATOR_MODEL = CONTINUOUS_RANGE_DEGREE__DECORATOR_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NETWORK_UTILIZATION_DEGREE__UPPER_BOUND_INCLUDED = CONTINUOUS_RANGE_DEGREE__UPPER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NETWORK_UTILIZATION_DEGREE__LOWER_BOUND_INCLUDED = CONTINUOUS_RANGE_DEGREE__LOWER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Steps</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NETWORK_UTILIZATION_DEGREE__NUMBER_OF_STEPS = CONTINUOUS_RANGE_DEGREE__NUMBER_OF_STEPS;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NETWORK_UTILIZATION_DEGREE__TO = CONTINUOUS_RANGE_DEGREE__TO;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NETWORK_UTILIZATION_DEGREE__FROM = CONTINUOUS_RANGE_DEGREE__FROM;
+
+	/**
+	 * The number of structural features of the '<em>Expected Network Utilization Degree</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NETWORK_UTILIZATION_DEGREE_FEATURE_COUNT = CONTINUOUS_RANGE_DEGREE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedSimulationTimeDegreeImpl <em>Expected Simulation Time Degree</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedSimulationTimeDegreeImpl
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedSimulationTimeDegree()
+	 * @generated
+	 */
+	int EXPECTED_SIMULATION_TIME_DEGREE = 50;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_SIMULATION_TIME_DEGREE__ENTITY_NAME = CONTINUOUS_RANGE_DEGREE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Primary Changed</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_SIMULATION_TIME_DEGREE__PRIMARY_CHANGED = CONTINUOUS_RANGE_DEGREE__PRIMARY_CHANGED;
+
+	/**
+	 * The feature id for the '<em><b>Dof</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_SIMULATION_TIME_DEGREE__DOF = CONTINUOUS_RANGE_DEGREE__DOF;
+
+	/**
+	 * The feature id for the '<em><b>Changeable Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_SIMULATION_TIME_DEGREE__CHANGEABLE_ELEMENTS = CONTINUOUS_RANGE_DEGREE__CHANGEABLE_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Decorator Model</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_SIMULATION_TIME_DEGREE__DECORATOR_MODEL = CONTINUOUS_RANGE_DEGREE__DECORATOR_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_SIMULATION_TIME_DEGREE__UPPER_BOUND_INCLUDED = CONTINUOUS_RANGE_DEGREE__UPPER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_SIMULATION_TIME_DEGREE__LOWER_BOUND_INCLUDED = CONTINUOUS_RANGE_DEGREE__LOWER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Steps</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_SIMULATION_TIME_DEGREE__NUMBER_OF_STEPS = CONTINUOUS_RANGE_DEGREE__NUMBER_OF_STEPS;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_SIMULATION_TIME_DEGREE__TO = CONTINUOUS_RANGE_DEGREE__TO;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_SIMULATION_TIME_DEGREE__FROM = CONTINUOUS_RANGE_DEGREE__FROM;
+
+	/**
+	 * The number of structural features of the '<em>Expected Simulation Time Degree</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_SIMULATION_TIME_DEGREE_FEATURE_COUNT = CONTINUOUS_RANGE_DEGREE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedOperationResponseTimeDegreeImpl <em>Expected Operation Response Time Degree</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedOperationResponseTimeDegreeImpl
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedOperationResponseTimeDegree()
+	 * @generated
+	 */
+	int EXPECTED_OPERATION_RESPONSE_TIME_DEGREE = 51;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_OPERATION_RESPONSE_TIME_DEGREE__ENTITY_NAME = CONTINUOUS_RANGE_DEGREE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Primary Changed</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_OPERATION_RESPONSE_TIME_DEGREE__PRIMARY_CHANGED = CONTINUOUS_RANGE_DEGREE__PRIMARY_CHANGED;
+
+	/**
+	 * The feature id for the '<em><b>Dof</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_OPERATION_RESPONSE_TIME_DEGREE__DOF = CONTINUOUS_RANGE_DEGREE__DOF;
+
+	/**
+	 * The feature id for the '<em><b>Changeable Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_OPERATION_RESPONSE_TIME_DEGREE__CHANGEABLE_ELEMENTS = CONTINUOUS_RANGE_DEGREE__CHANGEABLE_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Decorator Model</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_OPERATION_RESPONSE_TIME_DEGREE__DECORATOR_MODEL = CONTINUOUS_RANGE_DEGREE__DECORATOR_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_OPERATION_RESPONSE_TIME_DEGREE__UPPER_BOUND_INCLUDED = CONTINUOUS_RANGE_DEGREE__UPPER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_OPERATION_RESPONSE_TIME_DEGREE__LOWER_BOUND_INCLUDED = CONTINUOUS_RANGE_DEGREE__LOWER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Steps</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_OPERATION_RESPONSE_TIME_DEGREE__NUMBER_OF_STEPS = CONTINUOUS_RANGE_DEGREE__NUMBER_OF_STEPS;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_OPERATION_RESPONSE_TIME_DEGREE__TO = CONTINUOUS_RANGE_DEGREE__TO;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_OPERATION_RESPONSE_TIME_DEGREE__FROM = CONTINUOUS_RANGE_DEGREE__FROM;
+
+	/**
+	 * The number of structural features of the '<em>Expected Operation Response Time Degree</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_OPERATION_RESPONSE_TIME_DEGREE_FEATURE_COUNT = CONTINUOUS_RANGE_DEGREE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedNumberOfElementsDegreeImpl <em>Expected Number Of Elements Degree</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedNumberOfElementsDegreeImpl
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedNumberOfElementsDegree()
+	 * @generated
+	 */
+	int EXPECTED_NUMBER_OF_ELEMENTS_DEGREE = 52;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NUMBER_OF_ELEMENTS_DEGREE__ENTITY_NAME = DISCRETE_RANGE_DEGREE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Primary Changed</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NUMBER_OF_ELEMENTS_DEGREE__PRIMARY_CHANGED = DISCRETE_RANGE_DEGREE__PRIMARY_CHANGED;
+
+	/**
+	 * The feature id for the '<em><b>Dof</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NUMBER_OF_ELEMENTS_DEGREE__DOF = DISCRETE_RANGE_DEGREE__DOF;
+
+	/**
+	 * The feature id for the '<em><b>Changeable Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NUMBER_OF_ELEMENTS_DEGREE__CHANGEABLE_ELEMENTS = DISCRETE_RANGE_DEGREE__CHANGEABLE_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Decorator Model</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NUMBER_OF_ELEMENTS_DEGREE__DECORATOR_MODEL = DISCRETE_RANGE_DEGREE__DECORATOR_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NUMBER_OF_ELEMENTS_DEGREE__UPPER_BOUND_INCLUDED = DISCRETE_RANGE_DEGREE__UPPER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NUMBER_OF_ELEMENTS_DEGREE__LOWER_BOUND_INCLUDED = DISCRETE_RANGE_DEGREE__LOWER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Steps</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NUMBER_OF_ELEMENTS_DEGREE__NUMBER_OF_STEPS = DISCRETE_RANGE_DEGREE__NUMBER_OF_STEPS;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NUMBER_OF_ELEMENTS_DEGREE__TO = DISCRETE_RANGE_DEGREE__TO;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NUMBER_OF_ELEMENTS_DEGREE__FROM = DISCRETE_RANGE_DEGREE__FROM;
+
+	/**
+	 * The number of structural features of the '<em>Expected Number Of Elements Degree</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_NUMBER_OF_ELEMENTS_DEGREE_FEATURE_COUNT = DISCRETE_RANGE_DEGREE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedQueueLengthDegreeImpl <em>Expected Queue Length Degree</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedQueueLengthDegreeImpl
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedQueueLengthDegree()
+	 * @generated
+	 */
+	int EXPECTED_QUEUE_LENGTH_DEGREE = 53;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_QUEUE_LENGTH_DEGREE__ENTITY_NAME = DISCRETE_RANGE_DEGREE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Primary Changed</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_QUEUE_LENGTH_DEGREE__PRIMARY_CHANGED = DISCRETE_RANGE_DEGREE__PRIMARY_CHANGED;
+
+	/**
+	 * The feature id for the '<em><b>Dof</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_QUEUE_LENGTH_DEGREE__DOF = DISCRETE_RANGE_DEGREE__DOF;
+
+	/**
+	 * The feature id for the '<em><b>Changeable Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_QUEUE_LENGTH_DEGREE__CHANGEABLE_ELEMENTS = DISCRETE_RANGE_DEGREE__CHANGEABLE_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Decorator Model</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_QUEUE_LENGTH_DEGREE__DECORATOR_MODEL = DISCRETE_RANGE_DEGREE__DECORATOR_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_QUEUE_LENGTH_DEGREE__UPPER_BOUND_INCLUDED = DISCRETE_RANGE_DEGREE__UPPER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_QUEUE_LENGTH_DEGREE__LOWER_BOUND_INCLUDED = DISCRETE_RANGE_DEGREE__LOWER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Steps</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_QUEUE_LENGTH_DEGREE__NUMBER_OF_STEPS = DISCRETE_RANGE_DEGREE__NUMBER_OF_STEPS;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_QUEUE_LENGTH_DEGREE__TO = DISCRETE_RANGE_DEGREE__TO;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_QUEUE_LENGTH_DEGREE__FROM = DISCRETE_RANGE_DEGREE__FROM;
+
+	/**
+	 * The number of structural features of the '<em>Expected Queue Length Degree</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_QUEUE_LENGTH_DEGREE_FEATURE_COUNT = DISCRETE_RANGE_DEGREE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedTaskCountDegreeImpl <em>Expected Task Count Degree</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedTaskCountDegreeImpl
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedTaskCountDegree()
+	 * @generated
+	 */
+	int EXPECTED_TASK_COUNT_DEGREE = 54;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_TASK_COUNT_DEGREE__ENTITY_NAME = DISCRETE_RANGE_DEGREE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Primary Changed</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_TASK_COUNT_DEGREE__PRIMARY_CHANGED = DISCRETE_RANGE_DEGREE__PRIMARY_CHANGED;
+
+	/**
+	 * The feature id for the '<em><b>Dof</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_TASK_COUNT_DEGREE__DOF = DISCRETE_RANGE_DEGREE__DOF;
+
+	/**
+	 * The feature id for the '<em><b>Changeable Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_TASK_COUNT_DEGREE__CHANGEABLE_ELEMENTS = DISCRETE_RANGE_DEGREE__CHANGEABLE_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Decorator Model</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_TASK_COUNT_DEGREE__DECORATOR_MODEL = DISCRETE_RANGE_DEGREE__DECORATOR_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_TASK_COUNT_DEGREE__UPPER_BOUND_INCLUDED = DISCRETE_RANGE_DEGREE__UPPER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_TASK_COUNT_DEGREE__LOWER_BOUND_INCLUDED = DISCRETE_RANGE_DEGREE__LOWER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Steps</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_TASK_COUNT_DEGREE__NUMBER_OF_STEPS = DISCRETE_RANGE_DEGREE__NUMBER_OF_STEPS;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_TASK_COUNT_DEGREE__TO = DISCRETE_RANGE_DEGREE__TO;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_TASK_COUNT_DEGREE__FROM = DISCRETE_RANGE_DEGREE__FROM;
+
+	/**
+	 * The number of structural features of the '<em>Expected Task Count Degree</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPECTED_TASK_COUNT_DEGREE_FEATURE_COUNT = DISCRETE_RANGE_DEGREE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.CooldownTimeConstraintDegreeImpl <em>Cooldown Time Constraint Degree</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.CooldownTimeConstraintDegreeImpl
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getCooldownTimeConstraintDegree()
+	 * @generated
+	 */
+	int COOLDOWN_TIME_CONSTRAINT_DEGREE = 55;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TIME_CONSTRAINT_DEGREE__ENTITY_NAME = CONTINUOUS_RANGE_DEGREE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Primary Changed</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TIME_CONSTRAINT_DEGREE__PRIMARY_CHANGED = CONTINUOUS_RANGE_DEGREE__PRIMARY_CHANGED;
+
+	/**
+	 * The feature id for the '<em><b>Dof</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TIME_CONSTRAINT_DEGREE__DOF = CONTINUOUS_RANGE_DEGREE__DOF;
+
+	/**
+	 * The feature id for the '<em><b>Changeable Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TIME_CONSTRAINT_DEGREE__CHANGEABLE_ELEMENTS = CONTINUOUS_RANGE_DEGREE__CHANGEABLE_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Decorator Model</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TIME_CONSTRAINT_DEGREE__DECORATOR_MODEL = CONTINUOUS_RANGE_DEGREE__DECORATOR_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TIME_CONSTRAINT_DEGREE__UPPER_BOUND_INCLUDED = CONTINUOUS_RANGE_DEGREE__UPPER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TIME_CONSTRAINT_DEGREE__LOWER_BOUND_INCLUDED = CONTINUOUS_RANGE_DEGREE__LOWER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Steps</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TIME_CONSTRAINT_DEGREE__NUMBER_OF_STEPS = CONTINUOUS_RANGE_DEGREE__NUMBER_OF_STEPS;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TIME_CONSTRAINT_DEGREE__TO = CONTINUOUS_RANGE_DEGREE__TO;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TIME_CONSTRAINT_DEGREE__FROM = CONTINUOUS_RANGE_DEGREE__FROM;
+
+	/**
+	 * The number of structural features of the '<em>Cooldown Time Constraint Degree</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_TIME_CONSTRAINT_DEGREE_FEATURE_COUNT = CONTINUOUS_RANGE_DEGREE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.CooldownMaxScalingOperationsConstraintDegreeImpl <em>Cooldown Max Scaling Operations Constraint Degree</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.CooldownMaxScalingOperationsConstraintDegreeImpl
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getCooldownMaxScalingOperationsConstraintDegree()
+	 * @generated
+	 */
+	int COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE = 56;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE__ENTITY_NAME = DISCRETE_RANGE_DEGREE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Primary Changed</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE__PRIMARY_CHANGED = DISCRETE_RANGE_DEGREE__PRIMARY_CHANGED;
+
+	/**
+	 * The feature id for the '<em><b>Dof</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE__DOF = DISCRETE_RANGE_DEGREE__DOF;
+
+	/**
+	 * The feature id for the '<em><b>Changeable Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE__CHANGEABLE_ELEMENTS = DISCRETE_RANGE_DEGREE__CHANGEABLE_ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Decorator Model</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE__DECORATOR_MODEL = DISCRETE_RANGE_DEGREE__DECORATOR_MODEL;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE__UPPER_BOUND_INCLUDED = DISCRETE_RANGE_DEGREE__UPPER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound Included</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE__LOWER_BOUND_INCLUDED = DISCRETE_RANGE_DEGREE__LOWER_BOUND_INCLUDED;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Steps</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE__NUMBER_OF_STEPS = DISCRETE_RANGE_DEGREE__NUMBER_OF_STEPS;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE__TO = DISCRETE_RANGE_DEGREE__TO;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE__FROM = DISCRETE_RANGE_DEGREE__FROM;
+
+	/**
+	 * The number of structural features of the '<em>Cooldown Max Scaling Operations Constraint Degree</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE_FEATURE_COUNT = DISCRETE_RANGE_DEGREE_FEATURE_COUNT + 0;
+
+	/**
 	 * Returns the meta object for class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExchangeComponentRule <em>Exchange Component Rule</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Exchange Component Rule</em>'.
@@ -4333,6 +5641,126 @@ public interface specificPackage extends EPackage {
 	EClass getTargetGroupSizeMaxConstraintDegree();
 
 	/**
+	 * Returns the meta object for class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree <em>Step Adjustment Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Step Adjustment Degree</em>'.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree
+	 * @generated
+	 */
+	EClass getStepAdjustmentDegree();
+
+	/**
+	 * Returns the meta object for class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree <em>Expected CPU Utilization Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expected CPU Utilization Degree</em>'.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree
+	 * @generated
+	 */
+	EClass getExpectedCPUUtilizationDegree();
+
+	/**
+	 * Returns the meta object for class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree <em>Expected Memory Utilization Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expected Memory Utilization Degree</em>'.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree
+	 * @generated
+	 */
+	EClass getExpectedMemoryUtilizationDegree();
+
+	/**
+	 * Returns the meta object for class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedHDDUtilizationDegree <em>Expected HDD Utilization Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expected HDD Utilization Degree</em>'.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedHDDUtilizationDegree
+	 * @generated
+	 */
+	EClass getExpectedHDDUtilizationDegree();
+
+	/**
+	 * Returns the meta object for class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNetworkUtilizationDegree <em>Expected Network Utilization Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expected Network Utilization Degree</em>'.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNetworkUtilizationDegree
+	 * @generated
+	 */
+	EClass getExpectedNetworkUtilizationDegree();
+
+	/**
+	 * Returns the meta object for class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedSimulationTimeDegree <em>Expected Simulation Time Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expected Simulation Time Degree</em>'.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedSimulationTimeDegree
+	 * @generated
+	 */
+	EClass getExpectedSimulationTimeDegree();
+
+	/**
+	 * Returns the meta object for class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedOperationResponseTimeDegree <em>Expected Operation Response Time Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expected Operation Response Time Degree</em>'.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedOperationResponseTimeDegree
+	 * @generated
+	 */
+	EClass getExpectedOperationResponseTimeDegree();
+
+	/**
+	 * Returns the meta object for class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNumberOfElementsDegree <em>Expected Number Of Elements Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expected Number Of Elements Degree</em>'.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNumberOfElementsDegree
+	 * @generated
+	 */
+	EClass getExpectedNumberOfElementsDegree();
+
+	/**
+	 * Returns the meta object for class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree <em>Expected Queue Length Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expected Queue Length Degree</em>'.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree
+	 * @generated
+	 */
+	EClass getExpectedQueueLengthDegree();
+
+	/**
+	 * Returns the meta object for class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree <em>Expected Task Count Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expected Task Count Degree</em>'.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree
+	 * @generated
+	 */
+	EClass getExpectedTaskCountDegree();
+
+	/**
+	 * Returns the meta object for class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree <em>Cooldown Time Constraint Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Cooldown Time Constraint Degree</em>'.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree
+	 * @generated
+	 */
+	EClass getCooldownTimeConstraintDegree();
+
+	/**
+	 * Returns the meta object for class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree <em>Cooldown Max Scaling Operations Constraint Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Cooldown Max Scaling Operations Constraint Degree</em>'.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree
+	 * @generated
+	 */
+	EClass getCooldownMaxScalingOperationsConstraintDegree();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -4936,6 +6364,127 @@ public interface specificPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE = eINSTANCE.getTargetGroupSizeMaxConstraintDegree();
+
+		/**
+		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.StepAdjustmentDegreeImpl <em>Step Adjustment Degree</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.StepAdjustmentDegreeImpl
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getStepAdjustmentDegree()
+		 * @generated
+		 */
+		EClass STEP_ADJUSTMENT_DEGREE = eINSTANCE.getStepAdjustmentDegree();
+
+		/**
+		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedCPUUtilizationDegreeImpl <em>Expected CPU Utilization Degree</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedCPUUtilizationDegreeImpl
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedCPUUtilizationDegree()
+		 * @generated
+		 */
+		EClass EXPECTED_CPU_UTILIZATION_DEGREE = eINSTANCE.getExpectedCPUUtilizationDegree();
+
+		/**
+		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedMemoryUtilizationDegreeImpl <em>Expected Memory Utilization Degree</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedMemoryUtilizationDegreeImpl
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedMemoryUtilizationDegree()
+		 * @generated
+		 */
+		EClass EXPECTED_MEMORY_UTILIZATION_DEGREE = eINSTANCE.getExpectedMemoryUtilizationDegree();
+
+		/**
+		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedHDDUtilizationDegreeImpl <em>Expected HDD Utilization Degree</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedHDDUtilizationDegreeImpl
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedHDDUtilizationDegree()
+		 * @generated
+		 */
+		EClass EXPECTED_HDD_UTILIZATION_DEGREE = eINSTANCE.getExpectedHDDUtilizationDegree();
+
+		/**
+		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedNetworkUtilizationDegreeImpl <em>Expected Network Utilization Degree</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedNetworkUtilizationDegreeImpl
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedNetworkUtilizationDegree()
+		 * @generated
+		 */
+		EClass EXPECTED_NETWORK_UTILIZATION_DEGREE = eINSTANCE.getExpectedNetworkUtilizationDegree();
+
+		/**
+		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedSimulationTimeDegreeImpl <em>Expected Simulation Time Degree</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedSimulationTimeDegreeImpl
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedSimulationTimeDegree()
+		 * @generated
+		 */
+		EClass EXPECTED_SIMULATION_TIME_DEGREE = eINSTANCE.getExpectedSimulationTimeDegree();
+
+		/**
+		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedOperationResponseTimeDegreeImpl <em>Expected Operation Response Time Degree</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedOperationResponseTimeDegreeImpl
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedOperationResponseTimeDegree()
+		 * @generated
+		 */
+		EClass EXPECTED_OPERATION_RESPONSE_TIME_DEGREE = eINSTANCE.getExpectedOperationResponseTimeDegree();
+
+		/**
+		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedNumberOfElementsDegreeImpl <em>Expected Number Of Elements Degree</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedNumberOfElementsDegreeImpl
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedNumberOfElementsDegree()
+		 * @generated
+		 */
+		EClass EXPECTED_NUMBER_OF_ELEMENTS_DEGREE = eINSTANCE.getExpectedNumberOfElementsDegree();
+
+		/**
+		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedQueueLengthDegreeImpl <em>Expected Queue Length Degree</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedQueueLengthDegreeImpl
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedQueueLengthDegree()
+		 * @generated
+		 */
+		EClass EXPECTED_QUEUE_LENGTH_DEGREE = eINSTANCE.getExpectedQueueLengthDegree();
+
+		/**
+		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedTaskCountDegreeImpl <em>Expected Task Count Degree</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.ExpectedTaskCountDegreeImpl
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getExpectedTaskCountDegree()
+		 * @generated
+		 */
+		EClass EXPECTED_TASK_COUNT_DEGREE = eINSTANCE.getExpectedTaskCountDegree();
+
+		/**
+		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.CooldownTimeConstraintDegreeImpl <em>Cooldown Time Constraint Degree</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.CooldownTimeConstraintDegreeImpl
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getCooldownTimeConstraintDegree()
+		 * @generated
+		 */
+		EClass COOLDOWN_TIME_CONSTRAINT_DEGREE = eINSTANCE.getCooldownTimeConstraintDegree();
+
+		/**
+		 * The meta object literal for the '{@link de.uka.ipd.sdq.pcm.designdecision.specific.impl.CooldownMaxScalingOperationsConstraintDegreeImpl <em>Cooldown Max Scaling Operations Constraint Degree</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.CooldownMaxScalingOperationsConstraintDegreeImpl
+		 * @see de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificPackageImpl#getCooldownMaxScalingOperationsConstraintDegree()
+		 * @generated
+		 */
+		EClass COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE = eINSTANCE
+				.getCooldownMaxScalingOperationsConstraintDegree();
 
 	}
 

@@ -1,6 +1,8 @@
 package de.uka.ipd.sdq.dsexplore.opt4j.genotype;
 
 import java.util.List;
+
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedOperationResponseTimeDegree;
 /**
  * An interface visualising the implementation
  * of the {@link BinaryGenotype} class
@@ -21,7 +23,10 @@ public interface BinaryGenotypeRepresentation<E> extends List<E> {
 		 OrderedIntegerDegree, ProcessingRateDegree, ProcessingResourceDegree,
 		 RangeDegree, ResourceContainerReplicationDegree, ResourceContainerReplicationDegreeWithComponentChange,
 		 ResourceSelectionDegree, SchedulingPolicyDegree, StringComponentParamDegree,
-		 StringSetDegree, UnorderedDegree, UnorderedPrimitiveDegree, TargetGroupSizeMaxConstraintDegree
+		 StringSetDegree, UnorderedDegree, UnorderedPrimitiveDegree, TargetGroupSizeMaxConstraintDegree, StepAdjustmentDegree,
+		 ExpectedCPUUtilizationDegree, ExpectedMemoryUtilizationDegree, ExpectedHDDUtilizationDegree, ExpectedNetworkUtilizationDegree,
+		 ExpectedSimulationTimeDegree, ExpectedOperationResponseTimeDegree, ExpectedNumberOfElementsDegree, ExpectedQueueLengthDegree, 
+		 ExpectedTaskCountDegree, CooldownMaxScalingOperationsConstraintDegree, CooldownTimeConstraintDegree
 	}
 	
 	// Abstract methods

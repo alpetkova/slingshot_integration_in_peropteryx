@@ -36,6 +36,8 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ComplementumVisnetisDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousRangeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DataTypeDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteDegree;
@@ -43,6 +45,15 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteRangeDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.EnumDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExchangeComponentRule;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedHDDUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNetworkUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNumberOfElementsDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedOperationResponseTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedSimulationTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureCompletionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureConfigDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureDegree;
@@ -64,6 +75,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDe
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegreeWithComponentChange;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceSelectionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.SchedulingPolicyDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringSetDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
@@ -358,6 +370,90 @@ public class specificPackageImpl extends EPackageImpl implements specificPackage
 	 * @generated
 	 */
 	private EClass targetGroupSizeMaxConstraintDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stepAdjustmentDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expectedCPUUtilizationDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expectedMemoryUtilizationDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expectedHDDUtilizationDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expectedNetworkUtilizationDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expectedSimulationTimeDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expectedOperationResponseTimeDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expectedNumberOfElementsDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expectedQueueLengthDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expectedTaskCountDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cooldownTimeConstraintDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cooldownMaxScalingOperationsConstraintDegreeEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1042,6 +1138,126 @@ public class specificPackageImpl extends EPackageImpl implements specificPackage
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getStepAdjustmentDegree() {
+		return stepAdjustmentDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getExpectedCPUUtilizationDegree() {
+		return expectedCPUUtilizationDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getExpectedMemoryUtilizationDegree() {
+		return expectedMemoryUtilizationDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getExpectedHDDUtilizationDegree() {
+		return expectedHDDUtilizationDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getExpectedNetworkUtilizationDegree() {
+		return expectedNetworkUtilizationDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getExpectedSimulationTimeDegree() {
+		return expectedSimulationTimeDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getExpectedOperationResponseTimeDegree() {
+		return expectedOperationResponseTimeDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getExpectedNumberOfElementsDegree() {
+		return expectedNumberOfElementsDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getExpectedQueueLengthDegree() {
+		return expectedQueueLengthDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getExpectedTaskCountDegree() {
+		return expectedTaskCountDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getCooldownTimeConstraintDegree() {
+		return cooldownTimeConstraintDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getCooldownMaxScalingOperationsConstraintDegree() {
+		return cooldownMaxScalingOperationsConstraintDegreeEClass;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -1178,6 +1394,31 @@ public class specificPackageImpl extends EPackageImpl implements specificPackage
 		complementumVisnetisDegreeEClass = createEClass(COMPLEMENTUM_VISNETIS_DEGREE);
 
 		targetGroupSizeMaxConstraintDegreeEClass = createEClass(TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE);
+
+		stepAdjustmentDegreeEClass = createEClass(STEP_ADJUSTMENT_DEGREE);
+
+		expectedCPUUtilizationDegreeEClass = createEClass(EXPECTED_CPU_UTILIZATION_DEGREE);
+
+		expectedMemoryUtilizationDegreeEClass = createEClass(EXPECTED_MEMORY_UTILIZATION_DEGREE);
+
+		expectedHDDUtilizationDegreeEClass = createEClass(EXPECTED_HDD_UTILIZATION_DEGREE);
+
+		expectedNetworkUtilizationDegreeEClass = createEClass(EXPECTED_NETWORK_UTILIZATION_DEGREE);
+
+		expectedSimulationTimeDegreeEClass = createEClass(EXPECTED_SIMULATION_TIME_DEGREE);
+
+		expectedOperationResponseTimeDegreeEClass = createEClass(EXPECTED_OPERATION_RESPONSE_TIME_DEGREE);
+
+		expectedNumberOfElementsDegreeEClass = createEClass(EXPECTED_NUMBER_OF_ELEMENTS_DEGREE);
+
+		expectedQueueLengthDegreeEClass = createEClass(EXPECTED_QUEUE_LENGTH_DEGREE);
+
+		expectedTaskCountDegreeEClass = createEClass(EXPECTED_TASK_COUNT_DEGREE);
+
+		cooldownTimeConstraintDegreeEClass = createEClass(COOLDOWN_TIME_CONSTRAINT_DEGREE);
+
+		cooldownMaxScalingOperationsConstraintDegreeEClass = createEClass(
+				COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE);
 	}
 
 	/**
@@ -1273,6 +1514,18 @@ public class specificPackageImpl extends EPackageImpl implements specificPackage
 		advicePlacementDegreeEClass.getESuperTypes().add(this.getIndicatorDegree());
 		complementumVisnetisDegreeEClass.getESuperTypes().add(this.getClassAsReferenceDegree());
 		targetGroupSizeMaxConstraintDegreeEClass.getESuperTypes().add(this.getDiscreteRangeDegree());
+		stepAdjustmentDegreeEClass.getESuperTypes().add(this.getDiscreteRangeDegree());
+		expectedCPUUtilizationDegreeEClass.getESuperTypes().add(this.getContinuousRangeDegree());
+		expectedMemoryUtilizationDegreeEClass.getESuperTypes().add(this.getContinuousRangeDegree());
+		expectedHDDUtilizationDegreeEClass.getESuperTypes().add(this.getContinuousRangeDegree());
+		expectedNetworkUtilizationDegreeEClass.getESuperTypes().add(this.getContinuousRangeDegree());
+		expectedSimulationTimeDegreeEClass.getESuperTypes().add(this.getContinuousRangeDegree());
+		expectedOperationResponseTimeDegreeEClass.getESuperTypes().add(this.getContinuousRangeDegree());
+		expectedNumberOfElementsDegreeEClass.getESuperTypes().add(this.getDiscreteRangeDegree());
+		expectedQueueLengthDegreeEClass.getESuperTypes().add(this.getDiscreteRangeDegree());
+		expectedTaskCountDegreeEClass.getESuperTypes().add(this.getDiscreteRangeDegree());
+		cooldownTimeConstraintDegreeEClass.getESuperTypes().add(this.getContinuousRangeDegree());
+		cooldownMaxScalingOperationsConstraintDegreeEClass.getESuperTypes().add(this.getDiscreteRangeDegree());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(exchangeComponentRuleEClass, ExchangeComponentRule.class, "ExchangeComponentRule", !IS_ABSTRACT,
@@ -1470,6 +1723,43 @@ public class specificPackageImpl extends EPackageImpl implements specificPackage
 
 		initEClass(targetGroupSizeMaxConstraintDegreeEClass, TargetGroupSizeMaxConstraintDegree.class,
 				"TargetGroupSizeMaxConstraintDegree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(stepAdjustmentDegreeEClass, StepAdjustmentDegree.class, "StepAdjustmentDegree", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(expectedCPUUtilizationDegreeEClass, ExpectedCPUUtilizationDegree.class,
+				"ExpectedCPUUtilizationDegree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(expectedMemoryUtilizationDegreeEClass, ExpectedMemoryUtilizationDegree.class,
+				"ExpectedMemoryUtilizationDegree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(expectedHDDUtilizationDegreeEClass, ExpectedHDDUtilizationDegree.class,
+				"ExpectedHDDUtilizationDegree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(expectedNetworkUtilizationDegreeEClass, ExpectedNetworkUtilizationDegree.class,
+				"ExpectedNetworkUtilizationDegree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(expectedSimulationTimeDegreeEClass, ExpectedSimulationTimeDegree.class,
+				"ExpectedSimulationTimeDegree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(expectedOperationResponseTimeDegreeEClass, ExpectedOperationResponseTimeDegree.class,
+				"ExpectedOperationResponseTimeDegree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(expectedNumberOfElementsDegreeEClass, ExpectedNumberOfElementsDegree.class,
+				"ExpectedNumberOfElementsDegree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(expectedQueueLengthDegreeEClass, ExpectedQueueLengthDegree.class, "ExpectedQueueLengthDegree",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(expectedTaskCountDegreeEClass, ExpectedTaskCountDegree.class, "ExpectedTaskCountDegree",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(cooldownTimeConstraintDegreeEClass, CooldownTimeConstraintDegree.class,
+				"CooldownTimeConstraintDegree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(cooldownMaxScalingOperationsConstraintDegreeEClass,
+				CooldownMaxScalingOperationsConstraintDegree.class, "CooldownMaxScalingOperationsConstraintDegree",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 	}
 
 } // specificPackageImpl

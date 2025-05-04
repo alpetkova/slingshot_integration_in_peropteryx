@@ -471,5 +471,20 @@
     <eClassifiers xsi:type="ecore:EClass" name="ComplementumVisnetisDegree" eSuperTypes="#//specific/ClassAsReferenceDegree"/>
     <eClassifiers xsi:type="ecore:EClass" name="TargetGroupSizeMaxConstraintDegree"
         eSuperTypes="#//specific/DiscreteRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="StepAdjustmentDegree" eSuperTypes="#//specific/DiscreteRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExpectedCPUUtilizationDegree" eSuperTypes="#//specific/ContinuousRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExpectedMemoryUtilizationDegree" eSuperTypes="#//specific/ContinuousRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExpectedHDDUtilizationDegree" eSuperTypes="#//specific/ContinuousRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExpectedNetworkUtilizationDegree"
+        eSuperTypes="#//specific/ContinuousRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExpectedSimulationTimeDegree" eSuperTypes="#//specific/ContinuousRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExpectedOperationResponseTimeDegree"
+        eSuperTypes="#//specific/ContinuousRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExpectedNumberOfElementsDegree" eSuperTypes="#//specific/DiscreteRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExpectedQueueLengthDegree" eSuperTypes="#//specific/DiscreteRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExpectedTaskCountDegree" eSuperTypes="#//specific/DiscreteRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CooldownTimeConstraintDegree" eSuperTypes="#//specific/ContinuousRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CooldownMaxScalingOperationsConstraintDegree"
+        eSuperTypes="#//specific/DiscreteRangeDegree"/>
   </eSubpackages>
 </ecore:EPackage>

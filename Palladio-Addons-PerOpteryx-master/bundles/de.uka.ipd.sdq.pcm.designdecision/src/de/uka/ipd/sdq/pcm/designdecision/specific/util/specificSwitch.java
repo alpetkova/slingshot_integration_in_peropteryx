@@ -26,6 +26,8 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ComplementumVisnetisDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousRangeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DataTypeDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteDegree;
@@ -33,6 +35,15 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteRangeDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.EnumDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExchangeComponentRule;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedHDDUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNetworkUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNumberOfElementsDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedOperationResponseTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedSimulationTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureCompletionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureConfigDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureDegree;
@@ -54,6 +65,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDe
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegreeWithComponentChange;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceSelectionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.SchedulingPolicyDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringSetDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
@@ -997,6 +1009,292 @@ public class specificSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case specificPackage.STEP_ADJUSTMENT_DEGREE: {
+			StepAdjustmentDegree stepAdjustmentDegree = (StepAdjustmentDegree) theEObject;
+			T result = caseStepAdjustmentDegree(stepAdjustmentDegree);
+			if (result == null)
+				result = caseDiscreteRangeDegree(stepAdjustmentDegree);
+			if (result == null)
+				result = caseRangeDegree(stepAdjustmentDegree);
+			if (result == null)
+				result = caseDiscreteDegree(stepAdjustmentDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(stepAdjustmentDegree);
+			if (result == null)
+				result = caseDataTypeDegree(stepAdjustmentDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(stepAdjustmentDegree);
+			if (result == null)
+				result = caseNamedElement(stepAdjustmentDegree);
+			if (result == null)
+				result = casePCMBaseClass(stepAdjustmentDegree);
+			if (result == null)
+				result = casePCMClass(stepAdjustmentDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.EXPECTED_CPU_UTILIZATION_DEGREE: {
+			ExpectedCPUUtilizationDegree expectedCPUUtilizationDegree = (ExpectedCPUUtilizationDegree) theEObject;
+			T result = caseExpectedCPUUtilizationDegree(expectedCPUUtilizationDegree);
+			if (result == null)
+				result = caseContinuousRangeDegree(expectedCPUUtilizationDegree);
+			if (result == null)
+				result = caseRangeDegree(expectedCPUUtilizationDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(expectedCPUUtilizationDegree);
+			if (result == null)
+				result = caseDataTypeDegree(expectedCPUUtilizationDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(expectedCPUUtilizationDegree);
+			if (result == null)
+				result = caseNamedElement(expectedCPUUtilizationDegree);
+			if (result == null)
+				result = casePCMBaseClass(expectedCPUUtilizationDegree);
+			if (result == null)
+				result = casePCMClass(expectedCPUUtilizationDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.EXPECTED_MEMORY_UTILIZATION_DEGREE: {
+			ExpectedMemoryUtilizationDegree expectedMemoryUtilizationDegree = (ExpectedMemoryUtilizationDegree) theEObject;
+			T result = caseExpectedMemoryUtilizationDegree(expectedMemoryUtilizationDegree);
+			if (result == null)
+				result = caseContinuousRangeDegree(expectedMemoryUtilizationDegree);
+			if (result == null)
+				result = caseRangeDegree(expectedMemoryUtilizationDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(expectedMemoryUtilizationDegree);
+			if (result == null)
+				result = caseDataTypeDegree(expectedMemoryUtilizationDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(expectedMemoryUtilizationDegree);
+			if (result == null)
+				result = caseNamedElement(expectedMemoryUtilizationDegree);
+			if (result == null)
+				result = casePCMBaseClass(expectedMemoryUtilizationDegree);
+			if (result == null)
+				result = casePCMClass(expectedMemoryUtilizationDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.EXPECTED_HDD_UTILIZATION_DEGREE: {
+			ExpectedHDDUtilizationDegree expectedHDDUtilizationDegree = (ExpectedHDDUtilizationDegree) theEObject;
+			T result = caseExpectedHDDUtilizationDegree(expectedHDDUtilizationDegree);
+			if (result == null)
+				result = caseContinuousRangeDegree(expectedHDDUtilizationDegree);
+			if (result == null)
+				result = caseRangeDegree(expectedHDDUtilizationDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(expectedHDDUtilizationDegree);
+			if (result == null)
+				result = caseDataTypeDegree(expectedHDDUtilizationDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(expectedHDDUtilizationDegree);
+			if (result == null)
+				result = caseNamedElement(expectedHDDUtilizationDegree);
+			if (result == null)
+				result = casePCMBaseClass(expectedHDDUtilizationDegree);
+			if (result == null)
+				result = casePCMClass(expectedHDDUtilizationDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.EXPECTED_NETWORK_UTILIZATION_DEGREE: {
+			ExpectedNetworkUtilizationDegree expectedNetworkUtilizationDegree = (ExpectedNetworkUtilizationDegree) theEObject;
+			T result = caseExpectedNetworkUtilizationDegree(expectedNetworkUtilizationDegree);
+			if (result == null)
+				result = caseContinuousRangeDegree(expectedNetworkUtilizationDegree);
+			if (result == null)
+				result = caseRangeDegree(expectedNetworkUtilizationDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(expectedNetworkUtilizationDegree);
+			if (result == null)
+				result = caseDataTypeDegree(expectedNetworkUtilizationDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(expectedNetworkUtilizationDegree);
+			if (result == null)
+				result = caseNamedElement(expectedNetworkUtilizationDegree);
+			if (result == null)
+				result = casePCMBaseClass(expectedNetworkUtilizationDegree);
+			if (result == null)
+				result = casePCMClass(expectedNetworkUtilizationDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.EXPECTED_SIMULATION_TIME_DEGREE: {
+			ExpectedSimulationTimeDegree expectedSimulationTimeDegree = (ExpectedSimulationTimeDegree) theEObject;
+			T result = caseExpectedSimulationTimeDegree(expectedSimulationTimeDegree);
+			if (result == null)
+				result = caseContinuousRangeDegree(expectedSimulationTimeDegree);
+			if (result == null)
+				result = caseRangeDegree(expectedSimulationTimeDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(expectedSimulationTimeDegree);
+			if (result == null)
+				result = caseDataTypeDegree(expectedSimulationTimeDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(expectedSimulationTimeDegree);
+			if (result == null)
+				result = caseNamedElement(expectedSimulationTimeDegree);
+			if (result == null)
+				result = casePCMBaseClass(expectedSimulationTimeDegree);
+			if (result == null)
+				result = casePCMClass(expectedSimulationTimeDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.EXPECTED_OPERATION_RESPONSE_TIME_DEGREE: {
+			ExpectedOperationResponseTimeDegree expectedOperationResponseTimeDegree = (ExpectedOperationResponseTimeDegree) theEObject;
+			T result = caseExpectedOperationResponseTimeDegree(expectedOperationResponseTimeDegree);
+			if (result == null)
+				result = caseContinuousRangeDegree(expectedOperationResponseTimeDegree);
+			if (result == null)
+				result = caseRangeDegree(expectedOperationResponseTimeDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(expectedOperationResponseTimeDegree);
+			if (result == null)
+				result = caseDataTypeDegree(expectedOperationResponseTimeDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(expectedOperationResponseTimeDegree);
+			if (result == null)
+				result = caseNamedElement(expectedOperationResponseTimeDegree);
+			if (result == null)
+				result = casePCMBaseClass(expectedOperationResponseTimeDegree);
+			if (result == null)
+				result = casePCMClass(expectedOperationResponseTimeDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.EXPECTED_NUMBER_OF_ELEMENTS_DEGREE: {
+			ExpectedNumberOfElementsDegree expectedNumberOfElementsDegree = (ExpectedNumberOfElementsDegree) theEObject;
+			T result = caseExpectedNumberOfElementsDegree(expectedNumberOfElementsDegree);
+			if (result == null)
+				result = caseDiscreteRangeDegree(expectedNumberOfElementsDegree);
+			if (result == null)
+				result = caseRangeDegree(expectedNumberOfElementsDegree);
+			if (result == null)
+				result = caseDiscreteDegree(expectedNumberOfElementsDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(expectedNumberOfElementsDegree);
+			if (result == null)
+				result = caseDataTypeDegree(expectedNumberOfElementsDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(expectedNumberOfElementsDegree);
+			if (result == null)
+				result = caseNamedElement(expectedNumberOfElementsDegree);
+			if (result == null)
+				result = casePCMBaseClass(expectedNumberOfElementsDegree);
+			if (result == null)
+				result = casePCMClass(expectedNumberOfElementsDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.EXPECTED_QUEUE_LENGTH_DEGREE: {
+			ExpectedQueueLengthDegree expectedQueueLengthDegree = (ExpectedQueueLengthDegree) theEObject;
+			T result = caseExpectedQueueLengthDegree(expectedQueueLengthDegree);
+			if (result == null)
+				result = caseDiscreteRangeDegree(expectedQueueLengthDegree);
+			if (result == null)
+				result = caseRangeDegree(expectedQueueLengthDegree);
+			if (result == null)
+				result = caseDiscreteDegree(expectedQueueLengthDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(expectedQueueLengthDegree);
+			if (result == null)
+				result = caseDataTypeDegree(expectedQueueLengthDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(expectedQueueLengthDegree);
+			if (result == null)
+				result = caseNamedElement(expectedQueueLengthDegree);
+			if (result == null)
+				result = casePCMBaseClass(expectedQueueLengthDegree);
+			if (result == null)
+				result = casePCMClass(expectedQueueLengthDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.EXPECTED_TASK_COUNT_DEGREE: {
+			ExpectedTaskCountDegree expectedTaskCountDegree = (ExpectedTaskCountDegree) theEObject;
+			T result = caseExpectedTaskCountDegree(expectedTaskCountDegree);
+			if (result == null)
+				result = caseDiscreteRangeDegree(expectedTaskCountDegree);
+			if (result == null)
+				result = caseRangeDegree(expectedTaskCountDegree);
+			if (result == null)
+				result = caseDiscreteDegree(expectedTaskCountDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(expectedTaskCountDegree);
+			if (result == null)
+				result = caseDataTypeDegree(expectedTaskCountDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(expectedTaskCountDegree);
+			if (result == null)
+				result = caseNamedElement(expectedTaskCountDegree);
+			if (result == null)
+				result = casePCMBaseClass(expectedTaskCountDegree);
+			if (result == null)
+				result = casePCMClass(expectedTaskCountDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.COOLDOWN_TIME_CONSTRAINT_DEGREE: {
+			CooldownTimeConstraintDegree cooldownTimeConstraintDegree = (CooldownTimeConstraintDegree) theEObject;
+			T result = caseCooldownTimeConstraintDegree(cooldownTimeConstraintDegree);
+			if (result == null)
+				result = caseContinuousRangeDegree(cooldownTimeConstraintDegree);
+			if (result == null)
+				result = caseRangeDegree(cooldownTimeConstraintDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(cooldownTimeConstraintDegree);
+			if (result == null)
+				result = caseDataTypeDegree(cooldownTimeConstraintDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(cooldownTimeConstraintDegree);
+			if (result == null)
+				result = caseNamedElement(cooldownTimeConstraintDegree);
+			if (result == null)
+				result = casePCMBaseClass(cooldownTimeConstraintDegree);
+			if (result == null)
+				result = casePCMClass(cooldownTimeConstraintDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE: {
+			CooldownMaxScalingOperationsConstraintDegree cooldownMaxScalingOperationsConstraintDegree = (CooldownMaxScalingOperationsConstraintDegree) theEObject;
+			T result = caseCooldownMaxScalingOperationsConstraintDegree(cooldownMaxScalingOperationsConstraintDegree);
+			if (result == null)
+				result = caseDiscreteRangeDegree(cooldownMaxScalingOperationsConstraintDegree);
+			if (result == null)
+				result = caseRangeDegree(cooldownMaxScalingOperationsConstraintDegree);
+			if (result == null)
+				result = caseDiscreteDegree(cooldownMaxScalingOperationsConstraintDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(cooldownMaxScalingOperationsConstraintDegree);
+			if (result == null)
+				result = caseDataTypeDegree(cooldownMaxScalingOperationsConstraintDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(cooldownMaxScalingOperationsConstraintDegree);
+			if (result == null)
+				result = caseNamedElement(cooldownMaxScalingOperationsConstraintDegree);
+			if (result == null)
+				result = casePCMBaseClass(cooldownMaxScalingOperationsConstraintDegree);
+			if (result == null)
+				result = casePCMClass(cooldownMaxScalingOperationsConstraintDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
@@ -1619,6 +1917,186 @@ public class specificSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTargetGroupSizeMaxConstraintDegree(TargetGroupSizeMaxConstraintDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Step Adjustment Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Step Adjustment Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStepAdjustmentDegree(StepAdjustmentDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expected CPU Utilization Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expected CPU Utilization Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpectedCPUUtilizationDegree(ExpectedCPUUtilizationDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expected Memory Utilization Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expected Memory Utilization Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpectedMemoryUtilizationDegree(ExpectedMemoryUtilizationDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expected HDD Utilization Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expected HDD Utilization Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpectedHDDUtilizationDegree(ExpectedHDDUtilizationDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expected Network Utilization Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expected Network Utilization Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpectedNetworkUtilizationDegree(ExpectedNetworkUtilizationDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expected Simulation Time Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expected Simulation Time Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpectedSimulationTimeDegree(ExpectedSimulationTimeDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expected Operation Response Time Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expected Operation Response Time Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpectedOperationResponseTimeDegree(ExpectedOperationResponseTimeDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expected Number Of Elements Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expected Number Of Elements Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpectedNumberOfElementsDegree(ExpectedNumberOfElementsDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expected Queue Length Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expected Queue Length Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpectedQueueLengthDegree(ExpectedQueueLengthDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expected Task Count Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expected Task Count Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpectedTaskCountDegree(ExpectedTaskCountDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Cooldown Time Constraint Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Cooldown Time Constraint Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCooldownTimeConstraintDegree(CooldownTimeConstraintDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Cooldown Max Scaling Operations Constraint Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Cooldown Max Scaling Operations Constraint Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCooldownMaxScalingOperationsConstraintDegree(CooldownMaxScalingOperationsConstraintDegree object) {
 		return null;
 	}
 

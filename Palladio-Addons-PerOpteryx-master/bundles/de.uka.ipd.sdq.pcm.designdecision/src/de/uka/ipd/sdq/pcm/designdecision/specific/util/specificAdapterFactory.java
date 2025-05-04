@@ -27,6 +27,8 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ComplementumVisnetisDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousRangeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DataTypeDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteDegree;
@@ -34,6 +36,15 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteRangeDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.EnumDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExchangeComponentRule;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedHDDUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNetworkUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNumberOfElementsDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedOperationResponseTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedSimulationTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureCompletionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureConfigDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureDegree;
@@ -55,6 +66,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDe
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegreeWithComponentChange;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceSelectionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.SchedulingPolicyDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringSetDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
@@ -337,6 +349,67 @@ public class specificAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseTargetGroupSizeMaxConstraintDegree(TargetGroupSizeMaxConstraintDegree object) {
 			return createTargetGroupSizeMaxConstraintDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseStepAdjustmentDegree(StepAdjustmentDegree object) {
+			return createStepAdjustmentDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseExpectedCPUUtilizationDegree(ExpectedCPUUtilizationDegree object) {
+			return createExpectedCPUUtilizationDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseExpectedMemoryUtilizationDegree(ExpectedMemoryUtilizationDegree object) {
+			return createExpectedMemoryUtilizationDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseExpectedHDDUtilizationDegree(ExpectedHDDUtilizationDegree object) {
+			return createExpectedHDDUtilizationDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseExpectedNetworkUtilizationDegree(ExpectedNetworkUtilizationDegree object) {
+			return createExpectedNetworkUtilizationDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseExpectedSimulationTimeDegree(ExpectedSimulationTimeDegree object) {
+			return createExpectedSimulationTimeDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseExpectedOperationResponseTimeDegree(ExpectedOperationResponseTimeDegree object) {
+			return createExpectedOperationResponseTimeDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseExpectedNumberOfElementsDegree(ExpectedNumberOfElementsDegree object) {
+			return createExpectedNumberOfElementsDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseExpectedQueueLengthDegree(ExpectedQueueLengthDegree object) {
+			return createExpectedQueueLengthDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseExpectedTaskCountDegree(ExpectedTaskCountDegree object) {
+			return createExpectedTaskCountDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseCooldownTimeConstraintDegree(CooldownTimeConstraintDegree object) {
+			return createCooldownTimeConstraintDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseCooldownMaxScalingOperationsConstraintDegree(
+				CooldownMaxScalingOperationsConstraintDegree object) {
+			return createCooldownMaxScalingOperationsConstraintDegreeAdapter();
 		}
 
 		@Override
@@ -985,6 +1058,174 @@ public class specificAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTargetGroupSizeMaxConstraintDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree <em>Step Adjustment Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree
+	 * @generated
+	 */
+	public Adapter createStepAdjustmentDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree <em>Expected CPU Utilization Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree
+	 * @generated
+	 */
+	public Adapter createExpectedCPUUtilizationDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree <em>Expected Memory Utilization Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree
+	 * @generated
+	 */
+	public Adapter createExpectedMemoryUtilizationDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedHDDUtilizationDegree <em>Expected HDD Utilization Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedHDDUtilizationDegree
+	 * @generated
+	 */
+	public Adapter createExpectedHDDUtilizationDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNetworkUtilizationDegree <em>Expected Network Utilization Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNetworkUtilizationDegree
+	 * @generated
+	 */
+	public Adapter createExpectedNetworkUtilizationDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedSimulationTimeDegree <em>Expected Simulation Time Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedSimulationTimeDegree
+	 * @generated
+	 */
+	public Adapter createExpectedSimulationTimeDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedOperationResponseTimeDegree <em>Expected Operation Response Time Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedOperationResponseTimeDegree
+	 * @generated
+	 */
+	public Adapter createExpectedOperationResponseTimeDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNumberOfElementsDegree <em>Expected Number Of Elements Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNumberOfElementsDegree
+	 * @generated
+	 */
+	public Adapter createExpectedNumberOfElementsDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree <em>Expected Queue Length Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree
+	 * @generated
+	 */
+	public Adapter createExpectedQueueLengthDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree <em>Expected Task Count Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree
+	 * @generated
+	 */
+	public Adapter createExpectedTaskCountDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree <em>Cooldown Time Constraint Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree
+	 * @generated
+	 */
+	public Adapter createCooldownTimeConstraintDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree <em>Cooldown Max Scaling Operations Constraint Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree
+	 * @generated
+	 */
+	public Adapter createCooldownMaxScalingOperationsConstraintDegreeAdapter() {
 		return null;
 	}
 

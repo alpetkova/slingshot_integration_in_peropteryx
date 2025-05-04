@@ -293,6 +293,114 @@ public interface specificFactory extends EFactory {
 	TargetGroupSizeMaxConstraintDegree createTargetGroupSizeMaxConstraintDegree();
 
 	/**
+	 * Returns a new object of class '<em>Step Adjustment Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Step Adjustment Degree</em>'.
+	 * @generated
+	 */
+	StepAdjustmentDegree createStepAdjustmentDegree();
+
+	/**
+	 * Returns a new object of class '<em>Expected CPU Utilization Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expected CPU Utilization Degree</em>'.
+	 * @generated
+	 */
+	ExpectedCPUUtilizationDegree createExpectedCPUUtilizationDegree();
+
+	/**
+	 * Returns a new object of class '<em>Expected Memory Utilization Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expected Memory Utilization Degree</em>'.
+	 * @generated
+	 */
+	ExpectedMemoryUtilizationDegree createExpectedMemoryUtilizationDegree();
+
+	/**
+	 * Returns a new object of class '<em>Expected HDD Utilization Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expected HDD Utilization Degree</em>'.
+	 * @generated
+	 */
+	ExpectedHDDUtilizationDegree createExpectedHDDUtilizationDegree();
+
+	/**
+	 * Returns a new object of class '<em>Expected Network Utilization Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expected Network Utilization Degree</em>'.
+	 * @generated
+	 */
+	ExpectedNetworkUtilizationDegree createExpectedNetworkUtilizationDegree();
+
+	/**
+	 * Returns a new object of class '<em>Expected Simulation Time Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expected Simulation Time Degree</em>'.
+	 * @generated
+	 */
+	ExpectedSimulationTimeDegree createExpectedSimulationTimeDegree();
+
+	/**
+	 * Returns a new object of class '<em>Expected Operation Response Time Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expected Operation Response Time Degree</em>'.
+	 * @generated
+	 */
+	ExpectedOperationResponseTimeDegree createExpectedOperationResponseTimeDegree();
+
+	/**
+	 * Returns a new object of class '<em>Expected Number Of Elements Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expected Number Of Elements Degree</em>'.
+	 * @generated
+	 */
+	ExpectedNumberOfElementsDegree createExpectedNumberOfElementsDegree();
+
+	/**
+	 * Returns a new object of class '<em>Expected Queue Length Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expected Queue Length Degree</em>'.
+	 * @generated
+	 */
+	ExpectedQueueLengthDegree createExpectedQueueLengthDegree();
+
+	/**
+	 * Returns a new object of class '<em>Expected Task Count Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expected Task Count Degree</em>'.
+	 * @generated
+	 */
+	ExpectedTaskCountDegree createExpectedTaskCountDegree();
+
+	/**
+	 * Returns a new object of class '<em>Cooldown Time Constraint Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Cooldown Time Constraint Degree</em>'.
+	 * @generated
+	 */
+	CooldownTimeConstraintDegree createCooldownTimeConstraintDegree();
+
+	/**
+	 * Returns a new object of class '<em>Cooldown Max Scaling Operations Constraint Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Cooldown Max Scaling Operations Constraint Degree</em>'.
+	 * @generated
+	 */
+	CooldownMaxScalingOperationsConstraintDegree createCooldownMaxScalingOperationsConstraintDegree();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the package supported by this factory.

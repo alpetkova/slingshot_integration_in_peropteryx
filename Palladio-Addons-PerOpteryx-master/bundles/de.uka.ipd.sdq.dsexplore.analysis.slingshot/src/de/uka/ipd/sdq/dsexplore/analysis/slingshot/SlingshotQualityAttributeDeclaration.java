@@ -10,8 +10,8 @@ import de.uka.ipd.sdq.dsexplore.qml.contracttype.QMLContractType.Dimension;
 
 /**
  * Defines the Dimensions of this analyzer.
- *
- * @author Dominik Fuchss
+ * Based on Simucom
+ * @author Dominik Fuchss (original author)
  *
  */
 public class SlingshotQualityAttributeDeclaration extends AbstractPerformanceAttributeDeclaration implements IAnalysisQualityAttributeDeclaration {

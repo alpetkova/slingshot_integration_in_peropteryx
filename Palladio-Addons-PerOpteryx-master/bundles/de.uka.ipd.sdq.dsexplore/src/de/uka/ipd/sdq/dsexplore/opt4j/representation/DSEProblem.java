@@ -29,6 +29,11 @@ import org.palladiosimulator.pcm.resourcetype.SchedulingPolicy;
 import org.palladiosimulator.solver.models.PCMInstance;
 
 import org.palladiosimulator.spd.constraints.target.TargetGroupSizeConstraint;
+import org.palladiosimulator.spd.adjustments.StepAdjustment;
+import org.palladiosimulator.spd.triggers.expectations.ExpectedPercentage;
+import org.palladiosimulator.spd.triggers.expectations.ExpectedTime;
+import org.palladiosimulator.spd.triggers.expectations.ExpectedCount;
+import org.palladiosimulator.spd.constraints.policy.CooldownConstraint;
 
 import de.uka.ipd.sdq.dsexplore.Modules;
 import de.uka.ipd.sdq.dsexplore.designdecisions.alternativecomponents.AlternativeComponent;
@@ -72,6 +77,18 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ProcessingResourceDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.SchedulingPolicyDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedHDDUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNetworkUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedSimulationTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedOperationResponseTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNumberOfElementsDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.specificFactory;
 import de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificFactoryImpl;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
@@ -290,7 +307,36 @@ public class DSEProblem {
 					} else {
 						throw new RuntimeException("Invalid degree of freedom " + dd.toString() + ". The referenced ProcessingResourceType is not available in the given ResourceContainer.");
 					}
-				} else {
+					
+				} else if (dd instanceof ExpectedCPUUtilizationDegree) {
+					final ExpectedPercentage expPerc = (ExpectedPercentage) dd.getPrimaryChanged();
+					choice.setChosenValue(expPerc.getValue());
+	
+				} else if (dd instanceof ExpectedMemoryUtilizationDegree) {
+					final ExpectedPercentage expPerc = (ExpectedPercentage) dd.getPrimaryChanged();
+					choice.setChosenValue(expPerc.getValue());
+	
+				}else if (dd instanceof ExpectedHDDUtilizationDegree) {
+					final ExpectedPercentage expPerc = (ExpectedPercentage) dd.getPrimaryChanged();
+					choice.setChosenValue(expPerc.getValue());
+	
+				}else if (dd instanceof ExpectedNetworkUtilizationDegree) {
+					final ExpectedPercentage expPerc = (ExpectedPercentage) dd.getPrimaryChanged();
+					choice.setChosenValue(expPerc.getValue());
+	
+				}else if (dd instanceof ExpectedSimulationTimeDegree) {
+					final ExpectedTime expTime = (ExpectedTime) dd.getPrimaryChanged();
+					choice.setChosenValue(expTime.getValue());
+	
+				}else if (dd instanceof ExpectedOperationResponseTimeDegree) {
+					final ExpectedTime expTime = (ExpectedTime) dd.getPrimaryChanged();
+					choice.setChosenValue(expTime.getValue());
+	
+				}else if (dd instanceof CooldownTimeConstraintDegree) {
+					final CooldownConstraint cooltime = (CooldownConstraint) dd.getPrimaryChanged();
+					choice.setChosenValue(cooltime.getCooldownTime());
+	
+				}else {
 					this.throwUnknownDegreeException(dd);
 				}
 
@@ -350,7 +396,27 @@ public class DSEProblem {
 				} else if (degree instanceof TargetGroupSizeMaxConstraintDegree) {
 					final TargetGroupSizeConstraint tgsc = (TargetGroupSizeConstraint) entity;
 					choice.setChosenValue(tgsc.getMaxSize());
-					
+						
+				} else if (degree instanceof StepAdjustmentDegree) {
+					final StepAdjustment stadj = (StepAdjustment) entity;
+					choice.setChosenValue(stadj.getStepValue());
+						
+				} else if (degree instanceof ExpectedNumberOfElementsDegree) {
+					final ExpectedCount expCount = (ExpectedCount) entity;
+					choice.setChosenValue(expCount.getCount());
+						
+				}else if (degree instanceof ExpectedQueueLengthDegree) {
+					final ExpectedCount expCount = (ExpectedCount) entity;
+					choice.setChosenValue(expCount.getCount());
+						
+				}else if (degree instanceof ExpectedTaskCountDegree) {
+					final ExpectedCount expCount = (ExpectedCount) entity;
+					choice.setChosenValue(expCount.getCount());
+						
+				}else if (degree instanceof CooldownMaxScalingOperationsConstraintDegree) {
+					final CooldownConstraint coolmaxscop = (CooldownConstraint) entity;
+					choice.setChosenValue(coolmaxscop.getMaxScalingOperations());
+						
 				} else {
 					this.throwUnknownDegreeException(dd);
 				}

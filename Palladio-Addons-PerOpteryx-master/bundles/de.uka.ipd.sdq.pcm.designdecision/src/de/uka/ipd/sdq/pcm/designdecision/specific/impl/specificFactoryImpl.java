@@ -18,10 +18,21 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ComplementumVisnetisDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousRangeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.DiscreteRangeDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExchangeComponentRule;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedHDDUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNetworkUtilizationDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedNumberOfElementsDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedOperationResponseTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedSimulationTimeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureCompletionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureGroupDegree;
@@ -36,6 +47,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDe
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegreeWithComponentChange;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceSelectionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.SchedulingPolicyDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.specificFactory;
@@ -140,6 +152,30 @@ public class specificFactoryImpl extends EFactoryImpl implements specificFactory
 			return createComplementumVisnetisDegree();
 		case specificPackage.TARGET_GROUP_SIZE_MAX_CONSTRAINT_DEGREE:
 			return createTargetGroupSizeMaxConstraintDegree();
+		case specificPackage.STEP_ADJUSTMENT_DEGREE:
+			return createStepAdjustmentDegree();
+		case specificPackage.EXPECTED_CPU_UTILIZATION_DEGREE:
+			return createExpectedCPUUtilizationDegree();
+		case specificPackage.EXPECTED_MEMORY_UTILIZATION_DEGREE:
+			return createExpectedMemoryUtilizationDegree();
+		case specificPackage.EXPECTED_HDD_UTILIZATION_DEGREE:
+			return createExpectedHDDUtilizationDegree();
+		case specificPackage.EXPECTED_NETWORK_UTILIZATION_DEGREE:
+			return createExpectedNetworkUtilizationDegree();
+		case specificPackage.EXPECTED_SIMULATION_TIME_DEGREE:
+			return createExpectedSimulationTimeDegree();
+		case specificPackage.EXPECTED_OPERATION_RESPONSE_TIME_DEGREE:
+			return createExpectedOperationResponseTimeDegree();
+		case specificPackage.EXPECTED_NUMBER_OF_ELEMENTS_DEGREE:
+			return createExpectedNumberOfElementsDegree();
+		case specificPackage.EXPECTED_QUEUE_LENGTH_DEGREE:
+			return createExpectedQueueLengthDegree();
+		case specificPackage.EXPECTED_TASK_COUNT_DEGREE:
+			return createExpectedTaskCountDegree();
+		case specificPackage.COOLDOWN_TIME_CONSTRAINT_DEGREE:
+			return createCooldownTimeConstraintDegree();
+		case specificPackage.COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE:
+			return createCooldownMaxScalingOperationsConstraintDegree();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -449,6 +485,138 @@ public class specificFactoryImpl extends EFactoryImpl implements specificFactory
 	public TargetGroupSizeMaxConstraintDegree createTargetGroupSizeMaxConstraintDegree() {
 		TargetGroupSizeMaxConstraintDegreeImpl targetGroupSizeMaxConstraintDegree = new TargetGroupSizeMaxConstraintDegreeImpl();
 		return targetGroupSizeMaxConstraintDegree;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public StepAdjustmentDegree createStepAdjustmentDegree() {
+		StepAdjustmentDegreeImpl stepAdjustmentDegree = new StepAdjustmentDegreeImpl();
+		return stepAdjustmentDegree;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExpectedCPUUtilizationDegree createExpectedCPUUtilizationDegree() {
+		ExpectedCPUUtilizationDegreeImpl expectedCPUUtilizationDegree = new ExpectedCPUUtilizationDegreeImpl();
+		return expectedCPUUtilizationDegree;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExpectedMemoryUtilizationDegree createExpectedMemoryUtilizationDegree() {
+		ExpectedMemoryUtilizationDegreeImpl expectedMemoryUtilizationDegree = new ExpectedMemoryUtilizationDegreeImpl();
+		return expectedMemoryUtilizationDegree;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExpectedHDDUtilizationDegree createExpectedHDDUtilizationDegree() {
+		ExpectedHDDUtilizationDegreeImpl expectedHDDUtilizationDegree = new ExpectedHDDUtilizationDegreeImpl();
+		return expectedHDDUtilizationDegree;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExpectedNetworkUtilizationDegree createExpectedNetworkUtilizationDegree() {
+		ExpectedNetworkUtilizationDegreeImpl expectedNetworkUtilizationDegree = new ExpectedNetworkUtilizationDegreeImpl();
+		return expectedNetworkUtilizationDegree;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExpectedSimulationTimeDegree createExpectedSimulationTimeDegree() {
+		ExpectedSimulationTimeDegreeImpl expectedSimulationTimeDegree = new ExpectedSimulationTimeDegreeImpl();
+		return expectedSimulationTimeDegree;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExpectedOperationResponseTimeDegree createExpectedOperationResponseTimeDegree() {
+		ExpectedOperationResponseTimeDegreeImpl expectedOperationResponseTimeDegree = new ExpectedOperationResponseTimeDegreeImpl();
+		return expectedOperationResponseTimeDegree;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExpectedNumberOfElementsDegree createExpectedNumberOfElementsDegree() {
+		ExpectedNumberOfElementsDegreeImpl expectedNumberOfElementsDegree = new ExpectedNumberOfElementsDegreeImpl();
+		return expectedNumberOfElementsDegree;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExpectedQueueLengthDegree createExpectedQueueLengthDegree() {
+		ExpectedQueueLengthDegreeImpl expectedQueueLengthDegree = new ExpectedQueueLengthDegreeImpl();
+		return expectedQueueLengthDegree;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExpectedTaskCountDegree createExpectedTaskCountDegree() {
+		ExpectedTaskCountDegreeImpl expectedTaskCountDegree = new ExpectedTaskCountDegreeImpl();
+		return expectedTaskCountDegree;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CooldownTimeConstraintDegree createCooldownTimeConstraintDegree() {
+		CooldownTimeConstraintDegreeImpl cooldownTimeConstraintDegree = new CooldownTimeConstraintDegreeImpl();
+		return cooldownTimeConstraintDegree;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CooldownMaxScalingOperationsConstraintDegree createCooldownMaxScalingOperationsConstraintDegree() {
+		CooldownMaxScalingOperationsConstraintDegreeImpl cooldownMaxScalingOperationsConstraintDegree = new CooldownMaxScalingOperationsConstraintDegreeImpl();
+		return cooldownMaxScalingOperationsConstraintDegree;
 	}
 
 	/**
