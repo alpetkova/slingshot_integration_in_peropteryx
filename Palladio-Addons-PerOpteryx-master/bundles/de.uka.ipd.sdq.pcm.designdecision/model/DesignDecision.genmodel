@@ -276,6 +276,12 @@
       <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/ExpectedTaskCountDegree"/>
       <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/CooldownTimeConstraintDegree"/>
       <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/CooldownMaxScalingOperationsConstraintDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/AbsoluteAdjustmentDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/RelativeAdjustmentDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/IntervalDurationConstraintDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/IntervalOffsetConstraintDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/ThrashingConstraintDegree"/>
+      <genClasses xsi:type="genmodel:GenClass" ecoreClass="designdecision.ecore#//specific/TargetGroupSizeMinConstraintDegree"/>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

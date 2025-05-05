@@ -1062,6 +1062,144 @@ public class specificItemProviderAdapterFactory extends specificAdapterFactory
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.AbsoluteAdjustmentDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AbsoluteAdjustmentDegreeItemProvider absoluteAdjustmentDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.AbsoluteAdjustmentDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAbsoluteAdjustmentDegreeAdapter() {
+		if (absoluteAdjustmentDegreeItemProvider == null) {
+			absoluteAdjustmentDegreeItemProvider = new AbsoluteAdjustmentDegreeItemProvider(this);
+		}
+
+		return absoluteAdjustmentDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.RelativeAdjustmentDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RelativeAdjustmentDegreeItemProvider relativeAdjustmentDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.RelativeAdjustmentDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRelativeAdjustmentDegreeAdapter() {
+		if (relativeAdjustmentDegreeItemProvider == null) {
+			relativeAdjustmentDegreeItemProvider = new RelativeAdjustmentDegreeItemProvider(this);
+		}
+
+		return relativeAdjustmentDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.IntervalDurationConstraintDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IntervalDurationConstraintDegreeItemProvider intervalDurationConstraintDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.IntervalDurationConstraintDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createIntervalDurationConstraintDegreeAdapter() {
+		if (intervalDurationConstraintDegreeItemProvider == null) {
+			intervalDurationConstraintDegreeItemProvider = new IntervalDurationConstraintDegreeItemProvider(this);
+		}
+
+		return intervalDurationConstraintDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.IntervalOffsetConstraintDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IntervalOffsetConstraintDegreeItemProvider intervalOffsetConstraintDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.IntervalOffsetConstraintDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createIntervalOffsetConstraintDegreeAdapter() {
+		if (intervalOffsetConstraintDegreeItemProvider == null) {
+			intervalOffsetConstraintDegreeItemProvider = new IntervalOffsetConstraintDegreeItemProvider(this);
+		}
+
+		return intervalOffsetConstraintDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.ThrashingConstraintDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ThrashingConstraintDegreeItemProvider thrashingConstraintDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.ThrashingConstraintDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createThrashingConstraintDegreeAdapter() {
+		if (thrashingConstraintDegreeItemProvider == null) {
+			thrashingConstraintDegreeItemProvider = new ThrashingConstraintDegreeItemProvider(this);
+		}
+
+		return thrashingConstraintDegreeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMinConstraintDegree} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TargetGroupSizeMinConstraintDegreeItemProvider targetGroupSizeMinConstraintDegreeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMinConstraintDegree}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTargetGroupSizeMinConstraintDegreeAdapter() {
+		if (targetGroupSizeMinConstraintDegreeItemProvider == null) {
+			targetGroupSizeMinConstraintDegreeItemProvider = new TargetGroupSizeMinConstraintDegreeItemProvider(this);
+		}
+
+		return targetGroupSizeMinConstraintDegreeItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1246,6 +1384,18 @@ public class specificItemProviderAdapterFactory extends specificAdapterFactory
 			cooldownTimeConstraintDegreeItemProvider.dispose();
 		if (cooldownMaxScalingOperationsConstraintDegreeItemProvider != null)
 			cooldownMaxScalingOperationsConstraintDegreeItemProvider.dispose();
+		if (absoluteAdjustmentDegreeItemProvider != null)
+			absoluteAdjustmentDegreeItemProvider.dispose();
+		if (relativeAdjustmentDegreeItemProvider != null)
+			relativeAdjustmentDegreeItemProvider.dispose();
+		if (intervalDurationConstraintDegreeItemProvider != null)
+			intervalDurationConstraintDegreeItemProvider.dispose();
+		if (intervalOffsetConstraintDegreeItemProvider != null)
+			intervalOffsetConstraintDegreeItemProvider.dispose();
+		if (thrashingConstraintDegreeItemProvider != null)
+			thrashingConstraintDegreeItemProvider.dispose();
+		if (targetGroupSizeMinConstraintDegreeItemProvider != null)
+			targetGroupSizeMinConstraintDegreeItemProvider.dispose();
 	}
 
 }

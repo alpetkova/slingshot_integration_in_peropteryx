@@ -16,6 +16,7 @@ import org.palladiosimulator.pcm.core.entity.NamedElement;
 
 import de.uka.ipd.sdq.pcm.designdecision.DegreeOfFreedomInstance;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ATNumberOfReplicaDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.AbsoluteAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.AdvicePlacementDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.AllocationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.AssembledComponentDegree;
@@ -51,6 +52,8 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureGroupDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureSubset;
 import de.uka.ipd.sdq.pcm.designdecision.specific.IndicatorDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IntervalDurationConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IntervalOffsetConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.MonitoringDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.MultipleInclusionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.NumberOfCoresAsListDegree;
@@ -62,6 +65,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.OrderedIntegerDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ProcessingResourceDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.RangeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.RelativeAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegreeWithComponentChange;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceSelectionDegree;
@@ -70,6 +74,8 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringSetDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMinConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ThrashingConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.UnorderedDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.UnorderedPrimitiveDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.specificPackage;
@@ -410,6 +416,36 @@ public class specificAdapterFactory extends AdapterFactoryImpl {
 		public Adapter caseCooldownMaxScalingOperationsConstraintDegree(
 				CooldownMaxScalingOperationsConstraintDegree object) {
 			return createCooldownMaxScalingOperationsConstraintDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseAbsoluteAdjustmentDegree(AbsoluteAdjustmentDegree object) {
+			return createAbsoluteAdjustmentDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseRelativeAdjustmentDegree(RelativeAdjustmentDegree object) {
+			return createRelativeAdjustmentDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseIntervalDurationConstraintDegree(IntervalDurationConstraintDegree object) {
+			return createIntervalDurationConstraintDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseIntervalOffsetConstraintDegree(IntervalOffsetConstraintDegree object) {
+			return createIntervalOffsetConstraintDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseThrashingConstraintDegree(ThrashingConstraintDegree object) {
+			return createThrashingConstraintDegreeAdapter();
+		}
+
+		@Override
+		public Adapter caseTargetGroupSizeMinConstraintDegree(TargetGroupSizeMinConstraintDegree object) {
+			return createTargetGroupSizeMinConstraintDegreeAdapter();
 		}
 
 		@Override
@@ -1226,6 +1262,90 @@ public class specificAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCooldownMaxScalingOperationsConstraintDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.AbsoluteAdjustmentDegree <em>Absolute Adjustment Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.AbsoluteAdjustmentDegree
+	 * @generated
+	 */
+	public Adapter createAbsoluteAdjustmentDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.RelativeAdjustmentDegree <em>Relative Adjustment Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.RelativeAdjustmentDegree
+	 * @generated
+	 */
+	public Adapter createRelativeAdjustmentDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.IntervalDurationConstraintDegree <em>Interval Duration Constraint Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.IntervalDurationConstraintDegree
+	 * @generated
+	 */
+	public Adapter createIntervalDurationConstraintDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.IntervalOffsetConstraintDegree <em>Interval Offset Constraint Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.IntervalOffsetConstraintDegree
+	 * @generated
+	 */
+	public Adapter createIntervalOffsetConstraintDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.ThrashingConstraintDegree <em>Thrashing Constraint Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.ThrashingConstraintDegree
+	 * @generated
+	 */
+	public Adapter createThrashingConstraintDegreeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMinConstraintDegree <em>Target Group Size Min Constraint Degree</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMinConstraintDegree
+	 * @generated
+	 */
+	public Adapter createTargetGroupSizeMinConstraintDegreeAdapter() {
 		return null;
 	}
 

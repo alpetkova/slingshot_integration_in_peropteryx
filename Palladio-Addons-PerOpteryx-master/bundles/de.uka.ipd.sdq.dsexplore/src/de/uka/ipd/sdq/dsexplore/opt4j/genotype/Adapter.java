@@ -26,6 +26,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.CapacityDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceSelectionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMinConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree;
@@ -38,6 +39,11 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.AbsoluteAdjustmentDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.RelativeAdjustmentDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IntervalDurationConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IntervalOffsetConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ThrashingConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.specificFactory;
 /**
  * The {@link Adapter} contains methods to translate between {@link DesignDecisionGenotype} 
@@ -82,7 +88,10 @@ public class Adapter {
 	double[] SERVER_INTERVALS = {0,0,0,0}; // Initialization
 	double[] CAPACITYDEGREE_INTERVALS = {0,0,0,0}; // Initialization
 	double[] TARGETGROUPSIZEMAXCONSTRAINTDEGREE = {0,0,0,0}; // Initialization
+	double[] TARGETGROUPSIZEMINCONSTRAINTDEGREE = {0,0,0,0}; // Initialization
 	double[] STEPADJUSTMENTDEGREE = {0,0,0,0}; // Initialization
+	double[] ABSOLUTEADJUSTMENTDEGREE = {0,0,0,0}; // Initialization
+	double[] RELATIVEADJUSTMENTDEGREE = {0,0,0,0}; // Initialization
 	double[] EXPECTEDCPUUTILIZATIONDEGREE = {0,0,0,0}; // Initialization
 	double[] EXPECTEDMEMORYUTILIZATIONDEGREE = {0,0,0,0}; // Initialization
 	double[] EXPECTEDHDDUTILIZATIONDEGREE = {0,0,0,0}; // Initialization
@@ -94,6 +103,9 @@ public class Adapter {
 	double[] EXPECTEDTASKCOUNTDEGREE = {0,0,0,0}; // Initialization
 	double[] COOLDOWNMAXSCALINGOPERATIONSCONSTRAINTDEGREE = {0,0,0,0}; // Initialization
 	double[] COOLDOWNTIMECONSTRAINTDEGREE = {0,0,0,0}; // Initialization
+	double[] INTERVALDURATIONCONSTRAINTDEGREE = {0,0,0,0}; // Initialization
+	double[] INTERVALOFFSETCONSTRAINTDEGREE = {0,0,0,0}; // Initialization
+	double[] THRASHINGCONSTRAINTDEGREE = {0,0,0,0}; // Initialization
 
 	
 	
@@ -184,12 +196,36 @@ public class Adapter {
 					TARGETGROUPSIZEMAXCONSTRAINTDEGREE[i] = targetgroupsizemaxconstraintdegree_interval_lowerbound + i*diff;
 				}
 			
+			}else if(dofi instanceof TargetGroupSizeMinConstraintDegree) {
+				double targetgroupsizeminconstraintdegree_interval_lowerbound = ((TargetGroupSizeMinConstraintDegree) dofi).getFrom();
+				double targetgroupsizeminconstraintdegree_interval_upperbound = ((TargetGroupSizeMinConstraintDegree) dofi).getTo();
+				double diff = (targetgroupsizeminconstraintdegree_interval_upperbound - targetgroupsizeminconstraintdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					TARGETGROUPSIZEMINCONSTRAINTDEGREE[i] = targetgroupsizeminconstraintdegree_interval_lowerbound + i*diff;
+				}
+			
 			}else if(dofi instanceof StepAdjustmentDegree) {
 				double stepadjustmentdegree_interval_lowerbound = ((StepAdjustmentDegree) dofi).getFrom();
 				double stepadjustmentdegree_interval_upperbound = ((StepAdjustmentDegree) dofi).getTo();
 				double diff = (stepadjustmentdegree_interval_upperbound - stepadjustmentdegree_interval_lowerbound)/4;
 				for(int i = 0 ; i < 4 ; i++) {
 					STEPADJUSTMENTDEGREE[i] = stepadjustmentdegree_interval_lowerbound + i*diff;
+				}
+			
+			}else if(dofi instanceof AbsoluteAdjustmentDegree) {
+				double absoluteadjustmentdegree_interval_lowerbound = ((AbsoluteAdjustmentDegree) dofi).getFrom();
+				double absoluteadjustmentdegree_interval_upperbound = ((AbsoluteAdjustmentDegree) dofi).getTo();
+				double diff = (absoluteadjustmentdegree_interval_upperbound - absoluteadjustmentdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					ABSOLUTEADJUSTMENTDEGREE[i] = absoluteadjustmentdegree_interval_lowerbound + i*diff;
+				}
+			
+			}else if(dofi instanceof RelativeAdjustmentDegree) {
+				double relativeadjustmentdegree_interval_lowerbound = ((RelativeAdjustmentDegree) dofi).getFrom();
+				double relativeadjustmentdegree_interval_upperbound = ((RelativeAdjustmentDegree) dofi).getTo();
+				double diff = (relativeadjustmentdegree_interval_upperbound - relativeadjustmentdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					RELATIVEADJUSTMENTDEGREE[i] = relativeadjustmentdegree_interval_lowerbound + i*diff;
 				}
 			
 			}else if(dofi instanceof ExpectedCPUUtilizationDegree) {
@@ -285,6 +321,33 @@ public class Adapter {
 				double diff = (cooldowntimeconstraintdegree_interval_upperbound - cooldowntimeconstraintdegree_interval_lowerbound)/4;
 				for(int i = 0 ; i < 4 ; i++) {
 					COOLDOWNTIMECONSTRAINTDEGREE[i] = cooldowntimeconstraintdegree_interval_lowerbound + i*diff;
+				}
+			
+			}
+			else if(dofi instanceof IntervalDurationConstraintDegree) {
+				double intervaldurationconstraintdegree_interval_lowerbound = ((IntervalDurationConstraintDegree) dofi).getFrom();
+				double intervaldurationconstraintdegree_interval_upperbound = ((IntervalDurationConstraintDegree) dofi).getTo();
+				double diff = (intervaldurationconstraintdegree_interval_upperbound - intervaldurationconstraintdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					INTERVALDURATIONCONSTRAINTDEGREE[i] = intervaldurationconstraintdegree_interval_lowerbound + i*diff;
+				}
+			
+			}
+			else if(dofi instanceof IntervalOffsetConstraintDegree) {
+				double intervaloffsetconstraintdegree_interval_lowerbound = ((IntervalOffsetConstraintDegree) dofi).getFrom();
+				double intervaloffsetconstraintdegree_interval_upperbound = ((IntervalOffsetConstraintDegree) dofi).getTo();
+				double diff = (intervaloffsetconstraintdegree_interval_upperbound - intervaloffsetconstraintdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					INTERVALOFFSETCONSTRAINTDEGREE[i] = intervaloffsetconstraintdegree_interval_lowerbound + i*diff;
+				}
+			
+			}
+			else if(dofi instanceof ThrashingConstraintDegree) {
+				double thrashingconstraintdegree_interval_lowerbound = ((ThrashingConstraintDegree) dofi).getFrom();
+				double thrashingconstraintdegree_interval_upperbound = ((ThrashingConstraintDegree) dofi).getTo();
+				double diff = (thrashingconstraintdegree_interval_upperbound - thrashingconstraintdegree_interval_lowerbound)/4;
+				for(int i = 0 ; i < 4 ; i++) {
+					THRASHINGCONSTRAINTDEGREE[i] = thrashingconstraintdegree_interval_lowerbound + i*diff;
 				}
 			
 			}
@@ -421,6 +484,20 @@ public class Adapter {
 				
 				BinaryGenotype targetGroupSizeMaxConstraintDegreeValueBinaryGenotypeObj = new BinaryGenotype(targetGroupSizeMaxConstraintBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.TargetGroupSizeMaxConstraintDegree);
 				TranslatedGenotype.add(targetGroupSizeMaxConstraintDegreeValueBinaryGenotypeObj);
+			}else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof TargetGroupSizeMinConstraintDegree){
+				/* If the Choice object is representing TargetGroupSizeMinConstraintDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double targetGroupSizeMinConstraintDegreeValue=(Integer) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which targetGroupSizeMinConstraintDegreeValue value lies
+				 */
+				
+				List<Integer> targetGroupSizeMinConstraintBinaryRep = getTargetGroupSizeMinConstraintBinaryRep(targetGroupSizeMinConstraintDegreeValue);
+				
+				BinaryGenotype targetGroupSizeMinConstraintDegreeValueBinaryGenotypeObj = new BinaryGenotype(targetGroupSizeMinConstraintBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.TargetGroupSizeMinConstraintDegree);
+				TranslatedGenotype.add(targetGroupSizeMinConstraintDegreeValueBinaryGenotypeObj);
 			}else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof StepAdjustmentDegree){
 				/* If the Choice object is representing StepAdjustmentDegree 
 				 * then take the numerical value and convert to
@@ -435,6 +512,38 @@ public class Adapter {
 				
 				BinaryGenotype stepAdjustmentDegreeValueBinaryGenotypeObj = new BinaryGenotype(stepAdjustmentBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.StepAdjustmentDegree);
 				TranslatedGenotype.add(stepAdjustmentDegreeValueBinaryGenotypeObj);
+				
+			}
+			else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof AbsoluteAdjustmentDegree){
+				/* If the Choice object is representing AbsoluteAdjustmentDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double absoluteAdjustmentDegreeValue=(Integer) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which absoluteAdjustmentDegreeValue value lies
+				 */
+				
+				List<Integer> absoluteAdjustmentBinaryRep = getAbsoluteAdjustmentBinaryRep(absoluteAdjustmentDegreeValue);
+				
+				BinaryGenotype absoluteAdjustmentDegreeValueBinaryGenotypeObj = new BinaryGenotype(absoluteAdjustmentBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.AbsoluteAdjustmentDegree);
+				TranslatedGenotype.add(absoluteAdjustmentDegreeValueBinaryGenotypeObj);
+				
+			}
+			else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof RelativeAdjustmentDegree){
+				/* If the Choice object is representing RelativeAdjustmentDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double relativeAdjustmentDegreeValue=(Integer) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which relativeAdjustmentDegreeValue value lies
+				 */
+				
+				List<Integer> relativeAdjustmentBinaryRep = getRelativeAdjustmentBinaryRep(relativeAdjustmentDegreeValue);
+				
+				BinaryGenotype relativeAdjustmentDegreeValueBinaryGenotypeObj = new BinaryGenotype(relativeAdjustmentBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.RelativeAdjustmentDegree);
+				TranslatedGenotype.add(relativeAdjustmentDegreeValueBinaryGenotypeObj);
 				
 			}else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof ExpectedCPUUtilizationDegree){
 				/* If the Choice object is representing ExpectedCPUUtilizationDegree 
@@ -602,6 +711,54 @@ public class Adapter {
 				
 				BinaryGenotype cooldownTimeConstraintDegreeValueBinaryGenotypeObj = new BinaryGenotype(cooldownTimeConstraintBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.CooldownTimeConstraintDegree);
 				TranslatedGenotype.add(cooldownTimeConstraintDegreeValueBinaryGenotypeObj);
+				
+			}
+			else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof IntervalDurationConstraintDegree){
+				/* If the Choice object is representing IntervalDurationConstraintDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double intervalDurationConstraintDegreeValue=(Double) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which intervalDurationConstraintDegreeValue value lies
+				 */
+				
+				List<Integer> intervalDurationConstraintBinaryRep = getIntervalDurationConstraintBinaryRep(intervalDurationConstraintDegreeValue);
+				
+				BinaryGenotype intervalDurationConstraintDegreeValueBinaryGenotypeObj = new BinaryGenotype(intervalDurationConstraintBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.IntervalDurationConstraintDegree);
+				TranslatedGenotype.add(intervalDurationConstraintDegreeValueBinaryGenotypeObj);
+				
+			}
+			else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof IntervalOffsetConstraintDegree){
+				/* If the Choice object is representing IntervalOffsetConstraintDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double intervalOffsetConstraintDegreeValue=(Double) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which intervalOffsetConstraintDegreeValue value lies
+				 */
+				
+				List<Integer> intervalOffsetConstraintBinaryRep = getIntervalOffsetConstraintBinaryRep(intervalOffsetConstraintDegreeValue);
+				
+				BinaryGenotype intervalOffsetConstraintDegreeValueBinaryGenotypeObj = new BinaryGenotype(intervalOffsetConstraintBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.IntervalOffsetConstraintDegree);
+				TranslatedGenotype.add(intervalOffsetConstraintDegreeValueBinaryGenotypeObj);
+				
+			}
+			else if(ChoiceIterator.getDegreeOfFreedomInstance() instanceof ThrashingConstraintDegree){
+				/* If the Choice object is representing ThrashingConstraintDegree 
+				 * then take the numerical value and convert to
+				 * binary number.
+				 */
+				double thrashingConstraintDegreeValue=(Double) ChoiceIterator.getValue(); 
+				/* Now determine the interval 
+				 * in which thrashingConstraintDegreeValue value lies
+				 */
+				
+				List<Integer> thrashingConstraintBinaryRep = getThrashingConstraintBinaryRep(thrashingConstraintDegreeValue);
+				
+				BinaryGenotype thrashingConstraintDegreeValueBinaryGenotypeObj = new BinaryGenotype(thrashingConstraintBinaryRep, BinaryGenotypeRepresentation.TypeOfDegree.ThrashingConstraintDegree);
+				TranslatedGenotype.add(thrashingConstraintDegreeValueBinaryGenotypeObj);
 				
 			}
 			else throwOutOfScopeDegreeException(ChoiceIterator.getDegreeOfFreedomInstance());
@@ -867,6 +1024,23 @@ public class Adapter {
 		return Result;
 	}
 	
+	private List<Integer> getTargetGroupSizeMinConstraintBinaryRep(double targetGroupSizeMinConstraintDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<TARGETGROUPSIZEMINCONSTRAINTDEGREE.length;i++){
+			if(targetGroupSizeMinConstraintDegreeValue< TARGETGROUPSIZEMINCONSTRAINTDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
 	private List<Integer> getStepAdjustmentBinaryRep(double stepAdjustmentDegreeValue) {
 		// TODO Auto-generated method stub
 		boolean FOUNDINTERVAL = false;
@@ -874,6 +1048,40 @@ public class Adapter {
 		// TODO Auto-generated method stub
 		for(int i=0;i<STEPADJUSTMENTDEGREE.length;i++){
 			if(stepAdjustmentDegreeValue< STEPADJUSTMENTDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getAbsoluteAdjustmentBinaryRep(double absoluteAdjustmentDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<ABSOLUTEADJUSTMENTDEGREE.length;i++){
+			if(absoluteAdjustmentDegreeValue< ABSOLUTEADJUSTMENTDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getRelativeAdjustmentBinaryRep(double relativeAdjustmentDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<RELATIVEADJUSTMENTDEGREE.length;i++){
+			if(relativeAdjustmentDegreeValue< RELATIVEADJUSTMENTDEGREE[i] & !FOUNDINTERVAL){
 				Result.add(1);
 				FOUNDINTERVAL = true;
 			}else{
@@ -1061,6 +1269,57 @@ public class Adapter {
 		// TODO Auto-generated method stub
 		for(int i=0;i<COOLDOWNTIMECONSTRAINTDEGREE.length;i++){
 			if(cooldownTimeConstraintDegreeValue< COOLDOWNTIMECONSTRAINTDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getIntervalDurationConstraintBinaryRep(double intervalDurationConstraintDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<INTERVALDURATIONCONSTRAINTDEGREE.length;i++){
+			if(intervalDurationConstraintDegreeValue< INTERVALDURATIONCONSTRAINTDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getIntervalOffsetConstraintBinaryRep(double intervalOffsetConstraintDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<INTERVALOFFSETCONSTRAINTDEGREE.length;i++){
+			if(intervalOffsetConstraintDegreeValue< INTERVALOFFSETCONSTRAINTDEGREE[i] & !FOUNDINTERVAL){
+				Result.add(1);
+				FOUNDINTERVAL = true;
+			}else{
+				Result.add(0);
+			}
+		}
+		
+		return Result;
+	}
+	
+	private List<Integer> getThrashingConstraintBinaryRep(double thrashingConstraintDegreeValue) {
+		// TODO Auto-generated method stub
+		boolean FOUNDINTERVAL = false;
+		List<Integer> Result = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		for(int i=0;i<THRASHINGCONSTRAINTDEGREE.length;i++){
+			if(thrashingConstraintDegreeValue< THRASHINGCONSTRAINTDEGREE[i] & !FOUNDINTERVAL){
 				Result.add(1);
 				FOUNDINTERVAL = true;
 			}else{

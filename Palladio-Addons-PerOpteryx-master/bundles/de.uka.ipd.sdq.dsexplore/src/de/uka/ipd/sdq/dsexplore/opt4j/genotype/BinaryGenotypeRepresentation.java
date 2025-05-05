@@ -23,10 +23,12 @@ public interface BinaryGenotypeRepresentation<E> extends List<E> {
 		 OrderedIntegerDegree, ProcessingRateDegree, ProcessingResourceDegree,
 		 RangeDegree, ResourceContainerReplicationDegree, ResourceContainerReplicationDegreeWithComponentChange,
 		 ResourceSelectionDegree, SchedulingPolicyDegree, StringComponentParamDegree,
-		 StringSetDegree, UnorderedDegree, UnorderedPrimitiveDegree, TargetGroupSizeMaxConstraintDegree, StepAdjustmentDegree,
-		 ExpectedCPUUtilizationDegree, ExpectedMemoryUtilizationDegree, ExpectedHDDUtilizationDegree, ExpectedNetworkUtilizationDegree,
+		 StringSetDegree, UnorderedDegree, UnorderedPrimitiveDegree, TargetGroupSizeMaxConstraintDegree,TargetGroupSizeMinConstraintDegree, 
+		 StepAdjustmentDegree, ExpectedCPUUtilizationDegree, ExpectedMemoryUtilizationDegree, ExpectedHDDUtilizationDegree, ExpectedNetworkUtilizationDegree,
 		 ExpectedSimulationTimeDegree, ExpectedOperationResponseTimeDegree, ExpectedNumberOfElementsDegree, ExpectedQueueLengthDegree, 
-		 ExpectedTaskCountDegree, CooldownMaxScalingOperationsConstraintDegree, CooldownTimeConstraintDegree
+		 ExpectedTaskCountDegree, CooldownMaxScalingOperationsConstraintDegree, CooldownTimeConstraintDegree,
+		 AbsoluteAdjustmentDegree, RelativeAdjustmentDegree, IntervalDurationConstraintDegree, IntervalOffsetConstraintDegree, 
+		 ThrashingConstraintDegree
 	}
 	
 	// Abstract methods

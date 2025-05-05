@@ -15,6 +15,7 @@ import org.palladiosimulator.pcm.core.entity.NamedElement;
 
 import de.uka.ipd.sdq.pcm.designdecision.DegreeOfFreedomInstance;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ATNumberOfReplicaDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.AbsoluteAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.AdvicePlacementDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.AllocationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.AssembledComponentDegree;
@@ -50,6 +51,8 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureGroupDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureSubset;
 import de.uka.ipd.sdq.pcm.designdecision.specific.IndicatorDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IntervalDurationConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IntervalOffsetConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.MonitoringDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.MultipleInclusionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.NumberOfCoresAsListDegree;
@@ -61,6 +64,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.OrderedIntegerDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ProcessingResourceDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.RangeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.RelativeAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegreeWithComponentChange;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceSelectionDegree;
@@ -69,6 +73,8 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringSetDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMinConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ThrashingConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.UnorderedDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.UnorderedPrimitiveDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.specificPackage;
@@ -1295,6 +1301,150 @@ public class specificSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case specificPackage.ABSOLUTE_ADJUSTMENT_DEGREE: {
+			AbsoluteAdjustmentDegree absoluteAdjustmentDegree = (AbsoluteAdjustmentDegree) theEObject;
+			T result = caseAbsoluteAdjustmentDegree(absoluteAdjustmentDegree);
+			if (result == null)
+				result = caseDiscreteRangeDegree(absoluteAdjustmentDegree);
+			if (result == null)
+				result = caseRangeDegree(absoluteAdjustmentDegree);
+			if (result == null)
+				result = caseDiscreteDegree(absoluteAdjustmentDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(absoluteAdjustmentDegree);
+			if (result == null)
+				result = caseDataTypeDegree(absoluteAdjustmentDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(absoluteAdjustmentDegree);
+			if (result == null)
+				result = caseNamedElement(absoluteAdjustmentDegree);
+			if (result == null)
+				result = casePCMBaseClass(absoluteAdjustmentDegree);
+			if (result == null)
+				result = casePCMClass(absoluteAdjustmentDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.RELATIVE_ADJUSTMENT_DEGREE: {
+			RelativeAdjustmentDegree relativeAdjustmentDegree = (RelativeAdjustmentDegree) theEObject;
+			T result = caseRelativeAdjustmentDegree(relativeAdjustmentDegree);
+			if (result == null)
+				result = caseDiscreteRangeDegree(relativeAdjustmentDegree);
+			if (result == null)
+				result = caseRangeDegree(relativeAdjustmentDegree);
+			if (result == null)
+				result = caseDiscreteDegree(relativeAdjustmentDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(relativeAdjustmentDegree);
+			if (result == null)
+				result = caseDataTypeDegree(relativeAdjustmentDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(relativeAdjustmentDegree);
+			if (result == null)
+				result = caseNamedElement(relativeAdjustmentDegree);
+			if (result == null)
+				result = casePCMBaseClass(relativeAdjustmentDegree);
+			if (result == null)
+				result = casePCMClass(relativeAdjustmentDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.INTERVAL_DURATION_CONSTRAINT_DEGREE: {
+			IntervalDurationConstraintDegree intervalDurationConstraintDegree = (IntervalDurationConstraintDegree) theEObject;
+			T result = caseIntervalDurationConstraintDegree(intervalDurationConstraintDegree);
+			if (result == null)
+				result = caseContinuousRangeDegree(intervalDurationConstraintDegree);
+			if (result == null)
+				result = caseRangeDegree(intervalDurationConstraintDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(intervalDurationConstraintDegree);
+			if (result == null)
+				result = caseDataTypeDegree(intervalDurationConstraintDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(intervalDurationConstraintDegree);
+			if (result == null)
+				result = caseNamedElement(intervalDurationConstraintDegree);
+			if (result == null)
+				result = casePCMBaseClass(intervalDurationConstraintDegree);
+			if (result == null)
+				result = casePCMClass(intervalDurationConstraintDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.INTERVAL_OFFSET_CONSTRAINT_DEGREE: {
+			IntervalOffsetConstraintDegree intervalOffsetConstraintDegree = (IntervalOffsetConstraintDegree) theEObject;
+			T result = caseIntervalOffsetConstraintDegree(intervalOffsetConstraintDegree);
+			if (result == null)
+				result = caseContinuousRangeDegree(intervalOffsetConstraintDegree);
+			if (result == null)
+				result = caseRangeDegree(intervalOffsetConstraintDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(intervalOffsetConstraintDegree);
+			if (result == null)
+				result = caseDataTypeDegree(intervalOffsetConstraintDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(intervalOffsetConstraintDegree);
+			if (result == null)
+				result = caseNamedElement(intervalOffsetConstraintDegree);
+			if (result == null)
+				result = casePCMBaseClass(intervalOffsetConstraintDegree);
+			if (result == null)
+				result = casePCMClass(intervalOffsetConstraintDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.THRASHING_CONSTRAINT_DEGREE: {
+			ThrashingConstraintDegree thrashingConstraintDegree = (ThrashingConstraintDegree) theEObject;
+			T result = caseThrashingConstraintDegree(thrashingConstraintDegree);
+			if (result == null)
+				result = caseContinuousRangeDegree(thrashingConstraintDegree);
+			if (result == null)
+				result = caseRangeDegree(thrashingConstraintDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(thrashingConstraintDegree);
+			if (result == null)
+				result = caseDataTypeDegree(thrashingConstraintDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(thrashingConstraintDegree);
+			if (result == null)
+				result = caseNamedElement(thrashingConstraintDegree);
+			if (result == null)
+				result = casePCMBaseClass(thrashingConstraintDegree);
+			if (result == null)
+				result = casePCMClass(thrashingConstraintDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case specificPackage.TARGET_GROUP_SIZE_MIN_CONSTRAINT_DEGREE: {
+			TargetGroupSizeMinConstraintDegree targetGroupSizeMinConstraintDegree = (TargetGroupSizeMinConstraintDegree) theEObject;
+			T result = caseTargetGroupSizeMinConstraintDegree(targetGroupSizeMinConstraintDegree);
+			if (result == null)
+				result = caseDiscreteRangeDegree(targetGroupSizeMinConstraintDegree);
+			if (result == null)
+				result = caseRangeDegree(targetGroupSizeMinConstraintDegree);
+			if (result == null)
+				result = caseDiscreteDegree(targetGroupSizeMinConstraintDegree);
+			if (result == null)
+				result = caseOrderedDataTypeDegree(targetGroupSizeMinConstraintDegree);
+			if (result == null)
+				result = caseDataTypeDegree(targetGroupSizeMinConstraintDegree);
+			if (result == null)
+				result = caseDegreeOfFreedomInstance(targetGroupSizeMinConstraintDegree);
+			if (result == null)
+				result = caseNamedElement(targetGroupSizeMinConstraintDegree);
+			if (result == null)
+				result = casePCMBaseClass(targetGroupSizeMinConstraintDegree);
+			if (result == null)
+				result = casePCMClass(targetGroupSizeMinConstraintDegree);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
@@ -2097,6 +2247,96 @@ public class specificSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCooldownMaxScalingOperationsConstraintDegree(CooldownMaxScalingOperationsConstraintDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Absolute Adjustment Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Absolute Adjustment Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbsoluteAdjustmentDegree(AbsoluteAdjustmentDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Relative Adjustment Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Relative Adjustment Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRelativeAdjustmentDegree(RelativeAdjustmentDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Interval Duration Constraint Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Interval Duration Constraint Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIntervalDurationConstraintDegree(IntervalDurationConstraintDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Interval Offset Constraint Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Interval Offset Constraint Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIntervalOffsetConstraintDegree(IntervalOffsetConstraintDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Thrashing Constraint Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Thrashing Constraint Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseThrashingConstraintDegree(ThrashingConstraintDegree object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Target Group Size Min Constraint Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Target Group Size Min Constraint Degree</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTargetGroupSizeMinConstraintDegree(TargetGroupSizeMinConstraintDegree object) {
 		return null;
 	}
 

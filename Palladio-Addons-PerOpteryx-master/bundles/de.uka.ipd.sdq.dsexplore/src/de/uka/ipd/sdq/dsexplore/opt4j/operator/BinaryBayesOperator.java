@@ -30,6 +30,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.CapacityDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ContinuousProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceSelectionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMinConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree;
@@ -42,6 +43,11 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.AbsoluteAdjustmentDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.RelativeAdjustmentDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IntervalDurationConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IntervalOffsetConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ThrashingConstraintDegree;
 
 /**  
  * Operator to operate on a collection of 
@@ -164,7 +170,31 @@ public class BinaryBayesOperator implements BayesianCrossover<DesignDecisionGeno
 				
 					ddgpure.add(purechoice);
 				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof TargetGroupSizeMinConstraintDegree){
+					DiscreteRangeChoice purechoice = designdecisionFactory.eINSTANCE.createDiscreteRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
 				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof StepAdjustmentDegree){
+					DiscreteRangeChoice purechoice = designdecisionFactory.eINSTANCE.createDiscreteRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof AbsoluteAdjustmentDegree){
+					DiscreteRangeChoice purechoice = designdecisionFactory.eINSTANCE.createDiscreteRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof RelativeAdjustmentDegree){
 					DiscreteRangeChoice purechoice = designdecisionFactory.eINSTANCE.createDiscreteRangeChoice();
 					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
 					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
@@ -253,6 +283,30 @@ public class BinaryBayesOperator implements BayesianCrossover<DesignDecisionGeno
 					ddgpure.add(purechoice);
 				}
 				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof CooldownTimeConstraintDegree){
+					ContinousRangeChoice purechoice = designdecisionFactory.eINSTANCE.createContinousRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof IntervalDurationConstraintDegree){
+					ContinousRangeChoice purechoice = designdecisionFactory.eINSTANCE.createContinousRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof IntervalOffsetConstraintDegree){
+					ContinousRangeChoice purechoice = designdecisionFactory.eINSTANCE.createContinousRangeChoice();
+					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
+					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());
+					purechoice.setValue(ddg.get(k).getValue());
+				
+					ddgpure.add(purechoice);
+				}
+				else if(ChoiceTemplate.get(k).getDegreeOfFreedomInstance() instanceof ThrashingConstraintDegree){
 					ContinousRangeChoice purechoice = designdecisionFactory.eINSTANCE.createContinousRangeChoice();
 					purechoice.setDegreeOfFreedomInstance(ChoiceTemplate.get(k).getDegreeOfFreedomInstance());
 					purechoice.setIsActive(ChoiceTemplate.get(k).isActive());

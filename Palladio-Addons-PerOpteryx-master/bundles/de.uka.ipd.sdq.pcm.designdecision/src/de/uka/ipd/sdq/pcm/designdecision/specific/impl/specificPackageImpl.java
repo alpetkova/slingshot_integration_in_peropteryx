@@ -25,6 +25,7 @@ import de.uka.ipd.sdq.pcm.designdecision.impl.designdecisionPackageImpl;
 import de.uka.ipd.sdq.pcm.designdecision.qualityproperties.qualitypropertiesPackage;
 import de.uka.ipd.sdq.pcm.designdecision.qualityproperties.impl.qualitypropertiesPackageImpl;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ATNumberOfReplicaDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.AbsoluteAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.AdvicePlacementDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.AllocationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.AssembledComponentDegree;
@@ -60,6 +61,8 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureGroupDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.FeatureSubset;
 import de.uka.ipd.sdq.pcm.designdecision.specific.IndicatorDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IntervalDurationConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IntervalOffsetConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.MonitoringDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.MultipleInclusionDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.NumberOfCoresAsListDegree;
@@ -71,6 +74,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.OrderedIntegerDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ProcessingRateDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ProcessingResourceDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.RangeDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.RelativeAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegreeWithComponentChange;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceSelectionDegree;
@@ -79,6 +83,8 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringComponentParamDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StringSetDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMinConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ThrashingConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.UnorderedDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.UnorderedPrimitiveDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.specificFactory;
@@ -454,6 +460,48 @@ public class specificPackageImpl extends EPackageImpl implements specificPackage
 	 * @generated
 	 */
 	private EClass cooldownMaxScalingOperationsConstraintDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass absoluteAdjustmentDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass relativeAdjustmentDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass intervalDurationConstraintDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass intervalOffsetConstraintDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass thrashingConstraintDegreeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass targetGroupSizeMinConstraintDegreeEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1258,6 +1306,66 @@ public class specificPackageImpl extends EPackageImpl implements specificPackage
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getAbsoluteAdjustmentDegree() {
+		return absoluteAdjustmentDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getRelativeAdjustmentDegree() {
+		return relativeAdjustmentDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getIntervalDurationConstraintDegree() {
+		return intervalDurationConstraintDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getIntervalOffsetConstraintDegree() {
+		return intervalOffsetConstraintDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getThrashingConstraintDegree() {
+		return thrashingConstraintDegreeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getTargetGroupSizeMinConstraintDegree() {
+		return targetGroupSizeMinConstraintDegreeEClass;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -1419,6 +1527,18 @@ public class specificPackageImpl extends EPackageImpl implements specificPackage
 
 		cooldownMaxScalingOperationsConstraintDegreeEClass = createEClass(
 				COOLDOWN_MAX_SCALING_OPERATIONS_CONSTRAINT_DEGREE);
+
+		absoluteAdjustmentDegreeEClass = createEClass(ABSOLUTE_ADJUSTMENT_DEGREE);
+
+		relativeAdjustmentDegreeEClass = createEClass(RELATIVE_ADJUSTMENT_DEGREE);
+
+		intervalDurationConstraintDegreeEClass = createEClass(INTERVAL_DURATION_CONSTRAINT_DEGREE);
+
+		intervalOffsetConstraintDegreeEClass = createEClass(INTERVAL_OFFSET_CONSTRAINT_DEGREE);
+
+		thrashingConstraintDegreeEClass = createEClass(THRASHING_CONSTRAINT_DEGREE);
+
+		targetGroupSizeMinConstraintDegreeEClass = createEClass(TARGET_GROUP_SIZE_MIN_CONSTRAINT_DEGREE);
 	}
 
 	/**
@@ -1526,6 +1646,12 @@ public class specificPackageImpl extends EPackageImpl implements specificPackage
 		expectedTaskCountDegreeEClass.getESuperTypes().add(this.getDiscreteRangeDegree());
 		cooldownTimeConstraintDegreeEClass.getESuperTypes().add(this.getContinuousRangeDegree());
 		cooldownMaxScalingOperationsConstraintDegreeEClass.getESuperTypes().add(this.getDiscreteRangeDegree());
+		absoluteAdjustmentDegreeEClass.getESuperTypes().add(this.getDiscreteRangeDegree());
+		relativeAdjustmentDegreeEClass.getESuperTypes().add(this.getDiscreteRangeDegree());
+		intervalDurationConstraintDegreeEClass.getESuperTypes().add(this.getContinuousRangeDegree());
+		intervalOffsetConstraintDegreeEClass.getESuperTypes().add(this.getContinuousRangeDegree());
+		thrashingConstraintDegreeEClass.getESuperTypes().add(this.getContinuousRangeDegree());
+		targetGroupSizeMinConstraintDegreeEClass.getESuperTypes().add(this.getDiscreteRangeDegree());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(exchangeComponentRuleEClass, ExchangeComponentRule.class, "ExchangeComponentRule", !IS_ABSTRACT,
@@ -1760,6 +1886,24 @@ public class specificPackageImpl extends EPackageImpl implements specificPackage
 		initEClass(cooldownMaxScalingOperationsConstraintDegreeEClass,
 				CooldownMaxScalingOperationsConstraintDegree.class, "CooldownMaxScalingOperationsConstraintDegree",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(absoluteAdjustmentDegreeEClass, AbsoluteAdjustmentDegree.class, "AbsoluteAdjustmentDegree",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(relativeAdjustmentDegreeEClass, RelativeAdjustmentDegree.class, "RelativeAdjustmentDegree",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(intervalDurationConstraintDegreeEClass, IntervalDurationConstraintDegree.class,
+				"IntervalDurationConstraintDegree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(intervalOffsetConstraintDegreeEClass, IntervalOffsetConstraintDegree.class,
+				"IntervalOffsetConstraintDegree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(thrashingConstraintDegreeEClass, ThrashingConstraintDegree.class, "ThrashingConstraintDegree",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(targetGroupSizeMinConstraintDegreeEClass, TargetGroupSizeMinConstraintDegree.class,
+				"TargetGroupSizeMinConstraintDegree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 	}
 
 } // specificPackageImpl

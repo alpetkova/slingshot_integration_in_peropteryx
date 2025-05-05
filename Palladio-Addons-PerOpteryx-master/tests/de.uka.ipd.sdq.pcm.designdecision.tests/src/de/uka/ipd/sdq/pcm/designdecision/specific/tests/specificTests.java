@@ -70,6 +70,12 @@ public class specificTests extends TestSuite {
 		suite.addTestSuite(ExpectedTaskCountDegreeTest.class);
 		suite.addTestSuite(CooldownTimeConstraintDegreeTest.class);
 		suite.addTestSuite(CooldownMaxScalingOperationsConstraintDegreeTest.class);
+		suite.addTestSuite(AbsoluteAdjustmentDegreeTest.class);
+		suite.addTestSuite(RelativeAdjustmentDegreeTest.class);
+		suite.addTestSuite(IntervalDurationConstraintDegreeTest.class);
+		suite.addTestSuite(IntervalOffsetConstraintDegreeTest.class);
+		suite.addTestSuite(ThrashingConstraintDegreeTest.class);
+		suite.addTestSuite(TargetGroupSizeMinConstraintDegreeTest.class);
 		return suite;
 	}
 

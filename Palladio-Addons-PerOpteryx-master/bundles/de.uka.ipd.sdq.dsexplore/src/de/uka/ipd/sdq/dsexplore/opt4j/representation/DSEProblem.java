@@ -30,10 +30,15 @@ import org.palladiosimulator.solver.models.PCMInstance;
 
 import org.palladiosimulator.spd.constraints.target.TargetGroupSizeConstraint;
 import org.palladiosimulator.spd.adjustments.StepAdjustment;
+import org.palladiosimulator.spd.adjustments.AbsoluteAdjustment;
+import org.palladiosimulator.spd.adjustments.RelativeAdjustment;
 import org.palladiosimulator.spd.triggers.expectations.ExpectedPercentage;
 import org.palladiosimulator.spd.triggers.expectations.ExpectedTime;
 import org.palladiosimulator.spd.triggers.expectations.ExpectedCount;
 import org.palladiosimulator.spd.constraints.policy.CooldownConstraint;
+import org.palladiosimulator.spd.constraints.policy.IntervalConstraint;
+import org.palladiosimulator.spd.constraints.target.ThrashingConstraint;
+
 
 import de.uka.ipd.sdq.dsexplore.Modules;
 import de.uka.ipd.sdq.dsexplore.designdecisions.alternativecomponents.AlternativeComponent;
@@ -77,6 +82,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ProcessingResourceDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.SchedulingPolicyDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMinConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree;
@@ -89,6 +95,12 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.AbsoluteAdjustmentDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.RelativeAdjustmentDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IntervalDurationConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IntervalOffsetConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ThrashingConstraintDegree;
+
 import de.uka.ipd.sdq.pcm.designdecision.specific.specificFactory;
 import de.uka.ipd.sdq.pcm.designdecision.specific.impl.specificFactoryImpl;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
@@ -336,6 +348,18 @@ public class DSEProblem {
 					final CooldownConstraint cooltime = (CooldownConstraint) dd.getPrimaryChanged();
 					choice.setChosenValue(cooltime.getCooldownTime());
 	
+				}else if (dd instanceof IntervalDurationConstraintDegree) {
+					final IntervalConstraint intdur = (IntervalConstraint) dd.getPrimaryChanged();
+					choice.setChosenValue(intdur.getIntervalDuration());
+	
+				}else if (dd instanceof IntervalOffsetConstraintDegree) {
+					final IntervalConstraint intoff = (IntervalConstraint) dd.getPrimaryChanged();
+					choice.setChosenValue(intoff.getOffset());
+	
+				}else if (dd instanceof ThrashingConstraintDegree) {
+					final ThrashingConstraint thrashing = (ThrashingConstraint) dd.getPrimaryChanged();
+					choice.setChosenValue(thrashing.getMinimumTimeNoThrashing());
+	
 				}else {
 					this.throwUnknownDegreeException(dd);
 				}
@@ -397,11 +421,23 @@ public class DSEProblem {
 					final TargetGroupSizeConstraint tgsc = (TargetGroupSizeConstraint) entity;
 					choice.setChosenValue(tgsc.getMaxSize());
 						
+				} else if (degree instanceof TargetGroupSizeMinConstraintDegree) {
+					final TargetGroupSizeConstraint tgsc = (TargetGroupSizeConstraint) entity;
+					choice.setChosenValue(tgsc.getMinSize());
+						
 				} else if (degree instanceof StepAdjustmentDegree) {
 					final StepAdjustment stadj = (StepAdjustment) entity;
 					choice.setChosenValue(stadj.getStepValue());
 						
-				} else if (degree instanceof ExpectedNumberOfElementsDegree) {
+				} else if (degree instanceof AbsoluteAdjustmentDegree) {
+					final AbsoluteAdjustment absadj = (AbsoluteAdjustment) entity;
+					choice.setChosenValue(absadj.getGoalValue());
+						
+				}else if (degree instanceof RelativeAdjustmentDegree) {
+					final RelativeAdjustment reladj = (RelativeAdjustment) entity;
+					choice.setChosenValue(reladj.getPercentageGrowthValue());
+						
+				}else if (degree instanceof ExpectedNumberOfElementsDegree) {
 					final ExpectedCount expCount = (ExpectedCount) entity;
 					choice.setChosenValue(expCount.getCount());
 						

@@ -25,10 +25,15 @@ import org.palladiosimulator.solver.models.PCMInstance;
 
 import org.palladiosimulator.spd.constraints.target.TargetGroupSizeConstraint;
 import org.palladiosimulator.spd.adjustments.StepAdjustment;
+import org.palladiosimulator.spd.adjustments.AbsoluteAdjustment;
+import org.palladiosimulator.spd.adjustments.RelativeAdjustment;
 import org.palladiosimulator.spd.triggers.expectations.ExpectedPercentage;
 import org.palladiosimulator.spd.triggers.expectations.ExpectedTime;
 import org.palladiosimulator.spd.triggers.expectations.ExpectedCount;
 import org.palladiosimulator.spd.constraints.policy.CooldownConstraint;
+import org.palladiosimulator.spd.constraints.policy.IntervalConstraint;
+import org.palladiosimulator.spd.constraints.target.ThrashingConstraint;
+
 
 import com.google.inject.Inject;
 
@@ -76,6 +81,7 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDe
 import de.uka.ipd.sdq.pcm.designdecision.specific.ResourceContainerReplicationDegreeWithComponentChange;
 import de.uka.ipd.sdq.pcm.designdecision.specific.SchedulingPolicyDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMaxConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.TargetGroupSizeMinConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.StepAdjustmentDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedCPUUtilizationDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedMemoryUtilizationDegree;
@@ -88,6 +94,11 @@ import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedQueueLengthDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.ExpectedTaskCountDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownTimeConstraintDegree;
 import de.uka.ipd.sdq.pcm.designdecision.specific.CooldownMaxScalingOperationsConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.AbsoluteAdjustmentDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.RelativeAdjustmentDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IntervalDurationConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.IntervalOffsetConstraintDegree;
+import de.uka.ipd.sdq.pcm.designdecision.specific.ThrashingConstraintDegree;
 
 import placementDescription.SelectedCV;
 
@@ -224,8 +235,14 @@ public class DSEDecoder implements Decoder<DesignDecisionGenotype, PCMPhenotype>
 			this.applyChangeATNumberOfReplicaDegree((ATNumberOfReplicaDegree) designDecision, choice);
 		} else if (designDecision instanceof TargetGroupSizeMaxConstraintDegree) {
 			this.applyChangeTargetGroupSizeMaxConstraintDecision((TargetGroupSizeMaxConstraintDegree) designDecision, choice);
+		} else if (designDecision instanceof TargetGroupSizeMinConstraintDegree) {
+			this.applyChangeTargetGroupSizeMinConstraintDecision((TargetGroupSizeMinConstraintDegree) designDecision, choice);
 		} else if (designDecision instanceof StepAdjustmentDegree) {
 			this.applyChangeStepAdjustmentDecision((StepAdjustmentDegree) designDecision, choice);
+		} else if (designDecision instanceof AbsoluteAdjustmentDegree) {
+			this.applyChangeAbsoluteAdjustmentDecision((AbsoluteAdjustmentDegree) designDecision, choice);
+		} else if (designDecision instanceof RelativeAdjustmentDegree) {
+			this.applyChangeRelativeAdjustmentDecision((RelativeAdjustmentDegree) designDecision, choice);
 		} else if (designDecision instanceof ExpectedCPUUtilizationDegree) {
 			this.applyChangeExpectedCPUUtilizationDecision((ExpectedCPUUtilizationDegree) designDecision, choice);
 		}else if (designDecision instanceof ExpectedMemoryUtilizationDegree) {
@@ -248,6 +265,12 @@ public class DSEDecoder implements Decoder<DesignDecisionGenotype, PCMPhenotype>
 			this.applyChangeCooldownMaxScalingOperationsConstraintDecision((CooldownMaxScalingOperationsConstraintDegree) designDecision, choice);
 		}else if (designDecision instanceof CooldownTimeConstraintDegree) {
 			this.applyChangeCooldownTimeConstraintDecision((CooldownTimeConstraintDegree) designDecision, choice);
+		}else if (designDecision instanceof IntervalDurationConstraintDegree) {
+			this.applyChangeIntervalDurationConstraintDecision((IntervalDurationConstraintDegree) designDecision, choice);
+		}else if (designDecision instanceof IntervalOffsetConstraintDegree) {
+			this.applyChangeIntervalOffsetConstraintDecision((IntervalOffsetConstraintDegree) designDecision, choice);
+		}else if (designDecision instanceof ThrashingConstraintDegree) {
+			this.applyChangeThrashingConstraintDecision((ThrashingConstraintDegree) designDecision, choice);
 		}else {
 			try {
 				trans.transformChoice(pcm, choice);
@@ -270,6 +293,18 @@ public class DSEDecoder implements Decoder<DesignDecisionGenotype, PCMPhenotype>
 
 	}
 	
+	private void applyChangeTargetGroupSizeMinConstraintDecision(final TargetGroupSizeMinConstraintDegree designDecision, final Choice choice) {
+		if (!(choice instanceof DiscreteRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final DiscreteRangeChoice discreteChoice = (DiscreteRangeChoice) choice;
+
+		final TargetGroupSizeConstraint tgsc = (TargetGroupSizeConstraint) designDecision.getPrimaryChanged();
+		tgsc.setMinSize(discreteChoice.getChosenValue());
+
+	}
+	
 	private void applyChangeStepAdjustmentDecision(final StepAdjustmentDegree designDecision, final Choice choice) {
 		if (!(choice instanceof DiscreteRangeChoice)) {
 			this.throwNewInvalidChoiceException(designDecision, choice);
@@ -279,6 +314,30 @@ public class DSEDecoder implements Decoder<DesignDecisionGenotype, PCMPhenotype>
 
 		final StepAdjustment stadj = (StepAdjustment) designDecision.getPrimaryChanged();
 		stadj.setStepValue(discreteChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeAbsoluteAdjustmentDecision(final AbsoluteAdjustmentDegree designDecision, final Choice choice) {
+		if (!(choice instanceof DiscreteRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final DiscreteRangeChoice discreteChoice = (DiscreteRangeChoice) choice;
+
+		final AbsoluteAdjustment absadj = (AbsoluteAdjustment) designDecision.getPrimaryChanged();
+		absadj.setGoalValue(discreteChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeRelativeAdjustmentDecision(final RelativeAdjustmentDegree designDecision, final Choice choice) {
+		if (!(choice instanceof DiscreteRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final DiscreteRangeChoice discreteChoice = (DiscreteRangeChoice) choice;
+
+		final RelativeAdjustment reladj = (RelativeAdjustment) designDecision.getPrimaryChanged();
+		reladj.setPercentageGrowthValue(discreteChoice.getChosenValue());
 
 	}
 	
@@ -411,6 +470,42 @@ public class DSEDecoder implements Decoder<DesignDecisionGenotype, PCMPhenotype>
 
 		final CooldownConstraint cooltime = (CooldownConstraint) designDecision.getPrimaryChanged();
 		cooltime.setCooldownTime(continousChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeIntervalDurationConstraintDecision(final IntervalDurationConstraintDegree designDecision, final Choice choice) {
+		if (!(choice instanceof ContinousRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final ContinousRangeChoice continousChoice = (ContinousRangeChoice) choice;
+
+		final IntervalConstraint intdur = (IntervalConstraint) designDecision.getPrimaryChanged();
+		intdur.setIntervalDuration(continousChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeIntervalOffsetConstraintDecision(final IntervalOffsetConstraintDegree designDecision, final Choice choice) {
+		if (!(choice instanceof ContinousRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final ContinousRangeChoice continousChoice = (ContinousRangeChoice) choice;
+
+		final IntervalConstraint intoff = (IntervalConstraint) designDecision.getPrimaryChanged();
+		intoff.setOffset(continousChoice.getChosenValue());
+
+	}
+	
+	private void applyChangeThrashingConstraintDecision(final ThrashingConstraintDegree designDecision, final Choice choice) {
+		if (!(choice instanceof ContinousRangeChoice)) {
+			this.throwNewInvalidChoiceException(designDecision, choice);
+		}
+
+		final ContinousRangeChoice continousChoice = (ContinousRangeChoice) choice;
+
+		final ThrashingConstraint thrashing = (ThrashingConstraint) designDecision.getPrimaryChanged();
+		thrashing.setMinimumTimeNoThrashing(continousChoice.getChosenValue());
 
 	}
 

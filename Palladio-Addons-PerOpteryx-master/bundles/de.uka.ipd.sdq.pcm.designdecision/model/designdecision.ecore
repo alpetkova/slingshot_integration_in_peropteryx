@@ -486,5 +486,13 @@
     <eClassifiers xsi:type="ecore:EClass" name="CooldownTimeConstraintDegree" eSuperTypes="#//specific/ContinuousRangeDegree"/>
     <eClassifiers xsi:type="ecore:EClass" name="CooldownMaxScalingOperationsConstraintDegree"
         eSuperTypes="#//specific/DiscreteRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AbsoluteAdjustmentDegree" eSuperTypes="#//specific/DiscreteRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="RelativeAdjustmentDegree" eSuperTypes="#//specific/DiscreteRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="IntervalDurationConstraintDegree"
+        eSuperTypes="#//specific/ContinuousRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="IntervalOffsetConstraintDegree" eSuperTypes="#//specific/ContinuousRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ThrashingConstraintDegree" eSuperTypes="#//specific/ContinuousRangeDegree"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TargetGroupSizeMinConstraintDegree"
+        eSuperTypes="#//specific/DiscreteRangeDegree"/>
   </eSubpackages>
 </ecore:EPackage>

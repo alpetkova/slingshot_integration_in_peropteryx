@@ -401,6 +401,60 @@ public interface specificFactory extends EFactory {
 	CooldownMaxScalingOperationsConstraintDegree createCooldownMaxScalingOperationsConstraintDegree();
 
 	/**
+	 * Returns a new object of class '<em>Absolute Adjustment Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Absolute Adjustment Degree</em>'.
+	 * @generated
+	 */
+	AbsoluteAdjustmentDegree createAbsoluteAdjustmentDegree();
+
+	/**
+	 * Returns a new object of class '<em>Relative Adjustment Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Relative Adjustment Degree</em>'.
+	 * @generated
+	 */
+	RelativeAdjustmentDegree createRelativeAdjustmentDegree();
+
+	/**
+	 * Returns a new object of class '<em>Interval Duration Constraint Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Interval Duration Constraint Degree</em>'.
+	 * @generated
+	 */
+	IntervalDurationConstraintDegree createIntervalDurationConstraintDegree();
+
+	/**
+	 * Returns a new object of class '<em>Interval Offset Constraint Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Interval Offset Constraint Degree</em>'.
+	 * @generated
+	 */
+	IntervalOffsetConstraintDegree createIntervalOffsetConstraintDegree();
+
+	/**
+	 * Returns a new object of class '<em>Thrashing Constraint Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Thrashing Constraint Degree</em>'.
+	 * @generated
+	 */
+	ThrashingConstraintDegree createThrashingConstraintDegree();
+
+	/**
+	 * Returns a new object of class '<em>Target Group Size Min Constraint Degree</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Target Group Size Min Constraint Degree</em>'.
+	 * @generated
+	 */
+	TargetGroupSizeMinConstraintDegree createTargetGroupSizeMinConstraintDegree();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the package supported by this factory.

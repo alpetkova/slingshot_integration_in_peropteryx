@@ -256,6 +256,24 @@ public class DecisionSpaceItemProvider extends NamedElementItemProvider {
 
 		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
 				specificFactory.eINSTANCE.createCooldownMaxScalingOperationsConstraintDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createAbsoluteAdjustmentDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createRelativeAdjustmentDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createIntervalDurationConstraintDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createIntervalOffsetConstraintDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createThrashingConstraintDegree()));
+
+		newChildDescriptors.add(createChildParameter(designdecisionPackage.Literals.DECISION_SPACE__DEGREES_OF_FREEDOM,
+				specificFactory.eINSTANCE.createTargetGroupSizeMinConstraintDegree()));
 	}
 
 	/**
