@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<spd:SPD xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adjustments="http://palladiosimulator.org/ScalingPolicyDefinition/Adjustments/1.0" xmlns:expectations="http://palladiosimulator.org/ScalingPolicyDefinition/Triggers/Expectations/1.0" xmlns:policy="http://palladiosimulator.org/ScalingPolicyDefinition/Constraints/Policy/1.0" xmlns:spd="http://palladiosimulator.org/ScalingPolicyDefinition/1.0" xmlns:stimuli="http://palladiosimulator.org/ScalingPolicyDefinition/Triggers/Stimuli/1.0" xmlns:targets="http://palladiosimulator.org/ScalingPolicyDefinition/Targets/1.0" xmlns:triggers="http://palladiosimulator.org/ScalingPolicyDefinition/Triggers/1.0" id="_6YRSMBSzEfCPKfY5TCXIyw">
+  <scalingPolicies id="_HJAZwBS0EfCPKfY5TCXIyw" active="true" targetGroup="_FU9pQRS0EfCPKfY5TCXIyw">
+    <adjustmentType xsi:type="adjustments:StepAdjustment" stepValue="3"/>
+    <policyConstraints xsi:type="policy:CooldownConstraint" id="_xM1KkSbAEfCQiKA8zKlJpg" cooldownTime="10.0"/>
+    <scalingTrigger xsi:type="triggers:SimpleFireOnValue" id="_KXCcAxS0EfCPKfY5TCXIyw" relationalOperator="GreaterThan">
+      <stimulus xsi:type="stimuli:CPUUtilization"/>
+      <expectedValue xsi:type="expectations:ExpectedPercentage" value="60.0"/>
+    </scalingTrigger>
+  </scalingPolicies>
+  <targetGroups xsi:type="targets:ElasticInfrastructure" id="_FU9pQRS0EfCPKfY5TCXIyw">
+    <unit href="default.resourceenvironment#_eYcrEPXXEe-zjesnu5LcEw"/>
+  </targetGroups>
+</spd:SPD>

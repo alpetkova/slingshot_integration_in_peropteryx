@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.palladiosimulator.edp2.models:MeasuringPointRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org.palladiosimulator.edp2.models="http://palladiosimulator.org/EDP2/MeasuringPoint/1.0" xmlns:pcmmeasuringpoint="http://palladiosimulator.org/PCM/MeasuringPoint/1.0" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:spdmeasuringpoint="http://palladiosimulator.org/PCM/SPDMeasuringPoint/1.0" id="_2weDAPXQEe-zjesnu5LcEw">
+  <measuringPoints xsi:type="pcmmeasuringpoint:UsageScenarioMeasuringPoint" stringRepresentation="Usage Scenario: defaultUsageScenario" resourceURIRepresentation="platform:/resource/BasicModel/default.usagemodel#_I1OwUPXOEe-zjesnu5LcEw">
+    <usageScenario href="default.usagemodel#_I1OwUPXOEe-zjesnu5LcEw"/>
+  </measuringPoints>
+  <measuringPoints xsi:type="pcmmeasuringpoint:ActiveResourceMeasuringPoint" stringRepresentation="CPU [0] in LBServer" resourceURIRepresentation="platform:/resource/BasicModel/default.resourceenvironment#_T_BZIPXXEe-zjesnu5LcEw">
+    <activeResource href="default.resourceenvironment#_T_BZIPXXEe-zjesnu5LcEw"/>
+  </measuringPoints>
+  <measuringPoints xsi:type="pcmmeasuringpoint:ActiveResourceMeasuringPoint" stringRepresentation="CPU [0] in DBServer" resourceURIRepresentation="platform:/resource/BasicModel/default.resourceenvironment#_irOH0PXXEe-zjesnu5LcEw">
+    <activeResource href="default.resourceenvironment#_irOH0PXXEe-zjesnu5LcEw"/>
+  </measuringPoints>
+  <measuringPoints xsi:type="pcmmeasuringpoint:ActiveResourceMeasuringPoint" stringRepresentation="CPU [0] in WebServer" resourceURIRepresentation="platform:/resource/BasicModel/default.resourceenvironment#_kf3g0PXNEe-zjesnu5LcEw">
+    <activeResource href="default.resourceenvironment#_kf3g0PXNEe-zjesnu5LcEw"/>
+  </measuringPoints>
+  <measuringPoints xsi:type="spdmeasuringpoint:ElasticInfrastructureMeasuringPoint" stringRepresentation="Elastic Infrastructure aName [_FU9pQRS0EfCPKfY5TCXIyw]" resourceURIRepresentation="platform:/resource/BasicModel/My.spd#_FU9pQRS0EfCPKfY5TCXIyw">
+    <elasticInfrastructure href="My.spd#_FU9pQRS0EfCPKfY5TCXIyw"/>
+  </measuringPoints>
+  <measuringPoints xsi:type="pcmmeasuringpoint:AssemblyOperationMeasuringPoint" stringRepresentation="Operation: Assembly_Database.Database.IDatabase.OperationProvidedRole1.store" resourceURIRepresentation="platform:/resource/BasicModel/default.repository#_CZKTgPXIEe-zjesnu5LcEw">
+    <role xsi:type="repository:OperationProvidedRole" href="default.repository#_5Ps_MPXIEe-zjesnu5LcEw"/>
+    <operationSignature href="default.repository#_CZKTgPXIEe-zjesnu5LcEw"/>
+    <assembly href="default.system#_DvcXsPXNEe-zjesnu5LcEw"/>
+  </measuringPoints>
+</org.palladiosimulator.edp2.models:MeasuringPointRepository>

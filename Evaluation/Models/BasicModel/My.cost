@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cost:CostRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cost="http://sdq.ipd.uka.de/CostModel/1.0" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2">
+  <cost xsi:type="cost:ComponentCost" componentInitialCost="500.0">
+    <repositoryComponent xsi:type="repository:BasicComponent" href="default.repository#_vFuegPXIEe-zjesnu5LcEw"/>
+  </cost>
+  <cost xsi:type="cost:ComponentCost" componentInitialCost="300.0">
+    <repositoryComponent xsi:type="repository:BasicComponent" href="default.repository#_CxKbcPXWEe-zjesnu5LcEw"/>
+  </cost>
+  <cost xsi:type="cost:ComponentCost" componentInitialCost="800.0">
+    <repositoryComponent xsi:type="repository:BasicComponent" href="default.repository#_QFVvoPXIEe-zjesnu5LcEw"/>
+  </cost>
+  <cost xsi:type="cost:FixedProcessingResourceCost" fixedInitialCost="200.0">
+    <processingresourcespecification href="default.resourceenvironment#_irOH0PXXEe-zjesnu5LcEw"/>
+  </cost>
+  <cost xsi:type="cost:FixedProcessingResourceCost" fixedInitialCost="200.0">
+    <processingresourcespecification href="default.resourceenvironment#_kf3g0PXNEe-zjesnu5LcEw"/>
+  </cost>
+  <cost xsi:type="cost:FixedProcessingResourceCost" fixedInitialCost="200.0">
+    <processingresourcespecification href="default.resourceenvironment#_T_BZIPXXEe-zjesnu5LcEw"/>
+  </cost>
+</cost:CostRepository>

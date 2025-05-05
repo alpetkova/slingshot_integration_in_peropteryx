@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<designdecision:DecisionSpace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:designdecision="http://sdq.ipd.uka.de/DesignDecision/3.0" xmlns:specific="http://sdq.ipd.uka.de/DesignDecision/Specific/3.0" id="_rM3tACUwEfCdQZl1X-KeMw">
+  <degreesOfFreedom xsi:type="specific:StepAdjustmentDegree" to="4" from="1">
+    <primaryChanged href="scalingPolicies/ThesisExp.spd#//@scalingPolicies.0/@adjustmentType"/>
+  </degreesOfFreedom>
+  <degreesOfFreedom xsi:type="specific:ExpectedCPUUtilizationDegree" to="90.0" from="30.0">
+    <primaryChanged href="scalingPolicies/ThesisExp.spd#//@scalingPolicies.0/@scalingTrigger/@expectedValue"/>
+  </degreesOfFreedom>
+  <degreesOfFreedom xsi:type="specific:CooldownTimeConstraintDegree" to="30.0">
+    <primaryChanged href="scalingPolicies/ThesisExp.spd#_z3tIYYIDEe6mEMB9aurCeA"/>
+  </degreesOfFreedom>
+</designdecision:DecisionSpace>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<allocation:Allocation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:allocation="http://palladiosimulator.org/PalladioComponentModel/Allocation/5.2" id="_29CmwPXNEe-zjesnu5LcEw" entityName="New Allocation">
+  <targetResourceEnvironment_Allocation href="default.resourceenvironment#/"/>
+  <system_Allocation href="default.system#_8NbXwPXMEe-zjesnu5LcEw"/>
+  <allocationContexts_Allocation id="_-va98PXNEe-zjesnu5LcEw" entityName="Allocation_Assembly_Database">
+    <resourceContainer_AllocationContext href="default.resourceenvironment#_eYcrEPXXEe-zjesnu5LcEw"/>
+    <assemblyContext_AllocationContext href="default.system#_DvcXsPXNEe-zjesnu5LcEw"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_AC1GkPXOEe-zjesnu5LcEw" entityName="Allocation_Assembly_Web">
+    <resourceContainer_AllocationContext href="default.resourceenvironment#_gSIVEPXNEe-zjesnu5LcEw"/>
+    <assemblyContext_AllocationContext href="default.system#_IrHngPXNEe-zjesnu5LcEw"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_T1-8cPXYEe-zjesnu5LcEw" entityName="Allocation_Assembly_LoadBalancer">
+    <resourceContainer_AllocationContext href="default.resourceenvironment#_R_kp4PXXEe-zjesnu5LcEw"/>
+    <assemblyContext_AllocationContext href="default.system#_HDA1sPXXEe-zjesnu5LcEw"/>
+  </allocationContexts_Allocation>
+</allocation:Allocation>

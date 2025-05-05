@@ -1,1 +1,2 @@
 # slingshot_integration_in_peropteryx
+This repository contains the implementation and evaluation from the Master Thesis "Optimizing Elasticity Policies for Software Architectures at Design Time" conducted at the Institute of Software Engineering, Research Group Software Quality and Architecture, University of Stuttgart, Germany.

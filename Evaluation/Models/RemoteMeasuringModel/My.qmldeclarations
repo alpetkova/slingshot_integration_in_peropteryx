@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QMLDeclarations:QMLDeclarations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:QMLContract="http:///QMLContract.ecore" xmlns:QMLDeclarations="http:///QMLDeclarations.ecore" xmlns:QMLProfile="http:///QMLProfile.ecore" id="_LwygoCUwEfCdQZl1X-KeMw">
+  <qmlDeclarations xsi:type="QMLProfile:SimpleQMLProfile" id="_O77m8CUwEfCdQZl1X-KeMw">
+    <usageModel href="rm.usagemodel#/"/>
+    <requirements xsi:type="QMLProfile:UsageScenarioRequirement" id="_SDcxgCUwEfCdQZl1X-KeMw">
+      <requireContract xsi:type="QMLContract:SimpleQMLContract" href="pathmap://PCM_MODELS/PCMStandardQMLContract.qmldeclarations#_FqNZYaCrEd-s9uTaURbrKA"/>
+      <usageScenario href="rm.usagemodel#_KX07cBLREeu8HvFyDMmd-w"/>
+    </requirements>
+    <requirements xsi:type="QMLProfile:UsageScenarioRequirement" id="_oP7WACc5EfCPO9HlTkbf4g">
+      <requireContract xsi:type="QMLContract:SimpleQMLContract" href="pathmap://PCM_MODELS/PCMStandardQMLContract.qmldeclarations#_FqNZYaCrEd-s9uTaURbrKA"/>
+      <usageScenario href="rm.usagemodel#_Y1tP0Pr6Ee2HGboV_yvcZw"/>
+    </requirements>
+    <requirements xsi:type="QMLProfile:UsageScenarioRequirement" id="_rbMYICc5EfCPO9HlTkbf4g">
+      <requireContract xsi:type="QMLContract:SimpleQMLContract" href="pathmap://PCM_MODELS/PCMStandardQMLContract.qmldeclarations#_FqNZYaCrEd-s9uTaURbrKA"/>
+      <usageScenario href="rm.usagemodel#_B17vwCXqEeyoRe0c4nmT0g"/>
+    </requirements>
+    <requirements xsi:type="QMLProfile:UsageScenarioRequirement" id="_smREICc5EfCPO9HlTkbf4g">
+      <requireContract xsi:type="QMLContract:SimpleQMLContract" href="pathmap://PCM_MODELS/PCMStandardQMLContract.qmldeclarations#_FqNZYaCrEd-s9uTaURbrKA"/>
+      <usageScenario href="rm.usagemodel#_Hs1AUBe1Eeybf7rGWS87vg"/>
+    </requirements>
+  </qmlDeclarations>
+</QMLDeclarations:QMLDeclarations>

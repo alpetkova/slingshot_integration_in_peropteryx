@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ASCII"?>
+<repository:Repository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:seff="http://palladiosimulator.org/PalladioComponentModel/SEFF/5.2" id="_MHa-APXHEe-zjesnu5LcEw" entityName="New Repository">
+  <components__Repository xsi:type="repository:BasicComponent" id="_QFVvoPXIEe-zjesnu5LcEw" entityName="Web">
+    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_BmoGgPXMEe-zjesnu5LcEw" entityName="Web.IWeb.OperationProvidedRole1" providedInterface__OperationProvidedRole="_mBHf4PXHEe-zjesnu5LcEw"/>
+    <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_ExaAcPXMEe-zjesnu5LcEw" entityName="Web.IDatabase.OperationRequiredRole1" requiredInterface__OperationRequiredRole="_AEWYQPXIEe-zjesnu5LcEw"/>
+    <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_BnSN0PXMEe-zjesnu5LcEw" describedService__SEFF="_tzw80PXHEe-zjesnu5LcEw">
+      <steps_Behaviour xsi:type="seff:StartAction" id="_BnS04PXMEe-zjesnu5LcEw" successor_AbstractAction="_j6OjQPjlEe-Xr4EDZL5ceA"/>
+      <steps_Behaviour xsi:type="seff:StopAction" id="_BnS04fXMEe-zjesnu5LcEw" predecessor_AbstractAction="_0ddbYPXMEe-zjesnu5LcEw"/>
+      <steps_Behaviour xsi:type="seff:ExternalCallAction" id="_0ddbYPXMEe-zjesnu5LcEw" entityName="ExternalCallAction1" predecessor_AbstractAction="_j6OjQPjlEe-Xr4EDZL5ceA" successor_AbstractAction="_BnS04fXMEe-zjesnu5LcEw" calledService_ExternalService="_CZKTgPXIEe-zjesnu5LcEw" role_ExternalService="_ExaAcPXMEe-zjesnu5LcEw"/>
+      <steps_Behaviour xsi:type="seff:InternalAction" id="_j6OjQPjlEe-Xr4EDZL5ceA" entityName="InternalAction1" predecessor_AbstractAction="_BnS04PXMEe-zjesnu5LcEw" successor_AbstractAction="_0ddbYPXMEe-zjesnu5LcEw">
+        <resourceDemand_Action>
+          <specification_ParametericResourceDemand specification="2"/>
+          <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+        </resourceDemand_Action>
+        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4"/>
+      </steps_Behaviour>
+    </serviceEffectSpecifications__BasicComponent>
+  </components__Repository>
+  <components__Repository xsi:type="repository:BasicComponent" id="_vFuegPXIEe-zjesnu5LcEw" entityName="Database">
+    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_5Ps_MPXIEe-zjesnu5LcEw" entityName="Database.IDatabase.OperationProvidedRole1" providedInterface__OperationProvidedRole="_AEWYQPXIEe-zjesnu5LcEw"/>
+    <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_5P8PwPXIEe-zjesnu5LcEw" describedService__SEFF="_CZKTgPXIEe-zjesnu5LcEw">
+      <steps_Behaviour xsi:type="seff:InternalAction" id="_On1TAPXMEe-zjesnu5LcEw" entityName="storeInternally" predecessor_AbstractAction="_PiMZECB3EfCArObAv8eq4Q" successor_AbstractAction="_OR1kcCB3EfCArObAv8eq4Q">
+        <resourceDemand_Action>
+          <specification_ParametericResourceDemand specification="DoublePMF[(10.0;0.3)(20.0;0.4)(30.0;0.3)]"/>
+          <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+        </resourceDemand_Action>
+        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4"/>
+      </steps_Behaviour>
+      <steps_Behaviour xsi:type="seff:StopAction" id="_OR1kcCB3EfCArObAv8eq4Q" predecessor_AbstractAction="_On1TAPXMEe-zjesnu5LcEw"/>
+      <steps_Behaviour xsi:type="seff:StartAction" id="_PiMZECB3EfCArObAv8eq4Q" successor_AbstractAction="_On1TAPXMEe-zjesnu5LcEw"/>
+    </serviceEffectSpecifications__BasicComponent>
+  </components__Repository>
+  <components__Repository xsi:type="repository:BasicComponent" id="_CxKbcPXWEe-zjesnu5LcEw" entityName="LoadBalancer">
+    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_pWka8PXWEe-zjesnu5LcEw" entityName="LoadBalancer.IDatabase.OperationProvidedRole1" providedInterface__OperationProvidedRole="_AEWYQPXIEe-zjesnu5LcEw"/>
+    <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_p538UPXWEe-zjesnu5LcEw" entityName="LoadBalancer.IDatabase.OperationRequiredRole1" requiredInterface__OperationRequiredRole="_AEWYQPXIEe-zjesnu5LcEw"/>
+    <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_pWuL8PXWEe-zjesnu5LcEw" describedService__SEFF="_CZKTgPXIEe-zjesnu5LcEw">
+      <steps_Behaviour xsi:type="seff:StartAction" id="_pWuL8fXWEe-zjesnu5LcEw" successor_AbstractAction="_524n0PjlEe-Xr4EDZL5ceA"/>
+      <steps_Behaviour xsi:type="seff:StopAction" id="_pWuL8vXWEe-zjesnu5LcEw" predecessor_AbstractAction="_9GxmUPXnEe-zjesnu5LcEw"/>
+      <steps_Behaviour xsi:type="seff:BranchAction" id="_9GxmUPXnEe-zjesnu5LcEw" entityName="BranchAction1" predecessor_AbstractAction="_524n0PjlEe-Xr4EDZL5ceA" successor_AbstractAction="_pWuL8vXWEe-zjesnu5LcEw">
+        <branches_Branch xsi:type="seff:ProbabilisticBranchTransition" id="_B2OYAPXoEe-zjesnu5LcEw" entityName="ProbabilisticBranchTransition1" branchProbability="1.0">
+          <branchBehaviour_BranchTransition id="_B2OYAfXoEe-zjesnu5LcEw">
+            <steps_Behaviour xsi:type="seff:StartAction" id="_B2OYAvXoEe-zjesnu5LcEw" successor_AbstractAction="_GSVW8PXoEe-zjesnu5LcEw"/>
+            <steps_Behaviour xsi:type="seff:StopAction" id="_B2O_EPXoEe-zjesnu5LcEw" predecessor_AbstractAction="_GSVW8PXoEe-zjesnu5LcEw"/>
+            <steps_Behaviour xsi:type="seff:ExternalCallAction" id="_GSVW8PXoEe-zjesnu5LcEw" entityName="ExternalCallAction1" predecessor_AbstractAction="_B2OYAvXoEe-zjesnu5LcEw" successor_AbstractAction="_B2O_EPXoEe-zjesnu5LcEw" calledService_ExternalService="_CZKTgPXIEe-zjesnu5LcEw" role_ExternalService="_p538UPXWEe-zjesnu5LcEw"/>
+          </branchBehaviour_BranchTransition>
+        </branches_Branch>
+      </steps_Behaviour>
+      <steps_Behaviour xsi:type="seff:InternalAction" id="_524n0PjlEe-Xr4EDZL5ceA" entityName="InternalAction1" predecessor_AbstractAction="_pWuL8fXWEe-zjesnu5LcEw" successor_AbstractAction="_9GxmUPXnEe-zjesnu5LcEw">
+        <resourceDemand_Action>
+          <specification_ParametericResourceDemand specification="2"/>
+          <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+        </resourceDemand_Action>
+        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4"/>
+      </steps_Behaviour>
+    </serviceEffectSpecifications__BasicComponent>
+  </components__Repository>
+  <interfaces__Repository xsi:type="repository:OperationInterface" id="_mBHf4PXHEe-zjesnu5LcEw" entityName="IWeb">
+    <signatures__OperationInterface id="_tzw80PXHEe-zjesnu5LcEw" entityName="submit">
+      <parameters__OperationSignature parameterName="name">
+        <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
+      </parameters__OperationSignature>
+      <parameters__OperationSignature parameterName="forename">
+        <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
+      </parameters__OperationSignature>
+    </signatures__OperationInterface>
+  </interfaces__Repository>
+  <interfaces__Repository xsi:type="repository:OperationInterface" id="_AEWYQPXIEe-zjesnu5LcEw" entityName="IDatabase">
+    <signatures__OperationInterface id="_CZKTgPXIEe-zjesnu5LcEw" entityName="store">
+      <parameters__OperationSignature parameterName="name">
+        <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
+      </parameters__OperationSignature>
+      <parameters__OperationSignature parameterName="forename">
+        <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
+      </parameters__OperationSignature>
+    </signatures__OperationInterface>
+  </interfaces__Repository>
+</repository:Repository>

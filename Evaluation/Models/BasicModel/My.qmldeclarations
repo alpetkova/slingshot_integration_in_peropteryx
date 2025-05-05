@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QMLDeclarations:QMLDeclarations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:QMLContract="http:///QMLContract.ecore" xmlns:QMLDeclarations="http:///QMLDeclarations.ecore" xmlns:QMLProfile="http:///QMLProfile.ecore" id="_qfyLYAPwEfCsjaVZQEE6DQ">
+  <qmlDeclarations xsi:type="QMLProfile:SimpleQMLProfile" id="__Gb1MJyKEd-NNcIT2kpSGQ" entityName="PCMStandardQMLProfile">
+    <usageModel href="default.usagemodel#/"/>
+    <requirements xsi:type="QMLProfile:UsageScenarioRequirement" id="__IEz85yKEd-NNcIT2kpSGQ">
+      <requireContract xsi:type="QMLContract:SimpleQMLContract" href="pathmap://PCM_MODELS/PCMStandardQMLContract.qmldeclarations#_FqNZYaCrEd-s9uTaURbrKA"/>
+      <usageScenario href="default.usagemodel#_I1OwUPXOEe-zjesnu5LcEw"/>
+    </requirements>
+  </qmlDeclarations>
+</QMLDeclarations:QMLDeclarations>
