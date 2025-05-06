@@ -68,7 +68,7 @@ public class SlingshotAnalysisEDP2Result extends SlingshotAnalysisResult {
 	private List<MeasuringType> measuringTypes;
 
 	/**
-	 * Constructor. Creates an instance of SimuComAnalysisEDP2Result.
+	 * Constructor. Creates an instance of SlingshotAnalysisEDP2Result.
 	 * 
 	 * @param run                  The latest run of the experiment.
 	 * @param experiment           The experiment (at the moment with only one
@@ -106,7 +106,7 @@ public class SlingshotAnalysisEDP2Result extends SlingshotAnalysisResult {
 		this.observations = values.length;
 		this.confidenceInterval = determineConfidenceInterval(values);
 
-		logger.debug("Initialised SimuCom EDP2 result");
+		logger.debug("Initialised Slingshot EDP2 result");
 	}
 
 	/**
@@ -232,7 +232,7 @@ public class SlingshotAnalysisEDP2Result extends SlingshotAnalysisResult {
 				}
 			}
 
-			// Return new instance of SimuComAnalysisEDP2Result for the requested run
+			// Return new instance of SlingshotAnalysisEDP2Result for the requested run
 			return new SlingshotAnalysisEDP2Result(reqRun, mySetting, pcmInstance, pcmEntity, criterionToAspect,
 					qualityAttribute);
 		}
@@ -248,7 +248,7 @@ public class SlingshotAnalysisEDP2Result extends SlingshotAnalysisResult {
 			final HashMap<String, ExternalCallAction> idToExternalCallMap,
 			final Map<String, AssemblyContextContext> idToAssemblyContextMap,
 			final List<String> completionComponentIdsToIgnore) {
-		logger.warn("SimuComAnalysisEDP2Result.retrieveServiceResultsFinish not yet implemented for EDP2");
+		logger.warn("SlingshotAnalysisEDP2Result.retrieveServiceResultsFinish not yet implemented for EDP2");
 	}
 
 	/**
@@ -257,7 +257,7 @@ public class SlingshotAnalysisEDP2Result extends SlingshotAnalysisResult {
 	@Override
 	protected Map<String, PassiveResourceResult> retrievePassiveResourceUtilFinish(
 			final Map<String, PassiveResourceResult> idsToPassiveResourceResult) {
-		logger.warn("SimuComAnalysisEDP2Result.retrievePassiveResourceUtilFinish not yet implemented for EDP2");
+		logger.warn("SlingshotAnalysisEDP2Result.retrievePassiveResourceUtilFinish not yet implemented for EDP2");
 		return Collections.emptyMap();
 	}
 
@@ -268,7 +268,7 @@ public class SlingshotAnalysisEDP2Result extends SlingshotAnalysisResult {
 	protected void getUtilisationOfResource(final ActiveResourceUtilisationResult resultToFill, final Entity container,
 			final ResourceType resourceType) throws AnalysisFailedException {
 
-		logger.warn("SimuComAnalysisEDP2Result.getUtilisationOfResource not yet implemented for EDP2");
+		logger.warn("SlingshotAnalysisEDP2Result.getUtilisationOfResource not yet implemented for EDP2");
 	}
 
 	/**

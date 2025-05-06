@@ -219,7 +219,7 @@ abstract public class SlingshotAnalysisResult extends AbstractPerformanceAnalysi
 
     /**
      * retrieves active resource utils.
-     * Should also do passive resource utils (but not yet collected in SimuCom).
+     * Should also do passive resource utils (but not yet collected in Slingshot).
      * @param pcmInstance
      * @param repo
      * @return

@@ -33,12 +33,6 @@ import de.uka.ipd.sdq.dsexplore.analysis.IAnalysis;
 import de.uka.ipd.sdq.dsexplore.analysis.IAnalysisResult;
 import de.uka.ipd.sdq.dsexplore.analysis.IStatisticAnalysisResult;
 import de.uka.ipd.sdq.dsexplore.analysis.PCMPhenotype;
-//import de.uka.ipd.sdq.dsexplore.analysis.simucom.DSESimuComWorkflowLauncher;
-//import de.uka.ipd.sdq.dsexplore.analysis.simucom.SimuComAnalysisEDP2Result;
-//import de.uka.ipd.sdq.dsexplore.analysis.simucom.SimuComAnalysisResult;
-//import de.uka.ipd.sdq.dsexplore.analysis.simucom.SimuComAnalysisSensorFrameworkResult;
-//import de.uka.ipd.sdq.dsexplore.analysis.simucom.SimuComQualityAttributeDeclaration;
-//import de.uka.ipd.sdq.dsexplore.analysis.simulizar.SimulizarAnalysis;
 import de.uka.ipd.sdq.dsexplore.exception.ExceptionHelper;
 import de.uka.ipd.sdq.dsexplore.helper.ConfigurationHelper;
 import de.uka.ipd.sdq.dsexplore.launch.DSEWorkflowConfiguration;
@@ -130,19 +124,10 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
     
 
     /**
-     * Calls SimuCom. Before doing so, it calls the {@link ConfigurationHelper}
-     * to update the {@link ILaunchConfiguration} and stores the
-     * {@link PCMInstance} to files, so that SimuCom can read it as usual. After
-     * the SimuCom run, the analysis results are extracted from the
-     * sensorFramework data sources and returned. The returned
-     * {@link IAnalysisResult} is a {@link SimuComAnalysisResult} which does not
-     * store the results directly, but provides access to the underlying
-     * sensorFramework data sources.
+     * Conducts performance analysis via the Slingshot Simulator. 
+     * Adapted from the Simucom implementation
      *
-     * {@inheritDoc}
-     * @throws UserCanceledException
      *
-     * @see de.uka.ipd.sdq.dsexplore.analysis.IAnalysis#analyse(PCMPhenotype, de.uka.ipd.sdq.dsexplore.PCMInstance)
      */
     @Override
     public void analyse(final PCMPhenotype pheno, final IProgressMonitor monitor) throws AnalysisFailedException, CoreException, UserCanceledException {
@@ -388,7 +373,7 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
             try {
                 // load the model files and start the Slingshot Simulator
                 job.execute(monitor);
-                logger.debug("Finished SimuCom analysis");
+                logger.debug("Finished Slingshot analysis");
                 this.alreadyLaunched = true;
                 break;
             } catch (final JobFailedException e) {
@@ -396,7 +381,7 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
                 if (e.getCause() != null){
                 	String causingErrorMessage = e.getCause().getMessage();
                 	if (numberOfTries > 0 && causingErrorMessage != null && causingErrorMessage.contains("Couldn't find extension")){
-                		logger.warn("Trying to start SimuCom again.");
+                		logger.warn("Trying to start Slingshot again.");
                 		continue;
                 	}
                 }
@@ -404,7 +389,7 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
                 try {
 					job.cleanup(monitor);
 				} catch (CleanupFailedException e1) {
-					logger.error("Cleanup of failed simucoim run failed, probably you need to clean up manually (e.g. delete temorary plugin);");
+					logger.error("Cleanup of failed Slingshot run failed, probably you need to clean up manually (e.g. delete temorary plugin);");
 					e1.printStackTrace();
 				}
                 throw new AnalysisFailedException(e);
@@ -426,7 +411,7 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
 
         this.config = configuration.getRawConfiguration();
         if (blackboard == null){
-            throw ExceptionHelper.createNewCoreException("Error in initialisation: No Blackboard was set when initialising the SimuCom Analysis. Contact the developers.");
+            throw ExceptionHelper.createNewCoreException("Error in initialisation: No Blackboard was set when initialising the Slingshot Analysis. Contact the developers.");
         }
 
         this.initialExperimentName = this.config.getAttribute(SimuComConfig.EXPERIMENT_RUN, "");
@@ -449,7 +434,7 @@ public class SlingshotAnalysis extends AbstractAnalysis implements IAnalysis {
          } else if (criterion instanceof EntryLevelSystemCallCriterion){
         	 return ((EntryLevelSystemCallCriterion)criterion).getEntryLevelSystemCall();
          }
-    	 throw new CoreException(new Status(Status.ERROR, "de.uka.ipd.sdq.dsexplore.analysis.simucom", "Cannot handle Criterion of type "+criterion.getClass()+". Required is UsageScenarioBasedCriterion or EntryLevelSystemCallCriterion."));
+    	 throw new CoreException(new Status(Status.ERROR, "de.uka.ipd.sdq.dsexplore.analysis.slingshot", "Cannot handle Criterion of type "+criterion.getClass()+". Required is UsageScenarioBasedCriterion or EntryLevelSystemCallCriterion."));
     }
 
 
