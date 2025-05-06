@@ -18,9 +18,6 @@ plt.rcParams['ytick.labelsize'] = fntSize - 2
 plt.rcParams['font.family'] = 'serif'
 plt.rcParams['font.serif'] = ['Times New Roman']
 
-# path to the results with an inactive policy
-inactiveCSVInPath = Path("./csvs/RemMea/1832Inactive/allCandidates0_2025-05-02-183110.csv")
-
 # path to the data with an active policy
 # activeCSVInPath = Path("./csvs/RemMea/0446/allCandidates2_2025-05-03-044615.csv")
 activeCSVInPath = Path("./csvs/RemMea/1327/allCandidates2_2025-05-03-132722.csv")
@@ -40,22 +37,13 @@ barChartDoFs = ['StepAdjustmentDegreeImpl:StepAdjustment[TRANSIENT]', 'ExpectedC
 
 # short DoF names for x-axis of the bar chart
 # barChartDoFNames = ['step adjustement size', 'expected CPU utilization', 'max target group size', 'cooldown time']
-barChartDoFNames = ['step adjustement size', 'expected CPU utilization', 'cooldown time']
+barChartDoFNames = ['Step Adjustement Size', 'Expected CPU Utilization', 'Cooldown Time']
 
 ## load data
-# load the results of the inactive policy
-inactiveData = pd.read_csv(inactiveCSVInPath, delimiter=";")
-
 # load the results of the active policy
 activeData = pd.read_csv(activeCSVInPath, delimiter=";")
 
 ## calculate mean response times
-# extract all response times of the inactive policy
-inactiveResponseTimes = inactiveData.loc[:, inactiveData.columns.str.startswith('response time')]
-
-# calculate the mean response time of the inactive policy
-inactiveData['meanResponseTime'] = np.mean(inactiveResponseTimes.to_numpy())
-
 # extract all response times of the active policy
 activeResponseTimes = activeData.loc[:, activeData.columns.str.startswith('response time')]
 
@@ -63,12 +51,6 @@ activeResponseTimes = activeData.loc[:, activeData.columns.str.startswith('respo
 activeData['meanResponseTime'] = np.mean(activeResponseTimes.to_numpy(), axis=1)
 
 ## calculate mean costs
-# extract all response times of the inactive policy
-inactiveCosts = inactiveData.loc[:, inactiveData.columns.str.startswith('cost:')]
-
-# calculate the mean response time of the inactive policy
-inactiveData['meanCost'] = np.mean(inactiveCosts.to_numpy())
-
 # extract all response times of the active policy
 activeCosts = activeData.loc[:, activeData.columns.str.startswith('cost:')]
 
@@ -87,15 +69,10 @@ ax1_prim = axes
 x = activeData['meanResponseTime']
 y = activeData['meanCost']
 
-# ax1_prim.scatter(inactiveData['meanResponseTime'], inactiveData['meanCost'], color='black', label='Non Elastic System')
 ax1_prim.scatter(x[1:], y[1:], color='blue', label="PerOpteryx Candidates")
 ax1_prim.scatter(x[0], y[0], color='red', label="Initial Candidate")
 ax1_prim.scatter(x[idxChosenCand], y[idxChosenCand], color='green', label="Optimal Candidate")
 ax1_prim.plot(x[idxParetoFront], y[idxParetoFront], color='black', linestyle='--', label='Pareto Front')
-
-# # add a dashed line outside of the plot area, so that a pareto front label is added
-# # the actual pareto front line is manually added in PowerPoint
-# ax1_prim.axhline(y=10*max(activeData.meanCost), color='black', linestyle='--', label='Pareto Front')
 
 # set good y-axis limits
 xSpacing = 0.1*(max(activeData.meanResponseTime)-min(activeData.meanResponseTime))
@@ -122,8 +99,8 @@ barChartColumns.insert(0,'meanCost')
 barChartColumns.insert(1,'meanResponseTime')
 
 barChartXNames = barChartDoFNames.copy()
-barChartXNames.insert(0,'initial cost')
-barChartXNames.insert(1,'avg. response time')
+barChartXNames.insert(0,'Initial Cost')
+barChartXNames.insert(1,'Avg. Response Time')
 
 dfForBarChart = activeData.copy()
 dfForBarChart = dfForBarChart.loc[idxChosenCand, barChartColumns]
